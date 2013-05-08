@@ -39,9 +39,14 @@ function _check_file() {
  # Value does not need wrapping quotes if no spaces
  #
 function load_config() {
+  if [ ! -f config ]; then
+    cp "core/config-example" config
+  fi
+
   # defaults
   docs_source_dir='source'
   docs_kit_dir='kit'
+  docs_doxy_dir='doxygene'
   docs_html_dir='html'
   docs_drupal_dir='advanced_help'
   docs_tmp_dir="core/tmp"
@@ -85,7 +90,7 @@ function parse_config() {
 load_config
 
 # These dirs need to be created
-declare -a dirs=("$docs_html_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir" "$docs_source_dir");
+declare -a dirs=("$docs_html_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir" "$docs_source_dir" "$docs_doxy_dir");
 
 # These dirs need to be emptied
 declare -a dirs_to_empty=("$docs_html_dir" "$docs_drupal_dir" "$docs_tmp_dir");
@@ -207,6 +212,9 @@ for file in $docs_tpl_dir/*.css; do
     _check_file "$docs_html_dir/$basename"
   fi
 done
+
+# Doxygene implementation
+echo 'Not yet implemented' > "$docs_doxy_dir/README.md"
 
 # Cleanup tmp dir
 if [ -d "$docs_tmp_dir" ]; then
