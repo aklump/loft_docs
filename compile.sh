@@ -39,6 +39,10 @@ function _check_file() {
  # Value does not need wrapping quotes if no spaces
  #
 function load_config() {
+  if [ ! -d config ]; then
+    cp "core/config-example" config
+  fi
+
   # defaults
   docs_source_dir='source'
   docs_kit_dir='kit'
