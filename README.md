@@ -62,7 +62,7 @@ Each time you want to update your documentation files, after modifying files in 
     . compile.sh
     
 ## Installation
-1. First run, execute `. config.sh` to install the source directory and config file.
+1. First run, execute `. compile` to install the source directory and config file.
 1. Edit `config`.
 2. Enter the name of the drupal module this will be used for, if applicable
 3. Enter the credentials for the drupal site if using iframes
