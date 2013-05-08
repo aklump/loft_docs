@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# @file
+# Configuration
+
+##
+ # File path to the php you want to use for compiling
+ #
+php = '/Applications/MAMP/bin/php/php5.3.14/bin/php'
+
+##
+ # The drupal credentials for a user who can access any iframe content
+ #
+#credentials = "http://[drupal user]:[drupal pass]@[drupal url]/[login path e.g. user/login]";
+
+##
+ # The name of the drupal module to build advanced help output for.
+ #
+drupal_module = 'taskcamp';

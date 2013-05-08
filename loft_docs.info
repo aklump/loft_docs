@@ -1,0 +1,4 @@
+name = "Loft Docs"
+description = "A convenient system for documenting projects."
+version = 0.2.1
+author = Aaron Klump <sourcecode@intheloftstudios.com>

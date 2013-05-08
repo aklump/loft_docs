@@ -1,0 +1,24 @@
+.breadcrumb {
+  font-size: 11px;
+}
+body.index .breadcrumb {
+  display: none;
+}
+body.index .pager {
+  display: none;
+}
+.pager {
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+.pager .prev,
+.pager .next {
+  position: absolute
+}
+.pager .prev {
+  left: 0;
+}
+.pager .next {
+  right: 0;
+}
