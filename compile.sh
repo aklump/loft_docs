@@ -39,7 +39,7 @@ function _check_file() {
  # Value does not need wrapping quotes if no spaces
  #
 function load_config() {
-  if [ ! -d config ]; then
+  if [ ! -f config ]; then
     cp "core/config-example" config
   fi
 
