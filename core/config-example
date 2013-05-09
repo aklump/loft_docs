@@ -10,11 +10,11 @@
 php = $(which php)
 
 ##
- # The drupal credentials for a user who can access any iframe content
+ # The drupal credentials for a user who can access your iframe content
  #
-credentials = "http://user:pass@www.my-site.com/user/login";
+#credentials = "http://user:pass@www.my-site.com/user/login";
 
 ##
  # The name of the drupal module to build advanced help output for.
  #
-drupal_module = 'my_module';
+#drupal_module = 'my_module';
