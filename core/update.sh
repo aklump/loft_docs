@@ -55,21 +55,32 @@
 #
 
 # Download the latest stable
-mkdir -p tmp
-cd tmp
+# Go above core
 
+root_dir=${PWD%/*}
+if [ ! -d "$root_dir/core" ] && [ ! -f "$root_dir/core_version.info" ]; then
+  echo "`tput setaf 1`Update failed. Corrupt file structure.`tput op`"
+  exit
+fi
+
+if [ -d "$root_dir/tmp" ]; then
+  echo "`tput setaf 3`You must delete $root_dir/tmp before updating.`tput op`"
+  exit
+else
+  mkdir -p $root_dir/tmp
+fi
+
+cd $root_dir/tmp
 curl -O -L https://github.com/aklump/loft_docs/archive/master.zip
-unzip master.zip;
-cd ../
+unzip -q master.zip;
+cd $root_dir
 
 # Update the core files
-docs_update="tmp/loft_docs-master/"
-cp $docs_update/README.md ../
-cp $docs_update/compile.sh ../
-cp $docs_update/core-version.info ../
-rsync -av --delete $docs_update/core/ ../core/
+docs_update="$root_dir/tmp/loft_docs-master/"
 
-if [ -d tmp ] && [ -d "$docs_update" ]; then
-  rm -rf $docs_tmp_dir
-  echo "`tput setaf 2`Update complete.`tput op`"
-fi
+cp -v $docs_update/README.md $root_dir/
+cp -v $docs_update/core-version.info $root_dir/
+rsync -av --delete $docs_update/core/ $root_dir/core/ --exclude=Markdown.pl
+
+rm -rf $root_dir/tmp
+echo "`tput setaf 2`Update complete.`tput op`"

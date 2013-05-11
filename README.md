@@ -59,7 +59,7 @@ Compiling relies on the [Code Kit app][codekit]; you should add this directory a
 
 Each time you want to update your documentation files, after modifying files in `source` you need to execute `compile.sh` form bash:
 
-    . compile.sh
+    ./core/compile.sh
     
 ## Installation
 1. You should replace the included `.gitignore` if you intend to use git with your documentation.
@@ -77,6 +77,12 @@ If you try compile immediately upon installing, an example configuration will be
 The file in `tpl` controls the output of the `.html` files found in `html`.  You should never modify these files, nor any files in `core`.  Instead to override the theming you should copy `core/tpl` up one directory into the base directory and override those files.
 
     cp -R core/tpl tpl
+    
+
+## Core Update
+This script provides a self updating feature.  To update the core files, go into core and execute `update.sh`
+
+    ./core/update.sh
     
 ## Rationalle
 The rationalle behind this project is that it is easy to write markdown files, and it is easy to share a static html based documentation file, and it is easy to use Drupal Advanced Help module, and it is easy to verison your documentation in git; but to do all this together at once… was NOT EASY.
