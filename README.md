@@ -62,7 +62,6 @@ Each time you want to update your documentation files, after modifying files in 
     ./core/compile.sh
     
 ## Installation
-1. You should replace the included `.gitignore` if you intend to use git with your documentation.
 1. After downloading the source code, execute `. compile` to install the source directory and `config` file.
 1. Edit `config`.
 2. Enter the name of the drupal module this will be used for, if applicable

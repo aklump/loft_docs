@@ -39,8 +39,8 @@ function _check_file() {
  # Value does not need wrapping quotes if no spaces
  #
 function load_config() {
-  if [ ! -f config ]; then
-    cp "core/config-example" config
+  if [ ! -f core-config.sh ]; then
+    cp "core/config-example" core-config.sh
   fi
 
   # defaults
@@ -61,7 +61,7 @@ function load_config() {
   docs_help_ini=$(ls source/*help.ini)
 
   # custom
-  parse_config config
+  parse_config core-config.sh
 }
 
 ##
