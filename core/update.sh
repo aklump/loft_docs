@@ -67,7 +67,7 @@ docs_update="tmp/loft_docs-master/"
 cp $docs_update/README.md ../
 cp $docs_update/compile.sh ../
 cp $docs_update/core-version.info ../
-rsync -av $docs_update/core/ ../core/
+rsync -av --delete $docs_update/core/ ../core/
 
 if [ -d tmp ] && [ -d "$docs_update" ]; then
   rm -rf $docs_tmp_dir

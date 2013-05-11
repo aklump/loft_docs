@@ -62,11 +62,12 @@ Each time you want to update your documentation files, after modifying files in 
     . compile.sh
     
 ## Installation
-1. First run, execute `. compile` to install the source directory and config file.
+1. You should replace the included `.gitignore` if you intend to use git with your documentation.
+1. After downloading the source code, execute `. compile` to install the source directory and `config` file.
 1. Edit `config`.
 2. Enter the name of the drupal module this will be used for, if applicable
-3. Enter the credentials for the drupal site if using iframes
-4. Override the php path if needed; php must have the curl library installed
+3. Enter the credentials for the drupal site if using iframes.
+4. Override the php path if needed; php must have the curl library installed.
 
 If you try compile immediately upon installing, an example configuration will be installed at `source`.  If you wish to bypass the example, then simply create a `source dir` and begin writing your markdown:
 
