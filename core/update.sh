@@ -54,10 +54,10 @@
 # @{
 #
 
-# Download the latest stable
-# Go above core
+# Find the directory above this script, it is root
+root_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+root_dir=${root_dir%/*}
 
-root_dir=${PWD%/*}
 if [ ! -d "$root_dir/core" ] && [ ! -f "$root_dir/core_version.info" ]; then
   echo "`tput setaf 1`Update failed. Corrupt file structure.`tput op`"
   exit
@@ -71,6 +71,8 @@ else
 fi
 
 cd $root_dir/tmp
+
+# Download the master branch
 curl -O -L https://github.com/aklump/loft_docs/archive/master.zip
 unzip -q master.zip;
 cd $root_dir
