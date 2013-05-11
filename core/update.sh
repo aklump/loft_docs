@@ -66,6 +66,7 @@ cd ../
 docs_update="tmp/loft_docs-master/"
 cp $docs_update/README.md ../
 cp $docs_update/compile.sh ../
+cp $docs_update/core-version.info ../
 rsync -av $docs_update/core/ ../core/
 
 if [ -d tmp ] && [ -d "$docs_update" ]; then
