@@ -125,7 +125,7 @@ done
 
 
 
-# Build index.html from index.php
+# Build index.html from home.php
 echo '' > "$docs_kit_dir/index.kit"
 $docs_php "core/page_vars.php" "$docs_help_ini" "index" >> "$docs_kit_dir/index.kit"
 $docs_php "core/home.php" "$docs_help_ini" "$docs_tpl_dir" >> "$docs_kit_dir/index.kit"

@@ -10,7 +10,7 @@ require_once 'classes/IndexInterface.php';
 $index = new AdvancedHelpIni($argv[1]);
 if (($data = $index->getData()) && isset($data[$argv[2]])) {
   $vars = $data[$argv[2]];
-  $vars['classes'] = array($vars['id']);
+  $vars['classes'] = array('page-' . $vars['id']);
 }
 $declarations = array();
 $vars['classes'] = implode(' ', $vars['classes']);

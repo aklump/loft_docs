@@ -99,12 +99,15 @@ class AdvancedHelpIni implements IndexInterface {
     $last = NULL;
     foreach ($list as $key => $value) {
       $list[$key] += array(
+        'prev_id' => 'index',
         'prev' => 'index.html',
         'prev_title' => 'Index',
+        'next_id' => 'index',
         'next' => 'index.html',
         'next_title' => 'Index',
       );
       if ($last !== NULL) {
+        $list[$last]['next_id'] = $key;
         $list[$last]['next'] = $value['file'];
         $list[$last]['next_title'] = $value['title'];
       }
@@ -112,12 +115,18 @@ class AdvancedHelpIni implements IndexInterface {
         $list[$key] = $prev + $list[$key];
       }
       $prev = array(
+        'prev_id' => $key,
         'prev' => $value['file'],
         'prev_title' => $value['title'],
       );
       $last = $key;
     }
 
+    // Set the index prev as the last in the list
+    $last = end($list);
+    $list['index']['prev_id'] = $last['id'];
+    $list['index']['prev'] = $last['file'];
+    $list['index']['prev_title'] = $last['title'];
     return $list;
   }
 }
