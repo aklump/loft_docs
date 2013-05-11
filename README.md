@@ -62,15 +62,21 @@ Each time you want to update your documentation files, after modifying files in 
     ./core/compile.sh
     
 ## Installation
-1. After downloading the source code, execute `. compile` to install the source directory and `config` file.
-1. Edit `config`.
-2. Enter the name of the drupal module this will be used for, if applicable
+1. To install, just run the compile command:
+
+        ./core/compile.sh
+
+2. The necessary dirs will be created including the configuration file:
+
+        core-config.sh  
+  
+1. Open and edit `core-config.sh`.
+2. Enter the name of the drupal module this will be used for, if applicable.
 3. Enter the credentials for the drupal site if using iframes.
 4. Override the php path if needed; php must have the curl library installed.
-
-If you try compile immediately upon installing, an example configuration will be installed at `source`.  If you wish to bypass the example, then simply create a `source dir` and begin writing your markdown:
-
-    mkdir source
+5. Check your configuration by visiting `html/index.html` in a browser
+6. Delete the example contents from `source`.
+7. Installation is complete.
     
 ## Theming
 The file in `tpl` controls the output of the `.html` files found in `html`.  You should never modify these files, nor any files in `core`.  Instead to override the theming you should copy `core/tpl` up one directory into the base directory and override those files.
