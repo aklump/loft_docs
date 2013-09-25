@@ -41,6 +41,7 @@ function _check_file() {
 function load_config() {
   if [ ! -f core-config.sh ]; then
     cp "core/config-example" core-config.sh
+    installing=1
   fi
 
   # defaults
@@ -87,6 +88,7 @@ function parse_config() {
 }
 
 # Pull in config vars
+installing=0
 load_config
 
 # These dirs need to be created
@@ -122,8 +124,13 @@ do
   fi
 done
 
-
-
+# Installation steps
+if [ $installing -eq 1 ]; then
+  echo "`tput setaf 3`Installing Loft Docs...`tput op`"
+  if [ -f .gitignore ]; then
+    rm .gitignore
+  fi
+fi
 
 # Build index.html from home.php
 echo '' > "$docs_kit_dir/index.kit"
