@@ -62,7 +62,8 @@ Each time you want to update your documentation files, after modifying files in 
     ./core/compile.sh
     
 ## Installation
-1. To install, just run the compile command:
+1. Add the root directory as a project in CodeKit.
+1. Run the compile command:
 
         ./core/compile.sh
 
@@ -70,18 +71,20 @@ Each time you want to update your documentation files, after modifying files in 
 
         core-config.sh  
   
-1. Open and edit `core-config.sh`.
+1. Open and edit `core-config.sh`. **You should not delete this file once it's been created, as it is the flag that installation has taken place!** Compiling without this file may lead to some/all of your files being deleted.
 2. Enter the name of the drupal module this will be used for, if applicable.
 3. Enter the credentials for the drupal site if using iframes.
 4. Override the php path if needed; php must have the curl library installed.
-5. Check your configuration by visiting `html/index.html` in a browser
-6. Delete the example contents from `source`.
-7. Installation is complete.
+5. Run `./core/compile.sh` once more to update the configuration.
+5. Test the installation by visiting `html/index.html` in a browser.
+7. Installation is complete; you may now begin documenting in `source`. You most likely should first delete the example files in `source`.
     
 ## Theming
-The file in `tpl` controls the output of the `.html` files found in `html`.  You should never modify these files, nor any files in `core`.  Instead to override the theming you should copy `core/tpl` up one directory into the base directory and override those files.
+The files in `/core/tpl` controls the output of the `.html` files found in `html`.  You should never modify these files, nor any files in `core`.  Instead to override the theming you should copy `core/tpl` up one directory into the base directory and override those files.
 
-    cp -R core/tpl tpl
+    cp -R core/tpl .
+    
+For css changes you should edit `/tpl/style.css` in the newly created `/tpl` file.
     
 
 ## Core Update
