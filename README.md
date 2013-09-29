@@ -1,21 +1,35 @@
 [markdown]:http://daringfireball.net/projects/markdown/
 [help_module]:http://drupal.org/project/advanced_help
 [codekit]:http://incident57.com/codekit/
+[lynx]:http://lynx.isc.org/
 For installation instructions scroll to the bottom.
 
-## Readers
-Offline readers should only concern themselves only with the `html` folder.  Load the `index.html` file to get started.
+##What Is This?
+This tool provides one central place to manage your documentation allowing you to compose in Markdown and have the benefits of all of the following output formats:
 
-## Authors
-Authors should add/edit the markdown files as these are considered the source files.
+1. HTML
+2. Plaintext
+3. Advanced Help for Drupal
 
-Only files in the `source` directory should  be edited.  All other files get created when you compile. 
+Gone are the days of having to update all your different documentation locations!
 
-Images should e added to `source/images`.
+## As a Reader
+1. To read documentation you probably just want to load `/html/index.html` in a browser and proceed from there.
+2. Plaintext documentation may also be available in `/text/`
 
-Use relative links when linking to other pages inside `source`.
+## As a Content Manager
+1. You will need to read about compiling below; this is the step needed to generate derivative documentation from `/source`.
 
-Use absolute links when linking to anything outside of `source`.
+## As an Author
+1. You will concern yourself with the `/source` directory, creating your source markdown files here.  This is the source of all documentation.
+
+2. Only files in the `source` directory should  be edited.  All other files get created during compiling.
+
+3. Images should e added to `source/images`.
+
+4. Use relative links when linking to other pages inside `source`.
+
+5. Use absolute links when linking to anything outside of `source`.
 
 ### Linking to Other Help Pages
 You should do the following to link internally to `source/page2.html`
@@ -53,7 +67,9 @@ Do not use the `&path&` convention when linking to images (as is recommended by 
 
 ## Compiling
 ### Requirements
-Compiling requires the [Markdown Perl Binary][markdown], add it to the `core/Markdown.pl`.    
+Compiling requires the [Markdown Perl Binary][markdown], add it to the `core/Markdown.pl`.
+
+Output of `.txt` files requires that [Lynx][lynx] be installed.
 
 Compiling relies on the [Code Kit app][codekit]; you should add this directory as a project before executing `compile.sh`.  The first time you compile you may need to manually compile the `.kit` files from the CodeKit UI.
 
@@ -62,7 +78,8 @@ Each time you want to update your documentation files, after modifying files in 
     ./core/compile.sh
     
 ## Installation
-1. Add the root directory as a project in CodeKit.
+1. Download the [Markdown Perl Binary][markdown] and add it as `/core/Markdown.pl`
+1. Add the root directory of this folder as a project in [Code Kit app][codekit].
 1. Run the compile command:
 
         ./core/compile.sh
@@ -78,7 +95,16 @@ Each time you want to update your documentation files, after modifying files in 
 5. Run `./core/compile.sh` once more to update the configuration.
 5. Test the installation by visiting `html/index.html` in a browser.
 7. Installation is complete; you may now begin documenting in `source`. You most likely should first delete the example files in `source`.
-    
+
+### Quick Installing Lynx on Mac
+Here's a quick way to get Lynx on a mac...
+
+1. Download this application [http://habilis.net/lynxlet/](http://habilis.net/lynxlet/)
+2. In shell type `cd /usr/bin`
+3. Followed by `sudo ln -s /Applications/Lynxlet.app/Contents/Resources/lynx/bin/lynx`
+4. Test your installation with this command `lynx`; you should see the lynx browser show up.
+ 
+   
 ## Theming
 The files in `/core/tpl` controls the output of the `.html` files found in `html`.  You should never modify these files, nor any files in `core`.  Instead to override the theming you should copy `core/tpl` up one directory into the base directory and override those files.
 

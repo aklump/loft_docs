@@ -10,6 +10,11 @@
 php = $(which php)
 
 ##
+ # Lynx is required for output of .txt files
+ #
+lynx = $(which lynx)
+
+##
  # The drupal credentials for a user who can access your iframe content
  #
 #credentials = "http://user:pass@www.my-site.com/user/login";

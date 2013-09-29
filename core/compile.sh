@@ -49,6 +49,7 @@ function load_config() {
   docs_kit_dir='kit'
   docs_doxy_dir='doxygene'
   docs_html_dir='html'
+  docs_text_dir='text'
   docs_drupal_dir='advanced_help'
   docs_tmp_dir="core/tmp"
 
@@ -63,6 +64,12 @@ function load_config() {
 
   # custom
   parse_config core-config.sh
+
+  docs_text_enabled=1
+  if ! lynx_loc="$(type -p "$docs_lynx")" || [ -z "$lynx_loc" ]; then
+    echo "`tput setaf 3`Lynx not found; .txt files will not be created.`tput op`"
+    docs_text_enabled=0
+  fi
 }
 
 ##
@@ -92,10 +99,10 @@ installing=0
 load_config
 
 # These dirs need to be created
-declare -a dirs=("$docs_html_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir" "$docs_source_dir" "$docs_doxy_dir");
+declare -a dirs=("$docs_html_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir" "$docs_source_dir" "$docs_doxy_dir");
 
 # These dirs need to be emptied
-declare -a dirs_to_empty=("$docs_html_dir" "$docs_drupal_dir" "$docs_tmp_dir");
+declare -a dirs_to_empty=("$docs_html_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_tmp_dir");
 
 # If source does not exist then copy core example
 if [ ! -d "$docs_source_dir" ]; then
@@ -123,6 +130,12 @@ do
     mkdir $var
   fi
 done
+
+# Delete the text directory if no lynx
+if [ "$docs_text_enabled" -eq 0 ]; then
+  rmdir $docs_text_dir
+fi
+
 
 # Installation steps
 if [ $installing -eq 1 ]; then
@@ -193,6 +206,14 @@ for file in $docs_tmp_dir/*.html; do
     html_file=$basename.html
     kit_file=$basename.kit
     tmp_file=$basename.kit.txt
+
+    # Convert to plaintext
+    if lynx_loc="$(type -p "$docs_lynx")" && [ ! -z "$lynx_loc" ]; then
+      textname=`basename $file html`
+      textname=${textname}txt
+      $docs_lynx --dump $file > "$docs_text_dir/${textname}"
+      _check_file "$docs_text_dir/${textname}"
+    fi
 
     # Process each file for advanced help markup
     $docs_php "core/advanced_help.php" "$docs_tmp_dir/$html_file" "$docs_drupal_module" > $docs_drupal_dir/$html_file
