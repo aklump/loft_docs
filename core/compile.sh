@@ -45,6 +45,8 @@ function load_config() {
   fi
 
   # defaults
+  docs_php=$(which php)
+  docs_lynx=$(which lynx)
   docs_source_dir='source'
   docs_kit_dir='kit'
   docs_doxy_dir='doxygene'
