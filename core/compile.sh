@@ -181,6 +181,15 @@ for file in $docs_source_dir/*; do
       cp $file $docs_html_dir/$basename
       _check_file "$docs_html_dir/$basename"
 
+    # text files pass through to drupal, html and txt
+    elif echo "$file" | grep -q '.txt$'; then
+      cp $file $docs_drupal_dir/$basename
+      _check_file "$docs_drupal_dir/$basename"
+      cp $file $docs_html_dir/$basename
+      _check_file "$docs_html_dir/$basename"
+      cp $file $docs_text_dir/$basename
+      _check_file "$docs_text_dir/$basename"
+
     # Rename the .ini file; we should only ever have one
     elif echo "$file" | grep -q '.ini$' && [ ! -f "$docs_drupal_dir/$docs_drupal_module.$basename" ]; then
       cp $file "$docs_drupal_dir/$docs_drupal_module.$basename"
@@ -217,6 +226,18 @@ for file in $docs_tmp_dir/*.html; do
       $docs_lynx --dump $file > "$docs_text_dir/${textname}"
       _check_file "$docs_text_dir/${textname}"
     fi
+
+    # Drupal likes to have a README.txt file in the module root directory; this
+    # little step facilitates that need.
+    if [ "$docs_README" ]; then
+      readme_file=${docs_README##*/}
+      readme_dir=${docs_README%/*}
+      if [ -d "$readme_dir" ] && [ -f "$docs_text_dir/$readme_file" ]; then
+        rm -q "$docs_README"
+        cp "$docs_text_dir/$readme_file" "$readme_dir"
+      fi
+    fi
+
 
     # Process each file for advanced help markup
     $docs_php "core/advanced_help.php" "$docs_tmp_dir/$html_file" "$docs_drupal_module" > $docs_drupal_dir/$html_file
