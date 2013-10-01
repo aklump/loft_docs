@@ -227,18 +227,6 @@ for file in $docs_tmp_dir/*.html; do
       _check_file "$docs_text_dir/${textname}"
     fi
 
-    # Drupal likes to have a README.txt file in the module root directory; this
-    # little step facilitates that need.
-    if [ "$docs_README" ]; then
-      readme_file=${docs_README##*/}
-      readme_dir=${docs_README%/*}
-      if [ -d "$readme_dir" ] && [ -f "$docs_text_dir/$readme_file" ]; then
-        rm -q "$docs_README"
-        cp "$docs_text_dir/$readme_file" "$readme_dir"
-      fi
-    fi
-
-
     # Process each file for advanced help markup
     $docs_php "core/advanced_help.php" "$docs_tmp_dir/$html_file" "$docs_drupal_module" > $docs_drupal_dir/$html_file
 
@@ -264,6 +252,28 @@ for file in $docs_tpl_dir/*.css; do
     _check_file "$docs_html_dir/$basename"
   fi
 done
+
+# Drupal likes to have a README.txt file in the module root directory; this
+# little step facilitates that need. It also supports other README type
+# files.
+if [ "$docs_README" ]; then
+  destinations=($docs_README)
+  for destination in "${destinations[@]}"
+  do
+    readme_file=${destination##*/}
+    readme_dir=${destination%/*}
+    if echo "$readme_file" | grep -q '.txt$'; then
+      readme_source="$docs_text_dir/$readme_file"
+    elif echo "$readme_file" | grep -q '.md$'; then
+      readme_source="$docs_source_dir/$readme_file"
+    fi
+    if [ -d "$readme_dir" ]; then
+      echo  "$readme_source" "$readme_dir/"
+      cp "$readme_source" "$destination"
+      _check_file "$destination"
+    fi
+  done
+fi
 
 # Doxygene implementation
 echo 'Not yet implemented' > "$docs_doxy_dir/README.md"

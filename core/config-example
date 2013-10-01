@@ -6,8 +6,8 @@
 ##
  # File path to the php you want to use for compiling
  #
-#php = '/Applications/MAMP/bin/php/php5.3.14/bin/php'
 php = $(which php)
+#php = '/Applications/MAMP/bin/php/php5.3.14/bin/php'
 
 ##
  # Lynx is required for output of .txt files
@@ -18,7 +18,7 @@ lynx = $(which lynx)
  # File path to Markdown.pl e.g., core/Markdown.pl
  #
 markdown = 'core/Markdown.pl'
-markdown = '/Users/aklump/bin/Markdown_1.0.1/Markdown.pl'
+#markdown = '/Users/aklump/bin/Markdown_1.0.1/Markdown.pl'
 
 ##
  # The drupal credentials for a user who can access your iframe content
@@ -42,3 +42,6 @@ markdown = '/Users/aklump/bin/Markdown_1.0.1/Markdown.pl'
  # this variable is set, the .txt version will be copied to this location.
  #
 #README = '../README.txt'
+
+# This would also copy README.md as well as README.txt
+#README = '../README.txt ../README.md'
