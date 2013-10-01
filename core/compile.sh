@@ -47,6 +47,7 @@ function load_config() {
   # defaults
   docs_php=$(which php)
   docs_lynx=$(which lynx)
+  docs_markdown='core/Markdown.pl'
   docs_source_dir='source'
   docs_kit_dir='kit'
   docs_doxy_dir='doxygene'
@@ -166,7 +167,7 @@ for file in $docs_source_dir/*; do
 
     if echo "$file" | grep -q '.md$'; then
       basename=$(echo $basename | sed 's/\.md$//g').html
-      perl core/Markdown.pl --html4tags $file > $docs_tmp_dir/$basename
+      perl $docs_markdown --html4tags $file > $docs_tmp_dir/$basename
 
     # Css files pass through to the html dir
     elif echo "$file" | grep -q '.css$'; then

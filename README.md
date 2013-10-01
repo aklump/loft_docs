@@ -67,7 +67,7 @@ Do not use the `&path&` convention when linking to images (as is recommended by 
 
 ## Compiling
 ### Requirements
-Compiling requires the [Markdown Perl Binary][markdown], add it to the `core/Markdown.pl`.
+Compiling requires the [Markdown Perl Binary][markdown], add it to the `core/Markdown.pl` or edit `core-config.sh` after installation with the path to `Markdown.pl`.
 
 Output of `.txt` files requires that [Lynx][lynx] be installed.
 
