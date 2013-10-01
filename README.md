@@ -39,16 +39,26 @@ You should do the following to link internally to `source/page2.html`
 ### iFrames
 One of the cool features is that compiling will grab iframe source and render it directly into the html for offline viewing.  @todo flesh this out.    
 
-## Advanced Help Drupal
-Compiling will output files compatible with the [Advanced Help Module for Drupal][help_module].
+## Use with Drupal
+Compiling will output files compatible with the [Advanced Help Module for Drupal][help_module].  By default these files will output to a folder named `advanced_help`, but with a little configuration the folder will output directory to the root of your module folder as `help`.
 
-Place this entire directory inside your module directory and create a symlink to the advanced help folder.
+This will also output `README.txt` directly to your module's root directory, so long as you create `/source/README.md` and make the settings shown below.
 
-    ln -s [this dir]/advanced_help help
+Follow these steps if you are using this for documenting a Drupal module:
 
-You must also create the advanced help .ini file in `source/help.ini`.  **Please note that you should omit the module name!**  Just name it `help.ini`.  See this file `advanced_help/help/using-advanced-help.html` inside the [Advanced Help Module][help_module] for more info.
+1. Place this tool in the root of your module directory.  Add it to `.gitignore` so it doesn't get added to your module's repository.
+3. Make sure the folder `help` does not exist in your module's root; if it does it will be erased!
+4. Make sure `README.txt` does not exist in your module's root; if so it too will be erased during compiling.
+1. Make sure the following settings are present in `core-config.sh`; replace `my_module` with the name of the module
+        
+        drupal_module = 'my_module';
+        drupal_dir = '../help'
+        README = '../README.txt'
+        
+2. Make sure to create `/source/README.md`; this compiles to `README.txt`.
+3. You must also create the advanced help .ini file in `source/help.ini`.  **Please note that you should omit the module name!**  Just name it `help.ini`.  See this file `advanced_help/help/using-advanced-help.html` inside the [Advanced Help Module][help_module] for more info.
 
-After you've written you markdown files, you need to compile to create the `advanced_help` directory.
+After you've written you markdown files, and compiled, you will see the `help` directory and the `README.txt` files in the root of your module.
 
 ### Links
 Do not use `&topic:module/topic&` as is suggested, rather follow the instructions above and the Advanced Help topic links will automatically be generated for you.
