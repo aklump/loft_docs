@@ -51,6 +51,7 @@ function load_config() {
   docs_source_dir='source'
   docs_kit_dir='kit'
   docs_doxy_dir='doxygene'
+  docs_website_dir='public_html'
   docs_html_dir='html'
   docs_text_dir='text'
   docs_drupal_dir='advanced_help'
@@ -102,10 +103,10 @@ installing=0
 load_config
 
 # These dirs need to be created
-declare -a dirs=("$docs_html_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir" "$docs_source_dir" "$docs_doxy_dir");
+declare -a dirs=("$docs_html_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir" "$docs_source_dir" "$docs_doxy_dir");
 
 # These dirs need to be emptied
-declare -a dirs_to_empty=("$docs_html_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_tmp_dir");
+declare -a dirs_to_empty=("$docs_html_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_tmp_dir");
 
 # If source does not exist then copy core example
 if [ ! -d "$docs_source_dir" ]; then
@@ -163,21 +164,25 @@ for file in $docs_source_dir/*; do
   then
     basename=${file##*/}
 
-    # Process .md files and output as .htmlll
+    # Process .md files and output as .html
 
     if echo "$file" | grep -q '.md$'; then
       basename=$(echo $basename | sed 's/\.md$//g').html
       perl $docs_markdown --html4tags $file > $docs_tmp_dir/$basename
 
-    # Css files pass through to the html dir
+    # Css files pass through to the website and html dir
     elif echo "$file" | grep -q '.css$'; then
       cp $file $docs_html_dir/$basename
       _check_file "$docs_html_dir/$basename"
+      cp $file $docs_website_dir/$basename
+      _check_file "$docs_website_dir/$basename"
 
     # Html files pass through to drupal and html
     elif echo "$file" | grep -q '.html$'; then
       cp $file $docs_drupal_dir/$basename
       _check_file "$docs_drupal_dir/$basename"
+      cp $file $docs_website_dir/$basename
+      _check_file "$docs_website_dir/$basename"
       cp $file $docs_html_dir/$basename
       _check_file "$docs_html_dir/$basename"
 
@@ -185,8 +190,8 @@ for file in $docs_source_dir/*; do
     elif echo "$file" | grep -q '.txt$'; then
       cp $file $docs_drupal_dir/$basename
       _check_file "$docs_drupal_dir/$basename"
-      cp $file $docs_html_dir/$basename
-      _check_file "$docs_html_dir/$basename"
+      cp $file $docs_website_dir/$basename
+      _check_file "$docs_website_dir/$basename"
       cp $file $docs_text_dir/$basename
       _check_file "$docs_text_dir/$basename"
 
@@ -195,16 +200,19 @@ for file in $docs_source_dir/*; do
       cp $file "$docs_drupal_dir/$docs_drupal_module.$basename"
       _check_file "$docs_drupal_dir/$docs_drupal_module.$basename"
 
-    # All files types pass through to drupal
+    # All files types pass through to drupal, webpage, html, and text
     else
       cp $file $docs_drupal_dir/$basename
       _check_file "$docs_drupal_dir/$basename"
+      cp $file $docs_website_dir/$basename
+      _check_file "$docs_website_dir/$basename"
     fi
 
   elif [ -d "$file" ]; then
     basename=${file##*/}
     echo "Copying dir $basename..."
     rsync -rv $docs_source_dir/$basename/ $docs_drupal_dir/$basename/
+    rsync -rv $docs_source_dir/$basename/ $docs_website_dir/$basename/
     rsync -rv $docs_source_dir/$basename/ $docs_html_dir/$basename/
   fi
 done
@@ -218,6 +226,10 @@ for file in $docs_tmp_dir/*.html; do
     html_file=$basename.html
     kit_file=$basename.kit
     tmp_file=$basename.kit.txt
+
+    # Send over html snippet files to html
+    cp $file $docs_html_dir/$html_file
+    _check_file "$docs_html_dir/$html_file"
 
     # Convert to plaintext
     if lynx_loc="$(type -p "$docs_lynx")" && [ ! -z "$lynx_loc" ]; then
@@ -248,8 +260,8 @@ done
 for file in $docs_tpl_dir/*.css; do
   if [ -f "$file" ]; then
     basename=${file##*/}
-    cp $file $docs_html_dir/$basename
-    _check_file "$docs_html_dir/$basename"
+    cp $file $docs_website_dir/$basename
+    _check_file "$docs_website_dir/$basename"
   fi
 done
 
