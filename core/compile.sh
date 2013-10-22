@@ -53,6 +53,7 @@ function load_config() {
   docs_doxy_dir='doxygene'
   docs_website_dir='public_html'
   docs_html_dir='html'
+  docs_mediawiki_dir='mediawiki'
   docs_text_dir='text'
   docs_drupal_dir='advanced_help'
   docs_tmp_dir="core/tmp"
@@ -103,10 +104,10 @@ installing=0
 load_config
 
 # These dirs need to be created
-declare -a dirs=("$docs_html_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir" "$docs_source_dir" "$docs_doxy_dir");
+declare -a dirs=("$docs_html_dir" "$docs_mediawiki_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir" "$docs_source_dir" "$docs_doxy_dir");
 
 # These dirs need to be emptied
-declare -a dirs_to_empty=("$docs_html_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_tmp_dir");
+declare -a dirs_to_empty=("$docs_html_dir" "$docs_mediawiki_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_tmp_dir");
 
 # If source does not exist then copy core example
 if [ ! -d "$docs_source_dir" ]; then
@@ -226,6 +227,7 @@ for file in $docs_tmp_dir/*.html; do
     html_file=$basename.html
     kit_file=$basename.kit
     tmp_file=$basename.kit.txt
+    txt_file=$basename.txt
 
     # Send over html snippet files to html
     cp $file $docs_html_dir/$html_file
@@ -241,6 +243,9 @@ for file in $docs_tmp_dir/*.html; do
 
     # Process each file for advanced help markup
     $docs_php "core/advanced_help.php" "$docs_tmp_dir/$html_file" "$docs_drupal_module" > $docs_drupal_dir/$html_file
+
+    # Convert to mediawiki
+    $docs_php "core/mediawiki.php"  "$docs_tmp_dir/$html_file" >> $docs_mediawiki_dir/$txt_file
 
     # Convert to offline .html
     echo '' > $docs_kit_dir/$tmp_file

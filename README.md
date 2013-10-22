@@ -9,13 +9,15 @@ This tool provides one central place to manage your documentation allowing you t
 
 1. HTML
 2. Plaintext
-3. Advanced Help for Drupal
+3. MediaWiki
+5. Advanced Help for Drupal
 
 Gone are the days of having to update all your different documentation locations!
 
 ## As a Reader
 1. To read documentation you probably just want to load `/html/index.html` in a browser and proceed from there.
 2. Plaintext documentation may also be available in `/text/`
+3. MediaWiki documentation is in `/mediawiki/`
 
 ## As a Content Manager
 1. You will need to read about compiling below; this is the step needed to generate derivative documentation from `/source`.

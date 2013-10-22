@@ -1,0 +1,5 @@
+{
+  "require": {
+    "aklump/loft_parser": "0.1.*"
+  }
+}
