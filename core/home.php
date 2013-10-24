@@ -3,11 +3,11 @@
  * @file
  * Parses Drupal's Advanced Help .ini file to create the directory or index
  *
- * @ingroup ovadata_docs OvaData Developer Docs
+ * @ingroup loft_docs
  * @{
  */
 require_once 'classes/IndexInterface.php';
-$index = new AdvancedHelpIni($argv[1]);
+$index = new aklump\loft_docs\AdvancedHelpIni($argv[1]);
 
 $list = array();
 foreach ($index->getData() as $key => $value) {
@@ -28,4 +28,4 @@ EOD;
 
 print $output;
 
-/** @} */ //end of group: ovadata_docs
+/** @} */ //end of group: loft_docs

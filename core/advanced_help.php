@@ -3,7 +3,7 @@
  * @file
  * Process advanced help html files to make them fit into said format
  *
- * @ingroup ovadata_docs
+ * @ingroup loft_docs
  * @{
  */
 
@@ -39,4 +39,4 @@ if (isset($argv[1])
 }
 print $output;
 
-/** @} */ //end of group: ovadata_docs
+/** @} */ //end of group: loft_docs

@@ -1,0 +1,6 @@
+{
+  "require": {
+    "aklump/loft_parser": "0.1.*",
+    "aklump/kit_php": "0.2.*"
+  }
+}

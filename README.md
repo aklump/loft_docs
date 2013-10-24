@@ -9,13 +9,15 @@ This tool provides one central place to manage your documentation allowing you t
 
 1. HTML
 2. Plaintext
-3. Advanced Help for Drupal
+3. MediaWiki
+5. Advanced Help for Drupal
 
 Gone are the days of having to update all your different documentation locations!
 
 ## As a Reader
 1. To read documentation you probably just want to load `/html/index.html` in a browser and proceed from there.
 2. Plaintext documentation may also be available in `/text/`
+3. MediaWiki documentation is in `/mediawiki/`
 
 ## As a Content Manager
 1. You will need to read about compiling below; this is the step needed to generate derivative documentation from `/source`.
@@ -81,22 +83,23 @@ Compiling requires the [Markdown Perl Binary][markdown], add it to the `core/Mar
 
 Output of `.txt` files requires that [Lynx][lynx] be installed.
 
-Compiling relies on the [Code Kit app][codekit]; you should add this directory as a project before executing `compile.sh`.  The first time you compile you may need to manually compile the `.kit` files from the CodeKit UI.
+~~Compiling relies on the [Code Kit app][codekit]; you should add this directory as a project before executing `compile.sh`.  The first time you compile you may need to manually compile the `.kit` files from the CodeKit UI.~~ As of version 0.4 there is no longer a dependency on [Code Kit][codekit].  I've written [a php compiler](https://github.com/aklump/kit_php) that handles the `.kit` file compiling, instead.
 
-Each time you want to update your documentation files, after modifying files in `source` you need to execute `compile.sh` form bash:
+Each time you want to update your documentation files, after modifying files in `source` you need to execute `compile.sh` from bash, make sure you are in the root directory of this package.
 
     ./core/compile.sh
     
 ## Installation
-1. Download the [Markdown Perl Binary][markdown] and add it as `/core/Markdown.pl`
-1. Add the root directory of this folder as a project in [Code Kit app][codekit].
+1. Download the [Markdown Perl Binary][markdown] and add it as `/core/Markdown.pl`.  **You may skip this step** if this is already installed somewhere else in your system; in that case you will need to edit `core-config.sh` (once it's been created) and point it to your `Markdown.pl` file.
+1. ~~Add the root directory of this folder as a project in [Code Kit app][codekit]. **Do not adjust CodeKit project level settings** until after installation is complete, as the installation step overwrites `codekit-config.json`.~~
+2. Make sure [Composer](http://getcomposer.org/) is installed on your system and run `composer install` to get the necessary dependencies.
 1. Run the compile command:
 
         ./core/compile.sh
 
-2. The necessary dirs will be created including the configuration file:
+2. The necessary dirs will be created including these configuration file(s):
 
-        core-config.sh  
+        core-config.sh
   
 1. Open and edit `core-config.sh`. **You should not delete this file once it's been created, as it is the flag that installation has taken place!** Compiling without this file may lead to some/all of your files being deleted.
 2. Enter the name of the drupal module this will be used for, if applicable.
@@ -128,7 +131,7 @@ This script provides a self updating feature.  To update the core files, go into
 
     ./core/update.sh
     
-## Rationalle
+## Rationale
 The rationalle behind this project is that it is easy to write markdown files, and it is easy to share a static html based documentation file, and it is easy to use Drupal Advanced Help module, and it is easy to verison your documentation in git; but to do all this together at once… was NOT EASY.
 
 So this project is born to satisfy this need.

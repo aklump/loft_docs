@@ -3,7 +3,7 @@
  * @file
  * Replace iframes with actual content for offline html
  *
- * @ingroup ovadata_docs
+ * @ingroup loft_docs
  * @{
  */
 $temp_dir = sys_get_temp_dir();
@@ -11,11 +11,12 @@ $temp_dir = sys_get_temp_dir();
 // Drupal credentials for logging in to the account that can access the iframes
 //http://username:password@hostname/path?arg=value#anchor';
 $login = (object) parse_url($argv[2]);
+$errors = array();
 
 if (isset($argv[1])
     && ($output = file_get_contents(getcwd() . '/' . $argv[1]))
     && (preg_match_all('/<iframe\s+src="([^"]+)".*?<\/iframe>/', $output, $iframes))) {
-  $errors = array();
+
   $data = array(
     'name' => $login->user,
     'pass' => $login->pass,
@@ -60,4 +61,4 @@ if ($errors) {
 }
 print $output;
 
-/** @} */ //end of group: ovadata_docs
+/** @} */ //end of group: loft_docs
