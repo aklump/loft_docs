@@ -2,7 +2,7 @@
 [help_module]:http://drupal.org/project/advanced_help
 [codekit]:http://incident57.com/codekit/
 [lynx]:http://lynx.isc.org/
-For installation instructions scroll to the bottom.
+*For installation instructions scroll to the bottom.*
 
 ##What Is This?
 This tool provides one central place to manage your documentation allowing you to compose in Markdown and have the benefits of all of the following output formats:
@@ -15,9 +15,9 @@ This tool provides one central place to manage your documentation allowing you t
 Gone are the days of having to update all your different documentation locations!
 
 ## As a Reader
-1. To read documentation you probably just want to load `/html/index.html` in a browser and proceed from there.
-2. Plaintext documentation may also be available in `/text/`
-3. MediaWiki documentation is in `/mediawiki/`
+1. To read documentation you probably just want to load `public_html/index.html` in a browser and proceed from there.
+2. Plaintext documentation may also be available in `text/`
+3. MediaWiki documentation is in `mediawiki/`
 
 ## As a Content Manager
 1. You will need to read about compiling below; this is the step needed to generate derivative documentation from `/source`.
@@ -105,7 +105,7 @@ Each time you want to update your documentation files, after modifying files in 
 3. Enter the credentials for the drupal site if using iframes.
 4. Override the php path if needed; php must have the curl library installed.
 5. Run `./core/compile.sh` once more to update the configuration.
-5. Test the installation by visiting `html/index.html` in a browser.
+5. Test the installation by visiting `public_html/index.html` in a browser, this is the webpage output and should show you a few example pages.
 7. Installation is complete; you may now begin documenting in `source`. You most likely should first delete the example files in `source`.
 
 ### Quick Installing Lynx on Mac
