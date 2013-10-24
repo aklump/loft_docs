@@ -32,6 +32,27 @@ function _check_file() {
 }
 
 ##
+ # Determine if an output format is enabled
+ #
+ # @param string $1
+ #   The output format to check e.g., 'html'
+ #
+ # @return 0|1
+ #
+function is_disabled() {
+  local seeking=$1
+  local in=1
+  for element in "${docs_disabled[@]}"; do
+   if [[ $element == $seeking ]]; then
+     in=0
+     break
+   fi
+  done
+  return $in
+}
+
+
+##
  # Load the configuration file
  #
  # Lines that begin with [ or # will be ignored
@@ -45,12 +66,13 @@ function load_config() {
   fi
 
   # defaults
+  docs_disabled="doxygene"
   docs_php=$(which php)
   docs_lynx=$(which lynx)
   docs_markdown='core/Markdown.pl'
   docs_source_dir='source'
   docs_kit_dir='kit'
-  docs_doxy_dir='doxygene'
+  docs_doxygene_dir='doxygene'
   docs_website_dir='public_html'
   docs_html_dir='html'
   docs_mediawiki_dir='mediawiki'
@@ -75,6 +97,8 @@ function load_config() {
     echo "`tput setaf 3`Lynx not found; .txt files will not be created.`tput op`"
     docs_text_enabled=0
   fi
+
+  docs_disabled=($docs_disabled)
 }
 
 ##
@@ -104,10 +128,23 @@ installing=0
 load_config
 
 # These dirs need to be created
-declare -a dirs=("$docs_html_dir" "$docs_mediawiki_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir" "$docs_source_dir" "$docs_doxy_dir");
+declare -a dirs=("$docs_html_dir" "$docs_mediawiki_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir" "$docs_source_dir" "$docs_doxygene_dir");
 
-# These dirs need to be emptied
+# These dirs need to be emptied before we start
 declare -a dirs_to_empty=("$docs_html_dir" "$docs_mediawiki_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_tmp_dir");
+
+# These dirs need to be removed at that end
+declare -a dirs_to_delete=("$docs_tmp_dir")
+
+# Add all enabled formats to dir array
+for format in "${docs_disabled[@]}"
+do
+  if is_disabled "$format"; then
+    dir=docs_${format}_dir
+    dir=$(eval "echo \$${dir}")
+    dirs_to_delete=("${dirs_to_delete[@]}" "$dir")
+  fi
+done
 
 # If source does not exist then copy core example
 if [ ! -d "$docs_source_dir" ]; then
@@ -141,20 +178,25 @@ if [ "$docs_text_enabled" -eq 0 ]; then
   rmdir $docs_text_dir
 fi
 
-
 # Installation steps
 if [ $installing -eq 1 ]; then
   echo "`tput setaf 3`Installing Loft Docs...`tput op`"
   if [ -f .gitignore ]; then
     rm .gitignore
   fi
+
+  ## Setup the codekit file with the correct kit output
+  #codekit_file="codekit-config.json"
+  #if [ -f "$codekit_file" ]; then
+  #  rm "$codekit_file"
+  #fi
+  #echo "{"projectSettings" : {"kitAutoOutputPathRelativePath" : "..\/$docs_html_dir"}}" > "$codekit_file"
 fi
 
 # Build index.html from home.php
 echo '' > "$docs_kit_dir/index.kit"
 $docs_php "core/page_vars.php" "$docs_help_ini" "index" >> "$docs_kit_dir/index.kit"
 $docs_php "core/home.php" "$docs_help_ini" "$docs_tpl_dir" >> "$docs_kit_dir/index.kit"
-
 _check_file "$docs_kit_dir/index.kit"
 
 # Copy over files in the tmp directory, but compile anything with a .md
@@ -178,7 +220,7 @@ for file in $docs_source_dir/*; do
       cp $file $docs_website_dir/$basename
       _check_file "$docs_website_dir/$basename"
 
-    # Html files pass through to drupal and html
+    # Html files pass through to drupal, website and html
     elif echo "$file" | grep -q '.html$'; then
       cp $file $docs_drupal_dir/$basename
       _check_file "$docs_drupal_dir/$basename"
@@ -187,7 +229,7 @@ for file in $docs_source_dir/*; do
       cp $file $docs_html_dir/$basename
       _check_file "$docs_html_dir/$basename"
 
-    # text files pass through to drupal, html and txt
+    # text files pass through to drupal, website and txt
     elif echo "$file" | grep -q '.txt$'; then
       cp $file $docs_drupal_dir/$basename
       _check_file "$docs_drupal_dir/$basename"
@@ -201,7 +243,7 @@ for file in $docs_source_dir/*; do
       cp $file "$docs_drupal_dir/$docs_drupal_module.$basename"
       _check_file "$docs_drupal_dir/$docs_drupal_module.$basename"
 
-    # All files types pass through to drupal, webpage, html, and text
+    # All files types pass through to drupal and webpage
     else
       cp $file $docs_drupal_dir/$basename
       _check_file "$docs_drupal_dir/$basename"
@@ -218,7 +260,8 @@ for file in $docs_source_dir/*; do
   fi
 done
 
-# Now process all tmp files into kit>html and advanced help files>html
+# Iterate over all html files and send to CodeKit; then iterate over all html
+# files and send to drupal and website
 for file in $docs_tmp_dir/*.html; do
   if [ -f "$file" ]
   then
@@ -257,7 +300,6 @@ for file in $docs_tmp_dir/*.html; do
     $docs_php "core/iframes.php" "$docs_kit_dir/$tmp_file" "$docs_credentials" > $docs_kit_dir/$kit_file
     rm $docs_kit_dir/$tmp_file
     _check_file "$docs_kit_dir/$kit_file"
-
   fi
 done
 
@@ -292,10 +334,16 @@ if [ "$docs_README" ]; then
   done
 fi
 
-# Doxygene implementation
-echo 'Not yet implemented' > "$docs_doxy_dir/README.md"
+# Now process our CodeKit directory
+$docs_php "core/kit.php" "$docs_kit_dir" "$docs_website_dir" > $docs_kit_dir/results.txt
 
-# Cleanup tmp dir
-if [ -d "$docs_tmp_dir" ]; then
-  rm -rf $docs_tmp_dir
-fi
+# Doxygene implementation
+echo 'Not yet implemented' > "$docs_doxygene_dir/README.md"
+
+# Cleanup dirs that are not enabled or were temp
+for var in "${dirs_to_delete[@]}"
+do
+  if [ "$var" ] && [ -d "$var" ]; then
+    rm -rf $var;
+  fi
+done

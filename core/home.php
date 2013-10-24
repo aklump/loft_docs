@@ -7,7 +7,7 @@
  * @{
  */
 require_once 'classes/IndexInterface.php';
-$index = new AdvancedHelpIni($argv[1]);
+$index = new aklump\loft_docs\AdvancedHelpIni($argv[1]);
 
 $list = array();
 foreach ($index->getData() as $key => $value) {

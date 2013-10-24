@@ -7,6 +7,8 @@
  * @{
  */
 
+namespace aklump\loft_docs;
+
 /**
  * Interface IndexInterface
  */
