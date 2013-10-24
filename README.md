@@ -83,7 +83,7 @@ Compiling requires the [Markdown Perl Binary][markdown], add it to the `core/Mar
 
 Output of `.txt` files requires that [Lynx][lynx] be installed.
 
-~~Compiling relies on the [Code Kit app][codekit]; you should add this directory as a project before executing `compile.sh`.  The first time you compile you may need to manually compile the `.kit` files from the CodeKit UI.~~ As of version 0.4 there is no longer a dependency on [Code Kit][codekit].  I've written [a php compiler](https://github.com/aklump/kit_php) that handles the `.kit` file compiling, instead.
+~~Compiling relies on the [Code Kit app][codekit]; you should add this directory as a project before executing `compile.sh`.  The first time you compile you may need to manually compile the `.kit` files from the CodeKit UI.~~ As of version 0.4 there is no longer a dependency on [Code Kit][codekit].  I've written [a php compiler](https://github.com/aklump/kit_php) that handles the `.kit` file compiling, which is included.
 
 Each time you want to update your documentation files, after modifying files in `source` you need to execute `compile.sh` from bash, make sure you are in the root directory of this package.
 
@@ -92,7 +92,6 @@ Each time you want to update your documentation files, after modifying files in 
 ## Installation
 1. Download the [Markdown Perl Binary][markdown] and add it as `/core/Markdown.pl`.  **You may skip this step** if this is already installed somewhere else in your system; in that case you will need to edit `core-config.sh` (once it's been created) and point it to your `Markdown.pl` file.
 1. ~~Add the root directory of this folder as a project in [Code Kit app][codekit]. **Do not adjust CodeKit project level settings** until after installation is complete, as the installation step overwrites `codekit-config.json`.~~
-2. Make sure [Composer](http://getcomposer.org/) is installed on your system and run `composer install` to get the necessary dependencies.
 1. Run the compile command:
 
         ./core/compile.sh
