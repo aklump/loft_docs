@@ -7,8 +7,9 @@
  * @{
  */
 require_once 'classes/IndexInterface.php';
+use aklump\loft_docs\AdvancedHelpIni;
 
-$index = new aklump\loft_docs\AdvancedHelpIni($argv[1]);
+$index = new AdvancedHelpIni($argv[1]);
 $vars = array(
   'classes' => array(),
 );
@@ -21,6 +22,13 @@ $vars['classes'] = implode(' ', $vars['classes']);
 foreach ($vars as $key => $value) {
   $declarations[] = "\$$key = $value";
 }
+
+// Add in additional kit vars:
+
+// Suppress timezone warnings if they arise
+$declarations[] = '$date = ' . @date('r');
+
+// Now write the vars
 print '<!--' . implode("-->\n<!--", $declarations) . "-->\n";
 
 /** @} */ //end of group: loft_docs

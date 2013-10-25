@@ -3,10 +3,10 @@
  * @file
  * Defines class
  *
- * @ingroup loft_docs
+ * @ingroup loft_parser
  * @{
  */
-namespace aklump\loft_docs;
+namespace aklump\loft_parser;
 
 /**
  * Class MediaWikiParser

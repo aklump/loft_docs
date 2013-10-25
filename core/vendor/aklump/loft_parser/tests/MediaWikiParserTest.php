@@ -3,10 +3,10 @@
  * @file
  * Unit tests for the ParserClass
  *
- * @ingroup loft_docs
+ * @ingroup loft_parser
  * @{
  */
-namespace aklump\loft_docs;
+namespace aklump\loft_parser;
 require_once '../vendor/autoload.php';
 require_once '../classes/Parser.php';
 require_once '../classes/MediaWikiParser.php';

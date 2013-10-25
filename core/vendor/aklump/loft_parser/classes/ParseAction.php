@@ -3,10 +3,10 @@
  * @file
  * Defines the abstract parseAction class
  *
- * @ingroup loft_docs
+ * @ingroup loft_parser
  * @{
  */
-namespace aklump\loft_docs;
+namespace aklump\loft_parser;
 
 
 /**
@@ -36,6 +36,51 @@ abstract class ParseAction implements ParseActionInterface {
    */
   public function __construct() {
     $this->params = func_get_args();
+  }
+}
+
+/**
+ * Class HTMLTagRemoveAction
+ *
+ * Removes an html tag and if it occupies a line by itself, removes the line
+ */
+class HTMLTagRemoveAction extends ParseAction implements ParseActionInterface {
+
+  /**
+   * Constructor
+   *
+   * @param string $html_tag
+   * @param int $skip_count
+   *   (Optional) Defaults to 0. Set this to a number and that many tags will be
+       skipped over before removing starts to take place. For example if you
+       want to remove all but the first h1 tag in a document, you would call it
+       like this:
+
+       @code
+         $obj = new HTMLTagRemoveAction('h1', 1);
+         $obj->parse($html_content);
+       @endcode
+   */
+  public function __construct($html_tag, $skip_count = 0) {
+    parent::__construct($html_tag, $skip_count);
+  }
+
+  public function parse(&$source) {
+    list($html_tag, $skip_count) = $this->params;
+    $html_tag = trim($html_tag, '<>');
+    $regex = '/(<' . $html_tag . '\b[^>]*>)(.*?)(<\/' . $html_tag . '>)/is';
+    $lines = explode(PHP_EOL, $source);
+    $i = 0;
+    foreach (array_keys($lines) as $key) {
+      if (preg_match($regex, $lines[$key])
+          && ++$i > $skip_count
+          && trim($lines[$key] = preg_replace($regex, '', $lines[$key])) === '') {
+        unset($lines[$key]);
+      }
+    }
+    $source = implode(PHP_EOL, $lines);
+
+    return $this;
   }
 }
 

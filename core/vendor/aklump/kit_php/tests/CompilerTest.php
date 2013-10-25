@@ -137,8 +137,20 @@ EOD;
     $nav = $this->writeFile('<nav>Here is the Navigation</nav>', 'nav.kit', 'core/tpl');
 
     $obj = new Compiler($this->getTempDir() . '/kit', $this->getTempDir() . '/public_html');
-    $obj->apply();
     $this->assertEquals('<index><header><nav>Here is the Navigation</nav></header></index>', $obj->apply());
+
+    // Check imports
+    $control = array(
+      '../core/tpl/header.kit' => $obj->getSourceDirectory() . '/../core/tpl/header.kit',
+      'nav.kit' => $obj->getSourceDirectory() . '/../core/tpl/nav.kit',
+    );
+    $this->assertEquals($control, $obj->getImports());
+
+    // Check exports
+    $control = array(
+      'index.html' => $obj->getOutputDirectory() . '/index.html',
+    );
+    $this->assertEquals($control, $obj->getCompiledFiles());
   }
 
   public function testKitFilesInNestedDirs() {
