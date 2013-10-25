@@ -11,7 +11,7 @@ require_once 'vendor/autoload.php';
 
 // Convert paths to images to include @page
 if (isset($argv[1])) {
-  $p = new aklump\loft_docs\MediaWikiParser($argv[1], TRUE);
+  $p = new aklump\loft_parser\MediaWikiParser($argv[1], TRUE);
   $output = $p->parse();
 }
 print $output;
