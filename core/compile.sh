@@ -334,8 +334,8 @@ if [ "$docs_README" ]; then
   done
 fi
 
-# Now process our CodeKit directory
-$docs_php "core/kit.php" "$docs_kit_dir" "$docs_website_dir" > $docs_kit_dir/results.txt
+# Now process our CodeKit directory and produce our website
+$docs_php "core/webpage.php" "$docs_kit_dir" "$docs_website_dir"
 
 # Doxygene implementation
 echo 'Not yet implemented' > "$docs_doxygene_dir/README.md"

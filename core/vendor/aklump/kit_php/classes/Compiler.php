@@ -22,9 +22,29 @@ interface CompilerInterface extends KitInterface {
    *
    * @return array
    *   keys are the filenames
-   *   values are the complete paths
+   *   values are the absolute paths to the files
    */
   public function getKitFiles();
+
+  /**
+   * Return all filepaths of imported files
+   *
+   * These may be outside the source directory.
+   *
+   * @return array
+   *   keys are the filenames
+   *   values are the absolute paths to the files
+   */
+  public function getImports();
+
+  /**
+   * Return all filepaths of compiled files (html output)
+   *
+   * @return array
+   *   keys are the filenames
+   *   values are the absolute paths to the files
+   */
+  public function getCompiledFiles();
 }
 
 /**
@@ -32,7 +52,7 @@ interface CompilerInterface extends KitInterface {
  */
 class Compiler extends Kit implements CompilerInterface {
 
-  protected $source_dir, $output_dir, $imports, $kit_files;
+  protected $source_dir, $output_dir, $imports, $exports, $kit_files;
 
   /**
    * Constructor
@@ -44,6 +64,7 @@ class Compiler extends Kit implements CompilerInterface {
     $this->setSourceDirectory($source_dir);
     $this->setOutputDirectory($output_dir);
     $this->imports = array();
+    $this->exports = array();
   }
 
   public function __destruct() {
@@ -57,6 +78,14 @@ class Compiler extends Kit implements CompilerInterface {
         }
       }
     }
+  }
+
+  public function getImports() {
+    return $this->imports;
+  }
+
+  public function getCompiledFiles() {
+    return $this->exports;
   }
 
   /**
@@ -77,6 +106,9 @@ class Compiler extends Kit implements CompilerInterface {
    * @param string $file
    * @param string $destination
    *   (Optional) Defaults to 'output'. The other option is 'source'.
+   *
+   * @return string|FALSE
+   *   The path of the file if it was successfully written.
    */
   protected function writeFile($contents, $file, $destination = 'output') {
     $dir = $destination === 'source' ? $this->source_dir : $this->output_dir;
@@ -90,9 +122,12 @@ class Compiler extends Kit implements CompilerInterface {
       copy($dir . '/' . $file, $dir . '/' . $file . '.orig');
     }
 
-    $fp = fopen($dir . '/' . $file, 'w');
+    $path = $dir . '/' . $file;
+    $fp = fopen($path, 'w');
     fwrite($fp, $contents);
     fclose($fp);
+
+    return is_file($path) ? $path : FALSE;
   }
 
   public function setSourceDirectory($directory, $create = TRUE){
@@ -158,7 +193,9 @@ class Compiler extends Kit implements CompilerInterface {
         // Now store the compiled file
         $this->writeFile($import->apply(), $file, 'source');
 
-        $this->imports += $import->getImports();
+        foreach($import->getImports() as $key => $value) {
+          $this->imports[$key] = $value;
+        }
       }
     }
 
@@ -168,7 +205,8 @@ class Compiler extends Kit implements CompilerInterface {
       $variables->extract();
       $result = $variables->apply();
       $file = preg_replace('/\.kit$/', '.html', $file);
-      $this->writeFile($result, $file);
+      $path = $this->writeFile($result, $file);
+      $this->exports[$file] = $path;
     }
 
     return $result;

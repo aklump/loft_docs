@@ -3,10 +3,10 @@
  * @file
  * Unit tests for the ParserClass
  *
- * @ingroup loft_docs
+ * @ingroup loft_parser
  * @{
  */
-namespace aklump\loft_docs;
+namespace aklump\loft_parser;
 require_once '../vendor/autoload.php';
 require_once '../classes/Parser.php';
 require_once '../classes/ParseAction.php';
@@ -61,7 +61,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase {
     $actions = $p->getActions();
     $this->assertCount(2, $actions);
 
-    $this->assertInstanceOf('aklump\loft_docs\HTMLTagParseAction', $actions[0]);
-    $this->assertInstanceOf('aklump\loft_docs\HTMLTagParseAction', $actions[1]);
+    $this->assertInstanceOf('aklump\loft_parser\HTMLTagParseAction', $actions[0]);
+    $this->assertInstanceOf('aklump\loft_parser\HTMLTagParseAction', $actions[1]);
   }
 }

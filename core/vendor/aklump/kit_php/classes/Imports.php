@@ -113,23 +113,24 @@ class Imports extends Kit implements ImportsInterface {
         $this->imports += array_combine($array, $array);
 
         $replace = '';
-        foreach ($array as $path) {
-          $info = pathinfo($path);
+        foreach ($array as $import_path) {
+          $info = pathinfo($import_path);
           $partial = '_' . ltrim($info['basename'], '_');
           $variants = array(
-            $this->dirname . '/' . $path,
-            str_replace($info['basename'], $partial, $this->dirname . '/' . $path),
-            $this->dirname . '/' . $relative_dir . '/' . $path,
-            str_replace($info['basename'], $partial, $this->dirname . '/' . $relative_dir . '/' . $path),
-            $path,
-            str_replace($info['basename'], $partial, $path),
+            $this->dirname . '/' . $import_path,
+            str_replace($info['basename'], $partial, $this->dirname . '/' . $import_path),
+            $this->dirname . '/' . $relative_dir . '/' . $import_path,
+            str_replace($info['basename'], $partial, $this->dirname . '/' . $relative_dir . '/' . $import_path),
+            $import_path,
+            str_replace($info['basename'], $partial, $import_path),
             $info['basename'],
             $partial,
           );
           $variants = array_unique($variants);
-          foreach ($variants as $path) {
-            if (is_readable($path) && ($contents = file_get_contents($path))) {
+          foreach ($variants as $actual_path) {
+            if (is_readable($actual_path) && ($contents = file_get_contents($actual_path))) {
               $replace .= $contents;
+              $this->imports[$import_path] = $actual_path;
               break;
             }
           }

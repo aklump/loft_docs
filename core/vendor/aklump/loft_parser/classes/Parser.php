@@ -3,10 +3,10 @@
  * @file
  * Defines the abstract parse class
  *
- * @ingroup loft_docs
+ * @ingroup loft_parser
  * @{
  */
-namespace aklump\loft_docs;
+namespace aklump\loft_parser;
 
 /**
  * Interface Parser
@@ -102,4 +102,4 @@ class Parser implements ParserInterface {
   }
 }
 
-/** @} */ //end of group: loft_docs
+/** @} */ //end of group: loft_parser
