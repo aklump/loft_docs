@@ -431,23 +431,23 @@
     },
     {
         "name": "aklump/loft_parser",
-        "version": "0.1.1",
-        "version_normalized": "0.1.1.0",
+        "version": "0.1.2",
+        "version_normalized": "0.1.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/aklump/loft_parser.git",
-            "reference": "c769cff25f63765cab8cd629ae4daab423c35e89"
+            "reference": "f2b556b358b30f3b567075d251adf79af1b1d2f9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/aklump/loft_parser/zipball/c769cff25f63765cab8cd629ae4daab423c35e89",
-            "reference": "c769cff25f63765cab8cd629ae4daab423c35e89",
+            "url": "https://api.github.com/repos/aklump/loft_parser/zipball/f2b556b358b30f3b567075d251adf79af1b1d2f9",
+            "reference": "f2b556b358b30f3b567075d251adf79af1b1d2f9",
             "shasum": ""
         },
         "require-dev": {
             "phpunit/phpunit": "3.7.*"
         },
-        "time": "2013-10-25 00:34:03",
+        "time": "2013-10-26 18:06:08",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -477,17 +477,17 @@
     },
     {
         "name": "aklump/kit_php",
-        "version": "0.2.3",
-        "version_normalized": "0.2.3.0",
+        "version": "0.2.4",
+        "version_normalized": "0.2.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/aklump/kit_php.git",
-            "reference": "565255cc842a4c506645348c91d9f9179d0ec45a"
+            "reference": "3c7b434bddda58b312776910171e29e43daa8f08"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/aklump/kit_php/zipball/565255cc842a4c506645348c91d9f9179d0ec45a",
-            "reference": "565255cc842a4c506645348c91d9f9179d0ec45a",
+            "url": "https://api.github.com/repos/aklump/kit_php/zipball/3c7b434bddda58b312776910171e29e43daa8f08",
+            "reference": "3c7b434bddda58b312776910171e29e43daa8f08",
             "shasum": ""
         },
         "require": {
@@ -496,7 +496,7 @@
         "require-dev": {
             "phpunit/phpunit": "3.7.*"
         },
-        "time": "2013-10-25 00:35:29",
+        "time": "2013-10-26 18:12:16",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

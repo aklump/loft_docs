@@ -15,18 +15,37 @@ require_once '../classes/ParseAction.php';
 class MediaWikiParserTest extends \PHPUnit_Framework_TestCase {
 
   public function testConstruct() {
-    $p = new MediaWikiParser();
-    $actions = $p->getActions();
+    $obj = new MediaWikiParser();
+    $actions = $obj->getActions();
     $this->assertGreaterThan(0, count($actions));
   }
 
   public function testHeadings() {
     for ($i = 1; $i <= 10; ++$i) {
       $tag = "h$i";
-      $p = new MediaWikiParser("<$tag>Title</$tag>");
+      $obj = new MediaWikiParser("<$tag>Title</$tag>");
       $wiki = str_repeat('=', $i);
-      $this->assertEquals("{$wiki}Title{$wiki}", $p->parse());
+      $this->assertEquals("{$wiki}Title{$wiki}", $obj->parse());
     }
+  }
+
+  public function testPreCode() {
+    $subject = <<<EOD
+Check this out!
+<pre><code>10 print 'hello'
+20 goto 10
+</code></pre>
+More text.
+EOD;
+    $control = <<<EOD
+Check this out!
+<pre>10 print 'hello'
+20 goto 10
+</pre>
+More text.
+EOD;
+    $obj = new MediaWikiParser($subject);
+    $this->assertEquals($control, $obj->parse());
   }
 
   public function testParse() {
@@ -50,7 +69,7 @@ EOD;
 ======Level Six======
 EOD;
 
-    $p = new MediaWikiParser($subject);
-    $this->assertEquals($control, $p->parse());
+    $obj = new MediaWikiParser($subject);
+    $this->assertEquals($control, $obj->parse());
   }
 }

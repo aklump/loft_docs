@@ -32,7 +32,12 @@ class ImportsTest extends KitTestCaseTest {
   public function testImport() {
     // Multiple files
     $subject = array('do', 're', 'mi');
-    $files = array('file1.html', 'file2.html', 'file3.html');
+    $files = array();
+    $control = array();
+    foreach (array('file1.html', 'file2.html', 'file3.html') as $file) {
+      $files[] = $file;
+      $control[$file] = $this->getTempDir() . '/' . $file;
+    }
     $paths = array(
       ($dirname = $this->writeFile($subject[0], $files[0])),
       $this->writeFile($subject[1], $files[1]),
@@ -43,7 +48,7 @@ class ImportsTest extends KitTestCaseTest {
     $obj = new Imports('<!-- @import ' . implode(', ', $files) . ' -->', FALSE);
     $obj->setDirname($dirname);
     $this->assertEquals(implode('', $subject), $obj->apply());
-    $this->assertEquals(array_combine($files, $files), $obj->getImports());
+    $this->assertEquals($control, $obj->getImports());
 
 
     $path = $this->writeFile('A Dynamic, File-Based Subtitle', 'someFile.kit');

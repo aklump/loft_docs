@@ -50,4 +50,15 @@ class MediaWikiParser extends Parser implements ParserInterface {
     $this->addAction(new ListParseAction('# ', '* '));
     $this->addAction(new LinkParseAction('[$1 $2]'));
   }
+
+  public function parse() {
+    $parsed = parent::parse();
+
+    // POST PROCESSING:
+    
+    // Replace <pre></code> with <pre>
+    $parsed = preg_replace('/<pre\b[^>]*><code\b[^>]*>(.*)?<\/code><\/pre>/si', '<pre>\1</pre>', $parsed);
+
+    return $parsed;
+  }
 }
