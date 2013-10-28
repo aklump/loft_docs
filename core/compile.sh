@@ -187,6 +187,7 @@ if [ $installing -eq 1 ]; then
     echo '!.gitignore' >> .gitignore
     echo '!core-config.sh' >> .gitignore
     echo '!source' >> .gitignore
+    echo '!source/*' >> .gitignore
   fi
 
   ## Setup the codekit file with the correct kit output
