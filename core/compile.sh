@@ -183,6 +183,10 @@ if [ $installing -eq 1 ]; then
   echo "`tput setaf 3`Installing Loft Docs...`tput op`"
   if [ -f .gitignore ]; then
     rm .gitignore
+    echo '*' > .gitignore
+    echo '!.gitignore' >> .gitignore
+    echo '!core-config.sh' >> .gitignore
+    echo '!source' >> .gitignore
   fi
 
   ## Setup the codekit file with the correct kit output
