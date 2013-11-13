@@ -39,7 +39,17 @@ You should do the following to link internally to `source/page2.html`
     <a href="page2.html">Link to Next Page</a>
 
 ### iFrames
-One of the cool features is that compiling will grab iframe source and render it directly into the html for offline viewing.  @todo flesh this out.    
+One of the cool features is that compiling will grab iframe source and render it directly into the html for offline viewing.  The way to do this is just to include an `iframe` tag in your source code like so:
+
+    <iframe src="http://www.my-site.com/admin/iframe/content" width="100%" height="100%"></iframe>
+
+Then during compiling, the iframe source will be grabbed and then inserted as an html snippet in the place of the `iframe` tag.
+
+#### Behind a Drupal Login
+In some cases, your iframe content may be behind a Drupal login.  There is a contingency for this and it involves using the correct settings in `core-config.sh`.  You need to add or uncomment the following, replacing the credentials as appropriate.  That way the compiler will try to log in to your drupal site first before visiting the iframe source url.
+    
+    credentials = "http://user:pass@www.my-site.com/user/login";
+
 
 ## Use with Drupal
 Compiling will output files compatible with the [Advanced Help Module for Drupal][help_module].  By default these files will output to a folder named `advanced_help`, but with a little configuration the folder will output directory to the root of your module folder as `help`.
