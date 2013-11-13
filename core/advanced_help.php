@@ -44,6 +44,9 @@ if (isset($argv[1])
       if (!empty($topic['extension'])) {
         $topic = substr($matches[2][$key], 0, -1 * (strlen($topic['extension']) + 1));
       }
+      else {
+        $topic = $topic['filename'];
+      }
       $image = str_replace($matches[1][$key], '&topic:' . $argv[2] . '/' . $topic . '&', $matches[0][$key]);
       $output = str_replace($matches[0][$key], $image, $output);
     }
