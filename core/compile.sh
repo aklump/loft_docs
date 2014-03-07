@@ -1,5 +1,19 @@
 #!/bin/bash
 
+#
+# Do the pre-compile hook
+# 
+function do_pre_hook() {
+  return
+}
+
+#
+# Do the post-compile hook
+# 
+function do_post_hook() {
+  return
+}
+
 ##
  # End execution with a message
  #
@@ -127,6 +141,8 @@ function parse_config() {
 installing=0
 load_config
 
+do_pre_hook
+
 # These dirs need to be created
 declare -a dirs=("$docs_html_dir" "$docs_mediawiki_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir" "$docs_source_dir" "$docs_doxygene_dir");
 
@@ -183,7 +199,7 @@ if [ $installing -eq 1 ]; then
   echo "`tput setaf 3`Installing Loft Docs...`tput op`"
   if [ -f .gitignore ]; then
     rm .gitignore
-    echo '*' > .gitignore
+    echo '/*' > .gitignore
     echo '!.gitignore' >> .gitignore
     echo '!core-config.sh' >> .gitignore
     echo '!source' >> .gitignore
@@ -216,7 +232,9 @@ for file in $docs_source_dir/*; do
 
     if echo "$file" | grep -q '.md$'; then
       basename=$(echo $basename | sed 's/\.md$//g').html
-      perl $docs_markdown --html4tags $file > $docs_tmp_dir/$basename
+      
+      # This uses the perl compiler
+      $docs_php "core/markdown.php" "$file" "$docs_tmp_dir/$basename"
 
     # Css files pass through to the website and html dir
     elif echo "$file" | grep -q '.css$'; then
@@ -352,3 +370,5 @@ do
     rm -rf $var;
   fi
 done
+
+do_post_hook

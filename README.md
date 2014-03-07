@@ -1,4 +1,5 @@
 [markdown]:http://daringfireball.net/projects/markdown/
+[markdown_php]:http://michelf.ca/projects/php-markdown/
 [help_module]:http://drupal.org/project/advanced_help
 [codekit]:http://incident57.com/codekit/
 [lynx]:http://lynx.isc.org/
@@ -89,19 +90,15 @@ Do not use the `&path&` convention when linking to images (as is recommended by 
 
 ## Compiling
 ### Requirements
-Compiling requires the [Markdown Perl Binary][markdown], add it to the `core/Markdown.pl` or edit `core-config.sh` after installation with the path to `Markdown.pl`.
+Compiling uses [Markdown Php][markdown_php], it is included in this distribution.
 
 Output of `.txt` files requires that [Lynx][lynx] be installed.
-
-~~Compiling relies on the [Code Kit app][codekit]; you should add this directory as a project before executing `compile.sh`.  The first time you compile you may need to manually compile the `.kit` files from the CodeKit UI.~~ As of version 0.4 there is no longer a dependency on [Code Kit][codekit].  I've written [a php compiler](https://github.com/aklump/kit_php) that handles the `.kit` file compiling, which is included.
 
 Each time you want to update your documentation files, after modifying files in `source` you need to execute `compile.sh` from bash, make sure you are in the root directory of this package.
 
     ./core/compile.sh
     
 ## Installation
-1. Download the [Markdown Perl Binary][markdown] and add it as `/core/Markdown.pl`.  **You may skip this step** if this is already installed somewhere else in your system; in that case you will need to edit `core-config.sh` (once it's been created) and point it to your `Markdown.pl` file.
-1. ~~Add the root directory of this folder as a project in [Code Kit app][codekit]. **Do not adjust CodeKit project level settings** until after installation is complete, as the installation step overwrites `codekit-config.json`.~~
 1. Run the compile command:
 
         ./core/compile.sh

@@ -20,12 +20,6 @@ php = $(which php)
 lynx = $(which lynx)
 
 ##
- # File path to Markdown.pl e.g., core/Markdown.pl
- #
-markdown = 'core/Markdown.pl'
-#markdown = '/Users/aklump/bin/Markdown_1.0.1/Markdown.pl'
-
-##
  # The drupal credentials for a user who can access your iframe content
  #
 #credentials = "http://user:pass@www.my-site.com/user/login";
