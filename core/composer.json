@@ -1,9 +1,7 @@
 {
   "require": {
     "aklump/loft_parser": "0.1.*",
-    "aklump/kit_php": "0.2.*"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "3.7.*"
+    "aklump/kit_php": "0.2.*",
+    "michelf/php-markdown": ">=1.4.0"
   }
 }

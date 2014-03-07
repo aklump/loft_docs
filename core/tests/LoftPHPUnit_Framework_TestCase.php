@@ -6,7 +6,7 @@
  * @defgroup loft_phpunit Loft PHPUnit
  * @{
  */
-class LoftPHPUnit_Framework_TestCase extends PHPUnit_Framework_TestCase {
+abstract class LoftPHPUnit_Framework_TestCase extends PHPUnit_Framework_TestCase {
 
   protected $paths;
 
@@ -45,7 +45,7 @@ class LoftPHPUnit_Framework_TestCase extends PHPUnit_Framework_TestCase {
    *   Do not include the path in this argument
    * @param string $dir
    *   (Optional) Defaults to $this->getTempDir(). You may define a directory or
-       directories that will be created inside the temp dir.
+   *   directories that will be created inside the temp dir.
    *
    * @return string
    *   If the file is created the entire path to the file
