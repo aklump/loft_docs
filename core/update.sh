@@ -53,36 +53,42 @@
 # @ingroup loft_docs
 # @{
 #
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+CORE="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+ROOT="$CORE/.."
 
-# Find the directory above this script, it is root
-root_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-root_dir=${root_dir%/*}
-
-if [ ! -d "$root_dir/core" ] && [ ! -f "$root_dir/core_version.info" ]; then
+if [ ! -d "$ROOT/core" ] && [ ! -f "$ROOT/core_version.info" ]; then
   echo "`tput setaf 1`Update failed. Corrupt file structure.`tput op`"
   exit
 fi
 
-if [ -d "$root_dir/tmp" ]; then
-  echo "`tput setaf 3`You must delete $root_dir/tmp before updating.`tput op`"
+if [ -d "$ROOT/tmp" ]; then
+  echo "`tput setaf 3`You must delete $ROOT/tmp before updating.`tput op`"
   exit
 else
-  mkdir -p $root_dir/tmp
+  mkdir -p $ROOT/tmp
 fi
 
-cd $root_dir/tmp
+cd $ROOT/tmp
 
 # Download the master branch
 curl -O -L https://github.com/aklump/loft_docs/archive/master.zip
 unzip -q master.zip;
-cd $root_dir
+cd $ROOT
 
 # Update the core files
-docs_update="$root_dir/tmp/loft_docs-master/"
+docs_update="$ROOT/tmp/loft_docs-master/"
 
-cp -v $docs_update/README.md $root_dir/
-cp -v $docs_update/core-version.info $root_dir/
-rsync -av --delete $docs_update/core/ $root_dir/core/ --exclude=Markdown.pl
+cp -v $docs_update/README.md $ROOT/
+cp -v $docs_update/core-version.info $ROOT/
+rsync -av --delete $docs_update/core/ $ROOT/core/ --exclude=Markdown.pl
 
-rm -rf $root_dir/tmp
+rm -rf $ROOT/tmp
 echo "`tput setaf 2`Update complete.`tput op`"
+
+

@@ -1,0 +1,1 @@
+This folder contains the patterns for each export type.  During compilation, these folders are rsynced before any compiled content is added.
