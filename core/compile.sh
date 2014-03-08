@@ -1,17 +1,124 @@
 #!/bin/bash
 
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+CORE="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+ROOT="$CORE/.."
+
+#
+# Installs the .gitignore file
+#
+function install_gitignore() {
+  local file="$CORE/.gitignore"
+  if [ -f "$file" ]; then
+    rm "$file"
+    echo '/*' > "$file"
+    echo '!"$file"' >> "$file"
+    echo '!core-config.sh' >> "$file"
+    echo '!source' >> "$file"
+    echo '!source/*' >> "$file"
+  fi
+}
+
+#
+# Call the version hook and return the version string
+get_version_return=''
+function get_version() {
+  local hook=$(realpath "$CORE/${docs_version_hook[0]}")
+  if [ "$hook" ] && [ -f "$hook" ]; then
+    get_version_return=$(do_hook_file "$hook")
+    if [[ "$get_version_return" ]]; then
+      echo "`tput setaf 2`Version ($get_version_return) obtained from $hook.`tput op`"
+    fi
+  fi
+
+  if [[ ! "$get_version_return" ]]; then
+    get_version_return='1.0'
+    echo "`tput setaf 3`Using default version $get_version_return.`tput op`"
+  fi
+}
+
+#
+# Return the realpath
+# 
+# @param string $path
+# 
+function realpath() {
+  local cmd="print realpath('$1');"
+  local path=$($docs_php -r "$cmd")
+  echo $path
+}
+
+#
+# Execute a .sh or .php hook file and echo it's response
+# 
+# @param string $file
+# 
+function do_hook_file() {
+  local file=$1
+  if [[ ${file##*.} == 'php' ]]; then
+    cmd="$docs_php"
+  elif [[ ${file##*.} == 'sh' ]]; then
+    cmd=$docs_bash
+  fi
+  if [[ "$cmd" ]]; then
+    echo $($cmd "$file" "$CORE/$docs_source_dir" "$CORE" "$ROOT/$docs_version_file")
+  fi  
+}
+
 #
 # Do the pre-compile hook
 # 
-function do_pre_hook() {
-  return
+function do_pre_hooks() {
+  local hook
+  echo "`tput setaf 2`Running pre-compile hooks`tput op`"
+  for hook in ${docs_pre_hooks[@]}; do
+    hook=$(realpath "$ROOT/hooks/$hook")
+    echo "$hook"
+    echo $(do_hook_file $hook)
+  done
+
+  # Internal hooks should always come after the user-supplied
+  do_todos
 }
 
 #
 # Do the post-compile hook
 # 
-function do_post_hook() {
-  return
+function do_post_hooks() {
+  local hook
+  echo "`tput setaf 2`Running post-compile hooks`tput op`"
+  for hook in ${docs_post_hooks[@]}; do
+    hook=$(realpath "$ROOT/hooks/$hook")
+    echo "$hook"
+    echo $(do_hook_file $hook)
+  done
+}
+
+#
+# Do the todo item gathering
+# 
+function do_todos() {
+  if [[ "$docs_todos" ]]; then
+    echo "`tput setaf 2`Aggregating todo items...`tput op`"
+    
+    local global="$docs_source_dir/$docs_todos"
+    if [[ ! -f "$global" ]]; then
+      touch "$global";
+    fi
+
+    for file in $(find $docs_source_dir -type f -iname "*.md"); do
+      echo $file
+      if [ "$file" != "$global" ]; then
+        # Send a single file over for processing todos via php
+        $docs_php "$CORE/todos.php" "$file" "$global"
+      fi
+    done
+  fi
 }
 
 ##
@@ -72,18 +179,19 @@ function is_disabled() {
  # Lines that begin with [ or # will be ignored
  # Format: Name = "Value"
  # Value does not need wrapping quotes if no spaces
+ # File MUST HAVE an EOL char!
  #
 function load_config() {
   if [ ! -f core-config.sh ]; then
-    cp "core/config-example" core-config.sh
+    cp "$CORE/config-example" core-config.sh
     installing=1
   fi
 
   # defaults
   docs_disabled="doxygene"
   docs_php=$(which php)
+  docs_bash=$(which bash)
   docs_lynx=$(which lynx)
-  docs_markdown='core/Markdown.pl'
   docs_source_dir='source'
   docs_kit_dir='kit'
   docs_doxygene_dir='doxygene'
@@ -92,7 +200,12 @@ function load_config() {
   docs_mediawiki_dir='mediawiki'
   docs_text_dir='text'
   docs_drupal_dir='advanced_help'
-  docs_tmp_dir="core/tmp"
+  docs_tmp_dir="$CORE/tmp"
+  docs_todos="_tasklist.md"
+  docs_version_hook='version_hook.php'
+  docs_version_file='../*.info'
+  docs_pre_hooks=''
+  docs_post_hooks=''
 
   #Determine which is our tpl dir
   docs_tpl_dir='core/tpl'
@@ -141,13 +254,13 @@ function parse_config() {
 installing=0
 load_config
 
-do_pre_hook
+do_pre_hooks
 
 # These dirs need to be created
 declare -a dirs=("$docs_html_dir" "$docs_mediawiki_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir" "$docs_source_dir" "$docs_doxygene_dir");
 
 # These dirs need to be emptied before we start
-declare -a dirs_to_empty=("$docs_html_dir" "$docs_mediawiki_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_tmp_dir");
+declare -a dirs_to_empty=("$docs_html_dir" "$docs_mediawiki_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir");
 
 # These dirs need to be removed at that end
 declare -a dirs_to_delete=("$docs_tmp_dir")
@@ -164,7 +277,7 @@ done
 
 # If source does not exist then copy core example
 if [ ! -d "$docs_source_dir" ]; then
-  rsync -av "core/source-example/" $docs_source_dir/
+  rsync -av "$CORE/patterns/source/" $docs_source_dir/
 fi
 
 # Empty dirs
@@ -179,15 +292,21 @@ done
 for var in "${dirs[@]}"
 do
   if [ ! "$var" ]; then
-    end "`tput setaf 1`Bad Config`tput op`"
+    end "`tput setaf 1`Bad Config $var`tput op`"
     return
   fi
-  if [ ! -d "$var" ]
-  then
-    # Create new empty compiled dir
-    mkdir $var
+  if [ ! -d "$var" ]; then
+      mkdir $var
   fi
 done
+
+# Copy the patterns into place to be ready to receive files
+rsync -av "$CORE/patterns/public_html/" "$ROOT/$docs_website_dir"
+rsync -av "$CORE/patterns/html/" "$ROOT/$docs_html_dir"
+rsync -av "$CORE/patterns/mediawiki/" "$ROOT/$docs_mediawiki_dir"
+rsync -av "$CORE/patterns/text/" "$ROOT/$docs_text_dir"
+rsync -av "$CORE/patterns/advanced_help/" "$ROOT/$docs_drupal_dir"
+rsync -av "$CORE/patterns/doxygene/" "$ROOT/$docs_doxygene_dir"
 
 # Delete the text directory if no lynx
 if [ "$docs_text_enabled" -eq 0 ]; then
@@ -197,14 +316,8 @@ fi
 # Installation steps
 if [ $installing -eq 1 ]; then
   echo "`tput setaf 3`Installing Loft Docs...`tput op`"
-  if [ -f .gitignore ]; then
-    rm .gitignore
-    echo '/*' > .gitignore
-    echo '!.gitignore' >> .gitignore
-    echo '!core-config.sh' >> .gitignore
-    echo '!source' >> .gitignore
-    echo '!source/*' >> .gitignore
-  fi
+
+  install_gitignore
 
   ## Setup the codekit file with the correct kit output
   #codekit_file="codekit-config.json"
@@ -214,10 +327,12 @@ if [ $installing -eq 1 ]; then
   #echo "{"projectSettings" : {"kitAutoOutputPathRelativePath" : "..\/$docs_html_dir"}}" > "$codekit_file"
 fi
 
+get_version
+
 # Build index.html from home.php
 echo '' > "$docs_kit_dir/index.kit"
-$docs_php "core/page_vars.php" "$docs_help_ini" "index" >> "$docs_kit_dir/index.kit"
-$docs_php "core/home.php" "$docs_help_ini" "$docs_tpl_dir" >> "$docs_kit_dir/index.kit"
+$docs_php "$CORE/page_vars.php" "$docs_help_ini" "index" "$get_version_return" >> "$docs_kit_dir/index.kit"
+$docs_php "$CORE/home.php" "$docs_help_ini" "$docs_tpl_dir" >> "$docs_kit_dir/index.kit"
 _check_file "$docs_kit_dir/index.kit"
 
 # Copy over files in the tmp directory, but compile anything with a .md
@@ -234,7 +349,7 @@ for file in $docs_source_dir/*; do
       basename=$(echo $basename | sed 's/\.md$//g').html
       
       # This uses the perl compiler
-      $docs_php "core/markdown.php" "$file" "$docs_tmp_dir/$basename"
+      $docs_php "$CORE/markdown.php" "$file" "$docs_tmp_dir/$basename"
 
     # Css files pass through to the website and html dir
     elif echo "$file" | grep -q '.css$'; then
@@ -308,19 +423,19 @@ for file in $docs_tmp_dir/*.html; do
     fi
 
     # Process each file for advanced help markup
-    $docs_php "core/advanced_help.php" "$docs_tmp_dir/$html_file" "$docs_drupal_module" > $docs_drupal_dir/$html_file
+    $docs_php "$CORE/advanced_help.php" "$docs_tmp_dir/$html_file" "$docs_drupal_module" > $docs_drupal_dir/$html_file
 
     # Convert to mediawiki
-    $docs_php "core/mediawiki.php"  "$docs_tmp_dir/$html_file" >> $docs_mediawiki_dir/$txt_file
+    $docs_php "$CORE/mediawiki.php"  "$docs_tmp_dir/$html_file" >> $docs_mediawiki_dir/$txt_file
 
     # Convert to offline .html
     echo '' > $docs_kit_dir/$tmp_file
-    $docs_php "core/page_vars.php"  "$docs_help_ini" "$basename" >> $docs_kit_dir/$tmp_file
+    $docs_php "$CORE/page_vars.php"  "$docs_help_ini" "$basename"  "$get_version_return" >> $docs_kit_dir/$tmp_file
     echo '<!-- @include ../'$docs_tpl_dir'/header.kit -->' >> $docs_kit_dir/$tmp_file
     cat $file >> $docs_kit_dir/$tmp_file
     echo '<!-- @include ../'$docs_tpl_dir'/footer.kit -->' >> $docs_kit_dir/$tmp_file
 
-    $docs_php "core/iframes.php" "$docs_kit_dir/$tmp_file" "$docs_credentials" > $docs_kit_dir/$kit_file
+    $docs_php "$CORE/iframes.php" "$docs_kit_dir/$tmp_file" "$docs_credentials" > $docs_kit_dir/$kit_file
     rm $docs_kit_dir/$tmp_file
     _check_file "$docs_kit_dir/$kit_file"
   fi
@@ -358,7 +473,7 @@ if [ "$docs_README" ]; then
 fi
 
 # Now process our CodeKit directory and produce our website
-$docs_php "core/webpage.php" "$docs_kit_dir" "$docs_website_dir"
+$docs_php "$CORE/webpage.php" "$docs_kit_dir" "$docs_website_dir"
 
 # Doxygene implementation
 echo 'Not yet implemented' > "$docs_doxygene_dir/README.md"
@@ -371,4 +486,4 @@ do
   fi
 done
 
-do_post_hook
+do_post_hooks

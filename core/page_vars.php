@@ -24,9 +24,10 @@ foreach ($vars as $key => $value) {
 }
 
 // Add in additional kit vars:
+$now = new \DateTime('now', new \DateTimeZone('America/Los_Angeles'));
+$declarations[] = '$date = ' . $now->format('r');
 
-// Suppress timezone warnings if they arise
-$declarations[] = '$date = ' . @date('r');
+$declarations[] = '$version = ' . $argv[3];
 
 // Now write the vars
 print '<!--' . implode("-->\n<!--", $declarations) . "-->\n";
