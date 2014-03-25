@@ -52,6 +52,8 @@ You should do the following to link internally to `source/page2.html`
 ## Todo Items/Tasklist
 Todo item aggregation is a neat feature that works thus.  Add one or more todo items to your markdown source files using the [following syntax](https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments) and when you compile, your todo items will be aggregated and sorted into a new markdown file called `_tasklist.md`.  **Do not alter the content of `_tasklist.md` or you will loose your work.**
 
+If you want this to show up in indexing, make sure to add it to _help.ini_.
+
 When items are aggregated, the filenames are prepended to the todo item.  The final list will be filtered for uniqueness, and duplicates removed.  If the same todo item appears more than once in a file, it will be reduced to a single item; but the same todo item can appear in more than one file, since the filename prepend creates uniqueness.
 
     - [ ] a task list item
@@ -135,11 +137,15 @@ Each time you want to update your documentation files, after modifying files in 
 ### Defining the documentation version
 Some of the templates utilize a version string.  How this is provided is the the next topic covered.
 
-**By default, Loft Docs will look for `*.info`, two directories above `core/`.**
+If no version can be found the string will always be 1.0
 
+**By default, Loft Docs will look for `*.info`, in the directory above `core/`.**  If this is not working or desired then you can specify a path in _core-config.sh_ as such:
 
+    version_file = "/some/absolute/path/version.info"
 
-The templates receive a version string, which is always "1.0" unless you implement a version hook--_a php or shell script that echos the version string of your documentation_.  These version hook script receives the same arguments as the pre/post hooks.  You define your version hook in config.  See `version_hook.php` as an implementation example.  Only one file is allowed in the declaration; either php or shell.
+There is a built in a version hook that can sniff a version from .info and .json files and that may suffice.  If not read on about a custom version hook...
+
+_A version hook is a php or shell script that echos the version string of your documentation_.  These version hook script receives the same arguments as the pre/post hooks.  You define your version hook in config.  See `version_hook.php` as an implementation example.  Only one file is allowed in the declaration; either php or shell.
 
     version_hook = "version_hook.php"
 
@@ -155,6 +161,13 @@ The scripts will receive the following arguments:
 |----------|---------|--------------------------------------------------|
 | $argv[1] | $1      | The absolute filepath to the `source/` directory |
 | $argv[2] | $2      | The absolute filepath to the `core/` directory   |
+| $argv[3] | $3      | The absolute filepath to the version file        |
+| $argv[4] | $4      | The absolute filepath to the root_dir directory  |
+
+### Removing Compiled Files
+You may delete all compiled files using the _clean_ command.
+
+    ./core/clean.sh
 
 <a name="install"></a>
 ## Installation

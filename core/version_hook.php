@@ -11,7 +11,8 @@
  * @ingroup loft_docs
  * @{
  */
-$version_file = reset(glob($argv[3]));
+$version_file = $argv[3];
+
 if (is_file($version_file)) {
   $extension    = pathinfo($version_file, PATHINFO_EXTENSION);
 

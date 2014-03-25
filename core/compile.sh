@@ -7,7 +7,6 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
   [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
 done
 CORE="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
-ROOT="$CORE/.."
 
 #
 # Installs the .gitignore file
@@ -23,6 +22,26 @@ function install_gitignore() {
     echo '!source/*' >> "$file"
   fi
 }
+
+#
+# Return the full path to the version file
+#
+#
+function get_version_file() {
+  local file
+  file=${docs_version_file[0]}
+  if [[ "${file:0:1}" == '/' ]]; then
+    file="$file";
+  else
+    file="$docs_root_dir/$file";
+  fi
+
+  file=($(ls $file))
+  echo ${file[0]}
+}
+
+# Usage
+# result=$(func_name arg)
 
 #
 # Call the version hook and return the version string
@@ -48,10 +67,10 @@ function get_version() {
 # @param string $path
 # 
 function realpath() {
-  local cmd="print realpath('$1');"
-  local path=$($docs_php -r "$cmd")
+  local path=$($docs_php "$CORE/realpath.php" "$1")
   echo $path
 }
+
 
 #
 # Execute a .sh or .php hook file and echo it's response
@@ -65,9 +84,14 @@ function do_hook_file() {
   elif [[ ${file##*.} == 'sh' ]]; then
     cmd=$docs_bash
   fi
-  if [[ "$cmd" ]]; then
-    echo $($cmd "$file" "$CORE/$docs_source_dir" "$CORE" "$ROOT/$docs_version_file")
-  fi  
+
+  if [[ ! -f $file ]]; then
+    echo "`tput setaf 1`Hook file not found: $file`tput op`"
+  elif [[ "$cmd" ]]; then
+    source=$(realpath "$docs_root_dir/$docs_source_dir")
+    $cmd "$file" "$source" "$CORE" "$docs_version_file" "$docs_root_dir"
+    # echo $($cmd "$file" "$source" "$CORE" "$docs_root_dir/$docs_version_file")
+  fi
 }
 
 #
@@ -77,12 +101,12 @@ function do_pre_hooks() {
   local hook
   echo "`tput setaf 2`Running pre-compile hooks`tput op`"
   for hook in ${docs_pre_hooks[@]}; do
-    hook=$(realpath "$ROOT/hooks/$hook")
+    hook=$(realpath "$docs_hooks_dir/$hook")
     echo "$hook"
     echo $(do_hook_file $hook)
   done
 
-  # Internal hooks should always come after the user-supplied
+  # Internal pre hooks should always come after the user-supplied
   do_todos
 }
 
@@ -93,10 +117,14 @@ function do_post_hooks() {
   local hook
   echo "`tput setaf 2`Running post-compile hooks`tput op`"
   for hook in ${docs_post_hooks[@]}; do
-    hook=$(realpath "$ROOT/hooks/$hook")
+    hook=$(realpath "$docs_hooks_dir/$hook")
     echo "$hook"
     echo $(do_hook_file $hook)
   done
+
+  # Internal post hooks should always come after the user-supplied
+  # Remove the _tasklist.md file
+  rm "$docs_source_dir/$docs_todos"
 }
 
 #
@@ -104,21 +132,23 @@ function do_post_hooks() {
 # 
 function do_todos() {
   if [[ "$docs_todos" ]]; then
-    echo "`tput setaf 2`Aggregating todo items...`tput op`"
-    
     local global="$docs_source_dir/$docs_todos"
+    echo "`tput setaf 2`Aggregating todo items into $global...`tput op`"
+    
     if [[ ! -f "$global" ]]; then
       touch "$global";
     fi
 
     for file in $(find $docs_source_dir -type f -iname "*.md"); do
-      echo $file
       if [ "$file" != "$global" ]; then
+        echo "Scanning $file for todo items."
         # Send a single file over for processing todos via php
         $docs_php "$CORE/todos.php" "$file" "$global"
       fi
     done
   fi
+  echo "`tput setaf 2`Tasklist complete.`tput op`"
+  echo
 }
 
 ##
@@ -193,6 +223,7 @@ function load_config() {
   docs_bash=$(which bash)
   docs_lynx=$(which lynx)
   docs_source_dir='source'
+  docs_root_dir=$(realpath "$CORE/..")
   docs_kit_dir='kit'
   docs_doxygene_dir='doxygene'
   docs_website_dir='public_html'
@@ -203,7 +234,6 @@ function load_config() {
   docs_tmp_dir="$CORE/tmp"
   docs_todos="_tasklist.md"
   docs_version_hook='version_hook.php'
-  docs_version_file='../*.info'
   docs_pre_hooks=''
   docs_post_hooks=''
 
@@ -219,12 +249,24 @@ function load_config() {
   # custom
   parse_config core-config.sh
 
+  # put anything that comes AFTER parsing config file below this line
   docs_text_enabled=1
   if ! lynx_loc="$(type -p "$docs_lynx")" || [ -z "$lynx_loc" ]; then
     echo "`tput setaf 3`Lynx not found; .txt files will not be created.`tput op`"
     docs_text_enabled=0
   fi
 
+  # Below this line, anything that is dependent upon $docs_root_dir which can
+  # be overridden by the config file
+  if [[ ! "$docs_hooks_dir" ]]; then
+    docs_hooks_dir="$docs_root_dir/hooks"
+  fi
+
+  if [[ ! "$docs_version_file" ]]; then
+    docs_version_file="$docs_root_dir/*.info"
+  fi
+  docs_version_file="$(get_version_file)"
+  
   docs_disabled=($docs_disabled)
 }
 
@@ -241,7 +283,7 @@ function parse_config() {
       if [[ "$line" =~ ^[^#[]+ ]]; then
         name=${line% =*}
         value=${line##*= }
-        if [ "$name" ]
+        if [[ "$name" ]]
         then
           eval docs_$name=$value
         fi
@@ -301,12 +343,12 @@ do
 done
 
 # Copy the patterns into place to be ready to receive files
-rsync -av "$CORE/patterns/public_html/" "$ROOT/$docs_website_dir"
-rsync -av "$CORE/patterns/html/" "$ROOT/$docs_html_dir"
-rsync -av "$CORE/patterns/mediawiki/" "$ROOT/$docs_mediawiki_dir"
-rsync -av "$CORE/patterns/text/" "$ROOT/$docs_text_dir"
-rsync -av "$CORE/patterns/advanced_help/" "$ROOT/$docs_drupal_dir"
-rsync -av "$CORE/patterns/doxygene/" "$ROOT/$docs_doxygene_dir"
+rsync -av "$CORE/patterns/public_html/" "$docs_root_dir/$docs_website_dir"
+rsync -av "$CORE/patterns/html/" "$docs_root_dir/$docs_html_dir"
+rsync -av "$CORE/patterns/mediawiki/" "$docs_root_dir/$docs_mediawiki_dir"
+rsync -av "$CORE/patterns/text/" "$docs_root_dir/$docs_text_dir"
+rsync -av "$CORE/patterns/advanced_help/" "$docs_root_dir/$docs_drupal_dir"
+rsync -av "$CORE/patterns/doxygene/" "$docs_root_dir/$docs_doxygene_dir"
 
 # Delete the text directory if no lynx
 if [ "$docs_text_enabled" -eq 0 ]; then

@@ -6,7 +6,7 @@
  * @ingroup loft_docs
  * @{
  */
-require_once 'classes/IndexInterface.php';
+require_once dirname(__FILE__) . '/classes/IndexInterface.php';
 $index = new aklump\loft_docs\AdvancedHelpIni($argv[1]);
 
 $list = array();

@@ -14,6 +14,7 @@
 }
 
 $header_height: 2em;
+$footer_height: $header_height;
 header,
 footer {
   position: fixed;
@@ -35,6 +36,7 @@ footer {
 }
 body {
   margin-top: $header_height;
+  margin-bottom: $footer_height;
 }
 .pager {
   .prev,
