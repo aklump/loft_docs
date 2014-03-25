@@ -6,7 +6,7 @@
  * @ingroup loft_docs
  * @{
  */
-require_once 'classes/IndexInterface.php';
+require_once dirname(__FILE__) . '/classes/IndexInterface.php';
 use aklump\loft_docs\AdvancedHelpIni;
 
 $index = new AdvancedHelpIni($argv[1]);

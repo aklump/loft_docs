@@ -21,7 +21,7 @@
  * @ingroup loft_docs
  * @{
  */
-require_once 'vendor/autoload.php';
+require_once dirname(__FILE__) . '/vendor/autoload.php';
 use aklump\loft_parser\HTMLTagRemoveAction;
 
 // Convert paths to images to include @page

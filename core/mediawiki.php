@@ -7,7 +7,7 @@
  * @{
  */
 
-require_once 'vendor/autoload.php';
+require_once dirname(__FILE__) . '/vendor/autoload.php';
 
 // Convert paths to images to include @page
 if (isset($argv[1])) {

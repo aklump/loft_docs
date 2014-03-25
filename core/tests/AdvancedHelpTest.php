@@ -6,8 +6,8 @@
  * @ingroup loft_docs
  * @{
  */
-require_once '../vendor/autoload.php';
-require_once 'LoftPHPUnit_Framework_TestCase.php';
+require_once dirname(__FILE__) . '/../vendor/autoload.php';
+require_once dirname(__FILE__) . '/LoftPHPUnit_Framework_TestCase.php';
 
 class advancedHelpTest extends LoftPHPUnit_Framework_TestCase {
 
