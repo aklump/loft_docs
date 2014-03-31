@@ -71,24 +71,27 @@ if [ -d "$ROOT/tmp" ]; then
   echo "`tput setaf 3`You must delete $ROOT/tmp before updating.`tput op`"
   exit
 else
-  mkdir -p $ROOT/tmp
+  mkdir -p "$ROOT/tmp"
 fi
 
-cd $ROOT/tmp
+cd "$ROOT/tmp"
 
 # Download the master branch
 curl -O -L https://github.com/aklump/loft_docs/archive/master.zip
 unzip -q master.zip;
-cd $ROOT
+cd "$ROOT"
 
 # Update the core files
 docs_update="$ROOT/tmp/loft_docs-master/"
 
-cp -v $docs_update/README.md $ROOT/
-cp -v $docs_update/core-version.info $ROOT/
-rsync -av --delete $docs_update/core/ $ROOT/core/ --exclude=Markdown.pl
+cp -v "$docs_update/README.md" "$ROOT/"
+cp -v "$docs_update/core-version.info" "$ROOT/"
 
-rm -rf $ROOT/tmp
+# Update all of core
+rsync -av --delete "$docs_update/core/" "$ROOT/core/" --exclude=Markdown.pl --exclude=.loft_docs_pattern
+
+rm -rf "$ROOT/tmp"
+
 echo "`tput setaf 2`Update complete.`tput op`"
 
 
