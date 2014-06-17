@@ -25,9 +25,10 @@ require_once dirname(__FILE__) . '/vendor/autoload.php';
 use aklump\loft_parser\HTMLTagRemoveAction;
 
 // Convert paths to images to include @page
+$output = '';
 if (isset($argv[1])
-    //&& ($output = file_get_contents(getcwd() . '/' . $argv[1]))) {
-    && ($output = file_get_contents($argv[1]))) {
+  && is_readable($argv[1])
+  && ($output = file_get_contents($argv[1]))) {
 
   // Replace images
   if (preg_match_all('/<img.*?src="((?!http|https|&\w+&)\/?([^"]+))".*?>/', $output, $matches)) {

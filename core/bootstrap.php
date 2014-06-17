@@ -44,7 +44,9 @@ function parse_todos($string, $prefix = '') {
  * @return string        
  */
 function flatten_todos($array) {
-  return implode("\n", $array) . "\n";
+  if (is_array($array)) {
+    return implode("\n", array_filter($array)) . "\n";
+  }
 }
 
 /**
@@ -53,8 +55,10 @@ function flatten_todos($array) {
  * @param  array &$todos
  */
 function sort_todos(&$todos) {
-  usort($todos, '_sort_todos');
-  $todos = array_values(array_unique($todos));
+  if (is_array($todos)) {
+    usort($todos, '_sort_todos');
+    $todos = array_values(array_filter(array_unique($todos)));
+  }
 }
 
 /**
