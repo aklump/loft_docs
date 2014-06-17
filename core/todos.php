@@ -13,8 +13,9 @@ $global    = $argv[2];
 
 // Skip this file if no todo items.
 $prefix = '' . pathinfo($source, PATHINFO_FILENAME) . ': ';
-if (($contents = file_get_contents($source))
-  && (!($todos = parse_todos($contents, $prefix)))) {
+if (!is_readable($source)
+  || (($contents = file_get_contents($source))
+    && (!($todos = parse_todos($contents, $prefix))))) {
   
   return;
 }

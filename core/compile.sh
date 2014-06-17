@@ -447,17 +447,17 @@ for file in $docs_tmp_dir/*.html; do
   then
     basename=${file##*/}
     basename=$(echo $basename | sed 's/\.html$//g')
-    html_file=$basename.html
-    kit_file=$basename.kit
-    tmp_file=$basename.kit.txt
-    txt_file=$basename.txt
+    html_file="$basename.html"
+    kit_file="$basename.kit"
+    tmp_file="$basename.kit.txt"
+    txt_file="$basename.txt"
 
     # Send over html snippet files to html
-    cp $file $docs_html_dir/$html_file
+    cp "$file" "$docs_html_dir/$html_file"
     _check_file "$docs_html_dir/$html_file"
 
     # Convert to plaintext
-    if lynx_loc="$(type -p "$docs_lynx")" && [ ! -z "$lynx_loc" ]; then
+    if [[ "$docs_text_dir" ]] && lynx_loc="$(type -p "$docs_lynx")" && [ ! -z "$lynx_loc" ]; then
       textname=`basename $file html`
       textname=${textname}txt
       $docs_lynx --dump $file > "$docs_text_dir/${textname}"
@@ -465,20 +465,24 @@ for file in $docs_tmp_dir/*.html; do
     fi
 
     # Process each file for advanced help markup
-    $docs_php "$CORE/advanced_help.php" "$docs_tmp_dir/$html_file" "$docs_drupal_module" > $docs_drupal_dir/$html_file
+    if [[ "$docs_drupal_dir" ]]; then
+      $docs_php "$CORE/advanced_help.php" "$docs_tmp_dir/$html_file" "$docs_drupal_module" > "$docs_drupal_dir/$html_file"
+    fi
 
     # Convert to mediawiki
-    $docs_php "$CORE/mediawiki.php"  "$docs_tmp_dir/$html_file" >> $docs_mediawiki_dir/$txt_file
+    if [[ "$docs_mediawiki_dir" ]]; then
+      $docs_php "$CORE/mediawiki.php"  "$docs_tmp_dir/$html_file" > "$docs_mediawiki_dir/$txt_file"
+    fi
 
     # Convert to offline .html
-    echo '' > $docs_kit_dir/$tmp_file
-    $docs_php "$CORE/page_vars.php"  "$docs_help_ini" "$basename"  "$get_version_return" >> $docs_kit_dir/$tmp_file
-    echo '<!-- @include ../'$docs_tpl_dir'/header.kit -->' >> $docs_kit_dir/$tmp_file
-    cat $file >> $docs_kit_dir/$tmp_file
-    echo '<!-- @include ../'$docs_tpl_dir'/footer.kit -->' >> $docs_kit_dir/$tmp_file
+    echo '' > "$docs_kit_dir/$tmp_file"
+    $docs_php "$CORE/page_vars.php"  "$docs_help_ini" "$basename"  "$get_version_return" >> "$docs_kit_dir/$tmp_file"
+    echo '<!-- @include ../'$docs_tpl_dir'/header.kit -->' >> "$docs_kit_dir/$tmp_file"
+    cat $file >> "$docs_kit_dir/$tmp_file"
+    echo '<!-- @include ../'$docs_tpl_dir'/footer.kit -->' >> "$docs_kit_dir/$tmp_file"
 
-    $docs_php "$CORE/iframes.php" "$docs_kit_dir/$tmp_file" "$docs_credentials" > $docs_kit_dir/$kit_file
-    rm $docs_kit_dir/$tmp_file
+    $docs_php "$CORE/iframes.php" "$docs_kit_dir/$tmp_file" "$docs_credentials" > "$docs_kit_dir/$kit_file"
+    rm "$docs_kit_dir/$tmp_file"
     _check_file "$docs_kit_dir/$kit_file"
   fi
 done
