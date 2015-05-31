@@ -1,3 +1,5 @@
+@import "default";
+
 .breadcrumb{font-size:11px}body{line-height:1.6}body.page-index a.index,body.page-index .breadcrumb{display:none}body.page-index ul.index{font-size:1.4rem;margin-bottom:50px}.pager{width:100%;position:relative;text-align:center;min-height:1.6em;font-size:.9rem}.pager .prev,.pager .next{position:absolute}.pager .prev{left:0}.pager .next{right:0}.field-label-inline .field-label,.field-label-inline .field-items,.field-label-inline .field-item{display:inline}.field-label{font-weight:bold}.xml-field-xml.colorized{color:#170}.xml-field-xml.colorized .value{color:#000}.xml-field-xml.colorized .attribute{color:#00C}.xml-field-xml.colorized .string{color:#A11}
 
 #footer-legaleeze {
@@ -38,6 +40,12 @@ body {
   margin-top: $header_height;
   margin-bottom: $footer_height;
 }
+section {
+  img,
+  video {
+    width: 100%;
+  }
+}
 .pager {
   .prev,
   .next {
@@ -51,5 +59,10 @@ body {
     width: 40%;
     text-decoration: none;
     background: #ddd;    
+  }
+}
+.video-wrapper {
+  .video-duration {
+    float: right;
   }
 }

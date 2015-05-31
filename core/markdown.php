@@ -8,7 +8,7 @@
  */
 require_once dirname(__FILE__) . '/vendor/autoload.php';
 
-use \Michelf\MarkdownExtra;
+use \AKlump\MarkdownExtra;
 
 $in_file  = $argv[1];
 $out_file = $argv[2];

@@ -240,6 +240,9 @@ Here's a quick way to get Lynx on a mac...
 3. Followed by `sudo ln -s /Applications/Lynxlet.app/Contents/Resources/lynx/bin/lynx`
 4. Test your installation with this command `lynx`; you should see the lynx browser show up.
  
+#### or with homebrew
+1. `brew install lynx`
+
 <a name="theming"></a>   
 ## Theming
 The files in `/core/tpl` control the output of the `.html` files found in the website folder `public_html`.  You should never modify these files, nor any files in `core`.  Instead to override the theming you should copy `core/tpl` up one directory into the base directory and override those files.
