@@ -65,17 +65,19 @@ class AdvancedHelpIni implements IndexInterface {
   }
 
   public function getData() {
-    $info = parse_ini_file($this->path, TRUE);
-    $data = array();
-
-    foreach ($info as $key => $value) {
-       $weight = isset($value['weight']) ? $value['weight'] : 0;
-      if ($key === 'advanced help settings') {
+    $info  = parse_ini_file($this->path, TRUE);
+    $data  = array();
         $index = array(
           'id' => 'index',
-          'title' => $this->getTitle($key, $value),
+      'title' => 'Index',
           'file' => 'index.html',
         );
+
+    foreach ($info as $key => $value) {
+      $weight = isset($value['weight']) ? $value['weight'] : 0;
+      if (in_array($key, array('index', 'advanced help settings'))
+        && ($title = $this->getTitle($key, $value))) {
+        $index['title'] = $title;
       }
       else {
         $data[$weight][$key] = array(
@@ -116,11 +118,13 @@ class AdvancedHelpIni implements IndexInterface {
       if ($prev) {
         $list[$key] = $prev + $list[$key];
       }
+      if ($value) {
       $prev = array(
         'prev_id' => $key,
         'prev' => $value['file'],
         'prev_title' => $value['title'],
       );
+      }
       $last = $key;
     }
 
@@ -129,6 +133,8 @@ class AdvancedHelpIni implements IndexInterface {
     $list['index']['prev_id'] = $last['id'];
     $list['index']['prev'] = $last['file'];
     $list['index']['prev_title'] = $last['title'];
+
+
     return $list;
   }
 }

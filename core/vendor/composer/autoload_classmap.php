@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AKlump\\MarkdownExtra' => $baseDir . '/classes/MarkdownExtra.php',
     'aklump\\kit_php\\Compiler' => $vendorDir . '/aklump/kit_php/classes/Compiler.php',
     'aklump\\kit_php\\CompilerInterface' => $vendorDir . '/aklump/kit_php/classes/Compiler.php',
     'aklump\\kit_php\\Imports' => $vendorDir . '/aklump/kit_php/classes/Imports.php',
@@ -14,6 +15,8 @@ return array(
     'aklump\\kit_php\\KitInterface' => $vendorDir . '/aklump/kit_php/classes/Kit.php',
     'aklump\\kit_php\\Variables' => $vendorDir . '/aklump/kit_php/classes/Variables.php',
     'aklump\\kit_php\\VariablesInterface' => $vendorDir . '/aklump/kit_php/classes/Variables.php',
+    'aklump\\loft_docs\\AdvancedHelpIni' => $baseDir . '/classes/IndexInterface.php',
+    'aklump\\loft_docs\\IndexInterface' => $baseDir . '/classes/IndexInterface.php',
     'aklump\\loft_parser\\HRParseAction' => $vendorDir . '/aklump/loft_parser/classes/ParseAction.php',
     'aklump\\loft_parser\\HTMLTagParseAction' => $vendorDir . '/aklump/loft_parser/classes/ParseAction.php',
     'aklump\\loft_parser\\HTMLTagRemoveAction' => $vendorDir . '/aklump/loft_parser/classes/ParseAction.php',
