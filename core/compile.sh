@@ -501,8 +501,8 @@ done
 # files.
 if [ "$docs_README" ]; then
   destinations=($docs_README)
-  for destination in "${destinations[@]}"
-  do
+  for destination in "${destinations[@]}"; do
+    destination=${docs_source_dir}/${destination}
     readme_file=${destination##*/}
     readme_dir=${destination%/*}
     if echo "$readme_file" | grep -q '.txt$'; then
@@ -511,7 +511,6 @@ if [ "$docs_README" ]; then
       readme_source="$docs_source_dir/$readme_file"
     fi
     if [ -d "$readme_dir" ]; then
-      echo  "$readme_source" "$readme_dir/"
       cp "$readme_source" "$destination"
       _check_file "$destination"
     fi
