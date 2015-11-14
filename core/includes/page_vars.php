@@ -6,10 +6,11 @@
  * @ingroup loft_docs
  * @{
  */
-require_once dirname(__FILE__) . '/vendor/autoload.php';
-use aklump\loft_docs\AdvancedHelpIni;
+use AKlump\LoftDocs\OutlineJson as Index;
 
-$index = new AdvancedHelpIni($argv[1]);
+require_once dirname(__FILE__) . '/../vendor/autoload.php';
+
+$index = new Index($argv[1]);
 $vars = array(
   'classes' => array(),
 );

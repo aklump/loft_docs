@@ -65,11 +65,25 @@ Use the weight flag `@w` followed by an int or float number indicating the sort 
     - [ ] a task list item @w10
     - [ ] a task list item @w10.1
 
-### help.ini
-Make sure to add something like this to `help.ini` so your tasklist will be indexed:
+### Table of Contents/Indexing
+The index of your documentation may be provided in three ways: two are explicit and one is automatic.
+
+#### Automatic: Scanning of the source directory.
+1. All markdown files in `sources` will be scanned and automatically indexed.
+1. This is the fastest method but does not provide as much control.
+1. While initially writing your documentation this method is suggested; you can finalize your documentation based on the automatic json file that is produced by this method.
+1. The name of the file is important as it contains a pattern to distinguish the chapter/section.  Chapters are not required if all sections are to fit in one chapter.
+
+        {chapter}--{section}.md
+
+#### `help.ini`
+This is the method that stems from the Drupal advanced help module and looks something like this.  It is explicit, yet gives the lesser control as the input keys are limited.
 
     [_tasklist]
     title = "My Tasklist"
+
+#### `outline.json`
+This is the best method for providing exact control and should probably used for the final documentation.  It relies on a json file to provide the outline for your book.  Please refer to `examples/outline.json` for the file schema.
 
 ### Altering the filename of the todo list
 Add something like this line to your config file
@@ -150,10 +164,12 @@ _A version hook is a php or shell script that echos the version string of your d
     version_hook = "version_hook.php"
 
 ### Pre/Post hooks
-You may specify one or more php or shell scripts to be called both before and/or after compiling using the `pre_hooks` and `post_hooks` config options.  The paths you present are relative to the root directory, a.k.a. the directory which contains `core/`.  Compilation pauses until each script is finished.
+You may specify one or more php or shell scripts to be called both before and/or after compiling using the `pre_hooks` and `post_hooks` config options.  The paths you present are relative to `{root}/hooks`.  Compilation pauses until each script is finished.
 
     pre_hooks = "pre_compile.sh pre_compile.php"
     post_hooks = "post_compile.sh post_compile.php"
+
+**Scripts must be located in `{root}/hooks`.**
 
 The scripts will receive the following arguments:
 

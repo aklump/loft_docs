@@ -8,4 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
     'Michelf' => array($vendorDir . '/michelf/php-markdown'),
+    'AKlump\\LoftDocs\\' => array($baseDir . '/src'),
 );
