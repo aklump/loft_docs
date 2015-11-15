@@ -13,9 +13,6 @@
       "role": "Developer"
     }
   ],
-  "require-dev": {
-    "phpunit/phpunit": "3.7.*"
-  },
   "autoload": {
     "classmap" : [ "classes/" ]
   }

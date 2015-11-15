@@ -150,3 +150,25 @@ function path_is_section($path) {
   
   return in_array($ext, $valid);
 }
+
+/**
+ * Loads the outline json file and fills in missing defaults.
+ *
+ * @param  string $outline_file
+ *
+ * @return array
+ */
+function load_outline($outline_file) {
+  $outline = json_decode(file_get_contents($outline_file), TRUE);
+  $outline += array(
+    'appendices' => array(),
+    'authors' => array(),
+    'chapters' => array(),
+    'cover' => array(),
+    'sections' => array(),
+    'settings' => array('search' => 'tipuesearch'),
+  );
+
+  return $outline;
+
+}

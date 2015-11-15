@@ -48,6 +48,16 @@ You should do the following to link internally to `source/page2.html`
 
     <a href="page2.html">Link to Next Page</a>
 
+## Search
+To enable search you need to create a file (it must at least contain a title `# Search Results`) called:
+
+        search--results.md
+
+And to add tags (space-separated) to any file you use the Markdown metadata as described [here](https://github.com/fletcher/MultiMarkdown/wiki/MultiMarkdown-Syntax-Guide), e.g.:
+
+        tags: do re mi  
+
+        # Document...
 
 ## Todo Items/Tasklist
 Todo item aggregation is a neat feature that works thus.  Add one or more todo items to your markdown source files using the [following syntax](https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments) and when you compile, your todo items will be aggregated and sorted into a new markdown file called `_tasklist.md`.  **Do not alter the content of `_tasklist.md` or you will loose your work.**

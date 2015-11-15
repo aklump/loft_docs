@@ -6,14 +6,21 @@
  * @ingroup loft_docs
  * @{
  */
+namespace AKlump\LoftDocs;
+
 require_once dirname(__FILE__) . '/vendor/autoload.php';
-use aklump\kit_php\Compiler;
-use aklump\loft_parser\HTMLTagRemoveAction;
+
+use \aklump\kit_php\Compiler;
+use \aklump\loft_parser\HTMLTagRemoveAction;
+
+list(,$source_dir, $output_dir, $outline, $core_dir) = $argv;
 
 // Convert paths to images to include @page
-if (isset($argv[1]) && isset($argv[2])) {
+if (isset($source_dir) && isset($output_dir)) {
 
-  $obj = new Compiler($argv[1], $argv[2]);
+  $outline = load_outline($outline);
+
+  $obj = new Compiler($source_dir, $output_dir);
   $obj->apply();
 
   // Remove additional h1 tags from files; we make a general assumption that the
@@ -29,5 +36,3 @@ if (isset($argv[1]) && isset($argv[2])) {
     }
   }
 }
-
-/** @} */ //end of group: loft_docs
