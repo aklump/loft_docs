@@ -6,7 +6,7 @@
  * @ingroup markdown_extra
  * @{
  */
-namespace AKlump;
+namespace AKlump\LoftDocs;
 
 /**
  * Represents a MarkdownExtra object class.

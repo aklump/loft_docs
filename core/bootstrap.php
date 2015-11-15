@@ -86,3 +86,67 @@ function get_weight($string) {
 
   return 0;
 }
+
+/**
+ * Returns a string read to be used as an id.
+ *
+ * @param  string $text
+ *
+ * @return string
+ */
+function clean_id($text) {
+  $text = preg_replace(get_markdown_extensions(TRUE), '', $text);
+  return strtolower($text);
+}
+
+/**
+ * Return the recognized markdown extensions (without the dot).
+ *
+ * @param  boolean $regex True for a regex expression.
+ *
+ * @return array|string
+ */
+function get_markdown_extensions($regex = FALSE) {
+  $ext = array('md', 'mdown', 'markdown');
+  return $regex ? '/\.(' . implode('|', $ext) . ')$/' : $ext;
+}
+/**
+ * Returns a string to be used as a chapter/section title.
+ *
+ * @param  string $text
+ *
+ * @return string
+ */
+function clean_title($text) {
+  $text = preg_replace(get_markdown_extensions(TRUE), '', $text);
+  
+  return ucwords(preg_replace('/[-_]/', ' ', $text));
+}
+
+/**
+ * Returns the markdown file extention for a filename
+ *
+ * @param  string $file This is the filename relative to the source directory without extension.
+ *
+ * @return string
+ */
+function get_md_source_file_extension($file) {
+  //@todo make this dynamic?
+  return '.md';
+}
+
+/**
+ * Detect if a filename points to a markdown file.
+ *
+ * @param  string $path
+ *
+ * @return bool
+ */
+function path_is_section($path) {
+  $ext   = pathinfo(strtolower($path), PATHINFO_EXTENSION);
+  $valid = get_markdown_extensions();
+  //@todo want to be able to show text files?
+  // return in_array($ext, array('txt') + get_markdown_extensions());
+  
+  return in_array($ext, $valid);
+}

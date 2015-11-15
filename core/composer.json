@@ -2,7 +2,10 @@
     "autoload": {
         "files": [
             "bootstrap.php"
-        ]
+        ],
+        "psr-0": {
+            "AKlump\\LoftDocs\\": "src/"
+        }
     },
     "require": {
         "aklump/kit_php": "0.2.*",
