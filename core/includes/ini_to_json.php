@@ -7,8 +7,8 @@
 $file = __FILE__;
 require_once dirname($file) . '/../vendor/autoload.php';
 
-if (count($argv) < 3
-  || ((list(,$ini_file, $json_file) = $argv)
+if (count($argv) < 4
+  || ((list(,$ini_file, $source_dir, $json_file) = $argv)
     && (empty($ini_file) || empty($json_file)))) {
   echo "Missing parameters to $file" . PHP_EOL;
   return;
