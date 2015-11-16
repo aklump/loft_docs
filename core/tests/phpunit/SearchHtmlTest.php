@@ -18,7 +18,7 @@ class SearchHtmlTest extends \PHPUnit_Framework_TestCase {
   }
 
   public function testTitle() {
-    $subject = "<p>keywords    : do, re, mi<br /><h1>My nice title</h1><p>lorem ipsum</p>";
+    $subject = "<p>tags    : do re mi<br /><h1>My nice title</h1><p>lorem ipsum</p>";
     $obj     = new SearchHtml($subject);
     $this->assertSame($obj->getData()->getTitle(), 'My nice title');
     $this->assertSame($obj->getData()->getContents(), 'lorem ipsum');

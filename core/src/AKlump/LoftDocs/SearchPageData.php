@@ -26,7 +26,7 @@ class SearchPageData{
     $this->contents = $contents;
     
     // Process tags based on format.
-    $this->tags = array_filter(array_unique($tags));
+    $this->tags = array_values(array_filter(array_unique($tags)));
 
     // Trim tags and then look for internal spaces.
     foreach ($this->tags as &$tag) {
