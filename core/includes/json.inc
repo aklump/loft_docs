@@ -20,7 +20,13 @@ if (!empty($json_file)) {
   $json = array(
     'chapters' => array(),
     'sections' => array(),
+    'settings' => array(),
   );
+
+  $json['settings']['search'] = is_file(($f = $source_dir . '/search--results.md')) ? 'tipuesearch' : NULL;
+  if (empty(file_get_contents($f))) {
+    echo "search--results.md may not be an empty file; include at least a title";
+  }  
 
   $chapter_sort = 0;
   $section_sort = 0;
@@ -51,6 +57,7 @@ if (!empty($json_file)) {
       $json['chapters'][] = $chapter;
     }  
   }
+  
 
   // Write out the json file.
   file_put_contents($json_file, json_encode($json, JSON_PRETTY_PRINT));
