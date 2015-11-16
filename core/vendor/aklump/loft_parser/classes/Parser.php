@@ -22,9 +22,23 @@ interface ParserInterface {
 
   public function setSource($source);
 
+  /**
+   * Attempts to copy the contents of a file to self::source
+   *
+   * self::$source will be set even if the path is invalid!
+   *
+   * @param string $path A filepath to a source file.
+   */
   public function setSourceFromFile($path);
 
   public function getSource();
+  
+  /**
+   * Returns the filepath of the source if applicable
+   *
+   * @return NULL|string
+   */
+  public function getSourcePath();
 
   public function addAction(ParseActionInterface $action);
 
@@ -35,6 +49,30 @@ interface ParserInterface {
    *   An array of ParseAction objects.
    */
   public function getActions();
+
+
+  /**
+   * Add arbitrary data to self::data
+   *
+   * This data can be used as needed during parse operations, note any key that
+   * conflicts with a previous key will overwrite the older data.
+   *
+   * @param array|object   $data
+   *
+   * @return object $this
+   */
+  public function addData($data);
+
+  /**
+   * Return the arbitrary data as an object
+   *
+   * @code
+   *   $this->getData()->scope
+   * @endcode
+   *
+   * @return object
+   */
+  public function getData();
 }
 
 /**
@@ -42,13 +80,13 @@ interface ParserInterface {
  */
 class Parser implements ParserInterface {
 
-  protected $actions = array();
+  protected $actions, $data = array();
+  protected $source_path = NULL;
   public $parsed = '';
 
   /**
    * Constructor
    *
-   * @param string $source
    * @param string $source
    *   (Optional) Defaults to NULL.
    * @param bool $is_path.
@@ -70,12 +108,16 @@ class Parser implements ParserInterface {
   }
 
   public function setSourceFromFile($source) {
-    if (is_file($source)) {
+    $this->source_path = $source;
+    if (is_readable($source)) {
       $source = file_get_contents($source);
     }
     $this->setSource($source);
 
     return $this;
+  }
+  public function getSourcePath() {
+    return $this->source_path;
   }
 
   public function getSource() {
@@ -83,6 +125,7 @@ class Parser implements ParserInterface {
   }
 
   public function parse() {
+    $this->getData();
     $parsed = $this->getSource();
     foreach ($this->actions as $action) {
       $action->parse($parsed);
@@ -99,6 +142,16 @@ class Parser implements ParserInterface {
 
   public function getActions() {
     return $this->actions;
+  }
+
+  public function addData($data) {
+    $this->data = (array) $data + $this->data;
+
+    return $this;
+  }
+
+  public function getData() {
+    return (object) $this->data;
   }
 }
 

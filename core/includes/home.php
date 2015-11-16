@@ -9,7 +9,9 @@
 use AKlump\LoftDocs\OutlineJson as Index;
 
 require_once dirname(__FILE__) . '/../vendor/autoload.php';
-$index = new Index($argv[1]);
+
+$outline = load_outline($argv[1]);
+$index   = new Index($outline);
 
 $list = array();
 foreach ($index->getData() as $key => $value) {

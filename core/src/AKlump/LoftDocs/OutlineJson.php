@@ -15,15 +15,15 @@ namespace AKlump\LoftDocs;
  */
 class OutlineJson implements IndexInterface {
 
-  protected $path;
+  protected $json;
 
   /**
    * Constructor
-   * @param path $path
-   *   The path to the ini file
+   * @param array $json
+   *   The array from Json
    */
-  public function __construct($path) {
-    $this->path = $path;
+  public function __construct($json) {
+    $this->json = $json;
   }
 
   public function getTitle($default, $value) {
@@ -32,7 +32,7 @@ class OutlineJson implements IndexInterface {
   }
 
   public function getData() {
-    $info  = json_decode(file_get_contents($this->path, TRUE), TRUE);
+    $info  = $this->json;
     $data  = array();
     $index = array(
       'id' => 'index',

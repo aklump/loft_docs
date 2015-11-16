@@ -10,7 +10,9 @@ use AKlump\LoftDocs\OutlineJson as Index;
 
 require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
-$index = new Index($argv[1]);
+$outline = load_outline($argv[1]);
+$index   = new Index($outline);
+
 $vars = array(
   'classes' => array(),
 );
@@ -29,6 +31,17 @@ $now = new \DateTime('now', new \DateTimeZone('America/Los_Angeles'));
 $declarations[] = '$date = ' . $now->format('r');
 
 $declarations[] = '$version = ' . $argv[3];
+
+// Search support
+if ($outline['settings']['search']) {
+  $declarations[] = '$search = true';
+  if ($argv[2] === 'search--results') {
+    $declarations[] = '$search_results_page = true';
+  }
+  else {
+    $declarations[] = '$search_results_page = false';
+  }
+}
 
 // Now write the vars
 print '<!--' . implode("-->\n<!--", $declarations) . "-->\n";

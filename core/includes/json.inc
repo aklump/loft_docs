@@ -38,7 +38,7 @@ if (!empty($json_file)) {
     );
     $section_sort = max($section['sort'], $section_sort);
 
-    if (isset($data['parent'])) {
+    if (!empty($data['parent'])) {
       $chapter = array(
         'id' => clean_id($data['parent']),
         'title' => clean_title($data['parent']),
