@@ -56,11 +56,8 @@ class SearchHtml {
       $contents = str_replace($matches[0], '', $contents);
     }
 
-    if ($tags && preg_match('/keywords\s*:(.+)<br\s*\/>/si', $tags, $matches)) {
-      $tags = explode(',', $matches[1]);
-      array_walk($tags, function($value, $key) use (&$tags) {
-        $tags[$key] = str_replace(' ', '_', trim($value));
-      });
+    if ($tags && preg_match('/tags\s*:(.*?)</si', $tags, $matches)) {
+      $tags = explode(' ', $matches[1]);
     }
     else {
       $tags = array();
