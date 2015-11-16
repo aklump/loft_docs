@@ -45,7 +45,7 @@ class SearchHtml {
     $title    = $tags = '';
     $contents = $this->html;
 
-    if (preg_match('/(<h.+?>)(.+)<\/h.>?/si', $this->html, $matches)) {
+    if (preg_match('/(<h.+?>(.+?)<\/h.>)/si', $this->html, $matches)) {
       $title    = $matches[2];
 
       // Pull out the meta data section.
