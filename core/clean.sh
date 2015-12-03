@@ -6,9 +6,24 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
   [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
 done
 CORE="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+# Remove all pattern dirs
 for dir in $(find $CORE/patterns/*  -type d -maxdepth 0 ! -name "source" ); do
   dir="${dir##*/}"
-  if [[ -d $dir ]]; then
-    rm -rv $dir
+  if [[ -d "$dir" ]]; then
+    rm -rv "$dir"
   fi
 done
+
+# echo $CORE
+# find $CORE/source -name _*
+# return
+# Remove compiled files in source; those that begin with underscore
+for path in $(find "$CORE/../source" -name _*); do
+    rm -rv "$path"
+  # if [[ -f "$path" ]]; then
+  #   rm -v "$path"
+  # elif [[ -d "$path"]]; then
+  # fi
+done
+

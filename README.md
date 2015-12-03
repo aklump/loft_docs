@@ -48,6 +48,12 @@ You should do the following to link internally to `source/page2.html`
 
     <a href="page2.html">Link to Next Page</a>
 
+## As a Developer
+If you are implementing any hooks and you need component or include files, which compile to markdown files in `/source`:
+
+1. Put these component files in `/parts` not in `/source`.
+1. Make sure the generated files begin with the underscore, e.g., `_my_compiled_file.md`.  That will indicate these files are compiled and can be deleted using `core/clean.sh`.
+
 ## Search
 To enable search you need to create a file (it must at least contain a title `# Search Results`) called:
 
