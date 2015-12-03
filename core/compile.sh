@@ -420,8 +420,7 @@ _check_file "$docs_kit_dir/index.kit"
 # extension as it goes over; this is our baseline html that we will further
 # process for the intended audience.
 for file in $docs_source_dir/*; do
-  if [ -f "$file" ]
-  then
+  if [ -f "$file" ]; then
     basename=${file##*/}
 
     # Process .md files and output as .html
@@ -482,8 +481,7 @@ done
 # Iterate over all html files and send to CodeKit; then iterate over all html
 # files and send to drupal and website
 for file in $docs_tmp_dir/*.html; do
-  if [ -f "$file" ]
-  then
+  if [ -f "$file" ]; then
     basename=${file##*/}
     basename=$(echo $basename | sed 's/\.html$//g')
     html_file="$basename.html"
@@ -566,8 +564,7 @@ $docs_php "$CORE/includes/search.inc" "$docs_outline_file" "$CORE" "$docs_root_d
 echo 'Not yet implemented' > "$docs_doxygene_dir/README.md"
 
 # Cleanup dirs that are not enabled or were temp
-for var in "${dirs_to_delete[@]}"
-do
+for var in "${dirs_to_delete[@]}"; do
   if [ "$var" ] && [ -d "$var" ]; then
     rm -rf $var;
   fi
