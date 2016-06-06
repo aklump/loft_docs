@@ -26,6 +26,11 @@ foreach ($first_level as $file) {
     continue;
   }
 
+  // Do not include search--results.md
+  if ($file === 'search--results.md') {
+    continue;
+  }
+
   // We check for chapter--section.md format
   $chapter = '';
   $section = $file;

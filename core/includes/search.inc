@@ -13,7 +13,7 @@ list(,$outline, $core_dir, $build_dir, $webpage_dir) = $argv;
 $outline = load_outline($outline);
 
 // Search support
-if ($outline['settings']['search']) {
+if (!empty($outline['settings']['search'])) {
   $search_dir = "$webpage_dir/search";
 
   $hook_file  = $core_dir . "/includes/webpage." . $outline['settings']['search'] . ".sh";

@@ -33,7 +33,7 @@ $declarations[] = '$date = ' . $now->format('r');
 $declarations[] = '$version = ' . $argv[3];
 
 // Search support
-if ($outline['settings']['search']) {
+if (!empty($outline['settings']['search'])) {
   $declarations[] = '$search = true';
   if ($argv[2] === 'search--results') {
     $declarations[] = '$search_results_page = true';

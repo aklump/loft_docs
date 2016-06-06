@@ -344,11 +344,10 @@ declare -a dirs=("$docs_html_dir" "$docs_mediawiki_dir" "$docs_website_dir" "$do
 declare -a dirs_to_empty=("$docs_html_dir" "$docs_mediawiki_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir");
 
 # These dirs need to be removed at that end
-declare -a dirs_to_delete=("$docs_tmp_dir")
+declare -a dirs_to_delete=("$docs_tmp_dir" "$docs_kit_dir")
 
 # Add all enabled formats to dir array
-for format in "${docs_disabled[@]}"
-do
+for format in "${docs_disabled[@]}"; do
   if is_disabled "$format"; then
     dir=docs_${format}_dir
     dir=$(eval "echo \$${dir}")
