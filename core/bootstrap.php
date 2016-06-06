@@ -159,15 +159,19 @@ function path_is_section($path) {
  * @return array
  */
 function load_outline($outline_file) {
-  $outline = json_decode(file_get_contents($outline_file), TRUE);
-  $outline += array(
-    'appendices' => array(),
-    'authors' => array(),
-    'chapters' => array(),
-    'cover' => array(),
-    'sections' => array(),
-    'settings' => array('search' => 'tipuesearch'),
-  );
+  $outline = array();
+
+  if (file_exists($outline_file)) {
+    $outline = json_decode(file_get_contents($outline_file), TRUE);
+    $outline += array(
+      'appendices' => array(),
+      'authors'    => array(),
+      'chapters'   => array(),
+      'cover'      => array(),
+      'sections'   => array(),
+      'settings'   => array('search' => 'tipuesearch'),
+    );
+  }
 
   return $outline;
 

@@ -10,7 +10,7 @@ namespace AKlump\LoftDocs;
 
 /**
  * Represents an OutlineJson object class.
- * 
+ *
  * @brief Briefly describe what this class does.
  */
 class OutlineJson implements IndexInterface {
@@ -19,39 +19,38 @@ class OutlineJson implements IndexInterface {
 
   /**
    * Constructor
+   *
    * @param array $json
    *   The array from Json
    */
   public function __construct($json) {
-    $this->json = $json;
-  }
-
-  public function getTitle($default, $value) {
-    return isset($value['title']) ? $value['title'] :
-      (isset($value['name']) ? $value['name'] : $default);
+    $this->json = (array) $json;
   }
 
   public function getData() {
-    $info  = $this->json;
-    $data  = array();
+    $info = $this->json + array(
+        'sections' => array(),
+      );
+    $data = array();
     $index = array(
-      'id' => 'index',
+      'id'    => 'index',
       'title' => 'Index',
-      'file' => 'index.html',
+      'file'  => 'index.html',
     );
 
     foreach ($info['sections'] as $value) {
       $key = pathinfo($value['file'], PATHINFO_FILENAME);
       $weight = isset($value['sort']) ? $value['sort'] : 0;
       if (in_array($key, array('index', 'advanced help settings'))
-        && ($title = $this->getTitle($key, $value))) {
+        && ($title = $this->getTitle($key, $value))
+      ) {
         $index['title'] = $title;
       }
       else {
         $data[$weight][$key] = array(
-          'id' => $value['id'],
+          'id'    => $value['id'],
           'title' => $this->getTitle($key, $value),
-          'file' => str_replace(pathinfo($value['file'], PATHINFO_EXTENSION), 'html', $value['file']),
+          'file'  => str_replace(pathinfo($value['file'], PATHINFO_EXTENSION), 'html', $value['file']),
         );
       }
     }
@@ -71,11 +70,11 @@ class OutlineJson implements IndexInterface {
     $last = NULL;
     foreach ($list as $key => $value) {
       $list[$key] += array(
-        'prev_id' => 'index',
-        'prev' => 'index.html',
+        'prev_id'    => 'index',
+        'prev'       => 'index.html',
         'prev_title' => 'Index',
-        'next_id' => 'index',
-        'next' => 'index.html',
+        'next_id'    => 'index',
+        'next'       => 'index.html',
         'next_title' => 'Index',
       );
       if ($last !== NULL) {
@@ -87,11 +86,11 @@ class OutlineJson implements IndexInterface {
         $list[$key] = $prev + $list[$key];
       }
       if ($value) {
-      $prev = array(
-        'prev_id' => $key,
-        'prev' => $value['file'],
-        'prev_title' => $value['title'],
-      );
+        $prev = array(
+          'prev_id'    => $key,
+          'prev'       => $value['file'],
+          'prev_title' => $value['title'],
+        );
       }
       $last = $key;
     }
@@ -103,5 +102,10 @@ class OutlineJson implements IndexInterface {
     $list['index']['prev_title'] = $last['title'];
 
     return $list;
+  }
+
+  public function getTitle($default, $value) {
+    return isset($value['title']) ? $value['title'] :
+      (isset($value['name']) ? $value['name'] : $default);
   }
 }
