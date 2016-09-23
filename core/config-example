@@ -7,6 +7,7 @@
  # An array of output formats to disable, if any
  #
 #disabled = "website drupal html text mediawiki doxygene"
+disabled = "drupal html text mediawiki doxygene"
 
 ##
  # File path to the php you want to use for compiling
@@ -42,11 +43,11 @@ lynx = $(which lynx)
  # 
  # This should be a relative directory, relative to the source directory.
  #
-#README = '../README.txt'
+#README = '../../README.txt'
 
 # This would also copy README.md as well as README.txt to the directory one
 # level above /source
-#README = '../README.txt ../README.md'
+#README = '../../README.txt ../../README.md'
 
 #root_dir      = ""
 
