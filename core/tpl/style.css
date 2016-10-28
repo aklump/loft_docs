@@ -346,7 +346,7 @@ body.page-index ul.index {
   position: relative;
   text-align: center;
   min-height: 1.6em;
-  font-size: .9rem; }
+  font-size: 0.9rem; }
 
 .pager .prev, .pager .next {
   position: absolute; }
@@ -370,10 +370,10 @@ body.page-index ul.index {
   color: #000; }
 
 .xml-field-xml.colorized .attribute {
-  color: #00C; }
+  color: #00c; }
 
 .xml-field-xml.colorized .string {
-  color: #A11; }
+  color: #a11; }
 
 #footer-legaleeze {
   margin-top: 5px; }
@@ -410,7 +410,11 @@ body {
   margin-top: 2em;
   margin-bottom: 2em; }
 
-section img,
+section img {
+  margin: 30px 0;
+  -webkit-box-shadow: 0px 0px 30px 0px #aaa;
+  -moz-box-shadow: 0px 0px 30px 0px #aaa;
+  box-shadow: 0px 0px 30px 0px #aaa; }
 section video {
   width: 100%; }
 
