@@ -6,4 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Piwik\\Ini\\' => array($vendorDir . '/piwik/ini/src'),
+    'AKlump\\Data\\' => array($vendorDir . '/aklump/data'),
 );

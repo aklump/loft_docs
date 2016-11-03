@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests" tests="16" assertions="25" failures="0" errors="0" time="0.144504">
+    <testsuite name="advancedHelpTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/AdvancedHelpTest.php" tests="3" assertions="3" failures="0" errors="0" time="0.125283">
+      <testcase name="testImages" class="advancedHelpTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/AdvancedHelpTest.php" line="15" assertions="1" time="0.042238"/>
+      <testcase name="testHelpLinks" class="advancedHelpTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/AdvancedHelpTest.php" line="45" assertions="1" time="0.041308"/>
+      <testcase name="testRemoveH1Tag" class="advancedHelpTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/AdvancedHelpTest.php" line="71" assertions="1" time="0.041737"/>
+    </testsuite>
+    <testsuite name="TodosTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/TodosTest.php" tests="6" assertions="11" failures="0" errors="0" time="0.009026">
+      <testcase name="testParseTodosWithPrefix" class="TodosTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/TodosTest.php" line="14" assertions="1" time="0.001299"/>
+      <testcase name="test_flatten_todos" class="TodosTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/TodosTest.php" line="20" assertions="1" time="0.001193"/>
+      <testcase name="test_get_weight" class="TodosTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/TodosTest.php" line="30" assertions="5" time="0.001595"/>
+      <testcase name="testSortTodosRemovesDuplicates" class="TodosTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/TodosTest.php" line="38" assertions="1" time="0.001869"/>
+      <testcase name="test_sort_todos" class="TodosTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/TodosTest.php" line="52" assertions="1" time="0.001631"/>
+      <testcase name="test_parse_todos" class="TodosTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/TodosTest.php" line="67" assertions="2" time="0.001439"/>
+    </testsuite>
+    <testsuite name="AKlump\LoftDocs\SearchHtmlTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/phpunit/SearchHtmlTest.php" tests="3" assertions="7" failures="0" errors="0" time="0.004982">
+      <testcase name="testNoTags" class="AKlump\LoftDocs\SearchHtmlTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/phpunit/SearchHtmlTest.php" line="12" assertions="3" time="0.002176"/>
+      <testcase name="testTitle" class="AKlump\LoftDocs\SearchHtmlTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/phpunit/SearchHtmlTest.php" line="20" assertions="3" time="0.001493"/>
+      <testcase name="testReturnsObject" class="AKlump\LoftDocs\SearchHtmlTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/phpunit/SearchHtmlTest.php" line="28" assertions="1" time="0.001313"/>
+    </testsuite>
+    <testsuite name="AKlump\LoftDocs\SearchPageDataTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/phpunit/SearchPageDataTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.001281">
+      <testcase name="testTagsWithSpacesThrows" class="AKlump\LoftDocs\SearchPageDataTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/phpunit/SearchPageDataTest.php" line="15" assertions="1" time="0.001281"/>
+    </testsuite>
+    <testsuite name="AKlump\LoftDocs\TipueSearchTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/phpunit/TipueSearchTest.php" tests="3" assertions="3" failures="0" errors="0" time="0.003932">
+      <testcase name="testAddTwoSortsCorrectly" class="AKlump\LoftDocs\TipueSearchTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/phpunit/TipueSearchTest.php" line="12" assertions="1" time="0.001593"/>
+      <testcase name="testAddDuplicatesFilters" class="AKlump\LoftDocs\TipueSearchTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/phpunit/TipueSearchTest.php" line="24" assertions="1" time="0.001177"/>
+      <testcase name="testAddOneGet" class="AKlump\LoftDocs\TipueSearchTest" file="/Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/tests/phpunit/TipueSearchTest.php" line="35" assertions="1" time="0.001162"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
