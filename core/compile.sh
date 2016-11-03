@@ -570,3 +570,8 @@ for var in "${dirs_to_delete[@]}"; do
 done
 
 do_post_hooks
+
+# Ensure that module.help.ini exists if we are in a drupal site
+if [ "$docs_drupal_module" ] && [ ! -f "$docs_drupal_dir/$docs_drupal_module.help.ini"  ]; then
+  $docs_php "$CORE/make_ini.php" "$docs_drupal_dir" "$docs_drupal_module" "$docs_outline_file"
+fi
