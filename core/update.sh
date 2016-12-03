@@ -62,8 +62,13 @@ done
 CORE="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 ROOT="$CORE/.."
 
-
 source $CORE/functions.sh
+
+# Override to use the version file of the core
+function get_version_file() {
+    echo $ROOT/core-version.info
+}
+
 load_config
 
 if [ ! -d "$ROOT/core" ] && [ ! -f "$ROOT/core_version.info" ]; then
