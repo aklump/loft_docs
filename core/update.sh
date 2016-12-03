@@ -62,13 +62,17 @@ done
 CORE="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 ROOT="$CORE/.."
 
+
+source $CORE/functions.sh
+load_config
+
 if [ ! -d "$ROOT/core" ] && [ ! -f "$ROOT/core_version.info" ]; then
-  echo "`tput setaf 1`Update failed. Corrupt file structure.`tput op`"
+  echo_red "Update failed. Corrupt file structure."
   exit
 fi
 
 if [ -d "$ROOT/tmp" ]; then
-  echo "`tput setaf 3`You must delete $ROOT/tmp before updating.`tput op`"
+  echo_red "You must delete $ROOT/tmp before updating."
   exit
 else
   mkdir -p "$ROOT/tmp"
@@ -84,14 +88,18 @@ cd "$ROOT"
 # Update the core files
 docs_update="$ROOT/tmp/loft_docs-master/"
 
-cp -v "$docs_update/README.md" "$ROOT/"
-cp -v "$docs_update/core-version.info" "$ROOT/"
+#cp -v "$docs_update/README.md" "$ROOT/"
+#cp -v "$docs_update/core-version.info" "$ROOT/"
 
 # Update all of core
-rsync -av --delete "$docs_update/core/" "$ROOT/core/" --exclude=Markdown.pl --exclude=.loft_docs_pattern
+#rsync -av --delete "$docs_update/core/" "$ROOT/core/" --exclude=Markdown.pl
 
-rm -rf "$ROOT/tmp"
+#rm -rf "$ROOT/tmp"
 
-echo "`tput setaf 2`Update complete.`tput op`"
+echo_green "Updated complete"
 
-
+# Warnings about breaking changes.
+get_version
+if [ "$get_version_return" == "0.8" ]; then
+    echo_yellow "Review CHANGELOG.txt for breaking changes in version 0.8"
+fi
