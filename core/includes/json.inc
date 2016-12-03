@@ -29,6 +29,7 @@ if (!empty($json_file)) {
 
     $chapter_sort = 0;
     $section_sort = 0;
+    $chapter_index = array();
     foreach ($info as $file => $data) {
         if (empty($data['title'])) {
             continue;
@@ -41,11 +42,12 @@ if (!empty($json_file)) {
             'file'  => isset($data['file']) ? $data['file'] : $file . get_md_source_file_extension($file),
             'sort'  => isset($data['weight']) ? $data['weight'] : $section_sort++,
         );
-        $section_sort = max($section['sort'], $section_sort);
 
-        if (!empty($data['parent'])) {
+        $chapter_id = clean_id($data['parent']);
+        if (!empty($data['parent']) && !in_array($chapter_id, $chapter_index)) {
+            $chapter_index[] = $chapter_id;
             $chapter = array(
-                'id'    => clean_id($data['parent']),
+                'id'    => $chapter_id,
                 'title' => clean_title($data['parent']),
                 'sort'  => $chapter_sort++,
             );
@@ -56,7 +58,6 @@ if (!empty($json_file)) {
             $json['chapters'][] = $chapter;
         }
     }
-
 
     // Write out the json file.
     file_put_contents($json_file, json_encode($json, JSON_PRETTY_PRINT));
