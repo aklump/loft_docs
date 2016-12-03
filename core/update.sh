@@ -99,7 +99,5 @@ rm -rf "$ROOT/tmp"
 get_version
 echo_green "Updated complete"
 
-# Warnings about breaking changes.
-if [ "${get_version_return:0:3}" == "0.8" ]; then
-    echo_yellow "Review CHANGELOG.txt for breaking changes in version 0.8"
-fi
+## Allow the incoming update to post messages
+source "$docs_update/core/update_alerts.sh"
