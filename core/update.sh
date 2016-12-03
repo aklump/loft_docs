@@ -83,6 +83,12 @@ else
   mkdir -p "$ROOT/tmp"
 fi
 
+# Get's the before version
+get_version
+before_version=$get_version_return
+
+echo_green "Downloading current release..."
+
 cd "$ROOT/tmp"
 
 # Download the master branch
@@ -90,9 +96,6 @@ curl -O -L https://github.com/aklump/loft_docs/archive/master.zip
 unzip -q master.zip;
 cd "$ROOT"
 
-# Get's the before version
-get_version
-before_version=$get_version_return
 
 # Update the core files
 docs_update="$ROOT/tmp/loft_docs-master/"
