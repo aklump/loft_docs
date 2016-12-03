@@ -95,9 +95,9 @@ cp -v "$docs_update/core-version.info" "$ROOT/"
 rsync -av --delete "$docs_update/core/" "$ROOT/core/" --exclude=Markdown.pl
 
 ## Allow the incoming update to post messages
+get_version
 source "$docs_update/core/update_alerts.sh"
 
 rm -rf "$ROOT/tmp"
 
-get_version
 echo_green "Updated complete"
