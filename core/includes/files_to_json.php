@@ -46,44 +46,58 @@ foreach ($first_level as $file) {
     if (is_file($path) && ($contents = file_get_contents($path))) {
         $document = $fm->parse($contents);
         $frontmatter = $document->getData();
+        $body = $document->getContent();
     }
 
-    $chapter = $section = '';
+    $meta = array();
 
+    //
+    // 1. Frontmatter
+    $meta['chapter'] = $g->get($frontmatter, 'chapter');
+    $meta['section'] = $g->get($frontmatter, 'section');
+    $meta['title'] = $g->get($frontmatter, 'title');
+    $meta['sort'] = $g->get($frontmatter, 'sort');
+
+    //
+    // 2. html heading
+    if (!$g->get($meta, 'title') && preg_match('/#\s*(.+?)\s*$/m', $body, $matches)) {
+        $g->fill($meta, 'title', $matches[1]);
+    }
+
+    //
+    // 3. file-name derived meta
+    //
     // We check for chapter--section.md format
     if (($parts = explode('--', $file)) && count($parts) > 1) {
-        $chapter = array_shift($parts);
-        $section = implode('', $parts);
+        $g->fill($meta, 'chapter', array_shift($parts));
+        $g->fill($meta, 'section', implode('', $parts));
     }
 
-    // Superscede with frontmatter.
-    $chapter = $g->get($frontmatter, 'chapter', $chapter);
-    $section = $g->get($frontmatter, 'section', $section);
-    $title = $g->get($frontmatter, 'title', clean_title($file));
+    $g->fill($meta, 'title', clean_title($file));
 
     // In the top level there is no chapter indication.
     if (path_is_section($file)) {
         $info[pathinfo($file, PATHINFO_FILENAME)] = array(
             'file'   => $file,
-            'title'  => $title,
-            'parent' => $chapter,
-            'weight' => $g->get($frontmatter, 'sort'),
+            'title'  => $g->get($meta, 'title'),
+            'parent' => $g->get($meta, 'chapter'),
+            'weight' => $g->get($meta, 'sort'),
         );
     }
 
     // One level in, designates a chapter by dirname.
-    // elseif (is_dir($source_dir . '/' . $section)) {
-    //   $chapter_level = scandir($source_dir . '/' . $section);
-    //   foreach ($chapter_level as $chapter_section) {
-    //     if (substr($chapter_section, 0, 1) === '.') {
+    // elseif (is_dir($source_dir . '/' . $meta['section'])) {
+    //   $meta['chapter'_level = scandir($source_dir . '/' . $meta['section']);
+    //   foreach ($meta['chapter'_level as $meta['chapter'_section) {
+    //     if (substr($meta['chapter'_section, 0, 1) === '.') {
     //       continue;
     //     }
 
-    //     if (path_is_section($chapter_section)) {
-    //       $info[pathinfo($chapter_section, PATHINFO_FILENAME)] = array(
-    //         'file' => $section . '/' . $chapter_section,
-    //         'title' => clean_title($chapter_section),
-    //         'parent' => clean_id($section),
+    //     if (path_is_section($meta['chapter'_section)) {
+    //       $info[pathinfo($meta['chapter'_section, PATHINFO_FILENAME)] = array(
+    //         'file' => $meta['section'] . '/' . $meta['chapter'_section,
+    //         'title' => clean_title($meta['chapter'_section),
+    //         'parent' => clean_id($meta['section']),
     //       );
     //     }
     //   }
