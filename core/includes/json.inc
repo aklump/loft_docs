@@ -14,7 +14,6 @@
  * @see  files_to_json.php
  * @see  ini_to_json.php
  */
-
 if (!empty($json_file)) {
 
     $json = array(
@@ -25,7 +24,7 @@ if (!empty($json_file)) {
 
     $json['settings']['search'] = is_file(($f = $source_dir . '/search--results.md')) ? 'tipuesearch' : null;
     if (empty(file_get_contents($f))) {
-        echo "search--results.md may not be an empty file; include at least a title";
+        file_put_contents($f, '# Search Results');
     }
 
     $chapter_sort = 0;

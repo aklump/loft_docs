@@ -10,6 +10,7 @@ require_once dirname(__FILE__) . '/vendor/autoload.php';
 
 $source = $argv[1];
 $global = $argv[2];
+$todos = array();
 
 // Skip this file if no todo items.
 $prefix = '' . pathinfo($source, PATHINFO_FILENAME) . ': ';

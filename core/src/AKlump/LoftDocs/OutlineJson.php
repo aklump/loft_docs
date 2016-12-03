@@ -53,7 +53,7 @@ class OutlineJson implements IndexInterface
                 $data[$weight][$key] = array(
                     'id'    => $value['id'],
                     'title' => $this->getTitle($key, $value),
-                    'file'  => str_replace(pathinfo($value['file'], PATHINFO_EXTENSION), 'html', $value['file']),
+                    'file'  => pathinfo($value['file'], PATHINFO_FILENAME) . '.html',
                 );
             }
         }

@@ -7,9 +7,11 @@
  * @{
  */
 use AKlump\LoftDocs\OutlineJson as Index;
+use AKlump\Data\Data;
 
 require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
+$g = new Data();
 $outline = load_outline($argv[1]);
 $index = new Index($outline);
 
@@ -20,8 +22,18 @@ if (($data = $index->getData()) && isset($data[$argv[2]])) {
     $vars = $data[$argv[2]];
     $vars['classes'] = array('page-' . $vars['id']);
 }
-$declarations = array();
 $vars['classes'] = implode(' ', $vars['classes']);
+
+// Ensure these default vars
+$g->ensure($vars, 'title', '');
+$g->ensure($vars, 'prev', 'javascript:void(0)');
+$g->ensure($vars, 'prev_id', '');
+$g->ensure($vars, 'prev_title', '');
+$g->ensure($vars, 'next', 'javascript:void(0)');
+$g->ensure($vars, 'next_id', '');
+$g->ensure($vars, 'next_title', '');
+
+$declarations = array();
 foreach ($vars as $key => $value) {
     $declarations[] = "\$$key = $value";
 }
