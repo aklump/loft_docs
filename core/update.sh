@@ -85,6 +85,10 @@ curl -O -L https://github.com/aklump/loft_docs/archive/master.zip
 unzip -q master.zip;
 cd "$ROOT"
 
+# Get's the before version
+get_version
+before_version=$get_version_return
+
 # Update the core files
 docs_update="$ROOT/tmp/loft_docs-master/"
 
@@ -94,8 +98,10 @@ cp "$docs_update/core-version.info" "$ROOT/"
 # Update all of core
 rsync -a --delete "$docs_update/core/" "$ROOT/core/" --exclude=Markdown.pl
 
-## Allow the incoming update to post messages
+## By putting this after rsync, we will retrieve the new version
 get_version
+
+## Allow the incoming update to post messages
 source "$docs_update/core/update_alerts.sh"
 
 rm -rf "$ROOT/tmp"
