@@ -60,7 +60,7 @@ foreach ($first_level as $file) {
 
     //
     // 2. html heading
-    if (!$g->get($meta, 'title') && preg_match('/#\s*(.+?)\s*$/m', $body, $matches)) {
+    if (!$g->get($meta, 'title') && preg_match('/#[^#]\s*(.+?)\s*$/m', $body, $matches)) {
         $g->fill($meta, 'title', $matches[1]);
     }
 
