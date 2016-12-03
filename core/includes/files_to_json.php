@@ -42,7 +42,7 @@ foreach ($first_level as $file) {
     $path = $source_dir . '/' . $file;
 
     $frontmatter = array();
-    $contents = '';
+    $contents = $body = '';
     if (is_file($path) && ($contents = file_get_contents($path))) {
         $document = $fm->parse($contents);
         $frontmatter = $document->getData();
