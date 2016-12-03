@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ffd776f126dea8888431910f6ed5c402",
-    "content-hash": "0b152ea018885ce3e7c5f59ffe0ed315",
+    "hash": "2e9ad06aab02427171a6715d9033858d",
+    "content-hash": "5b1c85f57243fb4f89d7af9686b66eaa",
     "packages": [
         {
             "name": "aklump/data",
@@ -225,6 +225,61 @@
             "time": "2016-01-14 21:13:33"
         },
         {
+            "name": "symfony/yaml",
+            "version": "v3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "f2300ba8fbb002c028710b92e1906e7457410693"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/f2300ba8fbb002c028710b92e1906e7457410693",
+                "reference": "f2300ba8fbb002c028710b92e1906e7457410693",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "symfony/console": "~2.8|~3.0"
+            },
+            "suggest": {
+                "symfony/console": "For validating YAML files using the lint command"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-11-18 21:17:59"
+        },
+        {
             "name": "twig/twig",
             "version": "v1.27.0",
             "source": {
@@ -284,6 +339,62 @@
                 "templating"
             ],
             "time": "2016-10-25 19:17:17"
+        },
+        {
+            "name": "webuni/front-matter",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webuni/front-matter.git",
+                "reference": "dfede21e98a91729151e9665a81215f838e9320f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webuni/front-matter/zipball/dfede21e98a91729151e9665a81215f838e9320f",
+                "reference": "dfede21e98a91729151e9665a81215f838e9320f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5|^7.0",
+                "symfony/yaml": "^2.3|^3.0"
+            },
+            "require-dev": {
+                "coduo/phpspec-data-provider-extension": "^1.0",
+                "fabpot/php-cs-fixer": "^1.9",
+                "memio/spec-gen": "~0.3",
+                "mthaml/mthaml": "^1.2",
+                "phpspec/phpspec": "^2.5",
+                "twig/twig": "~1.20|~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webuni\\FrontMatter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Hasoň",
+                    "email": "martin.hason@gmail.com",
+                    "role": "Lead Developer"
+                }
+            ],
+            "description": "Front matter parser and dumper for PHP",
+            "homepage": "https://github.com/webuni/front-yaml",
+            "keywords": [
+                "front-matter",
+                "yaml"
+            ],
+            "time": "2016-04-26 23:39:13"
         }
     ],
     "packages-dev": [],

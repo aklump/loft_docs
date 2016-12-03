@@ -13,6 +13,7 @@
         "michelf/php-markdown": ">=1.4.0",
         "twig/twig": "^1.23",
         "piwik/ini": "^1.0",
-        "aklump/data": "^0.0.12"
+        "aklump/data": "^0.0.12",
+        "webuni/front-matter": "^0.2.0"
     }
 }

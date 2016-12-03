@@ -13,6 +13,11 @@ namespace AKlump\LoftDocs;
 class SearchPageData
 {
 
+    protected $url;
+    protected $title;
+    protected $contents;
+    protected $tags;
+
     /**
      * Constructor
      *
@@ -52,6 +57,20 @@ class SearchPageData
     public function getContents()
     {
         return $this->contents;
+    }
+
+    /**
+     * Adds tags to whatever was used in the constructor.
+     *
+     * @param array $tags
+     *
+     * @return $this
+     */
+    public function addTags(array $tags)
+    {
+        $this->tags += $tags;
+
+        return $this;
     }
 
     public function getTags($flatten = false)

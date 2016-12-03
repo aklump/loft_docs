@@ -17,6 +17,7 @@ class SearchHtml
 {
 
     protected $html, $url;
+    protected $tags = array();
 
     /**
      * Constructor method for a new SearchHtml.

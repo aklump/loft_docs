@@ -104,23 +104,10 @@ function get_weight($string)
  */
 function clean_id($text)
 {
-    $text = preg_replace(get_markdown_extensions(true), '', $text);
+    $regex = get_markdown_extensions(true);
+    $text = preg_replace($regex, '', $text);
 
     return strtolower($text);
-}
-
-/**
- * Return the recognized markdown extensions (without the dot).
- *
- * @param  boolean $regex True for a regex expression.
- *
- * @return array|string
- */
-function get_markdown_extensions($regex = false)
-{
-    $ext = array('md', 'mdown', 'markdown');
-
-    return $regex ? '/\.(' . implode('|', $ext) . ')$/' : $ext;
 }
 
 /**
@@ -132,13 +119,39 @@ function get_markdown_extensions($regex = false)
  */
 function clean_title($text)
 {
-    $text = preg_replace(get_markdown_extensions(true), '', $text);
+    $regex = get_markdown_extensions(true);
+    $text = preg_replace($regex, '', $text);
 
     return ucwords(preg_replace('/[-_]/', ' ', $text));
 }
 
 /**
- * Returns the markdown file extention for a filename
+ * Return the recognized markdown extensions (without the dot).
+ *
+ * @param  boolean $regex True for a regex expression.
+ *
+ * @return array|string
+ */
+function get_markdown_extensions($regex = false)
+{
+    $ext = array(
+        'md',
+        'markdown',
+        'mdown',
+        'mkdn',
+        'mkd',
+        'mdwn',
+        'mdtxt',
+        'mdtext',
+        'text',
+        'Rmd',
+    );
+
+    return $regex ? '/\.(' . implode('|', $ext) . ')$/' : $ext;
+}
+
+/**
+ * Returns the markdown file extension for a filename
  *
  * @param  string $file This is the filename relative to the source directory
  *                      without extension.
@@ -147,8 +160,10 @@ function clean_title($text)
  */
 function get_md_source_file_extension($file)
 {
-    //@todo make this dynamic?
-    return '.md';
+    //@todo make this dynamic? by looking up the file and matching filename and reading in the extension? see getFrontMatterTagsFromHtmlFile().
+    $extensions = get_markdown_extensions();
+
+    return '.' . reset($extensions);
 }
 
 /**

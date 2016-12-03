@@ -11,6 +11,14 @@ class ComposerStaticInit57e0d1a2964202d36b8a6b260801c423
     );
 
     public static $prefixLengthsPsr4 = array (
+        'W' => 
+        array (
+            'Webuni\\FrontMatter\\' => 19,
+        ),
+        'S' => 
+        array (
+            'Symfony\\Component\\Yaml\\' => 23,
+        ),
         'P' => 
         array (
             'Piwik\\Ini\\' => 10,
@@ -22,6 +30,14 @@ class ComposerStaticInit57e0d1a2964202d36b8a6b260801c423
     );
 
     public static $prefixDirsPsr4 = array (
+        'Webuni\\FrontMatter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/webuni/front-matter/src',
+        ),
+        'Symfony\\Component\\Yaml\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/yaml',
+        ),
         'Piwik\\Ini\\' => 
         array (
             0 => __DIR__ . '/..' . '/piwik/ini/src',

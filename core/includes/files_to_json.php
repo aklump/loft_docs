@@ -4,6 +4,9 @@
  * Reads the filesystem and writes new .json format as a file.
  *
  */
+use AKlump\Data\Data;
+use Webuni\FrontMatter\FrontMatter;
+
 $file = __FILE__;
 require_once dirname($file) . '/../vendor/autoload.php';
 
@@ -24,6 +27,8 @@ if (file_exists($json_file)) {
 
 $info = array();
 $first_level = scandir($source_dir);
+$fm = new FrontMatter();
+$g = new Data();
 foreach ($first_level as $file) {
     if (substr($file, 0, 1) === '.') {
         continue;
@@ -34,20 +39,35 @@ foreach ($first_level as $file) {
         continue;
     }
 
+    $path = $source_dir . '/' . $file;
+
+    $frontmatter = array();
+    $contents = '';
+    if (is_file($path) && ($contents = file_get_contents($path))) {
+        $document = $fm->parse($contents);
+        $frontmatter = $document->getData();
+    }
+
+    $chapter = $section = '';
+
     // We check for chapter--section.md format
-    $chapter = '';
-    $section = $file;
-    if (($parts = explode('--', $section)) && count($parts) > 1) {
+    if (($parts = explode('--', $file)) && count($parts) > 1) {
         $chapter = array_shift($parts);
         $section = implode('', $parts);
     }
 
+    // Superscede with frontmatter.
+    $chapter = $g->get($frontmatter, 'chapter', $chapter);
+    $section = $g->get($frontmatter, 'section', $section);
+    $title = $g->get($frontmatter, 'title', clean_title($file));
+
     // In the top level there is no chapter indication.
-    if (path_is_section($section)) {
-        $info[pathinfo($section, PATHINFO_FILENAME)] = array(
+    if (path_is_section($file)) {
+        $info[pathinfo($file, PATHINFO_FILENAME)] = array(
             'file'   => $file,
-            'title'  => clean_title($section),
+            'title'  => $title,
             'parent' => $chapter,
+            'weight' => $g->get($frontmatter, 'sort'),
         );
     }
 

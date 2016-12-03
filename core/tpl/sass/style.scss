@@ -160,3 +160,29 @@ iframe {
   margin: 0;
   @extend pre;
 }
+
+a,
+.tipue_search_content_url a {
+  color: #4183C4;
+  text-decoration: underline;
+  &:hover {
+    color: inherit;
+    text-decoration: underline;;
+  }
+}
+
+
+
+#tipue_search_input,
+#tipue_search_warning,
+#tipue_search_results_count,
+.tipue_search_content_title,
+.tipue_search_content_url,
+.tipue_search_content_text,
+.tipue_search_content_debug,
+#tipue_search_foot_boxes {
+  font: inherit;
+}
+.tipue_search_content_title {
+  font-size: 1.5em;
+}
