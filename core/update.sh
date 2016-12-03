@@ -88,11 +88,11 @@ cd "$ROOT"
 # Update the core files
 docs_update="$ROOT/tmp/loft_docs-master/"
 
-cp -v "$docs_update/README.md" "$ROOT/"
-cp -v "$docs_update/core-version.info" "$ROOT/"
+cp "$docs_update/README.md" "$ROOT/"
+cp "$docs_update/core-version.info" "$ROOT/"
 
 # Update all of core
-rsync -av --delete "$docs_update/core/" "$ROOT/core/" --exclude=Markdown.pl
+rsync -a --delete "$docs_update/core/" "$ROOT/core/" --exclude=Markdown.pl
 
 ## Allow the incoming update to post messages
 get_version
