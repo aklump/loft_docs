@@ -88,18 +88,18 @@ cd "$ROOT"
 # Update the core files
 docs_update="$ROOT/tmp/loft_docs-master/"
 
-#cp -v "$docs_update/README.md" "$ROOT/"
-#cp -v "$docs_update/core-version.info" "$ROOT/"
+cp -v "$docs_update/README.md" "$ROOT/"
+cp -v "$docs_update/core-version.info" "$ROOT/"
 
 # Update all of core
-#rsync -av --delete "$docs_update/core/" "$ROOT/core/" --exclude=Markdown.pl
+rsync -av --delete "$docs_update/core/" "$ROOT/core/" --exclude=Markdown.pl
 
-#rm -rf "$ROOT/tmp"
+rm -rf "$ROOT/tmp"
 
+get_version
 echo_green "Updated complete"
 
 # Warnings about breaking changes.
-get_version
-if [ "$get_version_return" == "0.8" ]; then
+if [ "${get_version_return:0:3}" == "0.8" ]; then
     echo_yellow "Review CHANGELOG.txt for breaking changes in version 0.8"
 fi
