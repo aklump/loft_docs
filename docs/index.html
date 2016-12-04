@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Index</title>
+    <link href="search/tipuesearch.css" rel="stylesheet">
+    <style type="text/css" media="all">
+      @import url("style.css");
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="search/tipuesearch_content.js"></script>
+    <script src="search/tipuesearch_set.js"></script>
+    <script src="search/tipuesearch.min.js"></script>
+
+</head>
+
+<body class="page-index">
+<header>
+<div class="pager">
+  <a href="example.html" class="prev example">&laquo;An Example Page & Image</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="README.html" class="next README">Overview of Loft Docs&raquo;</a>
+</div>
+
+</header>
+
+<div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+<h1>Index</h1>
+<div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<ul class="index"><li><a href="README.html">Overview of Loft Docs</a></li>
+<li><a href="CHANGELOG.html">Changelog</a></li>
+<li><a href="ld--drupal.html">Drupal Integration</a></li>
+<li><a href="ld--frontmatter.html">Frontmatter and How to Use</a></li>
+<li><a href="ld--hooks.html">Using pre/post hooks</a></li>
+<li><a href="ld--iframes.html">Using iFrames</a></li>
+<li><a href="ld--index.html">Table of Contents/Indexing</a></li>
+<li><a href="ld--install.html">Installation</a></li>
+<li><a href="ld--search.html">Integrating search</a></li>
+<li><a href="ld--theming.html">Custom Theming the Website Version</a></li>
+<li><a href="ld--todos.html">The TODO list feature</a></li>
+<li><a href="md_extra.html">Markdown Extra</a></li>
+<li><a href="mediawiki.html">Level One</a></li>
+<li><a href="example.html">An Example Page & Image</a></li></ul>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>  
+</div>
+
+<footer>
+<div class="pager">
+  <a href="example.html" class="prev example">&laquo;An Example Page & Image</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="README.html" class="next README">Overview of Loft Docs&raquo;</a>
+</div>
+
+
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.8.9 &bull; Last Updated: Sun, 04 Dec 2016 12:17:29 -0800</p>
+  </div>
+</footer>
+
+<script>
+$(document).ready(function() {
+  $('#tipue_search_input').tipuesearch();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+    "chapters": [],
+    "sections": [
+        {
+            "id": "_tasklist",
+            "file": "_tasklist.md",
+            "title": "All Todo Items",
+            "sort": 1000
+        },
+        {
+            "id": "welcome",
+            "title": "Welcome to Loft Docs",
+            "file": "welcome.md",
+            "sort": 0
+        }
+    ],
+    "settings": {
+        "search": "tipuesearch"
+    }
+}
