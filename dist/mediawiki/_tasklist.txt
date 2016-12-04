@@ -1,6 +1,0 @@
-=Tasklist=
-
-<pre>- [ ] welcome: Recompile your docs.
-- [ ] welcome: Add markdown files to `source`
-- [ ] welcome: Review and modify `core-config.sh` as needed for your situation.
-</pre>
