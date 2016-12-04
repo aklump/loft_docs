@@ -7,4 +7,4 @@ if [ "${get_version_return:0:3}" == "0.8" ]; then
 fi
 
 # Delete auto-generated.outline.json from source because it's now called outline.auto.inc as of 0.8.10
-test -f "docs_source_dir/auto-generated.outline.json" && rm "docs_source_dir/auto-generated.outline.json"
+test -f "$docs_source_dir/auto-generated.outline.json" && rm "$docs_source_dir/auto-generated.outline.json"
