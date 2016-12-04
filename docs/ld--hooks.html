@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Using pre/post hooks</title>
+    <link href="search/tipuesearch.css" rel="stylesheet">
+    <style type="text/css" media="all">
+      @import url("style.css");
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="search/tipuesearch_content.js"></script>
+    <script src="search/tipuesearch_set.js"></script>
+    <script src="search/tipuesearch.min.js"></script>
+
+</head>
+
+<body class="page-ld--hooks">
+<header>
+<div class="pager">
+  <a href="ld--frontmatter.html" class="prev ld--frontmatter">&laquo;Frontmatter and How to Use</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="ld--iframes.html" class="next ld--iframes">Using iFrames&raquo;</a>
+</div>
+
+</header>
+
+<div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+<h1>Using pre/post hooks</h1>
+<div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+
+<p>You may specify one or more php or shell scripts to be called both before and/or after compiling using the <code>pre_hooks</code> and <code>post_hooks</code> config options.  The paths you present are relative to <code>{root}/hooks</code>.  Compilation pauses until each script is finished.</p>
+
+<pre><code>pre_hooks = "pre_compile.sh pre_compile.php"
+post_hooks = "post_compile.sh post_compile.php"
+</code></pre>
+
+<p><strong>Scripts must be located in <code>{root}/hooks</code>.</strong></p>
+
+<p>The scripts will receive the following arguments:</p>
+
+<table>
+<thead>
+<tr>
+  <th>php arg</th>
+  <th>bash arg</th>
+  <th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>$argv[1]</td>
+  <td>$1</td>
+  <td>The absolute filepath to the <code>source/</code> directory</td>
+</tr>
+<tr>
+  <td>$argv[2]</td>
+  <td>$2</td>
+  <td>The absolute filepath to the <code>core/</code> directory</td>
+</tr>
+<tr>
+  <td>$argv[3]</td>
+  <td>$3</td>
+  <td>The absolute filepath to the version file</td>
+</tr>
+<tr>
+  <td>$argv[4]</td>
+  <td>$4</td>
+  <td>The absolute filepath to the root_dir directory</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>  
+</div>
+
+<footer>
+<div class="pager">
+  <a href="ld--frontmatter.html" class="prev ld--frontmatter">&laquo;Frontmatter and How to Use</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="ld--iframes.html" class="next ld--iframes">Using iFrames&raquo;</a>
+</div>
+
+
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.8.10 &bull; Last Updated: Sun, 04 Dec 2016 12:21:52 -0800</p>
+  </div>
+</footer>
+
+<script>
+$(document).ready(function() {
+  $('#tipue_search_input').tipuesearch();
+});
+</script>
+
+</body>
+</html>
+

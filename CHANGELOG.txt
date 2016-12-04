@@ -1,5 +1,10 @@
                                    Changelog
 
+0.8.10
+
+     * API CHANGE: auto-generated.outline.json is now called
+       outline.auto.json
+
 ## 0.8
 
      * BREAKING CHANGE: The paths in the config var README are now

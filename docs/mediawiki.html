@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Level One</title>
+    <link href="search/tipuesearch.css" rel="stylesheet">
+    <style type="text/css" media="all">
+      @import url("style.css");
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="search/tipuesearch_content.js"></script>
+    <script src="search/tipuesearch_set.js"></script>
+    <script src="search/tipuesearch.min.js"></script>
+
+</head>
+
+<body class="page-mediawiki">
+<header>
+<div class="pager">
+  <a href="md_extra.html" class="prev md_extra">&laquo;Markdown Extra</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="example.html" class="next example">An Example Page & Image&raquo;</a>
+</div>
+
+</header>
+
+<div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+<h1>Level One</h1>
+<div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+
+<p><em>Italic text</em></p>
+
+<p><strong>Bold text</strong></p>
+
+<p><strong><em>Bold and Italic text</em></strong></p>
+
+<h2>Level Two</h2>
+
+<ol>
+<li>do</li>
+<li>re</li>
+<li>mi</li>
+<li>fa</li>
+</ol>
+
+<h3>Level Three</h3>
+
+<ul>
+<li>uno</li>
+<li>dos</li>
+<li>tres</li>
+<li>quatro</li>
+</ul>
+
+<h4>Level Four</h4>
+
+<p>What does it do with <code>&lt;?php echo 'this text';?&gt;</code>?</p>
+
+<pre><code>10 print 'hello'
+20 goto 10
+</code></pre>
+
+<h5>Level Five</h5>
+
+<p><a href="http://www.google.com">google</a></p>
+
+<h6>Level Six</h6>
+
+
+<h2>Sites Folder</h2>
+
+<ol>
+<li>Use WhatSize appt o locate larger <code>~Sites/*</code></li>
+<li>Go through and replace older <code>.screenflow</code> movies with their derivative <code>.mov</code> files</li>
+<li>Delete the contents of the files folders on old sites that are no longer active</li>
+<li>Go through and zip legacy folders</li>
+<li>Remove older database snapshots</li>
+</ol>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>  
+</div>
+
+<footer>
+<div class="pager">
+  <a href="md_extra.html" class="prev md_extra">&laquo;Markdown Extra</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="example.html" class="next example">An Example Page & Image&raquo;</a>
+</div>
+
+
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.8.10 &bull; Last Updated: Sun, 04 Dec 2016 12:21:54 -0800</p>
+  </div>
+</footer>
+
+<script>
+$(document).ready(function() {
+  $('#tipue_search_input').tipuesearch();
+});
+</script>
+
+</body>
+</html>
+

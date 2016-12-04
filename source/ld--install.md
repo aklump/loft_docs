@@ -1,0 +1,49 @@
+# Installation
+
+How you incorporate Loft Docs is up to you, but there are two scenarios which will be described here, with suggested installation instructions.
+
+## Quick Start
+
+1. Copy the contents of `/dist` into your project.
+1. From within `dist`, in the shell, run `./core/compile.sh`.
+1. Open `dist/public_html/welcome.html` and follow instructions.
+
+## Stand-alone implementation
+
+If your goal is simply to document something, and these files will not integrate into another larger project (think git repo), then this is a stand-alone installation.  This would also be the case where you're using Loft Docs to build a website.  Loft Docs' root is the root of your project.  Here's the minimum file structure of a stand-alone implementation:
+
+    /.gitignore
+    /core
+    /core-config.sh
+    /core-version.info
+    /public_html
+    /source
+    /stand_alone.info
+
+In this scenario the version string of your project is contained in `/stand_alone.info` which is one level above Loft Docs' core, and so your config file would contain this line:
+
+    version_file = "../web_package.info"
+
+Or, for greater flexibility (so long as you've only one `.info` file), it could be:
+
+    version_file = "../*.info"
+
+If you were to host this as a website, `public_html` is your web root.    
+
+## Integrated implementation
+
+If you are installing Loft Docs _inside_ the existing code of a larger project, then this constitutes an integrated installation.  Loft Docs is not the root of the larger project, but a sub-folder, maybe you call it `docs` and store it in the root of the other project.
+
+    /docs/core
+    /other_project_file1
+    /other_project_file2
+    /other_project_file3
+    /web_package.info
+
+In this scenario the version string of your project is contained in `/web_package.info` which is one levels above Loft Docs, and so your config file would contain this line:
+
+    version_file = "../web_package.info"
+
+Or, for greater flexibility (so long as you've only one `.info` file), it could be:
+
+    version_file = "../*.info"
