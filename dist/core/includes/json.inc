@@ -25,7 +25,8 @@ if (!empty($json_file)) {
     );
 
     // If we have the merge file, merge it in.
-    if (!empty($merge_file) && ($merge_json = file_get_contents($merge_file))) {
+    $merge_json = null;
+    if (!empty($merge_file) && file_exists($merge_file) && ($merge_json = file_get_contents($merge_file))) {
         if (!($merge_json = json_decode($merge_json, true))) {
             echo "merge file: $merge_file contains invalid json";
         }
