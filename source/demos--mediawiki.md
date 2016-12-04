@@ -1,3 +1,6 @@
+---
+title: Test for MediaWiki
+---
 # Level One
 *Italic text*
 
