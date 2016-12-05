@@ -89,6 +89,7 @@ function realpath() {
 function load_config() {
   if [ ! -f core-config.sh ]; then
     echo_yellow "Installing..."
+    cp "$CORE/install/core-config.sh" "$docs_root_dir/"
     installing=1
   fi
 
@@ -115,18 +116,14 @@ function load_config() {
   docs_outline_auto='outline.auto.json'
   docs_outline_merge='outline.merge.json'
 
-  #Determine which is our tpl dir
+  # Determine which is our tpl dir
   docs_tpl_dir='core/tpl'
   if [ -d 'tpl' ]; then
     docs_tpl_dir='tpl'
   fi
 
   # Installation steps
-  if [ "$installing" -eq 1 ]; then
-    test -d "$docs_source_path" || mkdir "$docs_source_path"
-    cp "$CORE/install/core-config.sh" "$docs_root_dir/"
-    rsync -a "$CORE/install/source/" "$docs_source_path/"
-  fi
+  test -d "$docs_source_path/" || rsync -a "$CORE/install/source/" "$docs_source_path/"
 
   #
   #
