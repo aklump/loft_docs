@@ -35,12 +35,20 @@ for format in "${docs_disabled[@]}"; do
   fi
 done
 
-# Empty out dirs
-for var in "${dirs_to_empty[@]}"; do
-  if [ "$var" ] && [ -d "$var" ]; then
-    rm -rf $var;
+# Empty out all files one level deep; do not touch folders as these may contain assets like images and videos and we don't want to delete them if not needed.  This would cause a longer compile times.  The folders will be rsynced later on to handle the deletes.
+for dir in "${dirs_to_empty[@]}"; do
+  if [ "$dir" ] && [ -d "$dir" ]; then
+    find $dir -type f ! -name '*.git*' ! -name '*.htaccess' -maxdepth 1 -exec rm {} \;
   fi
 done
+
+# If no dirs, copy the patterns into place from the patterns dir.  This is important after --clean
+test -e "$docs_root_dir/$docs_website_dir" || rsync -a  "$CORE/install/patterns/public_html/" "$docs_root_dir/$docs_website_dir"
+test -e "$docs_root_dir/$docs_html_dir" || rsync -a "$CORE/install/patterns/html/" "$docs_root_dir/$docs_html_dir"
+test -e "$docs_root_dir/$docs_mediawiki_dir" || rsync -a    "$CORE/install/patterns/mediawiki/" "$docs_root_dir/$docs_mediawiki_dir"
+test -e "$docs_root_dir/$docs_text_dir" || rsync -a "$CORE/install/patterns/text/" "$docs_root_dir/$docs_text_dir"
+test -e "$docs_root_dir/$docs_drupal_dir" || rsync -a   "$CORE/install/patterns/advanced_help/"
+test -e "$docs_root_dir/$docs_doxygene_dir" || rsync -a "$CORE/install/patterns/doxygene/" "$docs_root_dir/$docs_doxygene_dir"
 
 # Assert dir exists if not create it and parents
 for path in "${dirs[@]}"; do
@@ -51,14 +59,6 @@ for path in "${dirs[@]}"; do
   fi
   test -d "$path" || mkdir -p "$path"
 done
-
-# Copy the patterns into place to be ready to receive files
-rsync -a "$CORE/install/patterns/public_html/" "$docs_root_dir/$docs_website_dir"
-rsync -a "$CORE/install/patterns/html/" "$docs_root_dir/$docs_html_dir"
-rsync -a "$CORE/install/patterns/mediawiki/" "$docs_root_dir/$docs_mediawiki_dir"
-rsync -a "$CORE/install/patterns/text/" "$docs_root_dir/$docs_text_dir"
-rsync -a "$CORE/install/patterns/advanced_help/" "$docs_root_dir/$docs_drupal_dir"
-rsync -a "$CORE/install/patterns/doxygene/" "$docs_root_dir/$docs_doxygene_dir"
 
 # Delete the text directory if no lynx
 if [ "$docs_text_enabled" -eq 0 ]; then
@@ -127,10 +127,16 @@ for file in $docs_source_dir/*; do
 
   elif [ -d "$file" ]; then
     basename=${file##*/}
-    echo "Copying dir $basename..."
-    rsync -ua "$docs_source_dir/$basename/" "$docs_drupal_dir/$basename/"
-    rsync -ua "$docs_source_dir/$basename/" "$docs_website_dir/$basename/"
-    rsync -ua "$docs_source_dir/$basename/" "$docs_html_dir/$basename/"
+    echo "Copying directory $basename..."
+    if ! is_disabled "drupal"; then
+        rsync -ua --delete "$docs_source_dir/$basename/" "$docs_drupal_dir/$basename/"
+    fi
+    if ! is_disabled "website"; then
+        rsync -ua --delete "$docs_source_dir/$basename/" "$docs_website_dir/$basename/"
+    fi
+    if ! is_disabled "html"; then
+        rsync -ua --delete "$docs_source_dir/$basename/" "$docs_html_dir/$basename/"
+    fi
   fi
 done
 
