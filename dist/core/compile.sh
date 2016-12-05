@@ -35,11 +35,6 @@ for format in "${docs_disabled[@]}"; do
   fi
 done
 
-# If source does not exist then copy core example
-if [ ! -d "$docs_source_dir" ]; then
-  rsync -a "$CORE/patterns/source/" $docs_source_dir/
-fi
-
 # Empty out dirs
 for var in "${dirs_to_empty[@]}"; do
   if [ "$var" ] && [ -d "$var" ]; then
@@ -58,12 +53,12 @@ for path in "${dirs[@]}"; do
 done
 
 # Copy the patterns into place to be ready to receive files
-rsync -a "$CORE/patterns/public_html/" "$docs_root_dir/$docs_website_dir"
-rsync -a "$CORE/patterns/html/" "$docs_root_dir/$docs_html_dir"
-rsync -a "$CORE/patterns/mediawiki/" "$docs_root_dir/$docs_mediawiki_dir"
-rsync -a "$CORE/patterns/text/" "$docs_root_dir/$docs_text_dir"
-rsync -a "$CORE/patterns/advanced_help/" "$docs_root_dir/$docs_drupal_dir"
-rsync -a "$CORE/patterns/doxygene/" "$docs_root_dir/$docs_doxygene_dir"
+rsync -a "$CORE/install/patterns/public_html/" "$docs_root_dir/$docs_website_dir"
+rsync -a "$CORE/install/patterns/html/" "$docs_root_dir/$docs_html_dir"
+rsync -a "$CORE/install/patterns/mediawiki/" "$docs_root_dir/$docs_mediawiki_dir"
+rsync -a "$CORE/install/patterns/text/" "$docs_root_dir/$docs_text_dir"
+rsync -a "$CORE/install/patterns/advanced_help/" "$docs_root_dir/$docs_drupal_dir"
+rsync -a "$CORE/install/patterns/doxygene/" "$docs_root_dir/$docs_doxygene_dir"
 
 # Delete the text directory if no lynx
 if [ "$docs_text_enabled" -eq 0 ]; then
@@ -90,7 +85,6 @@ for file in $docs_source_dir/*; do
     if echo "$file" | grep -q '.md$'; then
       basename=$(echo $basename | sed 's/\.md$//g').html
       
-      # This uses the perl compiler
       $docs_php "$CORE/markdown.php" "$file" "$docs_tmp_dir/$basename"
 
     # Css files pass through to the website and html dir
