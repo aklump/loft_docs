@@ -85,7 +85,6 @@ for file in $docs_source_dir/*; do
     if echo "$file" | grep -q '.md$'; then
       basename=$(echo $basename | sed 's/\.md$//g').html
       
-      # This uses the perl compiler
       $docs_php "$CORE/markdown.php" "$file" "$docs_tmp_dir/$basename"
 
     # Css files pass through to the website and html dir
