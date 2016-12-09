@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Installation</title>
+    <link href="search/tipuesearch.css" rel="stylesheet">
+    <style type="text/css" media="all">
+      @import url("style.css");
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="search/tipuesearch_content.js"></script>
+    <script src="search/tipuesearch_set.js"></script>
+    <script src="search/tipuesearch.min.js"></script>
+    <script src="js/core.js"></script>
+
+</head>
+
+<body class="page-ld--install">
+<header>
+<div class="pager">
+  <a href="ld--index.html" class="prev ld--index">&laquo;Table of Contents/Indexing</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="ld--roadmap.html" class="next ld--roadmap">Roadmap&raquo;</a>
+</div>
+
+</header>
+
+<div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+<h1>Installation</h1>
+<div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+
+<p>How you incorporate Loft Docs is up to you, but there are two scenarios which will be described here, with suggested installation instructions.</p>
+
+<h2>Quick Start</h2>
+
+<ol>
+<li>Copy the contents of <code>/dist</code> into your project.</li>
+<li>From within <code>dist</code>, in the shell, run <code>./core/compile.sh</code>.</li>
+<li>Open <code>dist/public_html/welcome.html</code> and follow instructions.</li>
+</ol>
+
+<h2>Stand-alone implementation</h2>
+
+<p>If your goal is simply to document something, and these files will not integrate into another larger project (think git repo), then this is a stand-alone installation.  This would also be the case where you're using Loft Docs to build a website.  Loft Docs' root is the root of your project.  Here's the minimum file structure of a stand-alone implementation:</p>
+
+<pre><code>/.gitignore
+/core
+/core-config.sh
+/core-version.info
+/public_html
+/source
+/stand_alone.info
+</code></pre>
+
+<p>In this scenario the version string of your project is contained in <code>/stand_alone.info</code> which is one level above Loft Docs' core, and so your config file would contain this line:</p>
+
+<pre><code>version_file = "../web_package.info"
+</code></pre>
+
+<p>Or, for greater flexibility (so long as you've only one <code>.info</code> file), it could be:</p>
+
+<pre><code>version_file = "../*.info"
+</code></pre>
+
+<p>If you were to host this as a website, <code>public_html</code> is your web root.</p>
+
+<h2>Integrated implementation</h2>
+
+<p>If you are installing Loft Docs <em>inside</em> the existing code of a larger project, then this constitutes an integrated installation.  Loft Docs is not the root of the larger project, but a sub-folder, maybe you call it <code>docs</code> and store it in the root of the other project.</p>
+
+<pre><code>/docs/core
+/other_project_file1
+/other_project_file2
+/other_project_file3
+/web_package.info
+</code></pre>
+
+<p>In this scenario the version string of your project is contained in <code>/web_package.info</code> which is one levels above Loft Docs, and so your config file would contain this line:</p>
+
+<pre><code>version_file = "../web_package.info"
+</code></pre>
+
+<p>Or, for greater flexibility (so long as you've only one <code>.info</code> file), it could be:</p>
+
+<pre><code>version_file = "../*.info"
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>  
+</div>
+
+<footer>
+<div class="pager">
+  <a href="ld--index.html" class="prev ld--index">&laquo;Table of Contents/Indexing</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="ld--roadmap.html" class="next ld--roadmap">Roadmap&raquo;</a>
+</div>
+
+
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.8.15 &bull; Last Updated: Fri, 09 Dec 2016 15:55:01 -0800</p>
+  </div>
+</footer>
+
+<script>
+$(document).ready(function() {
+  $('#tipue_search_input').tipuesearch();
+});
+</script>
+
+</body>
+</html>
+
