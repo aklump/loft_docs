@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Changelog</title>
+    <link href="search/tipuesearch.css" rel="stylesheet">
+    <style type="text/css" media="all">
+      @import url("style.css");
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="search/tipuesearch_content.js"></script>
+    <script src="search/tipuesearch_set.js"></script>
+    <script src="search/tipuesearch.min.js"></script>
+    <script src="js/core.js"></script>
+
+</head>
+
+<body class="page-changelog">
+<header>
+<div class="pager">
+  <a href="README.html" class="prev README">&laquo;Overview of Loft Docs</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="demos--md_extra.html" class="next demos--md_extra">Markdown Extra&raquo;</a>
+</div>
+
+</header>
+
+<div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+<h1>Changelog</h1>
+<div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+
+<h2>0.8.10</h2>
+
+<ul>
+<li>API CHANGE: <code>auto-generated.outline.json</code> is now called <code>outline.auto.json</code></li>
+</ul>
+
+<h2>0.8</h2>
+
+<ul>
+<li>BREAKING CHANGE: The paths in the config var <em>README</em> are now relative to the directory that contains <code>core-config.sh</code>, not the <code>source</code> folder.</li>
+</ul>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>  
+</div>
+
+<footer>
+<div class="pager">
+  <a href="README.html" class="prev README">&laquo;Overview of Loft Docs</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="demos--md_extra.html" class="next demos--md_extra">Markdown Extra&raquo;</a>
+</div>
+
+
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.8.16 &bull; Last Updated: Sat, 10 Dec 2016 09:36:51 -0800</p>
+  </div>
+</footer>
+
+<script>
+$(document).ready(function() {
+  $('#tipue_search_input').tipuesearch();
+});
+</script>
+
+</body>
+</html>
+

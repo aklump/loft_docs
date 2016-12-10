@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Overview of Loft Docs</title>
+    <link href="search/tipuesearch.css" rel="stylesheet">
+    <style type="text/css" media="all">
+      @import url("style.css");
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="search/tipuesearch_content.js"></script>
+    <script src="search/tipuesearch_set.js"></script>
+    <script src="search/tipuesearch.min.js"></script>
+    <script src="js/core.js"></script>
+
+</head>
+
+<body class="page-readme">
+<header>
+<div class="pager">
+  <a href="index.html" class="prev index">&laquo;Index</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="CHANGELOG.html" class="next CHANGELOG">Changelog&raquo;</a>
+</div>
+
+</header>
+
+<div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+<h1>Overview of Loft Docs</h1>
+<div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+
+<p><strong>Loft Docs is the last project documentation tool you'll ever need.</strong>  Loft Docs provides one central place to manage your documentation allowing you to compose in Markdown and have the benefits of simultaneous output to the following formats:</p>
+
+<ol>
+<li>An indexed, multi-page, stand-alone, searchable (via js) website</li>
+<li>HTML</li>
+<li>Plaintext</li>
+<li>MediaWiki</li>
+<li>Advanced Help for Drupal</li>
+</ol>
+
+<p>Gone are the days of having to update all your different documentation locations!</p>
+
+<p><em>For installation instructions <a href="#install">scroll down</a>.</em></p>
+
+<h2>Features</h2>
+
+<ol>
+<li>Tasklist todo item aggregation and sorting.</li>
+<li>Output to many popular formats.</li>
+<li>Compilation hooks for before and after.</li>
+<li>Custom <a href="#theming">website theming</a>.</li>
+<li>Searchable pages (in the website output)</li>
+</ol>
+
+<h2>As a Reader</h2>
+
+<ol>
+<li>To read documentation you probably just want to load <code>public_html/index.html</code> in a browser and proceed from there.</li>
+<li>Plaintext documentation may also be available in <code>text/</code>.</li>
+<li>MediaWiki documentation if supported will be found in <code>mediawiki/</code>.</li>
+</ol>
+
+<h2>As an Author</h2>
+
+<ol>
+<li><p>You will concern yourself with the <code>/source</code> directory, creating your source markdown files here.  This is the source of all documentation.</p></li>
+<li><p>Only files in the <code>source</code> directory should  be edited.  All other files get created during compiling.</p></li>
+<li><p>Images can be added to <code>source/images</code>.</p></li>
+<li><p>Use relative links when linking to other pages inside <code>source</code>.</p></li>
+<li><p>Use absolute links when linking to anything outside of <code>source</code>.</p></li>
+</ol>
+
+<h2>As an Admin/Content Manager</h2>
+
+<ol>
+<li>You will need to read about <a href="#compiling">compiling</a> below; this is the step needed to generate derivative documentation from <code>/source</code>.</li>
+</ol>
+
+<h3>Linking to Other Help Pages</h3>
+
+<p>You should do the following to link internally to <code>source/page2.html</code></p>
+
+<pre><code>&lt;a href="page2.html"&gt;Link to Next Page&lt;/a&gt;
+</code></pre>
+
+<h2>As a Developer</h2>
+
+<p>If you are implementing any hooks and you need component or include files, which compile to markdown files in <code>/source</code>:</p>
+
+<ol>
+<li>Put these component files in <code>/parts</code> not in <code>/source</code>.</li>
+<li>Make sure the generated files begin with the underscore, e.g., <code>_my_compiled_file.md</code>.  That will indicate these files are compiled and can be deleted using <code>core/clean.sh</code>.</li>
+</ol>
+
+<p><a name="compiling"></a></p>
+
+<h2>Compiling</h2>
+
+<p>After a round of changes to the files found in <code>/source</code>, you will need to export or <em>compile</em> your documentation.</p>
+
+<h3>How to compile</h3>
+
+<p>Each time you want to update your documentation files, after modifying files in <code>source</code> you need to execute <code>compile.sh</code> from bash, make sure you are in the root directory of this package.</p>
+
+<pre><code>./core/compile.sh
+</code></pre>
+
+<h3>Defining the documentation version</h3>
+
+<p>Some of the templates utilize a version string.  How this is provided is the the next topic covered.</p>
+
+<p>If no version can be found the string will always be 1.0</p>
+
+<p><strong>By default, Loft Docs will look for <code>*.info</code>, in the directory above <code>core/</code>.</strong>  If this is not working or desired then you can specify a path in <em>core-config.sh</em> as such:</p>
+
+<pre><code>version_file = "/some/absolute/path/version.info"
+</code></pre>
+
+<p>There is a built in a version hook that can sniff a version from .info and .json files and that may suffice.  If not read on about a custom version hook...</p>
+
+<p><em>A version hook is a php or shell script that echos the version string of your documentation</em>.  These version hook script receives the same arguments as the pre/post hooks.  You define your version hook in config.  See <code>version_hook.php</code> as an implementation example.  Only one file is allowed in the declaration; either php or shell.</p>
+
+<pre><code>version_hook = "version_hook.php"
+</code></pre>
+
+<h3>Removing Compiled Files</h3>
+
+<p>You may delete all compiled files using the <em>clean</em> command.</p>
+
+<pre><code>./core/clean.sh
+</code></pre>
+
+<h3>Requirements</h3>
+
+<ol>
+<li>Compiling uses <a href="http://michelf.ca/projects/php-markdown/">Markdown Php</a>, which is included in this distribution.</li>
+<li>Output of <code>.txt</code> files requires that <a href="http://lynx.isc.org/">Lynx</a> be installed.</li>
+</ol>
+
+<h3>How to install</h3>
+
+<ol>
+<li><p>Run the compile command, the first time it is runned, installation takes place.</p>
+
+<pre><code>./core/compile.sh
+</code></pre></li>
+<li><p>The necessary dirs will be created including these configuration file(s):</p>
+
+<pre><code>core-config.sh
+</code></pre></li>
+<li><p>Open and edit <code>core-config.sh</code>. <strong>You should not delete this file once it's been created, as it is the flag that installation has taken place!</strong> Compiling without this file may lead to some/all of your files being deleted.</p></li>
+<li>Enter the name of the drupal module this will be used for, if applicable.</li>
+<li>Enter the credentials for the drupal site if using iframes.</li>
+<li>Override the php path if needed; php must have the curl library installed.</li>
+<li>Run <code>./core/compile.sh</code> once more to update the configuration.</li>
+<li>Test the installation by visiting <code>public_html/index.html</code> in a browser, this is the webpage output and should show you a few example pages.</li>
+<li>Installation is complete; you may now begin documenting in <code>source</code>. You most likely should first delete the example files in <code>source</code>.</li>
+</ol>
+
+<h3>How to install Lynx on Mac</h3>
+
+<p>Here's a quick way to get Lynx on a mac...</p>
+
+<ol>
+<li>Download this application <a href="http://habilis.net/lynxlet/">http://habilis.net/lynxlet/</a></li>
+<li>In shell type <code>cd /usr/bin</code></li>
+<li>Followed by <code>sudo ln -s /Applications/Lynxlet.app/Contents/Resources/lynx/bin/lynx</code></li>
+<li>Test your installation with this command <code>lynx</code>; you should see the lynx browser show up.</li>
+</ol>
+
+<h4>or with homebrew</h4>
+
+<ol>
+<li><code>brew install lynx</code></li>
+</ol>
+
+<h2>Core update</h2>
+
+<p>Loft Docs provides a core update feature as seen below.  From the root directory type:</p>
+
+<pre><code>./core/update.sh
+</code></pre>
+
+<h2>Rationale</h2>
+
+<p>The rationalle behind this project is that it is easy to write markdown files, and it is easy to share a static html based documentation file, and it is easy to use Drupal Advanced Help module, and it is easy to version your documentation in git; but to do all this together at once… was NOT EASY.</p>
+
+<p>But now with <em>Loft Docs</em>... it's easy.</p>
+
+<h2>Contact</h2>
+
+<ul>
+<li><strong>In the Loft Studios</strong></li>
+<li>Aaron Klump - Developer</li>
+<li>PO Box 29294 Bellingham, WA 98228-1294</li>
+<li><em>aim</em>: theloft101</li>
+<li><em>skype</em>: intheloftstudios</li>
+<li><em>d.o</em>: aklump</li>
+<li><a href="http://www.InTheLoftStudios.com">http://www.InTheLoftStudios.com</a></li>
+</ul>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>  
+</div>
+
+<footer>
+<div class="pager">
+  <a href="index.html" class="prev index">&laquo;Index</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="CHANGELOG.html" class="next CHANGELOG">Changelog&raquo;</a>
+</div>
+
+
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.8.16 &bull; Last Updated: Sat, 10 Dec 2016 09:36:51 -0800</p>
+  </div>
+</footer>
+
+<script>
+$(document).ready(function() {
+  $('#tipue_search_input').tipuesearch();
+});
+</script>
+
+</body>
+</html>
+
