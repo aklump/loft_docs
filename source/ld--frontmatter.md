@@ -9,7 +9,7 @@ As of version 0.8 YAML front matter is supported in source files.  This is used 
 | sort | The order the page appears in the index and compilations |
 | chapter | The id of the chapter; not the chapter title, mind you. |
 | tags | Search tags, space separated |
-| noindex | Set this to true and the file will not be added to the index automatically |
+| noindex | Set this to true to ignore or exclude a file from the index |
 
 Read more about [Front Matter](http://assemble.io/docs/YAML-front-matter.html)
 
