@@ -1,30 +1,28 @@
-
 <!DOCTYPE html>
 
 <html>
 <head>
-    <title>Index</title>
-    <link href="search/tipuesearch.css" rel="stylesheet">
-    <style type="text/css" media="all">
-      @import url("style.css");
-    </style>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="search/tipuesearch_content.js"></script>
-    <script src="search/tipuesearch_set.js"></script>
-    <script src="search/tipuesearch.min.js"></script>
-    <script src="js/core.js"></script>
+  <title></title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <style type="text/css" media="all">
+    @import url("style.css");
+  </style>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script src="js/core.js"></script>
 
 </head>
 
-<body class="page-index">
+<body class="page--index">
 <header>
-<div class="pager">
-  <a href="demos--example.html" class="prev demos--example">&laquo;An Example Page & Image</a>
+  <div class="pager">
+  <a href="demos--example.html" class="prev demos--example">&laquo;An Example Page &amp; Image</a>
   <a href="index.html" class="index">Index</a>
-  <a href="README.html" class="next README">Overview of Loft Docs&raquo;</a>
+  <a href="README.html" class="next readme">Overview of Loft Docs&raquo;</a>
 </div>
-
 </header>
 
 <div class="search__wrapper">
@@ -33,52 +31,54 @@
   </form>
 </div>
 
-<h1>Index</h1>
-<div class="breadcrumb"><a href="index.html">Index</a></div>
+  <h1>Index</h1>
 
-<section>
-
-<ul class="index"><li><a href="README.html">Overview of Loft Docs</a></li>
-<li><a href="CHANGELOG.html">Changelog</a></li>
-<li><a href="demos--md_extra.html">Markdown Extra</a></li>
-<li><a href="demos--mediawiki.html">Test for MediaWiki</a></li>
-<li><a href="demos--no-title.html">Demos  No Title</a></li>
-<li><a href="demos--title.html">The Sniffed Title</a></li>
-<li><a href="ld--drupal.html">Drupal Integration</a></li>
-<li><a href="ld--frontmatter.html">Frontmatter and How to Use</a></li>
-<li><a href="ld--hooks.html">Using pre/post hooks</a></li>
-<li><a href="ld--iframes.html">Using iFrames</a></li>
-<li><a href="ld--index.html">Table of Contents/Indexing</a></li>
-<li><a href="ld--install.html">Installation</a></li>
-<li><a href="ld--roadmap.html">Roadmap</a></li>
-<li><a href="ld--search.html">Integrating search</a></li>
-<li><a href="ld--theming.html">Custom Theming the Website Version</a></li>
-<li><a href="ld--todos.html">The TODO list feature</a></li>
-<li><a href="demos--example.html">An Example Page & Image</a></li></ul>
+<section><ul class="index">
+      <li><a href="README.html">Overview of Loft Docs</a></li>
+      <li><a href="CHANGELOG.html">Changelog</a></li>
+      <li><a href="demos--md_extra.html">Markdown Extra</a></li>
+      <li><a href="demos--mediawiki.html">Test for MediaWiki</a></li>
+      <li><a href="demos--no-title.html">Demos  No Title</a></li>
+      <li><a href="demos--title.html">The Sniffed Title</a></li>
+      <li><a href="ld--autocompile.html">Auto-compiling</a></li>
+      <li><a href="ld--compiling.html">Compiling</a></li>
+      <li><a href="ld--drupal.html">Drupal Integration</a></li>
+      <li><a href="ld--frontmatter.html">Frontmatter and How to Use</a></li>
+      <li><a href="ld--hooks.html">Using pre/post hooks</a></li>
+      <li><a href="ld--iframes.html">Using iFrames</a></li>
+      <li><a href="ld--index.html">Table of Contents/Indexing</a></li>
+      <li><a href="ld--install.html">Installation</a></li>
+      <li><a href="ld--installation.html">How to install</a></li>
+      <li><a href="ld--roadmap.html">Roadmap</a></li>
+      <li><a href="ld--search.html">Integrating search</a></li>
+      <li><a href="ld--theming.html">Custom Theming the Website Version</a></li>
+      <li><a href="ld--todos.html">The TODO list feature</a></li>
+      <li><a href="demos--example.html">An Example Page &amp; Image</a></li>
+  </ul>
 </section>
 
 <div class="search__results">
-  <div id="tipue_search_content"></div>  
+  <div id="tipue_search_content"></div>
 </div>
 
 <footer>
-<div class="pager">
-  <a href="demos--example.html" class="prev demos--example">&laquo;An Example Page & Image</a>
+  <div class="pager">
+  <a href="demos--example.html" class="prev demos--example">&laquo;An Example Page &amp; Image</a>
   <a href="index.html" class="index">Index</a>
-  <a href="README.html" class="next README">Overview of Loft Docs&raquo;</a>
+  <a href="README.html" class="next readme">Overview of Loft Docs&raquo;</a>
 </div>
-
-
+  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.8.17 &bull; Last Updated: Sat, 14 Jan 2017 09:17:42 -0800</p>
+    <p class="legaleeze center">Version: 0.8.17 &bull; Last Updated: Sun, 15 Jan 2017 21:31:53 -0800</p>
   </div>
 </footer>
 
 <script>
-$(document).ready(function() {
-  $('#tipue_search_input').tipuesearch();
-});
+  $(document).ready(function () {
+    $('#tipue_search_input').tipuesearch();
+  });
 </script>
 
 </body>
 </html>
+

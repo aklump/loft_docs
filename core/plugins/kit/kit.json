@@ -1,0 +1,9 @@
+{
+    "name": "Kit templates",
+    "machine": "kit",
+    "handlers": {
+        "file": "build.sh",
+        "pre": "pre.sh",
+        "post": "post.sh"
+    }
+}

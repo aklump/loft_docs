@@ -1,10 +1,11 @@
 /core/tpl/config.rb
 /core/tpl/style.scss
 /advanced_help/
-/doxygene/
 /html/
 /public_html/
 /kit/
 /text/
 /mediawiki/
 /my_pretend_module
+/core/cache
+/core/tmp

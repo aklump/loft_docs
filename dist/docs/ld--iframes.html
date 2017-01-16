@@ -1,30 +1,28 @@
-
 <!DOCTYPE html>
 
 <html>
 <head>
-    <title>Using iFrames</title>
-    <link href="search/tipuesearch.css" rel="stylesheet">
-    <style type="text/css" media="all">
-      @import url("style.css");
-    </style>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="search/tipuesearch_content.js"></script>
-    <script src="search/tipuesearch_set.js"></script>
-    <script src="search/tipuesearch.min.js"></script>
-    <script src="js/core.js"></script>
+  <title>Using iFrames</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <style type="text/css" media="all">
+    @import url("style.css");
+  </style>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script src="js/core.js"></script>
 
 </head>
 
-<body class="page-ld--iframes">
+<body class="page--ld--iframes">
 <header>
-<div class="pager">
+  <div class="pager">
   <a href="ld--hooks.html" class="prev ld--hooks">&laquo;Using pre/post hooks</a>
   <a href="index.html" class="index">Index</a>
   <a href="ld--index.html" class="next ld--index">Table of Contents/Indexing&raquo;</a>
 </div>
-
 </header>
 
 <div class="search__wrapper">
@@ -33,12 +31,10 @@
   </form>
 </div>
 
-<h1>Using iFrames</h1>
-<div class="breadcrumb"><a href="index.html">Index</a></div>
+  <h1>Using iFrames</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
 
-<section>
-
-<h3>iFrames</h3>
+<section><h3>iFrames</h3>
 
 <p>One of the cool features is that compiling will grab iframe source and render it directly into the html for offline viewing.  The way to do this is just to include an <code>iframe</code> tag in your source code like so:</p>
 
@@ -56,26 +52,25 @@
 </section>
 
 <div class="search__results">
-  <div id="tipue_search_content"></div>  
+  <div id="tipue_search_content"></div>
 </div>
 
 <footer>
-<div class="pager">
+  <div class="pager">
   <a href="ld--hooks.html" class="prev ld--hooks">&laquo;Using pre/post hooks</a>
   <a href="index.html" class="index">Index</a>
   <a href="ld--index.html" class="next ld--index">Table of Contents/Indexing&raquo;</a>
 </div>
-
-
+  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.8.17 &bull; Last Updated: Sat, 14 Jan 2017 09:17:46 -0800</p>
+    <p class="legaleeze center">Version: 0.8.17 &bull; Last Updated: Sun, 15 Jan 2017 21:31:50 -0800</p>
   </div>
 </footer>
 
 <script>
-$(document).ready(function() {
-  $('#tipue_search_input').tipuesearch();
-});
+  $(document).ready(function () {
+    $('#tipue_search_input').tipuesearch();
+  });
 </script>
 
 </body>

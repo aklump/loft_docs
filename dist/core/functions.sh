@@ -73,7 +73,7 @@ function get_version() {
 # @param string $path
 #
 function realpath() {
-  local path=$($docs_php "$CORE/realpath.php" "$1")
+  local path=$($docs_php "$CORE/includes/realpath.php" "$1")
   echo $path
 }
 
@@ -87,39 +87,36 @@ function realpath() {
  # File MUST HAVE an EOL char!
  #
 function load_config() {
-  if [ ! -f core-config.sh ]; then
-    echo_yellow "Installing..."
-    cp "$CORE/install/core-config.sh" "$docs_root_dir/"
-    installing=1
-  fi
 
   # defaults
-  docs_disabled="doxygene"
   docs_php=$(which php)
   docs_bash=$(which bash)
   docs_lynx=$(which lynx)
   docs_source_dir='source'
   docs_root_dir=$(realpath "$CORE/..")
   docs_source_path=$(realpath "$docs_root_dir/$docs_source_dir")
+  docs_plugins_tpl='twig'
+  docs_partial_extension='.md'
+  docs_markdown_extension='.md'
   docs_kit_dir='kit'
-  docs_doxygene_dir='doxygene'
   docs_website_dir='public_html'
   docs_html_dir='html'
   docs_mediawiki_dir='mediawiki'
   docs_text_dir='text'
   docs_drupal_dir='advanced_help'
   docs_tmp_dir="$CORE/tmp"
-  docs_todos="_tasklist.md"
+  docs_todos="_tasklist$docs_markdown_extension"
   docs_version_hook='version_hook.php'
   docs_pre_hooks=''
   docs_post_hooks=''
   docs_outline_auto='outline.auto.json'
   docs_outline_merge='outline.merge.json'
 
-  # Determine which is our tpl dir
-  docs_tpl_dir='core/tpl'
-  if [ -d 'tpl' ]; then
-    docs_tpl_dir='tpl'
+  # Check for installation if needed.
+  if [ ! -f core-config.sh ]; then
+    echo_yellow "Installing..."
+    cp "$CORE/install/core-config.sh" "$docs_root_dir/"
+    installing=1
   fi
 
   # Installation steps
@@ -164,6 +161,13 @@ function load_config() {
   #
   # put anything that comes AFTER parsing config file below this line
   #
+
+  # Determine which is our tpl dir
+  if test -e "$PWD/tpl"; then
+    docs_tpl_dir="$PWD/tpl"
+  else
+    docs_tpl_dir=$(get_plugin_path $docs_plugins_tpl)/tpl
+  fi
 
   docs_text_enabled=1
   if ! lynx_loc="$(type -p "$docs_lynx")" || [ -z "$lynx_loc" ]; then
@@ -265,6 +269,24 @@ function do_post_hooks() {
 }
 
 #
+# Source the correct file for a plugin operation
+#
+# @param string plugin machine name e.g. twig
+# @param string operation e.g. file|post
+#
+function do_plugin_handler() {
+    local hook_file
+    hook_file=$($docs_php $CORE/includes/plugins.php "$CORE/plugins/" "$1" "$2")
+    test -f "$hook_file" && source "$hook_file"
+}
+
+function get_plugin_path() {
+    local hook_file
+    hook_file=$($docs_php $CORE/includes/plugins.php "$CORE/plugins/" "$1" "$2")
+    echo $hook_file
+}
+
+#
 # Do the todo item gathering
 #
 function do_todos() {
@@ -276,14 +298,12 @@ function do_todos() {
       touch "$global";
     fi
 
-    for file in $(find $docs_source_dir -type f -iname "*.md"); do
+    for file in $(find $docs_source_dir -type f -iname "*$docs_markdown_extension"); do
       if [ "$file" != "$global" ]; then
-#        echo "Scanning $file for todo items."
         # Send a single file over for processing todos via php
         $docs_php "$CORE/todos.php" "$file" "$global"
       fi
     done
-#    echo "Tasklist complete"
   fi
 }
 

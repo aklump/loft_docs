@@ -3,9 +3,7 @@ title: Overview of Loft Docs
 sort: -100
 ---
 [markdown]:http://daringfireball.net/projects/markdown/
-[markdown_php]:http://michelf.ca/projects/php-markdown/
 [codekit]:http://incident57.com/codekit/
-[lynx]:http://lynx.isc.org/
 
 #What Is Loft Docs?
 **Loft Docs is the last project documentation tool you'll ever need.**  Loft Docs provides one central place to manage your documentation allowing you to compose in Markdown and have the benefits of simultaneous output to the following formats:
@@ -57,68 +55,6 @@ If you are implementing any hooks and you need component or include files, which
 
 1. Put these component files in `/parts` not in `/source`.
 1. Make sure the generated files begin with the underscore, e.g., `_my_compiled_file.md`.  That will indicate these files are compiled and can be deleted using `core/clean.sh`.
-
-<a name="compiling"></a>
-## Compiling
-After a round of changes to the files found in `/source`, you will need to export or _compile_ your documentation.
-
-### How to compile
-Each time you want to update your documentation files, after modifying files in `source` you need to execute `compile.sh` from bash, make sure you are in the root directory of this package.
-
-    ./core/compile.sh
-
-### Defining the documentation version
-Some of the templates utilize a version string.  How this is provided is the the next topic covered.
-
-If no version can be found the string will always be 1.0
-
-**By default, Loft Docs will look for `*.info`, in the directory above `core/`.**  If this is not working or desired then you can specify a path in _core-config.sh_ as such:
-
-    version_file = "/some/absolute/path/version.info"
-
-There is a built in a version hook that can sniff a version from .info and .json files and that may suffice.  If not read on about a custom version hook...
-
-_A version hook is a php or shell script that echos the version string of your documentation_.  These version hook script receives the same arguments as the pre/post hooks.  You define your version hook in config.  See `version_hook.php` as an implementation example.  Only one file is allowed in the declaration; either php or shell.
-
-    version_hook = "version_hook.php"
-
-### Removing Compiled Files
-You may delete all compiled files using the _clean_ command.
-
-    ./core/clean.sh
-
-
-### Requirements
-1. Compiling uses [Markdown Php][markdown_php], which is included in this distribution.
-1. Output of `.txt` files requires that [Lynx][lynx] be installed.
-
-### How to install
-1. Run the compile command, the first time it is runned, installation takes place.
-
-        ./core/compile.sh
-
-2. The necessary dirs will be created including these configuration file(s):
-
-        core-config.sh
-  
-1. Open and edit `core-config.sh`. **You should not delete this file once it's been created, as it is the flag that installation has taken place!** Compiling without this file may lead to some/all of your files being deleted.
-2. Enter the name of the drupal module this will be used for, if applicable.
-3. Enter the credentials for the drupal site if using iframes.
-4. Override the php path if needed; php must have the curl library installed.
-5. Run `./core/compile.sh` once more to update the configuration.
-5. Test the installation by visiting `public_html/index.html` in a browser, this is the webpage output and should show you a few example pages.
-7. Installation is complete; you may now begin documenting in `source`. You most likely should first delete the example files in `source`.
-
-### How to install Lynx on Mac
-Here's a quick way to get Lynx on a mac...
-
-1. Download this application [http://habilis.net/lynxlet/](http://habilis.net/lynxlet/)
-2. In shell type `cd /usr/bin`
-3. Followed by `sudo ln -s /Applications/Lynxlet.app/Contents/Resources/lynx/bin/lynx`
-4. Test your installation with this command `lynx`; you should see the lynx browser show up.
- 
-#### or with homebrew
-1. `brew install lynx`
 
 ## Core update
 Loft Docs provides a core update feature as seen below.  From the root directory type:

@@ -1,0 +1,8 @@
+{
+    "name": "Twig",
+    "machine": "twig",
+    "handlers": {
+        "file": "page.sh",
+        "post": "index.sh"
+    }
+}

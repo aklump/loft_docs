@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>How to install</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <style type="text/css" media="all">
+    @import url("style.css");
+  </style>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script src="js/core.js"></script>
+
+</head>
+
+<body class="page--ld--installation">
+<header>
+  <div class="pager">
+  <a href="ld--install.html" class="prev ld--install">&laquo;Installation</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="ld--roadmap.html" class="next ld--roadmap">Roadmap&raquo;</a>
+</div>
+</header>
+
+<div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>How to install</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<ol>
+<li><p>Run the compile command, the first time it is runned, installation takes place.</p>
+
+<pre><code>./core/compile.sh
+</code></pre></li>
+<li><p>The necessary dirs will be created including these configuration file(s):</p>
+
+<pre><code>core-config.sh
+</code></pre></li>
+<li><p>Open and edit <code>core-config.sh</code>. <strong>You should not delete this file once it's been created, as it is the flag that installation has taken place!</strong> Compiling without this file may lead to some/all of your files being deleted.</p></li>
+<li>Enter the name of the drupal module this will be used for, if applicable.</li>
+<li>Enter the credentials for the drupal site if using iframes.</li>
+<li>Override the php path if needed; php must have the curl library installed.</li>
+<li>Run <code>./core/compile.sh</code> once more to update the configuration.</li>
+<li>Test the installation by visiting <code>public_html/index.html</code> in a browser, this is the webpage output and should show you a few example pages.</li>
+<li>Installation is complete; you may now begin documenting in <code>source</code>. You most likely should first delete the example files in <code>source</code>.</li>
+</ol>
+
+
+<p>Here's a quick way to get Lynx on a mac...</p>
+
+<ol>
+<li>Download this application <a href="http://habilis.net/lynxlet/">http://habilis.net/lynxlet/</a></li>
+<li>In shell type <code>cd /usr/bin</code></li>
+<li>Followed by <code>sudo ln -s /Applications/Lynxlet.app/Contents/Resources/lynx/bin/lynx</code></li>
+<li>Test your installation with this command <code>lynx</code>; you should see the lynx browser show up.</li>
+</ol>
+
+<h2>or with homebrew</h2>
+
+<ol>
+<li><code>brew install lynx</code></li>
+</ol>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="ld--install.html" class="prev ld--install">&laquo;Installation</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="ld--roadmap.html" class="next ld--roadmap">Roadmap&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.8.17 &bull; Last Updated: Sun, 15 Jan 2017 21:31:51 -0800</p>
+  </div>
+</footer>
+
+<script>
+  $(document).ready(function () {
+    $('#tipue_search_input').tipuesearch();
+  });
+</script>
+
+</body>
+</html>
+

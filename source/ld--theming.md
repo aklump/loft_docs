@@ -4,4 +4,3 @@ The files in `/core/tpl` control the output of the `.html` files found in the we
     cp -R core/tpl .
     
 For css changes you should edit `/tpl/style.css` in the newly created `/tpl` folder.
-    
