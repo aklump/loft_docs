@@ -6,7 +6,7 @@
 ##
  # An array of output formats to disable, if any
  #
-#disabled = "website html text mediawiki doxygene"
+#disabled = "website html text mediawiki"
 
 ##
  # File path to the php you want to use for compiling
@@ -27,7 +27,7 @@ lynx = $(which lynx)
  # The name of the drupal module to build advanced help output for, if
  # applicable
  #
-drupal_module = 'my_module';
+drupal_module = 'my_pretend_module';
 
 ##
 # The location of the advanced help output; this location is used in place of
@@ -45,7 +45,7 @@ README = 'README.txt README.md'
  # The file path to an extra CHANGELOG.txt file; when CHANGELOG.md is compiled and
  # this variable is set, the .txt version will be copied to this location.
  #
-README = 'CHANGELOG.txt'
+CHANGELOG = 'CHANGELOG.txt'
 
 #
 # The path to a .info file or a .json file containing 'version' as a first level key, whose value indicates the documentation version.

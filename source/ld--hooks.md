@@ -18,3 +18,4 @@ The scripts will receive the following arguments:
 | $argv[2] | $2      | The absolute filepath to the `core/` directory   |
 | $argv[3] | $3      | The absolute filepath to the version file        |
 | $argv[4] | $4      | The absolute filepath to the root_dir directory  |
+

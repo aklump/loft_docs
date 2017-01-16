@@ -46,7 +46,7 @@ if (!empty($json_file)) {
         $g->fill($json, 'settings.search', 'tipuesearch');
     }
     // Write the search results file if settings say to
-    if ($json['settings']['search'] && file_exists($search_results_file) && !file_get_contents($search_results_file)) {
+    if (!empty($json['settings']['search']) && file_exists($search_results_file) && !file_get_contents($search_results_file)) {
         file_put_contents($search_results_file, '# Search Results');
     }
 
