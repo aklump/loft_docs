@@ -10,6 +10,8 @@ use AKlump\Data\Data;
 use AKlump\LoftDocs\OutlineJson as Index;
 
 $CORE = getenv('LOFT_DOCS_CORE');
+$data_file = getenv('LOFT_DOCS_CACHE_DIR') . '/page_data.json';
+$page_data = file_exists($data_file) ? json_decode(file_get_contents($data_file), true) : array();
 
 require_once $CORE . '/vendor/autoload.php';
 
@@ -18,6 +20,12 @@ $vars = array(
 );
 list(, $outline_file, $page_id, $vars['version']) = $argv;
 $g = new Data();
+
+// Add in page vars if found.
+if (isset($page_data[$page_id])) {
+    $vars['page'] = $page_data[$page_id];
+}
+
 $outline = load_outline($outline_file);
 $index = new Index($outline);
 

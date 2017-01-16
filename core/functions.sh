@@ -247,6 +247,9 @@ function do_pre_hooks() {
         echo_yellow $(do_hook_file $hook)
     done
 
+    # Empty out the page data cache.
+    rm "$docs_cache_dir/page_data.json"
+
     # Internal pre hooks should always come after the user-supplied
     do_todos
 

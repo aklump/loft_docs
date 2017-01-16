@@ -15,6 +15,14 @@ if (!file_exists($from)) {
 $fm = new FrontMatter();
 if (($contents = file_get_contents($from))) {
     $document = $fm->parse($contents);
+
+    // Store any metadata
+    if ($vars = $document->getData()) {
+        $data_file = getenv('LOFT_DOCS_CACHE_DIR') . '/page_data.json';
+        $json = file_exists($data_file) ? json_decode(file_get_contents($data_file), true) : array();
+        $json[pathinfo($to, PATHINFO_FILENAME)] = $vars;
+        file_put_contents($data_file, json_encode($json));
+    }
     file_put_contents($to, $document->getContent());
 }
 
