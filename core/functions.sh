@@ -60,7 +60,7 @@ function get_version() {
   if [ "$hook" ] && [ -f "$hook" ]; then
     get_version_return=$(do_hook_file "$hook")
     if [[ "$get_version_return" ]]; then
-      echo_blue "Documentation version is: $get_version_return"
+      echo_blue "Current version is: $get_version_return"
     fi
   fi
 
