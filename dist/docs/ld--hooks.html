@@ -4,16 +4,7 @@
 <head>
   <title>Using pre/post hooks</title>
   <link href="search/tipuesearch.css" rel="stylesheet">
-  <style type="text/css" media="all">
-    @import url("style.css");
-  </style>
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="search/tipuesearch_content.js"></script>
-  <script src="search/tipuesearch_set.js"></script>
-  <script src="search/tipuesearch.min.js"></script>
-  <script src="js/core.js"></script>
-
+  <link href="style.css" rel="stylesheet">
 </head>
 
 <body class="page--ld--hooks">
@@ -25,7 +16,7 @@
 </div>
 </header>
 
-<div class="search__wrapper">
+  <div class="search__wrapper">
   <form action="search--results.html">
     <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
   </form>
@@ -77,6 +68,10 @@ post_hooks = "post_compile.sh post_compile.php"
 </tr>
 </tbody>
 </table>
+
+<h2>Generating Content</h2>
+
+<p>Hooks/plugins should not generate content to /source directory as this will affect the watcher, instead create any files needed into the core/cache/source.</p>
 </section>
 
 <div class="search__results">
@@ -91,16 +86,20 @@ post_hooks = "post_compile.sh post_compile.php"
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9 &bull; Last Updated: Sun, 15 Jan 2017 21:33:08 -0800</p>
+    <p class="legaleeze center">Version: 0.9 &bull; Last Updated: Mon, 16 Jan 2017 12:49:47 -0800</p>
   </div>
 </footer>
 
-<script>
-  $(document).ready(function () {
-    $('#tipue_search_input').tipuesearch();
-  });
-</script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
 </body>
 </html>
 

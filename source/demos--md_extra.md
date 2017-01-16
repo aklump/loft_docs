@@ -1,5 +1,5 @@
 ---
-title: Markdown Extra
+title: 'Demo: Markdown Extra'
 ---
 # Markdown Extra Demonstration Page
 

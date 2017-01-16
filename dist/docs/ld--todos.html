@@ -4,16 +4,7 @@
 <head>
   <title>The TODO list feature</title>
   <link href="search/tipuesearch.css" rel="stylesheet">
-  <style type="text/css" media="all">
-    @import url("style.css");
-  </style>
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="search/tipuesearch_content.js"></script>
-  <script src="search/tipuesearch_set.js"></script>
-  <script src="search/tipuesearch.min.js"></script>
-  <script src="js/core.js"></script>
-
+  <link href="style.css" rel="stylesheet">
 </head>
 
 <body class="page--ld--todos">
@@ -21,11 +12,11 @@
   <div class="pager">
   <a href="ld--theming.html" class="prev ld--theming">&laquo;Custom Theming the Website Version</a>
   <a href="index.html" class="index">Index</a>
-  <a href="demos--example.html" class="next demos--example">An Example Page &amp; Image&raquo;</a>
+  <a href="_tasklist.html" class="next _tasklist">Tasklist&raquo;</a>
 </div>
 </header>
 
-<div class="search__wrapper">
+  <div class="search__wrapper">
   <form action="search--results.html">
     <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
   </form>
@@ -73,20 +64,24 @@
   <div class="pager">
   <a href="ld--theming.html" class="prev ld--theming">&laquo;Custom Theming the Website Version</a>
   <a href="index.html" class="index">Index</a>
-  <a href="demos--example.html" class="next demos--example">An Example Page &amp; Image&raquo;</a>
+  <a href="_tasklist.html" class="next _tasklist">Tasklist&raquo;</a>
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9 &bull; Last Updated: Sun, 15 Jan 2017 21:33:11 -0800</p>
+    <p class="legaleeze center">Version: 0.9 &bull; Last Updated: Mon, 16 Jan 2017 12:49:50 -0800</p>
   </div>
 </footer>
 
-<script>
-  $(document).ready(function () {
-    $('#tipue_search_input').tipuesearch();
-  });
-</script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
 </body>
 </html>
 

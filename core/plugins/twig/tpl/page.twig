@@ -4,16 +4,7 @@
 <head>
   <title>{{ title }}</title>
   <link href="search/tipuesearch.css" rel="stylesheet">
-  <style type="text/css" media="all">
-    @import url("style.css");
-  </style>
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="search/tipuesearch_content.js"></script>
-  <script src="search/tipuesearch_set.js"></script>
-  <script src="search/tipuesearch.min.js"></script>
-  <script src="js/core.js"></script>
-
+  <link href="style.css" rel="stylesheet">
 </head>
 
 <body class="{{ classes|join(' ') }}">
@@ -21,11 +12,9 @@
   {% include 'nav.twig' %}
 </header>
 
-<div class="search__wrapper">
-  <form action="search--results.html">
-    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
-  </form>
-</div>
+{% if search %}
+  {% include 'search-form.twig' %}
+{% endif %}
 
 {% if is_index %}
   <h1>Index</h1>
@@ -48,12 +37,18 @@
   </div>
 </footer>
 
-<script>
-  $(document).ready(function () {
-    $('#tipue_search_input').tipuesearch();
-  });
-</script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+{% if search %}
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+{% endif %}
+<script src="js/core.js"></script>
 </body>
 </html>
 

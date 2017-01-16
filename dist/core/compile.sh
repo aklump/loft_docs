@@ -44,6 +44,8 @@ done
 
 LOFT_DOCS_CORE="$CORE"
 export LOFT_DOCS_CORE
+LOFT_DOCS_CACHE_DIR="$docs_cache_dir"
+export LOFT_DOCS_CACHE_DIR
 LOFT_DOCS_TMP_DIR="$docs_tmp_dir"
 export LOFT_DOCS_TMP_DIR
 
@@ -76,17 +78,24 @@ fi
 
 # Delete the text directory if no lynx
 if [ "$docs_text_enabled" -eq 0 ]; then
-  rmdir $docs_text_dir
+  dirs_to_delete=("${dirs_to_delete[@]}" "$docs_text_dir")
 fi
 
 get_version
 
 do_plugin_handler $docs_plugins_tpl pre
 
+# Get all the files in the source directory.
+declare -a files=("$docs_source_dir"/*)
+
+# Then add in all files we created.
+declare -a generated=("$docs_cache_dir/source"/*)
+files=("${generated[@]}" "${files[@]}")
+
 # Copy over files in the tmp directory, but compile anything with a .md
 # extension as it goes over; this is our baseline html that we will further
 # process for the intended audience.
-for file in "$docs_source_dir"/*; do
+for file in ${files[@]}; do
   if [ -f "$file" ]; then
     basename=${file##*/}
     extension=".${file##*.}"
@@ -154,7 +163,7 @@ for file in "$docs_source_dir"/*; do
   fi
 done
 
-# Iterate over all html files and send to CodeKit; then iterate over all html
+# Iterate over all html files and implement theme; then iterate over all html
 # files and send to drupal and website
 for file in "$docs_tmp_dir"/*.html; do
   if [ -f "$file" ]; then

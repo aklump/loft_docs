@@ -11,7 +11,7 @@
  *   - title
  * - $json_file string The output path of the json file.
  *
- * @see  files_to_json.php
+ * @see  files_to_json.inc
  * @see  ini_to_json.php
  */
 $g = new \AKlump\Data\Data();

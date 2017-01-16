@@ -30,6 +30,9 @@ function echo_green() {
 function get_version_file() {
   local file
   file=${docs_version_file[0]}
+  if [ ! "$file" ]; then
+    return 1
+  fi
 
   # The path starts with a / it is absolute
   if [[ "${file:0:1}" == '/' ]]; then
@@ -39,7 +42,7 @@ function get_version_file() {
     file=$(realpath "$docs_root_dir/$file");
   fi
 
-  if test -f $file; then
+  if test -f "$file"; then
       echo $file
       return 0
   fi
@@ -96,6 +99,7 @@ function load_config() {
   docs_root_dir=$(realpath "$CORE/..")
   docs_source_path=$(realpath "$docs_root_dir/$docs_source_dir")
   docs_plugins_tpl='twig'
+  docs_plugins_theme='twig'
   docs_partial_extension='.md'
   docs_markdown_extension='.md'
   docs_kit_dir='kit'
@@ -104,7 +108,8 @@ function load_config() {
   docs_mediawiki_dir='mediawiki'
   docs_text_dir='text'
   docs_drupal_dir='advanced_help'
-  docs_tmp_dir="$CORE/tmp"
+  docs_cache_dir="$CORE/cache"
+  docs_tmp_dir="$docs_cache_dir/tmp"
   docs_todos="_tasklist$docs_markdown_extension"
   docs_version_hook='version_hook.php'
   docs_pre_hooks=''
@@ -126,8 +131,8 @@ function load_config() {
   #
   # Discover the outline file
   #
-  if test -e "$docs_source_dir/$docs_outline_auto"; then
-    rm "$docs_source_dir/$docs_outline_auto"
+  if test -e "$docs_cache_dir/$docs_outline_auto"; then
+    rm "$docs_cache_dir/$docs_outline_auto"
   fi
 
   # We're looking ultimately for outline.json
@@ -141,7 +146,7 @@ function load_config() {
     if [[ "$docs_help_ini" ]]; then
       # Convert this to $docs_outline_auto
       $docs_php "$CORE/includes/ini_to_json.php" "$docs_help_ini" "$docs_source_path" "$docs_source_path/$docs_outline_auto"
-      docs_outline_file="$docs_source_path/$docs_outline_auto"
+      docs_outline_file="$docs_cache_dir/$docs_outline_auto"
 
       echo "`tty -s && tput setaf 3`You are using the older .ini version of the configutation; consider changing to outline.json, a template has been created for you as '$docs_outline_auto'.  See README for more info.`tty -s && tput op`"
     fi
@@ -150,9 +155,9 @@ function load_config() {
   # If we still don't have it then we'll generate from the file structure.
   if [[ ! "$docs_outline_file" ]]; then
     # Create $docs_outline_auto from the file contents
-    $docs_php "$CORE/includes/files_to_json.php" "$docs_source_path" "$docs_source_dir/$docs_outline_auto" "$docs_source_dir/$docs_outline_merge"
+    $docs_php "$CORE/includes/files_to_json.inc" "$docs_source_path" "$docs_cache_dir/source" "$docs_cache_dir/$docs_outline_auto" "$docs_source_dir/$docs_outline_merge"
 
-    docs_outline_file="$docs_source_path/$docs_outline_auto"
+    docs_outline_file="$docs_cache_dir/$docs_outline_auto"
   fi
 
   # custom
@@ -166,7 +171,7 @@ function load_config() {
   if test -e "$PWD/tpl"; then
     docs_tpl_dir="$PWD/tpl"
   else
-    docs_tpl_dir=$(get_plugin_path $docs_plugins_tpl)/tpl
+    docs_tpl_dir=$(get_plugin_path $docs_plugins_theme theme)
   fi
 
   docs_text_enabled=1
@@ -236,10 +241,13 @@ function do_hook_file() {
 # Do the pre-compile hook
 #
 function do_pre_hooks() {
-  local hook
 
-  # Hack to fix color, no time to figure out 2015-11-14T13:58, aklump
-#  echo "`tty -s && tput setaf 6``tty -s && tput op`"
+    mkdir -p "$docs_cache_dir/source/"
+
+    local hook
+
+    # Hack to fix color, no time to figure out 2015-11-14T13:58, aklump
+    #  echo "`tty -s && tput setaf 6``tty -s && tput op`"
     echo "Running pre-compile hooks..."
     for hook in ${docs_pre_hooks[@]}; do
         hook=$(realpath "$docs_hooks_dir/$hook")
@@ -291,8 +299,8 @@ function get_plugin_path() {
 #
 function do_todos() {
   if [[ "$docs_todos" ]]; then
-    local global="$docs_source_dir/$docs_todos"
-    echo "Aggregating todo items into $global..."
+    local global="$docs_cache_dir/source/$docs_todos"
+    echo "Aggregating todo items..."
 
     if [[ ! -f "$global" ]]; then
       touch "$global";
@@ -301,7 +309,7 @@ function do_todos() {
     for file in $(find $docs_source_dir -type f -iname "*$docs_markdown_extension"); do
       if [ "$file" != "$global" ]; then
         # Send a single file over for processing todos via php
-        $docs_php "$CORE/todos.php" "$file" "$global"
+        $docs_php "$CORE/includes/todos.inc" "$file" "$global"
       fi
     done
   fi

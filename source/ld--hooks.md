@@ -19,3 +19,5 @@ The scripts will receive the following arguments:
 | $argv[3] | $3      | The absolute filepath to the version file        |
 | $argv[4] | $4      | The absolute filepath to the root_dir directory  |
 
+## Generating Content
+Hooks/plugins should not generate content to /source directory as this will affect the watcher, instead create any files needed into the core/cache/source.
