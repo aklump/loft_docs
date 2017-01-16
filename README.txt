@@ -64,7 +64,7 @@ Core update
 
    Loft Docs provides a core update feature as seen below. From the root
    directory type:
-./core/update.sh
+./core/update
 
 Rationale
 
