@@ -152,16 +152,11 @@ function load_config() {
     fi
   fi
 
-  # If we still don't have it then we'll generate from the file structure.
-  if [[ ! "$docs_outline_file" ]]; then
-    # Create $docs_outline_auto from the file contents
-    $docs_php "$CORE/includes/files_to_json.inc" "$docs_source_path" "$docs_cache_dir/source" "$docs_cache_dir/$docs_outline_auto" "$docs_source_dir/$docs_outline_merge"
-
-    docs_outline_file="$docs_cache_dir/$docs_outline_auto"
-  fi
-
   # custom
   parse_config core-config.sh
+
+  # Create any necessary directories
+  mkdir -p "$docs_cache_dir/source/"
 
   #
   # put anything that comes AFTER parsing config file below this line
@@ -241,9 +236,6 @@ function do_hook_file() {
 # Do the pre-compile hook
 #
 function do_pre_hooks() {
-
-    mkdir -p "$docs_cache_dir/source/"
-
     local hook
 
     # Hack to fix color, no time to figure out 2015-11-14T13:58, aklump
@@ -257,6 +249,35 @@ function do_pre_hooks() {
 
     # Internal pre hooks should always come after the user-supplied
     do_todos
+
+    # Generate an outline from the file structure
+    if [[ ! "$docs_outline_file" ]]; then
+        # Create $docs_outline_auto from the file contents
+        $docs_php "$CORE/includes/files_to_json.inc" "$docs_source_path" "$docs_cache_dir/source" "$docs_cache_dir/$docs_outline_auto" "$docs_source_dir/$docs_outline_merge"
+
+        docs_outline_file="$docs_cache_dir/$docs_outline_auto"
+    fi
+}
+
+#
+# Do the todo item gathering
+#
+function do_todos() {
+  if [[ "$docs_todos" ]]; then
+    local global="$docs_cache_dir/source/$docs_todos"
+    echo "Aggregating todo items..."
+
+    if [[ ! -f "$global" ]]; then
+      touch "$global";
+    fi
+
+    for file in $(find $docs_source_dir -type f -iname "*$docs_markdown_extension"); do
+      if [ "$file" != "$global" ]; then
+        # Send a single file over for processing todos via php
+        $docs_php "$CORE/includes/todos.inc" "$file" "$global"
+      fi
+    done
+  fi
 }
 
 #
@@ -292,27 +313,6 @@ function get_plugin_path() {
     local hook_file
     hook_file=$($docs_php $CORE/includes/plugins.php "$CORE/plugins/" "$1" "$2")
     echo $hook_file
-}
-
-#
-# Do the todo item gathering
-#
-function do_todos() {
-  if [[ "$docs_todos" ]]; then
-    local global="$docs_cache_dir/source/$docs_todos"
-    echo "Aggregating todo items..."
-
-    if [[ ! -f "$global" ]]; then
-      touch "$global";
-    fi
-
-    for file in $(find $docs_source_dir -type f -iname "*$docs_markdown_extension"); do
-      if [ "$file" != "$global" ]; then
-        # Send a single file over for processing todos via php
-        $docs_php "$CORE/includes/todos.inc" "$file" "$global"
-      fi
-    done
-  fi
 }
 
 ##
