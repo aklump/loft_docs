@@ -8,4 +8,4 @@
 /mediawiki/
 /my_pretend_module
 /core/cache
-/core/tmp
+/dist/core/cache
