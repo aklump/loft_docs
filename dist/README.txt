@@ -58,7 +58,7 @@ As a Developer
     1. Put these component files in /parts not in /source.
     2. Make sure the generated files begin with the underscore, e.g.,
        _my_compiled_file.md. That will indicate these files are compiled
-       and can be deleted using core/clean.sh.
+       and can be deleted using core/clean.
 
 Core update
 
