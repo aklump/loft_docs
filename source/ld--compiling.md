@@ -10,9 +10,9 @@ After a round of changes to the files found in `/source`, you will need to expor
 
 ## How to compile
 
-Each time you want to update your documentation files, after modifying files in `source` you need to execute `compile.sh` from bash, make sure you are in the root directory of this package.
+Each time you want to update your documentation files, after modifying files in `source` you need to execute `compile` from bash, make sure you are in the root directory of this package.
 
-    ./core/compile.sh
+    ./core/compile
 
 ## Folders and Other Includes
 
@@ -50,4 +50,4 @@ _A version hook is a php or shell script that echos the version string of your d
 
 You may delete all compiled files using the _clean_ command.
 
-    ./core/clean.sh
+    ./core/clean

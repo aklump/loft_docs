@@ -54,7 +54,7 @@ You should do the following to link internally to `source/page2.html`
 If you are implementing any hooks and you need component or include files, which compile to markdown files in `/source`:
 
 1. Put these component files in `/parts` not in `/source`.
-1. Make sure the generated files begin with the underscore, e.g., `_my_compiled_file.md`.  That will indicate these files are compiled and can be deleted using `core/clean.sh`.
+1. Make sure the generated files begin with the underscore, e.g., `_my_compiled_file.md`.  That will indicate these files are compiled and can be deleted using `core/clean`.
 
 ## Core update
 Loft Docs provides a core update feature as seen below.  From the root directory type:

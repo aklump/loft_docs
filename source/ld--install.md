@@ -5,7 +5,7 @@ How you incorporate Loft Docs is up to you, but there are two scenarios which wi
 ## Quick Start
 
 1. Copy the contents of `/dist` into your project.
-1. From within `dist`, in the shell, run `./core/compile.sh`.
+1. From within `dist`, in the shell, run `./core/compile`.
 1. Open `dist/public_html/welcome.html` and follow instructions.
 
 ## Stand-alone implementation
