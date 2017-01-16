@@ -62,19 +62,23 @@ function getFrontMatterTagsFromHtmlFile($html_file)
     $g = new Data();
     $markdown_source = $argv[5];
     $md_file = pathinfo($html_file, PATHINFO_FILENAME);
+    $exists = false;
     foreach (get_markdown_extensions() as $ext) {
         $filename = $markdown_source . '/' . $md_file . '.' . $ext;
         if (file_exists($filename)) {
+            $exists = true;
             break;
         }
     }
-    if (($contents = file_get_contents($filename))) {
+
+    $front_matter = array();
+    if ($exists && ($contents = file_get_contents($filename))) {
         $fm = new FrontMatter();
         $document = $fm->parse($contents);
-        $frontmatter = $document->getData();
+        $front_matter = $document->getData();
     }
 
-    return $g->get($frontmatter, 'tags', '', function ($value) {
+    return $g->get($front_matter, 'tags', '', function ($value) {
         return array_unique(array_filter(explode(' ', $value)));
     });
 }
