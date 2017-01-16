@@ -36,7 +36,7 @@ $info = array();
  */
 function files_index($dir)
 {
-    $index = scandir($dir);
+    $index = is_dir($dir) ? scandir($dir) : array();
     array_walk($index, function (&$value) use ($dir) {
         $value = array(
             'path'     => $dir . '/' . $value,

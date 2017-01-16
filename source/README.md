@@ -59,7 +59,7 @@ If you are implementing any hooks and you need component or include files, which
 ## Core update
 Loft Docs provides a core update feature as seen below.  From the root directory type:
 
-    ./core/update.sh
+    ./core/update
     
 ## Rationale
 The rationalle behind this project is that it is easy to write markdown files, and it is easy to share a static html based documentation file, and it is easy to use Drupal Advanced Help module, and it is easy to version your documentation in git; but to do all this together at once… was NOT EASY.
