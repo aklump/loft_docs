@@ -216,14 +216,15 @@ done
 # files.
 if [ "$docs_README" ]; then
   destinations=($docs_README)
+  
   for output in "${destinations[@]}"; do
     output=$(realpath "$docs_root_dir/$output");
     readme_file=${output##*/}
     readme_dir=${output%/*}
     test -d "$readme_dir" || mkdir -p "$readme_dir"
     if echo "$readme_file" | grep -q '.txt$'; then
-        if test -e "$changelog_source"; then
-            readme_source="$docs_text_dir/$readme_file"
+        readme_source="$docs_text_dir/$readme_file"
+        if test -e "$readme_source"; then
             cp "$readme_source" "$output"
             _check_file "$output"
         fi
