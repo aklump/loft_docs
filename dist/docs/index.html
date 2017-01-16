@@ -4,28 +4,19 @@
 <head>
   <title></title>
   <link href="search/tipuesearch.css" rel="stylesheet">
-  <style type="text/css" media="all">
-    @import url("style.css");
-  </style>
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="search/tipuesearch_content.js"></script>
-  <script src="search/tipuesearch_set.js"></script>
-  <script src="search/tipuesearch.min.js"></script>
-  <script src="js/core.js"></script>
-
+  <link href="style.css" rel="stylesheet">
 </head>
 
 <body class="page--index">
 <header>
   <div class="pager">
-  <a href="demos--example.html" class="prev demos--example">&laquo;An Example Page &amp; Image</a>
+  <a href="demos--example.html" class="prev demos--example">&laquo;Demo: An Example Page &amp; Image</a>
   <a href="index.html" class="index">Index</a>
   <a href="README.html" class="next readme">Overview of Loft Docs&raquo;</a>
 </div>
 </header>
 
-<div class="search__wrapper">
+  <div class="search__wrapper">
   <form action="search--results.html">
     <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
   </form>
@@ -36,10 +27,10 @@
 <section><ul class="index">
       <li><a href="README.html">Overview of Loft Docs</a></li>
       <li><a href="CHANGELOG.html">Changelog</a></li>
-      <li><a href="demos--md_extra.html">Markdown Extra</a></li>
-      <li><a href="demos--mediawiki.html">Test for MediaWiki</a></li>
+      <li><a href="demos--md_extra.html">Demo: Markdown Extra</a></li>
+      <li><a href="demos--mediawiki.html">Demo: MediaWiki</a></li>
       <li><a href="demos--no-title.html">Demos  No Title</a></li>
-      <li><a href="demos--title.html">The Sniffed Title</a></li>
+      <li><a href="demos--title.html">Demo: The Sniffed Title</a></li>
       <li><a href="ld--autocompile.html">Auto-compiling</a></li>
       <li><a href="ld--compiling.html">Compiling</a></li>
       <li><a href="ld--drupal.html">Drupal Integration</a></li>
@@ -53,7 +44,8 @@
       <li><a href="ld--search.html">Integrating search</a></li>
       <li><a href="ld--theming.html">Custom Theming the Website Version</a></li>
       <li><a href="ld--todos.html">The TODO list feature</a></li>
-      <li><a href="demos--example.html">An Example Page &amp; Image</a></li>
+      <li><a href="_tasklist.html">Tasklist</a></li>
+      <li><a href="demos--example.html">Demo: An Example Page &amp; Image</a></li>
   </ul>
 </section>
 
@@ -63,22 +55,26 @@
 
 <footer>
   <div class="pager">
-  <a href="demos--example.html" class="prev demos--example">&laquo;An Example Page &amp; Image</a>
+  <a href="demos--example.html" class="prev demos--example">&laquo;Demo: An Example Page &amp; Image</a>
   <a href="index.html" class="index">Index</a>
   <a href="README.html" class="next readme">Overview of Loft Docs&raquo;</a>
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9 &bull; Last Updated: Sun, 15 Jan 2017 21:33:11 -0800</p>
+    <p class="legaleeze center">Version: 0.9.1 &bull; Last Updated: Mon, 16 Jan 2017 12:59:50 -0800</p>
   </div>
 </footer>
 
-<script>
-  $(document).ready(function () {
-    $('#tipue_search_input').tipuesearch();
-  });
-</script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
 </body>
 </html>
 

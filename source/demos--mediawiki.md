@@ -1,5 +1,5 @@
 ---
-title: Test for MediaWiki
+title: 'Demo: MediaWiki'
 ---
 # Level One
 *Italic text*

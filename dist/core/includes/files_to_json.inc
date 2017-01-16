@@ -11,7 +11,7 @@ $file = __FILE__;
 require_once dirname($file) . '/../vendor/autoload.php';
 
 if (count($argv) < 3
-    || ((list(, $source_dir, $json_file, $merge_file) = $argv)
+    || ((list(, $source_dir, $generated_dir, $json_file, $merge_file) = $argv)
         && (empty($source_dir) || empty($json_file)))
 ) {
     echo "Missing parameters to $file" . PHP_EOL;
@@ -26,11 +26,38 @@ if (file_exists($json_file)) {
 }
 
 $info = array();
-$first_level = scandir($source_dir);
+
+/**
+ * Index our files in a given directory.
+ *
+ * @param string $dir
+ *
+ * @return array
+ */
+function files_index($dir)
+{
+    $index = scandir($dir);
+    array_walk($index, function (&$value) use ($dir) {
+        $value = array(
+            'path'     => $dir . '/' . $value,
+            'basename' => $value,
+        );
+    });
+
+    return $index;
+}
+
+// Get all the files to index from two directories.
+$user = files_index($source_dir);
+$generated = files_index($generated_dir);
+$first_level = array_merge($user, $generated);
+
 $fm = new FrontMatter();
 $g = new Data();
-foreach ($first_level as $file) {
-    if (substr($file, 0, 1) === '.') {
+foreach ($first_level as $data) {
+    $path = $data['path'];
+    $file = $data['basename'];
+    if ($file === '.' || $file === '..') {
         continue;
     }
 
@@ -39,18 +66,16 @@ foreach ($first_level as $file) {
         continue;
     }
 
-    $path = $source_dir . '/' . $file;
-
-    $frontmatter = array();
+    $front_matter = array();
     $contents = $body = '';
     if (is_file($path) && ($contents = file_get_contents($path))) {
         $document = $fm->parse($contents);
-        $frontmatter = $document->getData();
+        $front_matter = $document->getData();
         $body = $document->getContent();
     }
 
     // Allow this file to be skipped for indexing.
-    if ($g->get($frontmatter, 'noindex')) {
+    if ($g->get($front_matter, 'noindex')) {
         continue;
     }
 
@@ -58,14 +83,14 @@ foreach ($first_level as $file) {
 
     //
     // 1. Frontmatter
-    $meta['chapter'] = $g->get($frontmatter, 'chapter');
-    $meta['section'] = $g->get($frontmatter, 'section');
-    $meta['title'] = $g->get($frontmatter, 'title');
-    $meta['sort'] = $g->get($frontmatter, 'sort');
+    $meta['chapter'] = $g->get($front_matter, 'chapter');
+    $meta['section'] = $g->get($front_matter, 'section');
+    $meta['title'] = $g->get($front_matter, 'title');
+    $meta['sort'] = $g->get($front_matter, 'sort');
 
     //
     // 2. html heading
-    if (!$g->get($meta, 'title') && preg_match('/^\s*#[^#]\s*(.+?)\s*$/m', $body, $matches)) {
+    if (!$g->get($meta, 'title') && preg_match('/^#(?!#)\s*(.+)$/m', $body, $matches)) {
         $g->fill($meta, 'title', $matches[1]);
     }
 

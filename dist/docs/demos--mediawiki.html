@@ -2,36 +2,27 @@
 
 <html>
 <head>
-  <title>Test for MediaWiki</title>
+  <title>Demo: MediaWiki</title>
   <link href="search/tipuesearch.css" rel="stylesheet">
-  <style type="text/css" media="all">
-    @import url("style.css");
-  </style>
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="search/tipuesearch_content.js"></script>
-  <script src="search/tipuesearch_set.js"></script>
-  <script src="search/tipuesearch.min.js"></script>
-  <script src="js/core.js"></script>
-
+  <link href="style.css" rel="stylesheet">
 </head>
 
 <body class="page--demos--mediawiki">
 <header>
   <div class="pager">
-  <a href="demos--md_extra.html" class="prev demos--md_extra">&laquo;Markdown Extra</a>
+  <a href="demos--md_extra.html" class="prev demos--md_extra">&laquo;Demo: Markdown Extra</a>
   <a href="index.html" class="index">Index</a>
   <a href="demos--no-title.html" class="next demos--no-title">Demos  No Title&raquo;</a>
 </div>
 </header>
 
-<div class="search__wrapper">
+  <div class="search__wrapper">
   <form action="search--results.html">
     <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
   </form>
 </div>
 
-  <h1>Test for MediaWiki</h1>
+  <h1>Demo: MediaWiki</h1>
   <div class="breadcrumb"><a href="index.html">Index</a></div>
 
 <section>
@@ -92,22 +83,26 @@
 
 <footer>
   <div class="pager">
-  <a href="demos--md_extra.html" class="prev demos--md_extra">&laquo;Markdown Extra</a>
+  <a href="demos--md_extra.html" class="prev demos--md_extra">&laquo;Demo: Markdown Extra</a>
   <a href="index.html" class="index">Index</a>
   <a href="demos--no-title.html" class="next demos--no-title">Demos  No Title&raquo;</a>
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9 &bull; Last Updated: Sun, 15 Jan 2017 21:33:06 -0800</p>
+    <p class="legaleeze center">Version: 0.9.1 &bull; Last Updated: Mon, 16 Jan 2017 12:59:43 -0800</p>
   </div>
 </footer>
 
-<script>
-  $(document).ready(function () {
-    $('#tipue_search_input').tipuesearch();
-  });
-</script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
 </body>
 </html>
 

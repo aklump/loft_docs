@@ -1,5 +1,5 @@
 ---
-title: Summary
+title: 'Demo: Summary'
 sort: -10
 noindex: true
 ---

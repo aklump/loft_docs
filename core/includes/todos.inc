@@ -6,7 +6,7 @@
  * @ingroup loft_docs
  * @{
  */
-require_once dirname(__FILE__) . '/vendor/autoload.php';
+require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
 $source = $argv[1];
 $global = $argv[2];

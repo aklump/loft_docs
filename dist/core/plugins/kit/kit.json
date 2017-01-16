@@ -2,6 +2,7 @@
     "name": "Kit templates",
     "machine": "kit",
     "handlers": {
+        "theme": "tpl",
         "file": "build.sh",
         "pre": "pre.sh",
         "post": "post.sh"

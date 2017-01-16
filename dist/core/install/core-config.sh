@@ -76,8 +76,3 @@ lynx = $(which lynx)
 # This controls which file extensions are run throught the markdown parser and wrapped with the header/footer tpls.
 #partial_extension = '.md'
 
-#
-# Define the plugin to use for website rendering
-#
-#plugins_tpl = 'kit';
-#plugins_tpl = 'twig';

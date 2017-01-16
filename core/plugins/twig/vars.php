@@ -13,25 +13,25 @@ $CORE = getenv('LOFT_DOCS_CORE');
 
 require_once $CORE . '/vendor/autoload.php';
 
-$g = new Data();
-$outline = load_outline($argv[1]);
-$index = new Index($outline);
-
 $vars = array(
     'classes' => array(),
 );
+list(, $outline_file, $page_id, $vars['version']) = $argv;
+$g = new Data();
+$outline = load_outline($outline_file);
+$index = new Index($outline);
 
 $vars['index'] = array();
 foreach ($index->getData() as $key => $value) {
     // Skip a self reference
-    if ($key == 'index') {
+    if (in_array($key, array('index', 'search--results'))) {
         continue;
     }
     $vars['index'][] = $value;
 }
 
-if (($data = $index->getData()) && isset($data[$argv[2]])) {
-    $vars = $data[$argv[2]];
+if (($data = $index->getData()) && isset($data[$page_id])) {
+    $vars += $data[$page_id];
     $vars['classes'] = array('page--' . $vars['id']);
 }
 
@@ -48,23 +48,8 @@ $g->ensure($vars, 'next_title', '');
 $now = new \DateTime('now', new \DateTimeZone('America/Los_Angeles'));
 $vars['date'] = $now->format('r');
 
-$vars['version'] = $argv[3];
-
 // Search support
-if (!empty($outline['settings']['search'])) {
-    $declarations[] = '$search = true';
-    if ($argv[2] === 'search--results') {
-        $vars['search_results_page'] = true;
-    }
-    else {
-        $vars['search_results_page'] = false;
-    }
-}
-else {
-    $vars['search'] = false;
-    $vars['search_results_page'] = false;
-}
-
+$g->onlyIf($outline, 'settings.search')->set($vars, 'search', true);
 
 $json = json_encode($vars);
 print $json;

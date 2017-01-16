@@ -31,21 +31,21 @@
         },
         {
             "id": "demos--example",
-            "title": "An Example Page & Image",
+            "title": "Demo: An Example Page & Image",
             "file": "demos--example.md",
             "sort": 100,
             "chapter": "demos"
         },
         {
             "id": "demos--md_extra",
-            "title": "Markdown Extra",
+            "title": "Demo: Markdown Extra",
             "file": "demos--md_extra.md",
             "sort": 1,
             "chapter": "demos"
         },
         {
             "id": "demos--mediawiki",
-            "title": "Test for MediaWiki",
+            "title": "Demo: MediaWiki",
             "file": "demos--mediawiki.md",
             "sort": 2,
             "chapter": "demos"
@@ -59,7 +59,7 @@
         },
         {
             "id": "demos--title",
-            "title": "The Sniffed Title",
+            "title": "Demo: The Sniffed Title",
             "file": "demos--title.md",
             "sort": 4,
             "chapter": "demos"
@@ -154,7 +154,15 @@
             "file": "ld--todos.md",
             "sort": 17,
             "chapter": "ld"
+        },
+        {
+            "id": "_tasklist",
+            "title": "Tasklist",
+            "file": "_tasklist.md",
+            "sort": 18
         }
     ],
-    "settings": []
+    "settings": {
+        "search": "tipuesearch"
+    }
 }

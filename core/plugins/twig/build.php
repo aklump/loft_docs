@@ -8,14 +8,15 @@ use aklump\loft_parser\HTMLTagRemoveAction;
 require_once dirname(__FILE__) . '/../../vendor/autoload.php';
 
 $g = new Data();
-$CORE = getenv('LOFT_DOCS_CORE');
+//$CACHE = getenv('LOFT_DOCS_CACHE_DIR');
 
 list (, $tpl_dir, $partial, $destination, $vars) = $argv;
 $vars = json_decode($vars, true);
 
 $loader = new Twig_Loader_Filesystem($tpl_dir);
 $twig = new Twig_Environment($loader, array(
-    'cache' => $CORE . '/cache/twig',
+//    'cache' => $CACHE . '/twig',
+    'cache' => false,
 ));
 
 switch ($partial) {
