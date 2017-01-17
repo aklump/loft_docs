@@ -248,7 +248,7 @@ function do_pre_hooks() {
     done
 
     # Empty out the page data cache.
-    rm "$docs_cache_dir/page_data.json"
+    test -e "$docs_cache_dir/page_data.json" && rm "$docs_cache_dir/page_data.json"
 
     # Internal pre hooks should always come after the user-supplied
     do_todos
