@@ -36,10 +36,12 @@ if (!empty($outline['settings']['search'])) {
 
         $g = new Data();
         foreach ($source_files as $html_file) {
-            $front_matter = getFrontMatterFromHtmlFile($html_file);
+            $record = getOutlineRecordByHtmlFile($html_file);
 
-            // Does front matter tell us to ignore this file?
-            if ($g->get($front_matter, 'search') === 'noindex') {
+            // Does json or front matter tell us to ignore this file?
+            if ($g->get($record, 'search') === 'noindex'
+                || (($front_matter = getFrontMatterFromHtmlFile($html_file)) && $g->get($front_matter, 'search') === 'noindex')
+            ) {
                 continue;
             }
 
@@ -57,6 +59,18 @@ if (!empty($outline['settings']['search'])) {
     } catch (\Exception $e) {
         print $e;
     }
+}
+
+function getOutlineRecordByHtmlFile($html_file)
+{
+    global $outline;
+    foreach ($outline['sections'] as $item) {
+        if ($item['file'] === $html_file) {
+            return $item;
+        }
+    }
+
+    return [];
 }
 
 /**

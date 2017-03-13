@@ -10,4 +10,5 @@
 /core/cache
 /dist/core/cache
 /core/tests/build
+/dist/core/tests/build
 .idea
