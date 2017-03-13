@@ -19,6 +19,7 @@ $outline = load_outline($outline);
 if (!empty($outline['settings']['search'])) {
     $search_dir = "$webpage_dir/search";
 
+    # This will grab the search engine files...
     $hook_file = $core_dir . "/includes/webpage." . $outline['settings']['search'] . ".sh";
     if (is_file($hook_file)) {
         system("$hook_file $core_dir $search_dir");

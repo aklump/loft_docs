@@ -9,3 +9,5 @@
 /my_pretend_module
 /core/cache
 /dist/core/cache
+/core/tests/build
+.idea
