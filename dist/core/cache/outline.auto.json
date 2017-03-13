@@ -58,6 +58,13 @@
             "chapter": "demos"
         },
         {
+            "id": "demos--search-noindex",
+            "title": "Demo: Do not include in search indexing",
+            "file": "demos--search-noindex.md",
+            "sort": -10,
+            "chapter": "demos"
+        },
+        {
             "id": "demos--title",
             "title": "Demo: The Sniffed Title",
             "file": "demos--title.md",
