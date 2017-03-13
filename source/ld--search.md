@@ -18,3 +18,11 @@ If you need to add search tags to pages , use the front matter with the key: _ta
         ---
         tags: code php how-to
         ---
+
+## How to exclude a page from the search index
+
+1. Use the frontmatter like this:
+
+        ---
+        search: noindex
+        ---
