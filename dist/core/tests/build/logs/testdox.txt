@@ -5,11 +5,11 @@ advancedHelp
 
 Todos
  [x] Parse todos with prefix
- [x] flatten todos
- [x] get weight
+ [x] test flatten todos
+ [x] test get weight
  [x] Sort todos removes duplicates
- [x] sort todos
- [x] parse todos
+ [x] test sort todos
+ [x] test parse todos
 
 AKlump\LoftDocs\SearchHtml
  [x] No tags
