@@ -21,8 +21,22 @@ If you need to add search tags to pages , use the front matter with the key: _ta
 
 ## How to exclude a page from the search index
 
+There are two ways.  For markdown source files, front matter is preferred.
+
 1. Use the frontmatter like this:
 
         ---
         search: noindex
         ---
+
+When that can't be used, say for an `.html` file, you can use the `outline.merge.json` file with the 
+
+    {
+        "frontmatter": [
+            {
+                "master.apib.html": {
+                    "search": "noindex"
+                }
+            }
+        ]
+    }

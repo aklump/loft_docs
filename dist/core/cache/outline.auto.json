@@ -171,5 +171,10 @@
     ],
     "settings": {
         "search": "tipuesearch"
+    },
+    "frontmatter": {
+        "demos--search-noindex2.html": {
+            "search": "noindex"
+        }
     }
 }
