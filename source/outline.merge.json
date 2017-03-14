@@ -6,10 +6,9 @@
             "sort": 0
         }
     ],
-    "sections": [
-        {
-            "file": "demos--search-noindex2.html",
+    "frontmatter": {
+        "demos--search-noindex2.html": {
             "search": "noindex"
         }
-    ]
+    }
 }

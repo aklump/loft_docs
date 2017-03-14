@@ -100,7 +100,7 @@ function getTags(array $front_matter)
  */
 function getFrontMatterFromHtmlFile($html_file)
 {
-    global $argv;
+    global $argv, $outline;
     $markdown_source = $argv[5];
     $md_file = pathinfo($html_file, PATHINFO_FILENAME);
     $exists = false;
@@ -119,5 +119,11 @@ function getFrontMatterFromHtmlFile($html_file)
         $front_matter = $document->getData();
     }
 
+    // Now look for it in the outline
+    if (!empty($outline['frontmatter'][$html_file])) {
+        $front_matter = $outline['frontmatter'][$html_file] + $front_matter;
+    }
+
     return $front_matter;
 }
+

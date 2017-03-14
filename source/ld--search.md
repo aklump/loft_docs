@@ -29,11 +29,14 @@ There are two ways.  For markdown source files, front matter is preferred.
         search: noindex
         ---
 
-When that can't be used, say for an `.html` file, you can use the `outline.merge.json` file
+When that can't be used, say for an `.html` file, you can use the `outline.merge.json` file with the 
 
-    "sections": [
-        {
-            "file": "demos--search-noindex2.html",
-            "search": "noindex"
-        }
-    ]
+    {
+        "frontmatter": [
+            {
+                "master.apib.html": {
+                    "search": "noindex"
+                }
+            }
+        ]
+    }
