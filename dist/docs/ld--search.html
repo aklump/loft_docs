@@ -49,6 +49,8 @@ tags: code php how-to
 
 <h2>How to exclude a page from the search index</h2>
 
+<p>There are two ways.  For markdown source files, front matter is preferred.</p>
+
 <ol>
 <li><p>Use the frontmatter like this:</p>
 
@@ -57,6 +59,19 @@ search: noindex
 ---
 </code></pre></li>
 </ol>
+
+<p>When that can't be used, say for an <code>.html</code> file, you can use the <code>outline.merge.json</code> file with the</p>
+
+<pre><code>{
+    "frontmatter": [
+        {
+            "master.apib.html": {
+                "search": "noindex"
+            }
+        }
+    ]
+}
+</code></pre>
 </section>
 
 <div class="search__results">
@@ -71,7 +86,7 @@ search: noindex
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.8 &bull; Last Updated: Mon, 13 Mar 2017 15:38:44 -0700</p>
+    <p class="legaleeze center">Version: 0.9.9 &bull; Last Updated: Mon, 13 Mar 2017 17:02:01 -0700</p>
   </div>
 </footer>
 
