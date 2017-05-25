@@ -73,6 +73,6 @@ lynx = $(which lynx)
 #drupal_dir = 'advanced_help'
 
 #
-# This controls which file extensions are run throught the markdown parser and wrapped with the header/footer tpls.
+# This controls which file extensions are run through the markdown parser and wrapped with the header/footer tpls.
 #partial_extension = '.md'
 
