@@ -1,5 +1,9 @@
                                    Changelog
 
+0.9.10
+
+     * Added Deny from All to the .htaccess for public_html pattern.
+
 0.9
 
      * Removed support for kit templates. Now using Twig templates.
