@@ -2,9 +2,12 @@
 
 0.9.10
 
-     * Added Deny from All to the .htaccess for public_html pattern. If
-       this breaks your compile, use a post compile hook to overwrite the
-       default .htaccess file.
+     * POSSIBLE BREAKING CHANGE: Added Deny from All to the .htaccess for
+       public_html pattern. If this breaks your compile, use a post
+       compile hook to overwrite the default .htaccess file; see
+       hooks/htaccess.sh for an example of how to do this. Be sure to
+       register the hook file in core-config.sh in the post_hooks section,
+       or it won't be called.
 
 0.9
 
