@@ -18,6 +18,10 @@ The scripts will receive the following arguments:
 | $argv[2] | $2      | The absolute filepath to the `core/` directory   |
 | $argv[3] | $3      | The absolute filepath to the version file        |
 | $argv[4] | $4      | The absolute filepath to the root_dir directory  |
+| $argv[5] | $5      | The absolute filepath to the compiled website directory  |
+| $argv[6] | $6      | The absolute filepath to the compiled html directory  |
+| $argv[7] | $7      | The absolute filepath to the compiled text directory  |
+| $argv[8] | $8      | The absolute filepath to the compiled drupal directory  |
 
 ## Generating Content
 Hooks/plugins should not generate content to /source directory as this will affect the watcher, instead create any files needed into the core/cache/source.

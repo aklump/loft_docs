@@ -227,7 +227,7 @@ function do_hook_file() {
   if [[ ! -f $file ]]; then
     echo "`tput setaf 1`Hook file not found: $file`tput op`"
   elif [[ "$cmd" ]]; then
-    $cmd "$file" "$docs_source_path" "$CORE" "$docs_version_file" "$docs_root_dir"
+    $cmd "$file" "$docs_source_path" "$CORE" "$docs_version_file" "$docs_root_dir" "$docs_root_dir/$docs_website_dir" "$docs_root_dir/$docs_html_dir" "$docs_root_dir/$docs_text_dir" "$docs_root_dir/$docs_drupal_dir"
     # echo $($cmd "$file" "$source" "$CORE" "$docs_root_dir/$docs_version_file")
   fi
 }
