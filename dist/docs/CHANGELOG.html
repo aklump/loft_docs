@@ -30,7 +30,7 @@
 <h2>0.9.10</h2>
 
 <ul>
-<li>Added <code>Deny from All</code> to the .htaccess for public_html pattern.  If this breaks your compile, use a post compile hook to overwrite the default <code>.htaccess</code> file.</li>
+<li>POSSIBLE BREAKING CHANGE: Added <code>Deny from All</code> to the <code>.htaccess</code> for public_html pattern.  If this breaks your compile, use a post compile hook to overwrite the default <code>.htaccess</code> file; see <code>hooks/htaccess.sh</code> for an example of how to do this.  Be sure to register the hook file in <code>core-config.sh</code> in the <code>post_hooks</code> section, or it won't be called.</li>
 </ul>
 
 <h2>0.9</h2>
@@ -71,7 +71,7 @@
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.11 &bull; Last Updated: Thu, 25 May 2017 09:23:22 -0700</p>
+    <p class="legaleeze center">Version: 0.9.12 &bull; Last Updated: Thu, 25 May 2017 10:29:14 -0700</p>
   </div>
 </footer>
 
