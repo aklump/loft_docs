@@ -3,6 +3,7 @@ title: Using pre/post hooks
 tags: extending pluggable
 ---
 # Pre/Post hooks
+
 You may specify one or more php or shell scripts to be called both before and/or after compiling using the `pre_hooks` and `post_hooks` config options.  The paths you present are relative to `{root}/hooks`.  Compilation pauses until each script is finished.
 
     pre_hooks = "pre_compile.sh pre_compile.php"
@@ -22,6 +23,12 @@ The scripts will receive the following arguments:
 | $argv[6] | $6      | The absolute filepath to the compiled html directory  |
 | $argv[7] | $7      | The absolute filepath to the compiled text directory  |
 | $argv[8] | $8      | The absolute filepath to the compiled drupal directory  |
+| $argv[9] | $9      | The absolute filepath to write dynamic pages before compile |
 
 ## Generating Content
-Hooks/plugins should not generate content to /source directory as this will affect the watcher, instead create any files needed into the core/cache/source.
+
+Hooks/plugins MUST NEVER create files in _/source_ as this will affect the watcher, instead create any files in `$argv[9]`.
+
+## Output
+
+You may print or echo from your script and it will be echoed to the user.
