@@ -21,7 +21,7 @@ It relies on a json file to provide the outline for your book.  Please refer to 
 This is the best method for providing exact control as it's completely explicit.  That said, it's tedius to maintain and so the other files below should be understood before you commit to using `outline.json`.  
 
 ### `outline.auto.json`
-This file is generated during compile IF `outline.json` is not found in the source directory.  It is based on the file structure of `source` plus other meta data (frontmatter, markdown header detection, etc.) as able to be determined during compile.
+This file is generated during compile IF `outline.json` is not found in the source directory.  It is based on the file structure of `source` plus other meta data (frontmatter, markdown header detection, etc.) as able to be determined during compile.  You will find the file at _core/cache/outline.auto.json_.
 
 ### `outline.merge.json`
 This file will be used during compile to override any values normally visible in `outline.auto.json`.  Use this to override or add to what normally shows up in `outline.auto.json`.  It will have no effect if `outline.json` is present in the `source` directory.
