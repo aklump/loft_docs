@@ -86,12 +86,21 @@ post_hooks = "post_compile.sh post_compile.php"
   <td>$8</td>
   <td>The absolute filepath to the compiled drupal directory</td>
 </tr>
+<tr>
+  <td>$argv[9]</td>
+  <td>$9</td>
+  <td>The absolute filepath to write dynamic pages before compile</td>
+</tr>
 </tbody>
 </table>
 
 <h2>Generating Content</h2>
 
-<p>Hooks/plugins should not generate content to /source directory as this will affect the watcher, instead create any files needed into the core/cache/source.</p>
+<p>Hooks/plugins MUST NEVER create files in <em>/source</em> as this will affect the watcher, instead create any files in <code>$argv[9]</code>.</p>
+
+<h2>Output</h2>
+
+<p>You may print or echo from your script and it will be echoed to the user.</p>
 </section>
 
 <div class="search__results">
@@ -106,7 +115,7 @@ post_hooks = "post_compile.sh post_compile.php"
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.12 &bull; Last Updated: Thu, 25 May 2017 10:29:21 -0700</p>
+    <p class="legaleeze center">Version: 0.9.13 &bull; Last Updated: Thu, 09 Nov 2017 17:58:17 -0800</p>
   </div>
 </footer>
 

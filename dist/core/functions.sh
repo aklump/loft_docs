@@ -227,8 +227,7 @@ function do_hook_file() {
   if [[ ! -f $file ]]; then
     echo "`tput setaf 1`Hook file not found: $file`tput op`"
   elif [[ "$cmd" ]]; then
-    $cmd "$file" "$docs_source_path" "$CORE" "$docs_version_file" "$docs_root_dir" "$docs_root_dir/$docs_website_dir" "$docs_root_dir/$docs_html_dir" "$docs_root_dir/$docs_text_dir" "$docs_root_dir/$docs_drupal_dir"
-    # echo $($cmd "$file" "$source" "$CORE" "$docs_root_dir/$docs_version_file")
+    $cmd "$file" "$docs_source_path" "$CORE" "$docs_version_file" "$docs_root_dir" "$docs_root_dir/$docs_website_dir" "$docs_root_dir/$docs_html_dir" "$docs_root_dir/$docs_text_dir" "$docs_root_dir/$docs_drupal_dir" "$CORE/cache/source"
   fi
 }
 
@@ -244,7 +243,7 @@ function do_pre_hooks() {
     for hook in ${docs_pre_hooks[@]}; do
         hook=$(realpath "$docs_hooks_dir/$hook")
         echo_green "Hook file: $hook"
-        echo_yellow $(do_hook_file $hook)
+        echo_yellow "$(do_hook_file $hook)"
     done
 
     # Empty out the page data cache.
@@ -291,8 +290,8 @@ function do_post_hooks() {
   echo "Running post-compile hooks..."
   for hook in ${docs_post_hooks[@]}; do
     hook=$(realpath "$docs_hooks_dir/$hook")
-    echo "`tty -s && tput setaf 2`Hook file: $hook`tty -s && tput op`"
-    echo $(do_hook_file $hook)
+    echo_green "`tty -s && tput setaf 2`Hook file: $hook`tty -s && tput op`"
+    echo_yellow "$(do_hook_file $hook)"
   done
 
   # Internal post hooks should always come after the user-supplied

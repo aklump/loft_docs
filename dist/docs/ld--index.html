@@ -41,7 +41,7 @@
 </code></pre></li>
 </ol>
 
-<h2><code>help.ini</code></h2>
+<h2>help.ini</h2>
 
 <p>This is the method that stems from the Drupal advanced help module and looks something like this.  It is explicit, yet gives the lesser control as the input keys are limited.</p>
 
@@ -49,17 +49,17 @@
 title = "My Tasklist"
 </code></pre>
 
-<h2><code>outline.json</code></h2>
+<h2>outline.json</h2>
 
 <p>It relies on a json file to provide the outline for your book.  Please refer to <code>examples/outline.json</code> for the file schema.</p>
 
 <p>This is the best method for providing exact control as it's completely explicit.  That said, it's tedius to maintain and so the other files below should be understood before you commit to using <code>outline.json</code>.</p>
 
-<h3><code>outline.auto.json</code></h3>
+<h3>outline.auto.json</h3>
 
-<p>This file is generated during compile IF <code>outline.json</code> is not found in the source directory.  It is based on the file structure of <code>source</code> plus other meta data (frontmatter, markdown header detection, etc.) as able to be determined during compile.</p>
+<p>This file is generated during compile IF <code>outline.json</code> is not found in the source directory.  It is based on the file structure of <code>source</code> plus other meta data (frontmatter, markdown header detection, etc.) as able to be determined during compile.  You will find the file at <em>core/cache/outline.auto.json</em>.</p>
 
-<h3><code>outline.merge.json</code></h3>
+<h3>outline.merge.json</h3>
 
 <p>This file will be used during compile to override any values normally visible in <code>outline.auto.json</code>.  Use this to override or add to what normally shows up in <code>outline.auto.json</code>.  It will have no effect if <code>outline.json</code> is present in the <code>source</code> directory.</p>
 </section>
@@ -76,7 +76,7 @@ title = "My Tasklist"
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.12 &bull; Last Updated: Thu, 25 May 2017 10:29:21 -0700</p>
+    <p class="legaleeze center">Version: 0.9.13 &bull; Last Updated: Thu, 09 Nov 2017 17:58:18 -0800</p>
   </div>
 </footer>
 
