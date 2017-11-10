@@ -244,7 +244,7 @@ function do_pre_hooks() {
     for hook in ${docs_pre_hooks[@]}; do
         hook=$(realpath "$docs_hooks_dir/$hook")
         echo_green "Hook file: $hook"
-        echo_yellow $(do_hook_file $hook)
+        echo_yellow "$(do_hook_file $hook)"
     done
 
     # Empty out the page data cache.
