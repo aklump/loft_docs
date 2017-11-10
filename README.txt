@@ -88,7 +88,7 @@ Contact
 
 References
 
-   1. file:///Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/cache/tmp/README.html#install
-   2. file:///Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/cache/tmp/README.html#theming
-   3. file:///Volumes/Data/Users/aklump/Code/Packages/bash/loft_docs/core/cache/tmp/README.html#compiling
+   1. file:///Users/aklump/Code/Packages/bash/loft_docs/core/cache/tmp/README.html#install
+   2. file:///Users/aklump/Code/Packages/bash/loft_docs/core/cache/tmp/README.html#theming
+   3. file:///Users/aklump/Code/Packages/bash/loft_docs/core/cache/tmp/README.html#compiling
    4. http://www.InTheLoftStudios.com/
