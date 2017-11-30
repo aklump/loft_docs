@@ -35,7 +35,11 @@ You may print or echo from your script and it will be echoed to the user.
 
 ## Using Twig Templates for Generated Content
 
-A common pre hook concern is to generate dynamic pages.  If you do this with a php file, you can have access to [Twig](https://twig.symfony.com/doc/2.x) via the core dependencies.  Here is an example scaffold for a pre hook that uses a twig template to create a page.
+A common pre hook concern is to generate dynamic pages.  If you do this with a php file, you can have access to [Twig](https://twig.symfony.com/doc/2.x) via the core dependencies.  
+
+If your template file is located in source, it should use a .twig extension.  Then in your hook, spit the compiled out as .md.
+
+Here is an example scaffold for a pre hook that uses a twig template to create a page.
 
 ### hooks/plugins_dir.php
 
