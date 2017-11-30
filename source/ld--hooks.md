@@ -32,3 +32,55 @@ Hooks/plugins MUST NEVER create files in _/source_ as this will affect the watch
 ## Output
 
 You may print or echo from your script and it will be echoed to the user.
+
+## Using Twig Templates for Generated Content
+
+A common pre hook concern is to generate dynamic pages.  If you do this with a php file, you can have access to [Twig](https://twig.symfony.com/doc/2.x) via the core dependencies.  
+
+If your template file is located in source, it should use a .twig extension.  Then in your hook, spit the compiled out as .md.
+
+Here is an example scaffold for a pre hook that uses a twig template to create a page.
+
+### hooks/plugins_dir.php
+
+    <?php
+    /**
+     * @file Generate the plugins directory page by scanning the plugins directory.
+     */
+    
+    // Load the core autoload, which will give access to Twig
+    require_once $argv[2] . '/vendor/autoload.php';
+    
+    // ...
+    // Create an array $vars from some process
+    // ...
+    
+    $loader = new Twig_Loader_Filesystem(dirname(__FILE__));
+    $twig = new Twig_Environment($loader);
+    
+    // Template file is located in /hooks as well.
+    $template = $twig->load('plugins_dir.md');
+    
+    // Write the file using $argv[9] to the correct compilation directory.
+    file_put_contents($argv[9] . '/plugins_dir.md', $template->render($vars));
+
+### hooks/plugins_dir.md
+
+    ---
+    sort: -163
+    ---
+    # Plugin Library
+    
+    {% for plugin in plugins %}
+    ## {{ plugin.name }}
+    
+    > {{ plugin.description }}
+    
+    {{ plugin.readme }}
+    
+    ### Usage Example
+    
+    <pre>{{ plugin.example }}</pre>
+    
+    {% endfor %}
+

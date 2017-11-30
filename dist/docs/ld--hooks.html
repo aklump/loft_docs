@@ -101,6 +101,59 @@ post_hooks = "post_compile.sh post_compile.php"
 <h2>Output</h2>
 
 <p>You may print or echo from your script and it will be echoed to the user.</p>
+
+<h2>Using Twig Templates for Generated Content</h2>
+
+<p>A common pre hook concern is to generate dynamic pages.  If you do this with a php file, you can have access to <a href="https://twig.symfony.com/doc/2.x">Twig</a> via the core dependencies.</p>
+
+<p>If your template file is located in source, it should use a .twig extension.  Then in your hook, spit the compiled out as .md.</p>
+
+<p>Here is an example scaffold for a pre hook that uses a twig template to create a page.</p>
+
+<h3>hooks/plugins_dir.php</h3>
+
+<pre><code>&lt;?php
+/**
+ * @file Generate the plugins directory page by scanning the plugins directory.
+ */
+
+// Load the core autoload, which will give access to Twig
+require_once $argv[2] . '/vendor/autoload.php';
+
+// ...
+// Create an array $vars from some process
+// ...
+
+$loader = new Twig_Loader_Filesystem(dirname(__FILE__));
+$twig = new Twig_Environment($loader);
+
+// Template file is located in /hooks as well.
+$template = $twig-&gt;load('plugins_dir.md');
+
+// Write the file using $argv[9] to the correct compilation directory.
+file_put_contents($argv[9] . '/plugins_dir.md', $template-&gt;render($vars));
+</code></pre>
+
+<h3>hooks/plugins_dir.md</h3>
+
+<pre><code>---
+sort: -163
+---
+# Plugin Library
+
+{% for plugin in plugins %}
+## {{ plugin.name }}
+
+&gt; {{ plugin.description }}
+
+{{ plugin.readme }}
+
+### Usage Example
+
+&lt;pre&gt;{{ plugin.example }}&lt;/pre&gt;
+
+{% endfor %}
+</code></pre>
 </section>
 
 <div class="search__results">
@@ -115,7 +168,7 @@ post_hooks = "post_compile.sh post_compile.php"
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.13 &bull; Last Updated: Thu, 09 Nov 2017 17:58:17 -0800</p>
+    <p class="legaleeze center">Version: 0.9.14 &bull; Last Updated: Thu, 30 Nov 2017 13:19:13 -0800</p>
   </div>
 </footer>
 
