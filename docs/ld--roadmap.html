@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Roadmap</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--ld--roadmap">
+<header>
+  <div class="pager">
+  <a href="ld--installation.html" class="prev ld--installation">&laquo;How to install</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="ld--search.html" class="next ld--search">Integrating search&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Roadmap</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<h2>Compile time takes too long for videos</h2>
+
+<p>When compiling the output directories are deleted.  This needs to change so that if videos are in a directory we don't have to waste time duplicating large files.</p>
+
+<ul>
+<li>[ ] Fix the delay caused by deleting files at beginning of compile.</li>
+</ul>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="ld--installation.html" class="prev ld--installation">&laquo;How to install</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="ld--search.html" class="next ld--search">Integrating search&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.9.15 &bull; Last Updated: Fri, 19 Jan 2018 11:46:20 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

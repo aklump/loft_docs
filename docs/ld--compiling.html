@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Compiling</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--ld--compiling">
+<header>
+  <div class="pager">
+  <a href="ld--autocompile.html" class="prev ld--autocompile">&laquo;Auto-compiling</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="ld--drupal.html" class="next ld--drupal">Drupal Integration&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Compiling</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<p>After a round of changes to the files found in <code>/source</code>, you will need to export or <em>compile</em> your documentation.</p>
+
+<h2>Requirements</h2>
+
+<ol>
+<li>Compiling uses <a href="http://michelf.ca/projects/php-markdown/">Markdown Php</a>, which is included in this distribution.</li>
+<li>Output of <code>.txt</code> files requires that <a href="http://lynx.isc.org/">Lynx</a> be installed.</li>
+</ol>
+
+<h2>How to compile</h2>
+
+<p>Each time you want to update your documentation files, after modifying files in <code>source</code> you need to execute <code>compile</code> from bash, make sure you are in the root directory of this package.</p>
+
+<pre><code>./core/compile
+</code></pre>
+
+<h2>Folders and Other Includes</h2>
+
+<p>By default folders in the <code>source</code> file are copied to the compiled output directories.  In some cases you will want greater control and/or you will not want to mess up <code>source</code> with boilerplater folders.  For this reason there is a means to include files/folders in the compiled output by creating defined folder structures and placing your boilerplate content there.</p>
+
+<p>For example to include a js directory in the website output you would create that folder as <code>compile/public_html/js</code>.</p>
+
+<pre><code>source/
+    about.md
+compile/
+    public_html/
+        js/
+            app.js
+            extra.js
+</code></pre>
+
+<p>If you've reconfigured the folder name for the website directory, make sure to match the folder structure to the reconfigured name.</p>
+
+<h2>Defining the documentation version</h2>
+
+<p>Some of the templates utilize a version string.  How this is provided is the the next topic covered.</p>
+
+<p>If no version can be found the string will always be 1.0</p>
+
+<p><strong>By default, Loft Docs will look for <code>*.info</code>, in the directory above <code>core/</code>.</strong>  If this is not working or desired then you can specify a path in <em>core-config.sh</em> as such:</p>
+
+<pre><code>version_file = "/some/absolute/path/version.info"
+</code></pre>
+
+<p>There is a built in a version hook that can sniff a version from .info and .json files and that may suffice.  If not read on about a custom version hook...</p>
+
+<p><em>A version hook is a php or shell script that echos the version string of your documentation</em>.  These version hook script receives the same arguments as the pre/post hooks.  You define your version hook in config.  See <code>version_hook.php</code> as an implementation example.  Only one file is allowed in the declaration; either php or shell.</p>
+
+<pre><code>version_hook = "version_hook.php"
+</code></pre>
+
+<h2>Removing Compiled Files</h2>
+
+<p>You may delete all compiled files using the <em>clean</em> command.</p>
+
+<pre><code>./core/clean
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="ld--autocompile.html" class="prev ld--autocompile">&laquo;Auto-compiling</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="ld--drupal.html" class="next ld--drupal">Drupal Integration&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.9.15 &bull; Last Updated: Fri, 19 Jan 2018 11:46:19 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+
