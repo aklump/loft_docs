@@ -1,0 +1,14 @@
+{
+    "chapters": [
+        {
+            "id": "ld",
+            "title": "Using Loft Docs",
+            "sort": 0
+        }
+    ],
+    "frontmatter": {
+        "demos--search-noindex2.html": {
+            "search": "noindex"
+        }
+    }
+}

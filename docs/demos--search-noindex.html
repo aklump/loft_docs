@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Demo: Do not include in search indexing</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--demos--search-noindex">
+<header>
+  <div class="pager">
+  <a href="README.html" class="prev README">&laquo;Overview of Loft Docs</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="CHANGELOG.html" class="next CHANGELOG">Changelog&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Demo: Do not include in search indexing</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section><p>Norske tekst.</p>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="README.html" class="prev README">&laquo;Overview of Loft Docs</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="CHANGELOG.html" class="next CHANGELOG">Changelog&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.9.14 &bull; Last Updated: Fri, 19 Jan 2018 11:44:00 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

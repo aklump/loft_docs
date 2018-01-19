@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Integrating search</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--ld--search">
+<header>
+  <div class="pager">
+  <a href="ld--roadmap.html" class="prev ld--roadmap">&laquo;Roadmap</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="ld--theming.html" class="next ld--theming">Custom Theming the Website Version&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Integrating search</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<p>To enable search you need to create a file in the source directory called:</p>
+
+<pre><code>    search--results.md
+</code></pre>
+
+<p>The file will be used as the stub for the search results page and can either be empty or you can add content to it.</p>
+
+<h2>How to explicitly tag content</h2>
+
+<p>If you need to add search tags to pages , use the front matter with the key: <em>tags</em>.  Follow these guidlines:</p>
+
+<ol>
+<li><p>Tags MUST NOT contain a space.</p>
+
+<pre><code>---
+tags: code php how-to
+---
+</code></pre></li>
+</ol>
+
+<h2>How to exclude a page from the search index</h2>
+
+<p>There are two ways.  For markdown source files, front matter is preferred.</p>
+
+<ol>
+<li><p>Use the frontmatter like this:</p>
+
+<pre><code>---
+search: noindex
+---
+</code></pre></li>
+</ol>
+
+<p>When that can't be used, say for an <code>.html</code> file, you can use the <code>outline.merge.json</code> file with the</p>
+
+<pre><code>{
+    "frontmatter": [
+        {
+            "master.apib.html": {
+                "search": "noindex"
+            }
+        }
+    ]
+}
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="ld--roadmap.html" class="prev ld--roadmap">&laquo;Roadmap</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="ld--theming.html" class="next ld--theming">Custom Theming the Website Version&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.9.14 &bull; Last Updated: Fri, 19 Jan 2018 11:44:02 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

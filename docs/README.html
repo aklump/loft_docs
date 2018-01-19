@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Overview of Loft Docs</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--readme">
+<header>
+  <div class="pager">
+  <a href="index.html" class="prev index">&laquo;Index</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="demos--search-noindex.html" class="next demos--search-noindex">Demo: Do not include in search indexing&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Overview of Loft Docs</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<p><strong>Loft Docs is the last project documentation tool you'll ever need.</strong>  Loft Docs provides one central place to manage your documentation allowing you to compose in Markdown and have the benefits of simultaneous output to the following formats:</p>
+
+<ol>
+<li>An indexed, multi-page, stand-alone, searchable (via js) website</li>
+<li>HTML</li>
+<li>Plaintext</li>
+<li>MediaWiki</li>
+<li>Advanced Help for Drupal</li>
+</ol>
+
+<p>Gone are the days of having to update all your different documentation locations!</p>
+
+<p><em>For installation instructions <a href="#install">scroll down</a>.</em></p>
+
+<h2>Features</h2>
+
+<ol>
+<li>Tasklist todo item aggregation and sorting.</li>
+<li>Output to many popular formats.</li>
+<li>Compilation hooks for before and after.</li>
+<li>Custom <a href="#theming">website theming</a>.</li>
+<li>Searchable pages (in the website output)</li>
+</ol>
+
+<h2>As a Reader</h2>
+
+<ol>
+<li>To read documentation you probably just want to load <code>public_html/index.html</code> in a browser and proceed from there.</li>
+<li>Plaintext documentation may also be available in <code>text/</code>.</li>
+<li>MediaWiki documentation if supported will be found in <code>mediawiki/</code>.</li>
+</ol>
+
+<h2>As an Author</h2>
+
+<ol>
+<li><p>You will concern yourself with the <code>/source</code> directory, creating your source markdown files here.  This is the source of all documentation.</p></li>
+<li><p>Only files in the <code>source</code> directory should  be edited.  All other files get created during compiling.</p></li>
+<li><p>Images can be added to <code>source/images</code>.</p></li>
+<li><p>Use relative links when linking to other pages inside <code>source</code>.</p></li>
+<li><p>Use absolute links when linking to anything outside of <code>source</code>.</p></li>
+</ol>
+
+<h2>As an Admin/Content Manager</h2>
+
+<ol>
+<li>You will need to read about <a href="#compiling">compiling</a> below; this is the step needed to generate derivative documentation from <code>/source</code>.</li>
+</ol>
+
+<h3>Linking to Other Help Pages</h3>
+
+<p>You should do the following to link internally to <code>source/page2.html</code></p>
+
+<pre><code>&lt;a href="page2.html"&gt;Link to Next Page&lt;/a&gt;
+</code></pre>
+
+<h2>As a Developer</h2>
+
+<p>If you are implementing any hooks and you need component or include files, which compile to markdown files in <code>/source</code>:</p>
+
+<ol>
+<li>Put these component files in <code>/parts</code> not in <code>/source</code>.</li>
+<li>Make sure the generated files begin with the underscore, e.g., <code>_my_compiled_file.md</code>.  That will indicate these files are compiled and can be deleted using <code>core/clean</code>.</li>
+</ol>
+
+<h2>Core update</h2>
+
+<p>Loft Docs provides a core update feature as seen below.  From the root directory type:</p>
+
+<pre><code>./core/update
+</code></pre>
+
+<h2>Rationale</h2>
+
+<p>The rationalle behind this project is that it is easy to write markdown files, and it is easy to share a static html based documentation file, and it is easy to use Drupal Advanced Help module, and it is easy to version your documentation in git; but to do all this together at once… was NOT EASY.</p>
+
+<p>But now with <em>Loft Docs</em>... it's easy.</p>
+
+<h2>Contact</h2>
+
+<ul>
+<li><strong>In the Loft Studios</strong></li>
+<li>Aaron Klump - Developer</li>
+<li>PO Box 29294 Bellingham, WA 98228-1294</li>
+<li><em>aim</em>: theloft101</li>
+<li><em>skype</em>: intheloftstudios</li>
+<li><em>d.o</em>: aklump</li>
+<li><a href="http://www.InTheLoftStudios.com">http://www.InTheLoftStudios.com</a></li>
+</ul>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="index.html" class="prev index">&laquo;Index</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="demos--search-noindex.html" class="next demos--search-noindex">Demo: Do not include in search indexing&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.9.14 &bull; Last Updated: Fri, 19 Jan 2018 11:43:59 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+
