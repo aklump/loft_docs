@@ -43,7 +43,7 @@ drupal_dir = 'my_pretend_module/help'
 #
 # This MUST be a directory relative to the directory containing core-config.sh
 #
-README = 'README.txt README.md'
+README = 'README.md'
 
 ##
  # The file path to an extra CHANGELOG.txt file; when CHANGELOG.md is compiled and
