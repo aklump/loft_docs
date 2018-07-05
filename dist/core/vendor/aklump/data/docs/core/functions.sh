@@ -153,7 +153,7 @@ function load_config() {
   # If we still don't have it then we'll generate from the file structure.
   if [[ ! "$docs_outline_file" ]]; then
     # Create $docs_outline_auto from the file contents
-    $docs_php "$CORE/includes/files_to_json.inc" "$docs_source_path" "$docs_source_dir/$docs_outline_auto" "$docs_source_dir/$docs_outline_merge"
+    $docs_php "$CORE/includes/files_to_json.php" "$docs_source_path" "$docs_source_dir/$docs_outline_auto" "$docs_source_dir/$docs_outline_merge"
 
     docs_outline_file="$docs_source_path/$docs_outline_auto"
   fi
@@ -280,7 +280,7 @@ function do_todos() {
       if [ "$file" != "$global" ]; then
 #        echo "Scanning $file for todo items."
         # Send a single file over for processing todos via php
-        $docs_php "$CORE/todos.inc" "$file" "$global"
+        $docs_php "$CORE/todos.php" "$file" "$global"
       fi
     done
 #    echo "Tasklist complete"

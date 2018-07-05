@@ -210,7 +210,7 @@ if [ "$docs_README" ]; then
         cp "$readme_source" "$output"
         _check_file "$output"
     elif echo "$readme_file" | grep -q '.md$'; then
-        $docs_php "$CORE/includes/cp_no_frontmatter.php" "$docs_source_dir/$readme_file" "$output"
+        $docs_php "$CORE/includes/cp_markdown_nofm.php" "$docs_source_dir/$readme_file" "$output"
         _check_file "$output"
     fi
 
@@ -230,7 +230,7 @@ if [ "$docs_CHANGELOG" ]; then
         cp "$changelog_source" "$output"
         _check_file "$output"
     elif echo "$changelog_file" | grep -q '.md$'; then
-        $docs_php "$CORE/includes/cp_no_frontmatter.php" "$docs_source_dir/$changelog_file" "$output"
+        $docs_php "$CORE/includes/cp_markdown_nofm.php" "$docs_source_dir/$changelog_file" "$output"
         _check_file "$output"
     fi
 
