@@ -17,5 +17,4 @@ rsync -a "$7/public_html/" "$7/dist/docs/"
 # ... and files.
 cp "$7/core-version.info" "$7/dist/"
 cp "$7/CHANGELOG.txt" "$7/dist/"
-cp "$7/README.txt" "$7/dist/"
 cp "$7/gitignore" "$7/dist/"
