@@ -34,11 +34,11 @@ class ComposerStaticInit57e0d1a2964202d36b8a6b260801c423
         array (
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Container\\' => 14,
-            'Piwik\\Ini\\' => 10,
         ),
         'M' => 
         array (
             'Michelf\\' => 8,
+            'Matomo\\Ini\\' => 11,
         ),
         'I' => 
         array (
@@ -93,13 +93,13 @@ class ComposerStaticInit57e0d1a2964202d36b8a6b260801c423
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'Piwik\\Ini\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/piwik/ini/src',
-        ),
         'Michelf\\' => 
         array (
             0 => __DIR__ . '/..' . '/michelf/php-markdown/Michelf',
+        ),
+        'Matomo\\Ini\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/matomo/ini/src',
         ),
         'Illuminate\\Support\\' => 
         array (
@@ -337,13 +337,13 @@ class ComposerStaticInit57e0d1a2964202d36b8a6b260801c423
         'JasonLewis\\ResourceWatcher\\Tracker' => __DIR__ . '/..' . '/jasonlewis/resource-watcher/src/JasonLewis/ResourceWatcher/Tracker.php',
         'JasonLewis\\ResourceWatcher\\Watcher' => __DIR__ . '/..' . '/jasonlewis/resource-watcher/src/JasonLewis/ResourceWatcher/Watcher.php',
         'JsonSerializable' => __DIR__ . '/..' . '/nesbot/carbon/src/JsonSerializable.php',
+        'Matomo\\Ini\\IniReader' => __DIR__ . '/..' . '/matomo/ini/src/IniReader.php',
+        'Matomo\\Ini\\IniReadingException' => __DIR__ . '/..' . '/matomo/ini/src/IniReadingException.php',
+        'Matomo\\Ini\\IniWriter' => __DIR__ . '/..' . '/matomo/ini/src/IniWriter.php',
+        'Matomo\\Ini\\IniWritingException' => __DIR__ . '/..' . '/matomo/ini/src/IniWritingException.php',
         'Michelf\\Markdown' => __DIR__ . '/..' . '/michelf/php-markdown/Michelf/Markdown.php',
         'Michelf\\MarkdownExtra' => __DIR__ . '/..' . '/michelf/php-markdown/Michelf/MarkdownExtra.php',
         'Michelf\\MarkdownInterface' => __DIR__ . '/..' . '/michelf/php-markdown/Michelf/MarkdownInterface.php',
-        'Piwik\\Ini\\IniReader' => __DIR__ . '/..' . '/piwik/ini/src/IniReader.php',
-        'Piwik\\Ini\\IniReadingException' => __DIR__ . '/..' . '/piwik/ini/src/IniReadingException.php',
-        'Piwik\\Ini\\IniWriter' => __DIR__ . '/..' . '/piwik/ini/src/IniWriter.php',
-        'Piwik\\Ini\\IniWritingException' => __DIR__ . '/..' . '/piwik/ini/src/IniWritingException.php',
         'Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerExceptionInterface.php',
         'Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
         'Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/NotFoundExceptionInterface.php',
