@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "52bb078bde949c4a1c1ead3f3e2ac117",
+    "content-hash": "0dea342bbf706cc9ee4919a81b524ee5",
     "packages": [
         {
             "name": "aklump/data",
@@ -404,6 +404,39 @@
             "time": "2015-07-11T10:22:48+00:00"
         },
         {
+            "name": "matomo/ini",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/matomo-org/component-ini.git",
+                "reference": "ac25c899aefdbaca7e00a86367af24bd72aa1b4d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/matomo-org/component-ini/zipball/ac25c899aefdbaca7e00a86367af24bd72aa1b4d",
+                "reference": "ac25c899aefdbaca7e00a86367af24bd72aa1b4d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "athletic/athletic": "0.1.*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Matomo\\Ini\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "time": "2018-02-14T18:57:44+00:00"
+        },
+        {
             "name": "michelf/php-markdown",
             "version": "1.8.0",
             "source": {
@@ -503,40 +536,6 @@
                 "time"
             ],
             "time": "2018-07-05T06:59:26+00:00"
-        },
-        {
-            "name": "piwik/ini",
-            "version": "1.0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/piwik/component-ini.git",
-                "reference": "bd2711ba4d5e20e4ca09b6829dc2831576b59dc3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/piwik/component-ini/zipball/bd2711ba4d5e20e4ca09b6829dc2831576b59dc3",
-                "reference": "bd2711ba4d5e20e4ca09b6829dc2831576b59dc3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "athletic/athletic": "0.1.*",
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Piwik\\Ini\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0"
-            ],
-            "abandoned": "matomo/ini",
-            "time": "2016-01-14T21:13:33+00:00"
         },
         {
             "name": "psr/container",
