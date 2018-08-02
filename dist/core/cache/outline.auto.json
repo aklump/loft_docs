@@ -163,10 +163,17 @@
             "chapter": "ld"
         },
         {
+            "id": "ld--visual-sitemap",
+            "title": "Integrate with Visual Sitemap",
+            "file": "ld--visual-sitemap.md",
+            "sort": 18,
+            "chapter": "ld"
+        },
+        {
             "id": "_tasklist",
             "title": "Tasklist",
             "file": "_tasklist.md",
-            "sort": 18
+            "sort": 19
         }
     ],
     "settings": {
