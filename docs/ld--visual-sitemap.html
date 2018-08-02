@@ -38,8 +38,7 @@ docs_vismap=$(type vismap &gt;/dev/null &amp;2&gt;&amp;1 &amp;&amp; which vismap
 
 if [ "$docs_vismap" ]; then
     cd "$1"
-    $docs_vismap sitemap.json
-    mv -v sitemap.html "$9/vismap.html"
+    $docs_vismap sitemap.json --out="$9/vismap.html" -f
 fi
 </code></pre></li>
 <li><p>Add the filename to <em>core-config.sh</em></p></li>
@@ -65,7 +64,7 @@ fi
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.22 &bull; Last Updated: Thu, 02 Aug 2018 15:27:23 -0700</p>
+    <p class="legaleeze center">Version: 0.9.23 &bull; Last Updated: Thu, 02 Aug 2018 16:47:13 -0700</p>
   </div>
 </footer>
 
