@@ -32,24 +32,24 @@
 <ol>
 <li><p>Create a hook file called <em>sitemap.sh</em> with the following:</p>
 
-<p>#!/usr/bin/env bash</p>
+<pre><code>#!/usr/bin/env bash
 
-<p>docs_vismap=$(type vismap >/dev/null &amp;2>&amp;1 &amp;&amp; which vismap)</p>
+docs_vismap=$(type vismap &gt;/dev/null &amp;2&gt;&amp;1 &amp;&amp; which vismap)
 
-<p>if [ "$docs_vismap" ]; then
-       cd "$1"
-       $docs_vismap sitemap.json
-       mv -v sitemap.html "$9/vismap.html"
-   fi</p></li>
+if [ "$docs_vismap" ]; then
+    cd "$1"
+    $docs_vismap sitemap.json
+    mv -v sitemap.html "$9/vismap.html"
+fi
+</code></pre></li>
 <li><p>Add the filename to <em>core-config.sh</em></p></li>
 <li>Create your sitemap json in <em>source/\sitemap.json</em>.</li>
 <li><p>Add a file called <em>sitemap.md</em> with something like the following; the <code>iframe</code> is the important part.</p>
 
-<p># Visual Sitemap</p>
+<pre><code># Visual Sitemap
 
-<p></p>
-
-<iframe src="vismap.html" height="1200"></iframe></li>
+&lt;iframe src="vismap.html" height="1200"&gt;&lt;/iframe&gt;
+</code></pre></li>
 </ol>
 </section>
 
@@ -65,7 +65,7 @@
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.20 &bull; Last Updated: Thu, 02 Aug 2018 15:15:28 -0700</p>
+    <p class="legaleeze center">Version: 0.9.20 &bull; Last Updated: Thu, 02 Aug 2018 15:23:09 -0700</p>
   </div>
 </footer>
 
