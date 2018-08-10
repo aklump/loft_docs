@@ -18,7 +18,7 @@ The scripts will receive the following arguments:
 | $argv[1] | $1      | The absolute filepath to the `source/` directory |
 | $argv[2] | $2      | The absolute filepath to the `core/` directory   |
 | $argv[3] | $3      | The absolute filepath to the version file        |
-| $argv[4] | $4      | The absolute filepath to the root_dir directory  |
+| $argv[4] | $4      | The absolute filepath to the parent directory of `source`, a.k.a the root directory  |
 | $argv[5] | $5      | The absolute filepath to the compiled website directory  |
 | $argv[6] | $6      | The absolute filepath to the compiled html directory  |
 | $argv[7] | $7      | The absolute filepath to the compiled text directory  |
