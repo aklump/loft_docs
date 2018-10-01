@@ -209,29 +209,29 @@
     },
     {
         "name": "illuminate/contracts",
-        "version": "v5.6.35",
-        "version_normalized": "5.6.35.0",
+        "version": "v5.7.6",
+        "version_normalized": "5.7.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/illuminate/contracts.git",
-            "reference": "2c029101285f6066f45e3ae5910b1b5f900fdcb4"
+            "reference": "2daf3c078610f744e2a4dc2f44fb5060cce9835b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/contracts/zipball/2c029101285f6066f45e3ae5910b1b5f900fdcb4",
-            "reference": "2c029101285f6066f45e3ae5910b1b5f900fdcb4",
+            "url": "https://api.github.com/repos/illuminate/contracts/zipball/2daf3c078610f744e2a4dc2f44fb5060cce9835b",
+            "reference": "2daf3c078610f744e2a4dc2f44fb5060cce9835b",
             "shasum": ""
         },
         "require": {
             "php": "^7.1.3",
-            "psr/container": "~1.0",
-            "psr/simple-cache": "~1.0"
+            "psr/container": "^1.0",
+            "psr/simple-cache": "^1.0"
         },
-        "time": "2018-07-31T12:49:53+00:00",
+        "time": "2018-09-18T12:50:05+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.6-dev"
+                "dev-master": "5.7-dev"
             }
         },
         "installation-source": "dist",
@@ -255,37 +255,37 @@
     },
     {
         "name": "illuminate/filesystem",
-        "version": "v5.6.35",
-        "version_normalized": "5.6.35.0",
+        "version": "v5.7.6",
+        "version_normalized": "5.7.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/illuminate/filesystem.git",
-            "reference": "569904131813e4ac7051ae00bc1834063da562a6"
+            "reference": "a09fae4470494dc9867609221b46fe844f2f3b70"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/filesystem/zipball/569904131813e4ac7051ae00bc1834063da562a6",
-            "reference": "569904131813e4ac7051ae00bc1834063da562a6",
+            "url": "https://api.github.com/repos/illuminate/filesystem/zipball/a09fae4470494dc9867609221b46fe844f2f3b70",
+            "reference": "a09fae4470494dc9867609221b46fe844f2f3b70",
             "shasum": ""
         },
         "require": {
-            "illuminate/contracts": "5.6.*",
-            "illuminate/support": "5.6.*",
+            "illuminate/contracts": "5.7.*",
+            "illuminate/support": "5.7.*",
             "php": "^7.1.3",
-            "symfony/finder": "~4.0"
+            "symfony/finder": "^4.1"
         },
         "suggest": {
-            "league/flysystem": "Required to use the Flysystem local and FTP drivers (~1.0).",
-            "league/flysystem-aws-s3-v3": "Required to use the Flysystem S3 driver (~1.0).",
-            "league/flysystem-cached-adapter": "Required to use the Flysystem cache (~1.0).",
-            "league/flysystem-rackspace": "Required to use the Flysystem Rackspace driver (~1.0).",
-            "league/flysystem-sftp": "Required to use the Flysystem SFTP driver (~1.0)."
+            "league/flysystem": "Required to use the Flysystem local and FTP drivers (^1.0).",
+            "league/flysystem-aws-s3-v3": "Required to use the Flysystem S3 driver (^1.0).",
+            "league/flysystem-cached-adapter": "Required to use the Flysystem cache (^1.0).",
+            "league/flysystem-rackspace": "Required to use the Flysystem Rackspace driver (^1.0).",
+            "league/flysystem-sftp": "Required to use the Flysystem SFTP driver (^1.0)."
         },
-        "time": "2018-08-13T14:51:11+00:00",
+        "time": "2018-08-14T19:42:44+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.6-dev"
+                "dev-master": "5.7-dev"
             }
         },
         "installation-source": "dist",
@@ -309,40 +309,41 @@
     },
     {
         "name": "illuminate/support",
-        "version": "v5.6.35",
-        "version_normalized": "5.6.35.0",
+        "version": "v5.7.6",
+        "version_normalized": "5.7.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/illuminate/support.git",
-            "reference": "4eb12aa00bbf2d5e73c355ad404a9d0679879094"
+            "reference": "f7c68e8c8aab200cc8ad84f974d5511cda58a742"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/support/zipball/4eb12aa00bbf2d5e73c355ad404a9d0679879094",
-            "reference": "4eb12aa00bbf2d5e73c355ad404a9d0679879094",
+            "url": "https://api.github.com/repos/illuminate/support/zipball/f7c68e8c8aab200cc8ad84f974d5511cda58a742",
+            "reference": "f7c68e8c8aab200cc8ad84f974d5511cda58a742",
             "shasum": ""
         },
         "require": {
-            "doctrine/inflector": "~1.1",
+            "doctrine/inflector": "^1.1",
             "ext-mbstring": "*",
-            "illuminate/contracts": "5.6.*",
-            "nesbot/carbon": "^1.24.1",
+            "illuminate/contracts": "5.7.*",
+            "nesbot/carbon": "^1.26.3",
             "php": "^7.1.3"
         },
         "conflict": {
             "tightenco/collect": "<5.5.33"
         },
         "suggest": {
-            "illuminate/filesystem": "Required to use the composer class (5.6.*).",
+            "illuminate/filesystem": "Required to use the composer class (5.7.*).",
+            "moontoast/math": "Required to use ordered UUIDs (^1.1).",
             "ramsey/uuid": "Required to use Str::uuid() (^3.7).",
-            "symfony/process": "Required to use the composer class (~4.0).",
-            "symfony/var-dumper": "Required to use the dd function (~4.0)."
+            "symfony/process": "Required to use the composer class (^4.1).",
+            "symfony/var-dumper": "Required to use the dd function (^4.1)."
         },
-        "time": "2018-08-15T21:02:31+00:00",
+        "time": "2018-09-19T18:36:57+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.6-dev"
+                "dev-master": "5.7-dev"
             }
         },
         "installation-source": "dist",
@@ -497,17 +498,17 @@
     },
     {
         "name": "nesbot/carbon",
-        "version": "1.33.0",
-        "version_normalized": "1.33.0.0",
+        "version": "1.34.0",
+        "version_normalized": "1.34.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/briannesbitt/Carbon.git",
-            "reference": "55667c1007a99e82030874b1bb14d24d07108413"
+            "reference": "1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/55667c1007a99e82030874b1bb14d24d07108413",
-            "reference": "55667c1007a99e82030874b1bb14d24d07108413",
+            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33",
+            "reference": "1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33",
             "shasum": ""
         },
         "require": {
@@ -518,7 +519,7 @@
             "friendsofphp/php-cs-fixer": "~2",
             "phpunit/phpunit": "^4.8.35 || ^5.7"
         },
-        "time": "2018-08-07T08:39:47+00:00",
+        "time": "2018-09-20T19:36:25+00:00",
         "type": "library",
         "extra": {
             "laravel": {
@@ -655,23 +656,23 @@
     },
     {
         "name": "symfony/finder",
-        "version": "v4.1.4",
-        "version_normalized": "4.1.4.0",
+        "version": "v4.1.5",
+        "version_normalized": "4.1.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/finder.git",
-            "reference": "e162f1df3102d0b7472805a5a9d5db9fcf0a8068"
+            "reference": "f0b042d445c155501793e7b8007457f9f5bb1c8c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/finder/zipball/e162f1df3102d0b7472805a5a9d5db9fcf0a8068",
-            "reference": "e162f1df3102d0b7472805a5a9d5db9fcf0a8068",
+            "url": "https://api.github.com/repos/symfony/finder/zipball/f0b042d445c155501793e7b8007457f9f5bb1c8c",
+            "reference": "f0b042d445c155501793e7b8007457f9f5bb1c8c",
             "shasum": ""
         },
         "require": {
             "php": "^7.1.3"
         },
-        "time": "2018-07-26T11:24:31+00:00",
+        "time": "2018-09-21T12:49:42+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -827,17 +828,17 @@
     },
     {
         "name": "symfony/translation",
-        "version": "v4.1.4",
-        "version_normalized": "4.1.4.0",
+        "version": "v4.1.5",
+        "version_normalized": "4.1.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/translation.git",
-            "reference": "fa2182669f7983b7aa5f1a770d053f79f0ef144f"
+            "reference": "6e49130ddf150b7bfe9e34edb2f3f698aa1aa43b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/translation/zipball/fa2182669f7983b7aa5f1a770d053f79f0ef144f",
-            "reference": "fa2182669f7983b7aa5f1a770d053f79f0ef144f",
+            "url": "https://api.github.com/repos/symfony/translation/zipball/6e49130ddf150b7bfe9e34edb2f3f698aa1aa43b",
+            "reference": "6e49130ddf150b7bfe9e34edb2f3f698aa1aa43b",
             "shasum": ""
         },
         "require": {
@@ -863,7 +864,7 @@
             "symfony/config": "",
             "symfony/yaml": ""
         },
-        "time": "2018-08-07T12:45:11+00:00",
+        "time": "2018-09-21T12:49:42+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -898,17 +899,17 @@
     },
     {
         "name": "symfony/yaml",
-        "version": "v3.4.15",
-        "version_normalized": "3.4.15.0",
+        "version": "v3.4.16",
+        "version_normalized": "3.4.16.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/yaml.git",
-            "reference": "c2f4812ead9f847cb69e90917ca7502e6892d6b8"
+            "reference": "61973ecda60e9f3561e929e19c07d4878b960fc1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/yaml/zipball/c2f4812ead9f847cb69e90917ca7502e6892d6b8",
-            "reference": "c2f4812ead9f847cb69e90917ca7502e6892d6b8",
+            "url": "https://api.github.com/repos/symfony/yaml/zipball/61973ecda60e9f3561e929e19c07d4878b960fc1",
+            "reference": "61973ecda60e9f3561e929e19c07d4878b960fc1",
             "shasum": ""
         },
         "require": {
@@ -924,7 +925,7 @@
         "suggest": {
             "symfony/console": "For validating YAML files using the lint command"
         },
-        "time": "2018-08-10T07:34:36+00:00",
+        "time": "2018-09-24T08:15:45+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

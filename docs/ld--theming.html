@@ -27,12 +27,12 @@
 
 <section>
 
-<p>The files in <code>/core/tpl</code> control the output of the <code>.html</code> files found in the website folder <code>public_html</code>.  You should never modify these files, nor any files in <code>core</code>.  Instead to override the theming you should copy <code>core/tpl</code> up one directory into the base directory and override those files.</p>
+<p>The files in <code>/core/plugins/twig/tpl .</code> control the output of the <code>.html</code> files found in the website folder <code>public_html</code>.  You should never modify these files, nor any files in <code>core</code>.  Instead to override the theming you should copy and modify that directory, e.g.</p>
 
-<pre><code>cp -R core/tpl .
+<pre><code>cp -R core/plugins/twig/tpl .
 </code></pre>
 
-<p>For css changes you should edit <code>/tpl/style.css</code> in the newly created <code>/tpl</code> folder.</p>
+<p>For css changes you should edit <code>/tpl/style.css</code> in the newly created <code>/tpl</code> folder.  Or the SASS files as desired.</p>
 </section>
 
 <div class="search__results">
@@ -47,7 +47,7 @@
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.26 &bull; Last Updated: Sat, 01 Sep 2018 09:30:46 -0700</p>
+    <p class="legaleeze center">Version: 0.9.27 &bull; Last Updated: Mon, 01 Oct 2018 13:18:26 -0700</p>
   </div>
 </footer>
 
