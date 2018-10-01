@@ -100,73 +100,80 @@
             "chapter": "ld"
         },
         {
+            "id": "ld--github",
+            "title": "Integration with GitHub",
+            "file": "ld--github.md",
+            "sort": 9,
+            "chapter": "ld"
+        },
+        {
             "id": "ld--hooks",
             "title": "Using pre\/post hooks",
             "file": "ld--hooks.md",
-            "sort": 9,
+            "sort": 10,
             "chapter": "ld"
         },
         {
             "id": "ld--iframes",
             "title": "Using iFrames",
             "file": "ld--iframes.md",
-            "sort": 10,
+            "sort": 11,
             "chapter": "ld"
         },
         {
             "id": "ld--index",
             "title": "Table of Contents\/Indexing",
             "file": "ld--index.md",
-            "sort": 11,
+            "sort": 12,
             "chapter": "ld"
         },
         {
             "id": "ld--install",
             "title": "Installation",
             "file": "ld--install.md",
-            "sort": 12,
+            "sort": 13,
             "chapter": "ld"
         },
         {
             "id": "ld--installation",
             "title": "How to install",
             "file": "ld--installation.md",
-            "sort": 13,
+            "sort": 14,
             "chapter": "ld"
         },
         {
             "id": "ld--roadmap",
             "title": "Roadmap",
             "file": "ld--roadmap.md",
-            "sort": 14,
+            "sort": 15,
             "chapter": "ld"
         },
         {
             "id": "ld--search",
             "title": "Integrating search",
             "file": "ld--search.md",
-            "sort": 15,
+            "sort": 16,
             "chapter": "ld"
         },
         {
             "id": "ld--theming",
             "title": "Custom Theming the Website Version",
             "file": "ld--theming.md",
-            "sort": 16,
+            "sort": 17,
             "chapter": "ld"
         },
         {
             "id": "ld--todos",
             "title": "The TODO list feature",
             "file": "ld--todos.md",
-            "sort": 17,
+            "sort": 18,
             "chapter": "ld"
         },
         {
             "id": "_tasklist",
             "title": "Tasklist",
             "file": "_tasklist.md",
-            "sort": 18
+            "sort": 19
         }
     ],
     "settings": {
