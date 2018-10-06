@@ -105,6 +105,7 @@ return array(
     'Illuminate\\Contracts\\Support\\MessageProvider' => $vendorDir . '/illuminate/contracts/Support/MessageProvider.php',
     'Illuminate\\Contracts\\Support\\Renderable' => $vendorDir . '/illuminate/contracts/Support/Renderable.php',
     'Illuminate\\Contracts\\Support\\Responsable' => $vendorDir . '/illuminate/contracts/Support/Responsable.php',
+    'Illuminate\\Contracts\\Translation\\HasLocalePreference' => $vendorDir . '/illuminate/contracts/Translation/HasLocalePreference.php',
     'Illuminate\\Contracts\\Translation\\Loader' => $vendorDir . '/illuminate/contracts/Translation/Loader.php',
     'Illuminate\\Contracts\\Translation\\Translator' => $vendorDir . '/illuminate/contracts/Translation/Translator.php',
     'Illuminate\\Contracts\\Validation\\Factory' => $vendorDir . '/illuminate/contracts/Validation/Factory.php',
