@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Token Replacement</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--ld--tokens">
+<header>
+  <div class="pager">
+  <a href="ld--todos.html" class="prev ld--todos">&laquo;The TODO list feature</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="_tasklist.html" class="next _tasklist">Tasklist&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Token Replacement</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<p>Using frontmatter, you can define tokens in your markdown file that will be replaced during render.  See examples below.</p>
+
+<h2>Example 1: Tokens</h2>
+
+<p>List your find/replace tokens in frontmatter under the key <code>tokens</code>:</p>
+
+<p>Here is your markdown document:</p>
+
+<pre><code>---
+tokens:
+    @modified: October 15, 2018
+    @s1: what-info-do-we-collect
+---
+# PRIVACY NOTICE
+
+Last Modified @modified
+
+* [What Information Do We Collect?](#@s1)
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac blandit risus. Mauris tempor a lacus a placerat. Vivamus viverra dapibus metus non finibus. Nulla ultricies est nulla, eget efficitur nibh viverra non. Sed sed est viverra nunc malesuada venenatis vitae at tellus. Suspendisse potenti. Morbi non blandit elit, sit amet consectetur mi.
+
+&lt;a name="@l2"&gt;&lt;/a&gt;
+## WHAT INFORMATION DO WE COLLECT?
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac blandit risus. Mauris tempor a lacus a placerat. Vivamus viverra dapibus metus non finibus. Nulla ultricies est nulla, eget efficitur nibh viverra non. Sed sed est viverra nunc malesuada venenatis vitae at tellus. Suspendisse potenti. Morbi non blandit elit, sit amet consectetur mi.
+
+This document was last updated on {{ modified }}.
+</code></pre>
+
+<h2>Example 2: Twig Style</h2>
+
+<p>See how you can use twig-style tokens by replacing the frontmatter <code>tokens</code> with <code>twig</code>.  Notice that the find keys do not include the <code>{{</code> and <code>}}</code>, however in the body of the document they are present.</p>
+
+<p>Here is your markdown document:</p>
+
+<pre><code>---
+twig:
+    modified: October 15, 2018
+    l1: what-info-do-we-collect
+---
+# PRIVACY NOTICE
+
+Last Modified {{ modified }}
+
+* [What Information Do We Collect?](#{{ s1 }})
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac blandit risus. Mauris tempor a lacus a placerat. Vivamus viverra dapibus metus non finibus. Nulla ultricies est nulla, eget efficitur nibh viverra non. Sed sed est viverra nunc malesuada venenatis vitae at tellus. Suspendisse potenti. Morbi non blandit elit, sit amet consectetur mi.
+
+&lt;a name="{{ s1 }}"&gt;&lt;/a&gt;
+## WHAT INFORMATION DO WE COLLECT?
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac blandit risus. Mauris tempor a lacus a placerat. Vivamus viverra dapibus metus non finibus. Nulla ultricies est nulla, eget efficitur nibh viverra non. Sed sed est viverra nunc malesuada venenatis vitae at tellus. Suspendisse potenti. Morbi non blandit elit, sit amet consectetur mi.
+
+This document was last updated on {{ modified }}.
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="ld--todos.html" class="prev ld--todos">&laquo;The TODO list feature</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="_tasklist.html" class="next _tasklist">Tasklist&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.9.28 &bull; Last Updated: Mon, 15 Oct 2018 13:07:26 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+
