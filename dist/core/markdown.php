@@ -29,6 +29,12 @@ if (is_file($in_file) && ($contents = file_get_contents($in_file))) {
 
   // If the tokens frontmatter key is present then we need to perform a token replace.
   if (isset($data['tokens'])) {
+    uksort($data['tokens'], function ($a, $b) {
+      $a = strlen($a);
+      $b = strlen($b);
+
+      return $b - $a;
+    });
     foreach ($data['tokens'] as $find => $replace) {
       $contents = str_replace($find, $replace, $contents);
     }
