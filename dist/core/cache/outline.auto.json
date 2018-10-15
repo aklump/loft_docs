@@ -170,10 +170,17 @@
             "chapter": "ld"
         },
         {
+            "id": "ld--tokens",
+            "title": "Token Replacement",
+            "file": "ld--tokens.md",
+            "sort": 19,
+            "chapter": "ld"
+        },
+        {
             "id": "_tasklist",
             "title": "Tasklist",
             "file": "_tasklist.md",
-            "sort": 19
+            "sort": 20
         }
     ],
     "settings": {
