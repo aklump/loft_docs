@@ -12,7 +12,7 @@ cd "$7" && (! test -e dist || rm -r dist) && mkdir dist
 
 # Now copy of the necessary folders; don't check first because we want a loud failure.
 rsync -a "$7/core/" "$7/dist/core/"
-rsync -a "$7/public_html/" "$7/dist/docs/"
+rsync -a "$7/docs/" "$7/dist/docs/"
 
 # ... and files.
 cp "$7/core-version.info" "$7/dist/"
