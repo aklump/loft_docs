@@ -50,11 +50,11 @@ LOFT_DOCS_TMP_DIR="$docs_tmp_dir"
 export LOFT_DOCS_TMP_DIR
 
 # If no dirs, copy the patterns into place from the patterns dir.  This is important after --clean
-test -e "$docs_root_dir/$docs_website_dir" || rsync -a  "$CORE/install/patterns/public_html/" "$docs_root_dir/$docs_website_dir"
-test -e "$docs_root_dir/$docs_html_dir" || rsync -a "$CORE/install/patterns/html/" "$docs_root_dir/$docs_html_dir"
-test -e "$docs_root_dir/$docs_mediawiki_dir" || rsync -a    "$CORE/install/patterns/mediawiki/" "$docs_root_dir/$docs_mediawiki_dir"
-test -e "$docs_root_dir/$docs_text_dir" || rsync -a "$CORE/install/patterns/text/" "$docs_root_dir/$docs_text_dir"
-test -e "$docs_root_dir/$docs_drupal_dir" || rsync -a   "$CORE/install/patterns/advanced_help/"
+ensure_pattern_directory $docs_website_dir "public_html"
+ensure_pattern_directory $docs_html_dir "html"
+ensure_pattern_directory $docs_mediawiki_dir "mediawiki"
+ensure_pattern_directory $docs_text_dir "text"
+ensure_pattern_directory $docs_drupal_dir "advanced_help"
 
 # Assert dir exists if not create it and parents
 for path in "${dirs[@]}"; do
@@ -216,7 +216,7 @@ done
 # files.
 if [ "$docs_README" ]; then
   destinations=($docs_README)
-  
+
   for output in "${destinations[@]}"; do
     output=$(realpath "$docs_root_dir/$output");
     readme_file=${output##*/}
