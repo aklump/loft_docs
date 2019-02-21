@@ -3,6 +3,10 @@
         {
             "id": "ld",
             "title": "Using Loft Docs"
+        },
+        {
+            "id": "demos",
+            "title": "Demo Pages"
         }
     ],
     "frontmatter": {

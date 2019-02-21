@@ -52,6 +52,7 @@ $g->ensure($vars, 'prev_title', '');
 $g->ensure($vars, 'next', 'javascript:void(0)');
 $g->ensure($vars, 'next_id', '');
 $g->ensure($vars, 'next_title', '');
+$vars['chapters'] = $index->getChapterIndex();
 
 // Add in additional vars:
 $now = new \DateTime('now', new \DateTimeZone('America/Los_Angeles'));

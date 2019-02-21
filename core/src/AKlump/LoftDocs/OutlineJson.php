@@ -9,6 +9,7 @@
 
 namespace AKlump\LoftDocs;
 
+use AKlump\Data\Data;
 use AKlump\LoftLib\Storage\FilePath;
 
 /**
@@ -18,6 +19,11 @@ use AKlump\LoftLib\Storage\FilePath;
  */
 class OutlineJson implements IndexInterface {
 
+  /**
+   * Holds the json from the outline file.
+   *
+   * @var array
+   */
   protected $json;
 
   /**
@@ -32,7 +38,56 @@ class OutlineJson implements IndexInterface {
       ->getJson(TRUE);
   }
 
+  /**
+   * Return a sorted chapter index.
+   *
+   * @return array
+   *   Each item is a chapter with these keys.  The order is as the user has
+   *   indicated they want it.
+   *   - id
+   *   - title
+   */
+  public function getChapterIndex() {
+    $g = new Data();
+    $info = $this->json + array(
+        'chapters' => [],
+      );
+    $chapter_order = array_map(function ($item) {
+      return $item['id'];
+    }, $info['chapters']);
+    foreach ($info['sections'] as $section) {
+      $chapter_order[] = $g->get($section, 'chapter');
+    }
+    $chapter_order = array_unique(array_filter($chapter_order));
+    // Add no chapters to the end.
+    $chapter_order[] = '';
+
+    $chapter_titles = [];
+    foreach ($chapter_order as $id) {
+      $chapter_titles[$id] = array_filter($info['chapters'], function ($item) use ($id) {
+        return $item['id'] == $id;
+      });
+      $chapter_titles[$id] = empty($chapter_titles[$id]) ? [
+        'id' => '',
+        'title' => '',
+      ] : reset($chapter_titles[$id]);
+    }
+
+    return $chapter_titles;
+  }
+
+  /**
+   * Return an array of index data
+   *
+   * @return array
+   *   Each element represents a page with these keys:
+   *   - id
+   *   - chapter array The chapter info.
+   *   - file
+   *   - title
+   */
   public function getData() {
+    $g = new Data();
     $info = $this->json + array(
         'sections' => array(),
       );
@@ -43,32 +98,36 @@ class OutlineJson implements IndexInterface {
       'file' => 'index.html',
     );
 
-    foreach ($info['sections'] as $value) {
-      $key = pathinfo($value['file'], PATHINFO_FILENAME);
-      $weight = isset($value['sort']) ? $value['sort'] : 0;
-      if (in_array($key, array('index', 'advanced help settings'))
-        && ($title = $this->getTitle($key, $value))
-      ) {
-        $index['title'] = $title;
+    foreach ($this->getChapterIndex() as $chapter_id => $chapter_data) {
+      $chapter_sections = [];
+      foreach ($info['sections'] as $value) {
+        $this_chapter = $g->get($value, 'chapter', '');
+        if ($this_chapter !== $chapter_id) {
+          continue;
+        }
+        $key = pathinfo($value['file'], PATHINFO_FILENAME);
+        if (in_array($key, array('index', 'advanced help settings'))
+          && ($title = $this->getTitle($key, $value))
+        ) {
+          $index['title'] = $title;
+        }
+        else {
+          $chapter_sections[$key] = array(
+            'id' => $value['id'],
+            'chapter' => $chapter_data['title'],
+            'title' => $this->getTitle($key, $value),
+            'file' => pathinfo($value['file'], PATHINFO_FILENAME) . '.html',
+          );
+        }
       }
-      else {
-        $data[$weight][$key] = array(
-          'id' => $value['id'],
-          'title' => $this->getTitle($key, $value),
-          'file' => pathinfo($value['file'], PATHINFO_FILENAME) . '.html',
-        );
-      }
+      uasort($chapter_sections, function ($a, $b) {
+        return strcasecmp($a['title'], $b['title']);
+      });
+      $data = array_merge($data, $chapter_sections);
     }
 
     // Sort and Flatten.
-    ksort($data);
-    $list = array();
-    foreach ($data as $value) {
-      foreach ($value as $key => $value2) {
-        $list[$key] = $value2;
-      }
-    }
-    $list = array('index' => $index) + $list;
+    $list = array('index' => $index) + $data;
 
     // Add in the prev and next links
     $prev = array();
@@ -83,7 +142,7 @@ class OutlineJson implements IndexInterface {
         'next_title' => 'Index',
       );
       if ($last !== NULL) {
-        $list[$last]['next_id'] = $key;
+        $list[$last]['next_id'] = $value['id'];
         $list[$last]['next'] = $value['file'];
         $list[$last]['next_title'] = $value['title'];
       }

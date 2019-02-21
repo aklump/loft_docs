@@ -31,7 +31,7 @@ if (!empty($json_file)) {
       echo "merge file: $merge_file contains invalid json";
     }
     else {
-      $json = json_outline_merge($merge_json, $json);
+      $json = json_outline_merge($json, $merge_json);
     }
   }
 
@@ -83,7 +83,7 @@ if (!empty($json_file)) {
   }
 
   // Merge json one more time to trump the auto or .ini
-  $json = $merge_json ? json_outline_merge($merge_json, $json) : $json;
+  $json = $merge_json ? json_outline_merge($json, $merge_json) : $json;
 
   // Write out the json file.
   file_put_contents($json_file, json_encode($json, JSON_PRETTY_PRINT));
