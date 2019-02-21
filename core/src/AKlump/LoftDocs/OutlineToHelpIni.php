@@ -52,10 +52,11 @@ class OutlineToHelpIni {
     $data['advanced help settings'] = $this->options;
     $outline = $this->getOutline();
     uasort($outline['sections'], '_sort_sort');
+    $weight = 0;
     foreach ($outline['sections'] as $section) {
       $data[pathinfo($section['file'], PATHINFO_FILENAME)] = array(
         'title' => $section['title'],
-        'weight' => $section['sort'],
+        'weight' => $weight++,
       );
     }
     $obj = new IniWriter();
