@@ -5,7 +5,7 @@
  */
 
 use AKlump\Data\Data;
-use AKlump\LoftDocs\Core;
+use AKlump\LoftDocs\Compiler;
 use Webuni\FrontMatter\FrontMatter;
 
 $file = __FILE__;
@@ -29,8 +29,8 @@ if (file_exists($json_file)) {
 $info = array();
 
 // Get all the files to index from two directories.
-$user = Core::indexSourceFiles($source_dir);
-$generated = Core::indexSourceFiles($generated_dir);
+$user = Compiler::indexSourceFiles($source_dir);
+$generated = Compiler::indexSourceFiles($generated_dir);
 $first_level = array_merge($user, $generated);
 usort($first_level, function ($a, $b) {
   return strcasecmp($a['filename_compiled'], $b['filename_compiled']);
@@ -81,7 +81,7 @@ foreach ($first_level as $data) {
   $g->fill($meta, 'title', clean_title($file));
 
   // In the top level there is no chapter indication.
-  if (Core::pathIsSection($file)) {
+  if (Compiler::pathIsSection($file)) {
     $info[$data['filename_compiled']] = array(
       'file' => $data['filename_compiled'],
       'title' => $g->get($meta, 'title'),

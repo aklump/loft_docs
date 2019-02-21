@@ -4,7 +4,10 @@ namespace AKlump\LoftDocs;
 
 use AKlump\LoftLib\Storage\FilePath;
 
-class Core {
+/**
+ * Provide compiling functionality
+ */
+class Compiler {
 
   /**
    * The path to the cache directory.
