@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": [
+        "re"
+    ],
+    "properties": {
+        "do": {
+            "description": "This is the first key",
+            "default": "deer",
+            "type": "string"
+        },
+        "re": {
+            "default": "sun",
+            "type": "string"
+        },
+        "mi:me:moi": {
+            "default": "myself",
+            "type": "string",
+            "pattern": "^m.+"
+        },
+        "pi": {
+            "default": 3.14,
+            "type": [
+                "double",
+                "integer"
+            ]
+        },
+        "fo": {
+            "type": "string"
+        },
+        "list": {
+            "description": "This tests how arrays fare.",
+            "type": "array"
+        },
+        "date": {
+            "type": "string",
+            "default": "static::defaultDate()",
+            "pattern": "static::JS_REGEX_DATEISO8601"
+        },
+        "boolean": {
+            "type": "boolean"
+        }
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "do": "The first",
+            "re": "The second",
+            "me": "mom",
+            "pi": 3.14,
+            "list": [
+                "blue",
+                "yellow"
+            ]
+        }
+    ]
+}

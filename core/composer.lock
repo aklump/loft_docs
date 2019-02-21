@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0dea342bbf706cc9ee4919a81b524ee5",
+    "content-hash": "b66487671f190fb5df19cfa1105ff787",
     "packages": [
         {
             "name": "aklump/data",
@@ -97,6 +97,45 @@
                 "The Kit Language"
             ],
             "time": "2013-10-26T18:12:16+00:00"
+        },
+        {
+            "name": "aklump/loft-lib",
+            "version": "1.0.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aklump/loft-lib.git",
+                "reference": "00c792625c784bc62637d867df90ff2678d679dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aklump/loft-lib/zipball/00c792625c784bc62637d867df90ff2678d679dc",
+                "reference": "00c792625c784bc62637d867df90ff2678d679dc",
+                "shasum": ""
+            },
+            "require": {
+                "aklump/data": "^0.0.28",
+                "illuminate/support": "^5.4",
+                "php": ">=5.6",
+                "ralouphie/mimey": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AKlump\\LoftLib\\": "src/AKlump/LoftLib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Klump",
+                    "email": "sourcecode@intheloftstudios.com"
+                }
+            ],
+            "description": "Core utilities provided by In the Loft Studios",
+            "time": "2019-01-23T21:50:58+00:00"
         },
         {
             "name": "aklump/loft_parser",
@@ -634,6 +673,46 @@
                 "simple-cache"
             ],
             "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
+            "name": "ralouphie/mimey",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ralouphie/mimey.git",
+                "reference": "3af64e9ba0495aa9e3d22651b3b4e6dca06a4d43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ralouphie/mimey/zipball/3af64e9ba0495aa9e3d22651b3b4e6dca06a4d43",
+                "reference": "3af64e9ba0495aa9e3d22651b3b4e6dca06a4d43",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4|^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7.0",
+                "satooshi/php-coveralls": ">=1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mimey\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ralph Khattar",
+                    "email": "ralph.khattar@gmail.com"
+                }
+            ],
+            "description": "PHP package for converting file extensions to MIME types and vice versa.",
+            "time": "2018-07-06T05:58:33+00:00"
         },
         {
             "name": "symfony/finder",

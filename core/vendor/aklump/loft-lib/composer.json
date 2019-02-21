@@ -1,0 +1,30 @@
+{
+    "name": "aklump\/loft-lib",
+    "description": "Core utilities provided by In the Loft Studios",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Aaron Klump",
+            "email": "sourcecode@intheloftstudios.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "AKlump\\LoftLib\\": "src\/AKlump\/LoftLib\/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AKlump\\LoftLib\\": "tests\/src\/AKlump\/LoftLib\/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.6",
+        "illuminate\/support": "^5.4",
+        "ralouphie\/mimey": "^2.0",
+        "aklump\/data": "^0.0.28"
+    },
+    "version": "1.0.16"
+}

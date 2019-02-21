@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Dataset</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--dataset">
+<header>
+  <div class="pager">
+  <a href="README.html" class="prev README">&laquo;In the Loft Studios Library</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="_tasklist.html" class="next _tasklist">Tasklist&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Dataset</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<p>An PHP class to use for data objects, using JSON schema as a validation structure.</p>
+
+<h2>Quick Start</h2>
+
+<ol>
+<li>Create a class that extends <code>Dataset</code>.</li>
+<li><p>Now define the json schema.  A simple method is to supply a class constant <code>JSON_SCHEMA</code> with the schema value:</p>
+
+<pre><code>class SimpleExample extends Dataset {
+
+  const JSON_SCHEMA = '{"type": "object","required":["id"],"id":{"type":"integer"},"version":{"type":"string","default":"1.2.5"}}';
+
+}  
+</code></pre></li>
+<li><p>Most times however, your schema will live in a separate file.  Therefore you will not define the class constant <code>JSON_SCHEMA</code>, rather provide the path to the json schema as the return value of the public static method <code>pathToJsonSchema</code>.  You may follow the convention of appending <code>.schema.json</code> to the classname, if you wish, as shown here:</p>
+
+<pre><code>/**
+ * {@inheritdoc}
+ */
+protected static function pathToJsonSchema() {
+  return __DIR__ . '/DatasetAlpha.schema.json';
+}
+</code></pre></li>
+<li><p>Now create a <a href="https://json-schema.org/latest/json-schema-validation.html#rfc.section.10">json schema file</a> to define your dataset at the path defined above.</p>
+
+<ol>
+<li>Be aware that when you use the <code>pattern</code> keyword to define a regex expression that you do NOT include the delimiters like you do in PHP's <code>preg_match</code>.  This is corrent JSON: <code>"pattern": "\\?[^#]+"</code>, notice there are no delimiters.</li>
+</ol></li>
+<li><p>Then implement an instance in your code like this:</p>
+
+<pre><code>&lt;?php
+$data = ['id' =&gt; 123];
+...
+try {
+    $timer = Timer::dataset($data)-&gt;validate()-&gt;throwFirstProblem();
+} catch (\Exception $exception) {
+    // Do something if validation failed.
+}
+</code></pre></li>
+</ol>
+
+<h3>Using PHP class members in your JSON code with <code>static::</code></h3>
+
+<p>You can provide class methods, constants, etc in your JSON schema files and they will be evaluated at runtime.  For example, here we provide the regex pattern for the <code>date</code> property with a class constant, and the <code>default</code> value with a class method.  The cornerstone of this process is that the value begin with <code>static::</code>.</p>
+
+<pre><code>    "date": {
+        "type": "string",
+        "default": "static::defaultDate()",
+        "pattern": "static::REGEX_DATEISO8601"
+    },
+</code></pre>
+
+<h2>Accessing Data</h2>
+
+<ol>
+<li>Get the complete dataset as an array (sorted, with defaults, etc): <code>$array = $data-&gt;get()</code></li>
+<li>Get the JSON value of the dataset by casting to a string: <code>$json = strval($data)</code>.</li>
+<li>Use a property directly: <code>$id = $data-&gt;id</code></li>
+<li>Use a property's alias directly: <code>$id = $data-&gt;userId</code>.  Read about aliases for more info.</li>
+</ol>
+
+<h2>Accessing Defaults</h2>
+
+<ol start="5">
+<li>Get the default for single key: <code>Timer::getDefault('id')</code>.</li>
+<li>Get an array of defaults: <code>Timer::getDefaults()</code></li>
+</ol>
+
+<h2>Detecting Errors</h2>
+
+<ol>
+<li>Return an array of all: <code>$data-&gt;getProblems</code>.</li>
+<li>Throw an <em>\InvalidArgumentException</em> with the first problem: <code>$data-&gt;throwFirstError</code></li>
+</ol>
+
+<h2>Setting Data</h2>
+
+<ul>
+<li>You can alter a single key using <code>::mutate</code>.</li>
+</ul>
+
+<h2>Aliases</h2>
+
+<p>You may have aliases for property keys, which means you can access the same value using any of a number of keys.  To define an alias use colon separation as seen below:</p>
+
+<pre><code>{
+    ...
+    "properties": {
+        "mi:me:moi": {
+            "default": "myself",
+            "type": "string",
+            "pattern": "/^m.+/"
+        },
+</code></pre>
+
+<h2>Custom Validation</h2>
+
+<ol>
+<li>If you have advanced validation beyond what comes for free, you may extend <code>validate()</code>, but read the docs there for what needs to happen.</li>
+<li>Consider using <code>ignoreKey()</code> instead, if possible.</li>
+</ol>
+
+<h2>How to Ignore a Key in Your Dataset (so as to not cause validation error)</h2>
+
+<pre><code>protected static function ignoreKey($key)
+{
+    return $key === 'duration';
+}
+
+protected static function ignoreKey($key)
+{
+    return strpos($key, '#') === 0;
+}
+</code></pre>
+
+<h2>Notes</h2>
+
+<ul>
+<li>To ignore some keys use <code>static::ignoreKey()</code> in your class.</li>
+</ul>
+
+<h2>Advanced Usage</h2>
+
+<h3>Auto-generate Values: Example 1</h3>
+
+<p>The time to do this is during <code>::import</code>.</p>
+
+<pre><code>&lt;?php
+
+/**
+ * Import extra data based on a default value.
+ *
+ * In this example, the defaults set the user id by global var.  During import
+ * we check for a user_id, either by import $data or the default data.  Then we
+ * make sure the the $original import data doesn't contain session_id, and if
+ * so we pull that data from the user account object.
+ */
+class Alpha extends Dataset {
+
+  ... 
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static function defaults() {
+    global $user;
+
+    return [
+      'user_id' =&gt; $user-&gt;uid,
+      'session_id' =&gt; -1,
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function import($data) {
+    $original = $data;
+    $data += static::getDefaults();
+
+    // Figure the session id based on the last time the user logged in.
+    // https://amplitude.zendesk.com/hc/en-us/articles/115002323627-Sessions
+    if ($data['user_id'] &amp;&amp; empty($original['session_id'])) {
+      $account = user_load($data['user_id']);
+
+      // We will count our session based on last login.
+      // https://drupal.stackexchange.com/questions/21864/whats-the-difference-between-user-login-and-access#21873
+      $data['session_id'] = $account-&gt;login * 1000;
+    }
+
+    return parent::import($data);
+  }
+
+}
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="README.html" class="prev README">&laquo;In the Loft Studios Library</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="_tasklist.html" class="next _tasklist">Tasklist&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 1.0 &bull; Last Updated: Wed, 23 Jan 2019 13:50:57 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

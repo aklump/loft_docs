@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>FilePath: A Better Way to Work With Files and Folders</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--filepath">
+<header>
+  <div class="pager">
+  <a href="index.html" class="prev index">&laquo;Index</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="README.html" class="next README">In the Loft Studios Library&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>FilePath: A Better Way to Work With Files and Folders</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<h2>Working with Directories</h2>
+
+<h3>Create a directory and all parents</h3>
+
+<p>Either of these will work.  The second, though, returns a new instance object.</p>
+
+<pre><code>FilePath::ensureDir('foo/bar/baz');
+$fp = FilePath::create('foo/bar/baz')-&gt;parents();
+</code></pre>
+
+<h3>Create a hidden directory</h3>
+
+<p>In this case you have to bypass the automatic determination of a file or directory based on the format of the path, so instead be explicit that you want a directory.</p>
+
+<pre><code>list($path_to_dir) = FilePath::ensureDir('foo/bar/.baz', NULL, TRUE);
+$hidden_dir_object = FilePath::create('foo/bar/.baz', NULL, [
+  'type' =&gt; FilePath::TYPE_DIR,
+])-&gt;parents();
+</code></pre>
+
+<h3>List files and folders</h3>
+
+<pre><code>$dir = FilePath::create('foo/bar/baz');
+$filesAndFolders = $dir-&gt;children()-&gt;all();
+$files = $dir-&gt;children()-&gt;justFiles()-&gt;all();
+$dirs = $dir-&gt;children()-&gt;justDirs()-&gt;all();
+</code></pre>
+
+<h3>List files and folders recursively</h3>
+
+<pre><code>$dir = FilePath::create('foo/bar/baz');
+$filesAndFolders = $dir-&gt;descendents()-&gt;all();
+$files = $dir-&gt;descendents()-&gt;justFiles()-&gt;all();
+$dirs = $dir-&gt;descendents()-&gt;justDirs()-&gt;all();
+</code></pre>
+
+<h3>List recursively, limit to two levels</h3>
+
+<pre><code>$dir = FilePath::create('foo/bar/baz');
+$filesAndFolders = $dir-&gt;descendents(2)-&gt;all();
+$files = $dir-&gt;descendents(2)-&gt;justFiles()-&gt;all();
+$dirs = $dir-&gt;descendents(2)-&gt;justDirs()-&gt;all();
+</code></pre>
+
+<h3>List pdf files recursively</h3>
+
+<pre><code>$dir = FilePath::create('foo/bar/baz');
+$files = $dir-&gt;descendents('/\.pdf$/')-&gt;justFiles()-&gt;all();
+</code></pre>
+
+<h3>List pdf files recursively limit to 1 level</h3>
+
+<pre><code>$dir = FilePath::create('foo/bar/baz');
+
+// Notice the order of the limit level doesn't matter.
+$files = $dir-&gt;descendents('/\.pdf$/', 1)-&gt;justFiles()-&gt;all();
+$files = $dir-&gt;descendents(1, '/\.pdf$/')-&gt;justFiles()-&gt;all();
+
+// or just us children()
+$files = $dir-&gt;children('/\.pdf$/')-&gt;justFiles()-&gt;all();
+</code></pre>
+
+<h3>List all but pdf files recursively</h3>
+
+<pre><code>$dir = FilePath::create('foo/bar/baz');
+
+// When two strings are sent as arguments, the first is use to match and the second to exclude; empty strings are ignored.
+$files = $dir-&gt;descendents('', '/\.pdf$/')-&gt;justFiles()-&gt;all();
+</code></pre>
+
+<h3>List any file matching foo unless it ends with .txt</h3>
+
+<pre><code>$dir = FilePath::create('foo/bar/baz');
+$files = $dir-&gt;descendents('/foo/', '/\.txt/')-&gt;justFiles()-&gt;all();
+</code></pre>
+
+<h2>Working with Files</h2>
+
+<p>When you instantiate with a filepath, the file will not be created, but all the parent directories will be created automatically if you attempt to write to the filepath.  If you do not want this, you must use the <code>parents = false</code> option to the constructor.</p>
+
+<h3>Attributes of a file</h3>
+
+<pre><code>$f = FilePath::create('/parent/dir/hello_world.txt');
+
+...
+
+$path = $f-&gt;getPath();
+$extension = $f-&gt;getExtension();
+$fname = $f-&gt;getFileName();
+$basename = $f-&gt;getBaseName();
+$basename = $f-&gt;getId();
+$directory = $f-&gt;getDirName();
+$mime = $f-&gt;getMimeType();
+$hash = $f-&gt;getHash();
+</code></pre>
+
+<h3>Create Empty Files</h3>
+
+<pre><code>// The parent $dir into which you will create files.
+$dir = FilePath::create('/parent/dir/ect/ory');
+
+$file1 = $dir-&gt;to('do.txt')-&gt;save();
+$file2 = $dir-&gt;to('re.txt')-&gt;save();
+$file3 = $dir-&gt;to('mi.txt')-&gt;save();
+</code></pre>
+
+<h3>Create Many Files With Same Content</h3>
+
+<pre><code>// $dir is not written to disk, but exists as a "stamp" or "template".
+$dir = FilePath::create('/parent/dir/ect/ory');
+$dir-&gt;put('lorem ipsum');
+
+// The save method will "apply the stamp" to disc with the contents of the stamp.
+$file1 = $dir-&gt;to('do.txt')-&gt;save();
+$file2 = $dir-&gt;to('re.txt')-&gt;save();
+$file3 = $dir-&gt;to('mi.txt')-&gt;save();
+</code></pre>
+
+<h3>Create Many Files With Different Content</h3>
+
+<pre><code>$dir = FilePath::create('/parent/dir/ect/ory');
+
+$file1 = $dir-&gt;put('lorem')-&gt;to('do.txt')-&gt;save();
+$file2 = $dir-&gt;put('ipsum')-&gt;to('re.txt')-&gt;save();
+$file3 = $dir-&gt;put('dolar')-&gt;to('mi.txt')-&gt;save();
+</code></pre>
+
+<h3>Writing to a File</h3>
+
+<pre><code>$file = FilePath::create('/parent/dir/hello_world.txt');
+$path = $file-&gt;put('hello world')-&gt;save()-&gt;getPath();
+
+// The contents of the file are already in memory so load() is not needed.
+$contents = $file-&gt;get();
+</code></pre>
+
+<h3>Reading a File</h3>
+
+<pre><code>$contents = FilePath::create('/parent/dir/hello_world.txt')
+  -&gt;load()
+  -&gt;get();
+</code></pre>
+
+<p>By passing a directory and an extension, a temporary filename will be created automatically.</p>
+
+<h3>Working with a time-based name file</h3>
+
+<pre><code>$file = FilePath::create('/foo/bar/baz/' . FilePath::dateName('json'));
+//  $file-&gt;getPath() === /foo/bar/baz/2017-11-17T00-55-20Z.json
+</code></pre>
+
+<h3>Delete a file</h3>
+
+<pre><code>$file = FilePath::create('/foo/bar.txt')-&gt;destroy();
+</code></pre>
+
+<h2>Copying Files</h2>
+
+<h3>Copy a file</h3>
+
+<pre><code>$source = FilePath::create(ROOT . '/quick_start.json');
+$destination = FilePath::create(getcwd() . '/sitemap.json')
+  -&gt;copyFrom($source);
+</code></pre>
+
+<h3>Copy a file from one directory to another</h3>
+
+<pre><code>$destination_dir = FilePath::create('/dir/where/file/end/up');
+$destination_dir-&gt;copyFrom('/source/file.md');
+
+$another_file = FilePath::create('/source2/file2.txt');
+$destination_dir-&gt;copyFrom($another_file);
+</code></pre>
+
+<h3>Move a file from one directory to another</h3>
+
+<pre><code>$destination_dir = FilePath::create('/dir/where/file/end/up');
+$destination_dir-&gt;moveFrom('/source/file.md');
+</code></pre>
+
+<h3>Duplicate a file within same directory</h3>
+
+<p>You must give the new name for the duplicated file.</p>
+
+<pre><code>$file_to_duplicate = FilePath::create('/some/file/original.md');
+$file_to_duplicate-&gt;to('clone.md')-&gt;copy('original.md');
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="index.html" class="prev index">&laquo;Index</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="README.html" class="next README">In the Loft Studios Library&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 1.0 &bull; Last Updated: Wed, 23 Jan 2019 13:50:56 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

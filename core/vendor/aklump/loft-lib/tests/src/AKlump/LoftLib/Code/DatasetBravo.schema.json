@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": [
+        "integer"
+    ],
+    "properties": {
+        "integer": {
+            "type": "integer",
+            "description": ""
+        },
+        "double:float": {
+            "type": "double"
+        },
+        "string": {
+            "type": "string"
+        },
+        "array": {
+            "type": "array"
+        },
+        "object": {
+            "type": "object"
+        },
+        "null": {
+            "type": "null"
+        },
+        "custom_class": {
+            "type": "\\AKlump\\LoftLib\\Code\\SomeCustomClass"
+        }
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "integer": 34,
+            "double": 98.6
+        }
+    ]
+}
