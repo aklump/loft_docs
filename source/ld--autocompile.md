@@ -1,8 +1,5 @@
 # Auto-compiling
 
-You can set up an automatic build using the following
+To watch your source directory for file changes and compile automatically as you work, you can use:
 
-    ./core/watch 10
-
-The argument is the number of seconds to poll.  You can omit and take the default value.
-
+    ./core/watch

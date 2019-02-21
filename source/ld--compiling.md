@@ -4,9 +4,7 @@ After a round of changes to the files found in `/source`, you will need to expor
 
 ## Requirements
 
-1. Compiling uses [Markdown Php](http://michelf.ca/projects/php-markdown/), which is included in this distribution.
-1. Output of `.txt` files requires that [Lynx](http://lynx.isc.org/) be installed.
-
+1. In order to use the text format you must have [Lynx](http://lynx.isc.org/) installed.
 
 ## How to compile
 
@@ -16,7 +14,7 @@ Each time you want to update your documentation files, after modifying files in 
 
 ## Folders and Other Includes
 
-By default folders in the `source` file are copied to the compiled output directories.  In some cases you will want greater control and/or you will not want to mess up `source` with boilerplater folders.  For this reason there is a means to include files/folders in the compiled output by creating defined folder structures and placing your boilerplate content there.
+By default folders in the `source` file are copied to the compiled output directories.  In some cases you will want greater control and/or you will not want to mess up `source` with boilerplate folders.  For this reason there is a means to include files/folders in the compiled output by creating a second directory, which is merged into to your final build.  Place your boilerplate content there.
 
 For example to include a js directory in the website output you would create that folder as `compile/public_html/js`.
 

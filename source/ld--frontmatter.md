@@ -26,4 +26,13 @@ Here is an example:
 
 ## FrontMatter in json
 
-You can also provide frontmatter to files using outline.merge.json.  Do this when yaml is not appropriate and using json would be easier.
+You can also provide frontmatter to files using _outline.merge.json_.  Do this when yaml is not appropriate and using json would be easier.  Here is an example:
+
+    {
+        "frontmatter": {
+            "demos--search-noindex2.html": {
+                "search": "noindex"
+            }
+        }
+    }
+

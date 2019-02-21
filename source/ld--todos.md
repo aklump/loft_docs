@@ -1,8 +1,8 @@
 # Tasklist (Todo Items)
 
-* You must enable tasklist aggregation in _outline.merge.json_.
-* A partial will be created of todo items called _\_tasklist.md_.  You may include it like other include files.
-* Add one or more todo items to your markdown source files using the [following syntax](https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments).
+* You must enable this feature for it to active as described below.
+* Once enabled, during compile a dynamic partial will be created of todo items called _\_tasklist.md_.  You may include it like other include files.
+* Add one or more todo items to your markdown source files using the Markdown Extra todo format as shown below. [Read more.](https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments)
 * When items are aggregated, the filenames are prepended to the todo item.  The final list will be filtered for uniqueness, and duplicates removed.  If the same todo item appears more than once in a file, it will be reduced to a single item; but the same todo item can appear in more than one file, since the filename prepend creates uniqueness.
 
 ## How to Enable

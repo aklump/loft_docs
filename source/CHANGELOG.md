@@ -2,7 +2,11 @@
 
 ## 0.10
 
-* Removed the `sort` key from the json outlines
+* Reduced default polling for watch.php from 20 to 2.
+* Removed the `sort` key from the json outlines.
+* Added support for includes for files ending in _.twig.md_.
+* Todos are only compiled if you enable them in _outline.merge.json_.
+* Todos are now present as an include file, not as a page.  Therefore you must both enable aggregation and use an include expression in a file.  See documentation for more info.
 
 ## 0.9.10
 

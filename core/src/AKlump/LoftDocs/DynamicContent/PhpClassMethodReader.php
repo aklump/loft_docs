@@ -1,6 +1,6 @@
 <?php
 
-namespace AKlump\LoftDocs;
+namespace AKlump\LoftDocs\DynamicContent;
 
 /**
  * A class to generate class method documentation.

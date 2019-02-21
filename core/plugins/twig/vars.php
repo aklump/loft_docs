@@ -6,40 +6,42 @@
  * @ingroup loft_docs
  * @{
  */
+
 use AKlump\Data\Data;
 use AKlump\LoftDocs\OutlineJson as Index;
+use AKlump\LoftLib\Storage\FilePath;
 
 $CORE = getenv('LOFT_DOCS_CORE');
 $data_file = getenv('LOFT_DOCS_CACHE_DIR') . '/page_data.json';
-$page_data = file_exists($data_file) ? json_decode(file_get_contents($data_file), true) : array();
+$page_data = file_exists($data_file) ? json_decode(file_get_contents($data_file), TRUE) : array();
 
 require_once $CORE . '/vendor/autoload.php';
 
 $vars = array(
-    'classes' => array(),
+  'classes' => array(),
 );
 list(, $outline_file, $page_id, $vars['version']) = $argv;
 $g = new Data();
 
 // Add in page vars if found.
 if (isset($page_data[$page_id])) {
-    $vars['page'] = $page_data[$page_id];
+  $vars['page'] = $page_data[$page_id];
 }
 
 $index = new Index($outline_file);
 
 $vars['index'] = array();
 foreach ($index->getData() as $key => $value) {
-    // Skip a self reference
-    if (in_array($key, array('index', 'search--results'))) {
-        continue;
-    }
-    $vars['index'][] = $value;
+  // Skip a self reference
+  if (in_array($key, array('index', 'search--results'))) {
+    continue;
+  }
+  $vars['index'][] = $value;
 }
 
 if (($data = $index->getData()) && isset($data[$page_id])) {
-    $vars += $data[$page_id];
-    $vars['classes'] = array('page--' . $vars['id']);
+  $vars += $data[$page_id];
+  $vars['classes'] = array('page--' . $vars['id']);
 }
 
 // Ensure these default vars
@@ -55,8 +57,9 @@ $g->ensure($vars, 'next_title', '');
 $now = new \DateTime('now', new \DateTimeZone('America/Los_Angeles'));
 $vars['date'] = $now->format('r');
 
-// Search support
-$g->onlyIf($outline, 'settings.search')->set($vars, 'search', true);
+// Search support.
+$outline = FilePath::create($outline_file)->load()->getJson(TRUE);
+$g->onlyIf($outline, 'settings.search')->set($vars, 'search', TRUE);
 
 $json = json_encode($vars);
 print $json;

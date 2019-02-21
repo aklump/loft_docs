@@ -39,7 +39,8 @@ if (!$source->exists()
 $global = $compiler->getInclude($merged_basename);
 
 // Merge any todo items from the global list.
-if (($contents = $global->load()->get())
+if ($global->exists()
+  && ($contents = $global->load()->get())
   && ($global_list = parse_todos($contents))
 ) {
   $todos = array_merge($global_list, $todos);

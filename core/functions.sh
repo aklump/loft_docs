@@ -233,7 +233,7 @@ function do_hook_file() {
       $docs_php "$CORE/includes/do_php_hook.php" "$file" "$docs_source_path" "$CORE" "$docs_version_file" "$docs_root_dir" "$docs_root_dir/$docs_website_dir" "$docs_root_dir/$docs_html_dir" "$docs_root_dir/$docs_text_dir" "$docs_root_dir/$docs_drupal_dir" "$CORE/cache/source" "$outline_file"
        ;;
     bash)
-      $docs_bash "$file" "$docs_source_path" "$CORE" "$docs_version_file" "$docs_root_dir" "$docs_root_dir/$docs_website_dir" "$docs_root_dir/$docs_html_dir" "$docs_root_dir/$docs_text_dir" "$docs_root_dir/$docs_drupal_dir" "$CORE/cache/source"
+      $docs_bash "$file" "$docs_source_path" "$CORE" "$docs_version_file" "$docs_root_dir" "$docs_root_dir/$docs_website_dir" "$docs_root_dir/$docs_html_dir" "$docs_root_dir/$docs_text_dir" "$docs_root_dir/$docs_drupal_dir" "$CORE/cache/source" "$outline_file"
        ;;
     esac
 

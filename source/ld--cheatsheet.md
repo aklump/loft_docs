@@ -1,6 +1,6 @@
 # Generating Cheatsheets
 
-Loft Docs makes it easy to generate cheatsheets based on a class's methods.  The output might look something like this:
+Loft Docs makes it easy to generate cheatsheet partials based on a class's methods.  The partial will receive it's name from the group in the example code below.  Include the partial as you would any other dynamic partial.  The output might look something like this:
 
 | BrowserTestCase |
 |---|
