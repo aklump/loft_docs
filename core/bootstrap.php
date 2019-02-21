@@ -56,12 +56,18 @@ function flatten_todos($array) {
  * Sort an array of todo items by @w flag
  *
  * @param  array &$todos
+ *
+ * @return bool
+ *   True on success.
  */
 function sort_todos(&$todos) {
+  $result = TRUE;
   if (is_array($todos)) {
-    usort($todos, '_sort_todos');
+    $result = usort($todos, '_sort_todos');
     $todos = array_values(array_filter(array_unique($todos)));
   }
+
+  return $result;
 }
 
 /**

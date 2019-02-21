@@ -230,7 +230,7 @@ function do_hook_file() {
   elif [[ "$type" ]]; then
     case $type in
     php)
-      $docs_php "$CORE/includes/do_php_hook.php" "$file" "$docs_source_path" "$CORE" "$docs_version_file" "$docs_root_dir" "$docs_root_dir/$docs_website_dir" "$docs_root_dir/$docs_html_dir" "$docs_root_dir/$docs_text_dir" "$docs_root_dir/$docs_drupal_dir" "$CORE/cache/source"
+      $docs_php "$CORE/includes/do_php_hook.php" "$file" "$docs_source_path" "$CORE" "$docs_version_file" "$docs_root_dir" "$docs_root_dir/$docs_website_dir" "$docs_root_dir/$docs_html_dir" "$docs_root_dir/$docs_text_dir" "$docs_root_dir/$docs_drupal_dir" "$CORE/cache/source" "$outline_file"
        ;;
     bash)
       $docs_bash "$file" "$docs_source_path" "$CORE" "$docs_version_file" "$docs_root_dir" "$docs_root_dir/$docs_website_dir" "$docs_root_dir/$docs_html_dir" "$docs_root_dir/$docs_text_dir" "$docs_root_dir/$docs_drupal_dir" "$CORE/cache/source"
@@ -260,16 +260,16 @@ function do_pre_hooks() {
         echo_yellow "$(do_hook_file $hook)"
     done
 
-    # Internal pre hooks should always come after the user-supplied
-    do_todos
-
-    # Generate an outline from the file structure
+    # Generate an outline from the file structure.
     if [[ ! "$docs_outline_file" ]]; then
         # Create $docs_outline_auto from the file contents
         $docs_php "$CORE/includes/files_to_json.inc" "$docs_source_path" "$docs_cache_dir/source" "$docs_cache_dir/$docs_outline_auto" "$docs_source_dir/$docs_outline_merge"
 
         docs_outline_file="$docs_cache_dir/$docs_outline_auto"
     fi
+
+    # Internal pre hooks should always come after the user-supplied
+    do_todos
 }
 
 #
@@ -278,18 +278,24 @@ function do_pre_hooks() {
 function do_todos() {
   if [[ "$docs_todos" ]]; then
     local global="$docs_cache_dir/source/$docs_todos"
-    echo "Aggregating todo items..."
-
-    if [[ ! -f "$global" ]]; then
-      touch "$global";
-    fi
-
+    local first_run=true
     for file in $(find $docs_source_dir -type f -iname "*$docs_markdown_extension"); do
       if [ "$file" != "$global" ]; then
-        # Send a single file over for processing todos via php
-        $docs_php "$CORE/includes/todos.inc" "$file" "$global"
+
+        # Send a single file over for processing todos via php.  If it returns
+        # 2 then the settings tell us not to aggregate.  1 means there are no
+        # items. 0 means aggregation occurred.
+        $docs_php "$CORE/includes/todos.inc" "$PWD/$file" "$docs_todos" "$CORE/cache/source" "$docs_outline_file" "$first_run"
+        if [[ "$?" -eq 2 ]]; then
+
+          # The settings are disabled for aggregation.
+          return;
+        fi
+        first_run=false
       fi
     done
+    # After the dots from PHP we need a new line when done.
+    echo ""
   fi
 }
 

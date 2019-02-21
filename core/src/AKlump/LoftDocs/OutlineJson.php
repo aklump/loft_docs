@@ -9,6 +9,8 @@
 
 namespace AKlump\LoftDocs;
 
+use AKlump\LoftLib\Storage\FilePath;
+
 /**
  * Represents an OutlineJson object class.
  *
@@ -21,11 +23,13 @@ class OutlineJson implements IndexInterface {
   /**
    * Constructor
    *
-   * @param array $json
-   *   The array from Json
+   * @param string $path_to_outline_file
+   *   Outline json filepath.
    */
-  public function __construct($json) {
-    $this->json = (array) $json;
+  public function __construct($path_to_outline_file) {
+    $this->json = FilePath::create($path_to_outline_file, ['install' => FALSE])
+      ->load()
+      ->getJson(TRUE);
   }
 
   public function getData() {
@@ -56,7 +60,7 @@ class OutlineJson implements IndexInterface {
       }
     }
 
-    //Sort and Flatten
+    // Sort and Flatten.
     ksort($data);
     $list = array();
     foreach ($data as $value) {

@@ -9,5 +9,10 @@
         "demos--search-noindex2.html": {
             "search": "noindex"
         }
+    },
+    "settings": {
+        "tasklist": {
+            "aggregate": true
+        }
     }
 }

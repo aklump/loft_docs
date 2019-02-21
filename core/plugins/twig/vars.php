@@ -26,8 +26,7 @@ if (isset($page_data[$page_id])) {
     $vars['page'] = $page_data[$page_id];
 }
 
-$outline = load_outline($outline_file);
-$index = new Index($outline);
+$index = new Index($outline_file);
 
 $vars['index'] = array();
 foreach ($index->getData() as $key => $value) {

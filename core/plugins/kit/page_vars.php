@@ -12,8 +12,7 @@ use AKlump\LoftDocs\OutlineJson as Index;
 require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
 $g = new Data();
-$outline = load_outline($argv[1]);
-$index = new Index($outline);
+$index = new Index($argv[1]);
 
 $vars = array(
     'classes' => array(),

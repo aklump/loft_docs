@@ -5,8 +5,12 @@ title: 'Demo: Markdown Extra'
 
 This page has markdown extra stuff...
 
+## A Table
+
 | do | re |
 |----|----|
 | C  | D  |
 
-- [ ] Todo items will get aggregated automatically @w10
+## Todo Item
+
+- [ ] This task (which uses Markdown Extra todo syntax) will get aggregated automatically @w10

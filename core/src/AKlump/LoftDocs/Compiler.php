@@ -2,6 +2,7 @@
 
 namespace AKlump\LoftDocs;
 
+use AKlump\Data\Data;
 use AKlump\LoftLib\Storage\FilePath;
 
 /**
@@ -16,8 +17,20 @@ class Compiler {
    */
   protected $pathToDynamicSourceFiles;
 
-  public function __construct(FilePath $dynamic_source) {
+  /**
+   * The path to the outline file.
+   *
+   * @var \AKlump\LoftLib\Storage\FilePath
+   */
+  protected $pathToOutline;
+
+  public function __construct(FilePath $dynamic_source, Filepath $outline) {
     $this->pathToDynamicSourceFiles = $dynamic_source;
+    FilePath::ensureDir($this->pathToDynamicSourceFiles->getPath());
+    $this->pathToOutline = $outline;
+    if (!$outline->exists()) {
+      throw new \RuntimeException("\$outline does not exist.");
+    }
   }
 
   /**
@@ -69,6 +82,18 @@ class Compiler {
     }
 
     return $this->addSourceFile($basename, $contents);
+  }
+
+  /**
+   * Get an instance of FilePath for an include file.
+   *
+   * @param $basename
+   *
+   * @return \AKlump\LoftLib\Storage\FilePath
+   *   The include filepath instance.
+   */
+  public function getInclude($basename) {
+    return $this->pathToDynamicSourceFiles->to($basename);
   }
 
   /**
@@ -131,6 +156,27 @@ class Compiler {
     // return in_array($ext, array('txt') + get_markdown_extensions());
 
     return in_array($ext, $valid);
+  }
+
+  /**
+   * Get a settings value.
+   *
+   * Settings are reported in the outline file under the key `settings`.
+   *
+   * @param string $setting_key
+   *   The setting name/key, e.g., "tasklist.aggregate".
+   * @param null $default
+   *   The default value
+   *
+   * @return mixed
+   *   The value of the setting or $default.
+   */
+  public function getSetting($setting_key, $default = NULL) {
+    $g = new Data();
+    $json = $this->pathToOutline->load()->getJson(TRUE);
+    $json += ['settings' => []];
+
+    return $g->get($json, 'settings.' . $setting_key, $default);
   }
 
 }
