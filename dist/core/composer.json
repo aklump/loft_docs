@@ -15,6 +15,7 @@
         "aklump/data": ">=0.0.25",
         "webuni/front-matter": "^0.2.0",
         "jasonlewis/resource-watcher": "^1.2",
-        "matomo/ini": "^2.0"
+        "matomo/ini": "^2.0",
+        "aklump/loft-lib": "^1.0"
     }
 }

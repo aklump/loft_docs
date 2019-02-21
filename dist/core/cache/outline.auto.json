@@ -79,101 +79,108 @@
             "chapter": "ld"
         },
         {
+            "id": "ld--cheatsheet",
+            "title": "Generating Cheatsheets",
+            "file": "ld--cheatsheet.md",
+            "sort": 6,
+            "chapter": "ld"
+        },
+        {
             "id": "ld--compiling",
             "title": "Compiling",
             "file": "ld--compiling.md",
-            "sort": 6,
+            "sort": 7,
             "chapter": "ld"
         },
         {
             "id": "ld--drupal",
             "title": "Drupal Integration",
             "file": "ld--drupal.md",
-            "sort": 7,
+            "sort": 8,
             "chapter": "ld"
         },
         {
             "id": "ld--frontmatter",
             "title": "Frontmatter and How to Use",
             "file": "ld--frontmatter.md",
-            "sort": 8,
+            "sort": 9,
             "chapter": "ld"
         },
         {
             "id": "ld--github",
             "title": "Integration with GitHub",
             "file": "ld--github.md",
-            "sort": 9,
+            "sort": 10,
             "chapter": "ld"
         },
         {
             "id": "ld--hooks",
             "title": "Using pre\/post hooks",
             "file": "ld--hooks.md",
-            "sort": 10,
+            "sort": 11,
             "chapter": "ld"
         },
         {
             "id": "ld--iframes",
             "title": "Using iFrames",
             "file": "ld--iframes.md",
-            "sort": 11,
+            "sort": 12,
             "chapter": "ld"
         },
         {
             "id": "ld--index",
             "title": "Table of Contents\/Indexing",
             "file": "ld--index.md",
-            "sort": 12,
+            "sort": 13,
             "chapter": "ld"
         },
         {
             "id": "ld--install",
             "title": "Installation",
             "file": "ld--install.md",
-            "sort": 13,
+            "sort": 14,
             "chapter": "ld"
         },
         {
             "id": "ld--installation",
             "title": "How to install",
             "file": "ld--installation.md",
-            "sort": 14,
+            "sort": 15,
             "chapter": "ld"
         },
         {
             "id": "ld--roadmap",
             "title": "Roadmap",
             "file": "ld--roadmap.md",
-            "sort": 15,
+            "sort": 16,
             "chapter": "ld"
         },
         {
             "id": "ld--search",
             "title": "Integrating search",
             "file": "ld--search.md",
-            "sort": 16,
+            "sort": 17,
             "chapter": "ld"
         },
         {
             "id": "ld--theming",
             "title": "Custom Theming the Website Version",
             "file": "ld--theming.md",
-            "sort": 17,
+            "sort": 18,
             "chapter": "ld"
         },
         {
             "id": "ld--todos",
             "title": "The TODO list feature",
             "file": "ld--todos.md",
-            "sort": 18,
+            "sort": 19,
             "chapter": "ld"
         },
         {
             "id": "ld--tokens",
             "title": "Token Replacement",
             "file": "ld--tokens.md",
-            "sort": 19,
+            "sort": 20,
             "chapter": "ld"
         }
     ],
