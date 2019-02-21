@@ -12,7 +12,6 @@ If you're instead using the json index outline format, then it will automaticall
             "id": "_tasklist",
             "file": "_tasklist.md",
             "title": "All Todo Items",
-            "sort": 1000
         }
 
 When items are aggregated, the filenames are prepended to the todo item.  The final list will be filtered for uniqueness, and duplicates removed.  If the same todo item appears more than once in a file, it will be reduced to a single item; but the same todo item can appear in more than one file, since the filename prepend creates uniqueness.

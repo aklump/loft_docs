@@ -67,7 +67,6 @@ Here is an example scaffold for a pre hook that uses a twig template to create a
 ### hooks/plugins_dir.md
 
     ---
-    sort: -163
     ---
     # Plugin Library
     

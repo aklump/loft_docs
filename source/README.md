@@ -1,6 +1,5 @@
 ---
 title: Overview of Loft Docs
-sort: -100
 ---
 [markdown]:http://daringfireball.net/projects/markdown/
 [codekit]:http://incident57.com/codekit/

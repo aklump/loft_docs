@@ -62,7 +62,6 @@ foreach ($first_level as $data) {
   $meta['chapter'] = $g->get($front_matter, 'chapter');
   $meta['section'] = $g->get($front_matter, 'section');
   $meta['title'] = $g->get($front_matter, 'title');
-  $meta['sort'] = $g->get($front_matter, 'sort');
 
   //
   // 2. html heading
@@ -87,7 +86,6 @@ foreach ($first_level as $data) {
       'file' => $data['filename_compiled'],
       'title' => $g->get($meta, 'title'),
       'parent' => $g->get($meta, 'chapter'),
-      'weight' => $g->get($meta, 'sort'),
     );
   }
 }

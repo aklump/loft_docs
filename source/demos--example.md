@@ -1,5 +1,4 @@
 ---
-sort: 100
 ---
 # Demo: An Example Page & Image
 ## Section Title

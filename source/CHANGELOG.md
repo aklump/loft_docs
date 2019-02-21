@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10
+
+* Removed the `sort` key from the json outlines
+
 ## 0.9.10
 
 * POSSIBLE BREAKING CHANGE: Added `Deny from All` to the `.htaccess` for public_html pattern.  If this breaks your compile, use a post compile hook to overwrite the default `.htaccess` file; see `hooks/htaccess.sh` for an example of how to do this.  Be sure to register the hook file in `core-config.sh` in the `post_hooks` section, or it won't be called.

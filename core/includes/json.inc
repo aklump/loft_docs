@@ -38,7 +38,7 @@ if (!empty($json_file)) {
     //
     //
     // Search support
-    
+
     // TODO Need to add support for search === false
     $search_results_file = $source_dir . '/search--results.md';
     if (file_exists($search_results_file)) {
@@ -63,7 +63,6 @@ if (!empty($json_file)) {
             'id'    => clean_id($file),
             'title' => $data['title'],
             'file'  => isset($data['file']) ? $data['file'] : $file . get_md_source_file_extension($file),
-            'sort'  => isset($data['weight']) ? $data['weight'] : $section_sort++,
         );
 
         $chapter_id = clean_id($data['parent']);
@@ -74,7 +73,6 @@ if (!empty($json_file)) {
                 $chapter = array(
                     'id'    => $chapter_id,
                     'title' => clean_title($data['parent']),
-                    'sort'  => $chapter_sort++,
                 );
             }
         }
