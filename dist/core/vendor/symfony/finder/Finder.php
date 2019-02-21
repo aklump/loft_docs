@@ -41,25 +41,25 @@ class Finder implements \IteratorAggregate, \Countable
     const IGNORE_DOT_FILES = 2;
 
     private $mode = 0;
-    private $names = array();
-    private $notNames = array();
-    private $exclude = array();
-    private $filters = array();
-    private $depths = array();
-    private $sizes = array();
+    private $names = [];
+    private $notNames = [];
+    private $exclude = [];
+    private $filters = [];
+    private $depths = [];
+    private $sizes = [];
     private $followLinks = false;
     private $sort = false;
     private $ignore = 0;
-    private $dirs = array();
-    private $dates = array();
-    private $iterators = array();
-    private $contains = array();
-    private $notContains = array();
-    private $paths = array();
-    private $notPaths = array();
+    private $dirs = [];
+    private $dates = [];
+    private $iterators = [];
+    private $contains = [];
+    private $notContains = [];
+    private $paths = [];
+    private $notPaths = [];
     private $ignoreUnreadableDirs = false;
 
-    private static $vcsPatterns = array('.svn', '_svn', 'CVS', '_darcs', '.arch-params', '.monotone', '.bzr', '.git', '.hg');
+    private static $vcsPatterns = ['.svn', '_svn', 'CVS', '_darcs', '.arch-params', '.monotone', '.bzr', '.git', '.hg'];
 
     public function __construct()
     {
@@ -536,13 +536,13 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function in($dirs)
     {
-        $resolvedDirs = array();
+        $resolvedDirs = [];
 
         foreach ((array) $dirs as $dir) {
             if (is_dir($dir)) {
                 $resolvedDirs[] = $this->normalizeDir($dir);
             } elseif ($glob = glob($dir, (\defined('GLOB_BRACE') ? GLOB_BRACE : 0) | GLOB_ONLYDIR)) {
-                $resolvedDirs = array_merge($resolvedDirs, array_map(array($this, 'normalizeDir'), $glob));
+                $resolvedDirs = array_merge($resolvedDirs, array_map([$this, 'normalizeDir'], $glob));
             } else {
                 throw new \InvalidArgumentException(sprintf('The "%s" directory does not exist.', $dir));
             }
@@ -638,7 +638,12 @@ class Finder implements \IteratorAggregate, \Countable
         return iterator_count($this->getIterator());
     }
 
-    private function searchInDirectory(string $dir): \Iterator
+    /**
+     * @param string $dir
+     *
+     * @return \Iterator
+     */
+    private function searchInDirectory($dir)
     {
         if (static::IGNORE_VCS_FILES === (static::IGNORE_VCS_FILES & $this->ignore)) {
             $this->exclude = array_merge($this->exclude, self::$vcsPatterns);

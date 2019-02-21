@@ -28,20 +28,6 @@ interface Application extends Container
     public function environment();
 
     /**
-     * Determine if the application is running in the console.
-     *
-     * @return bool
-     */
-    public function runningInConsole();
-
-    /**
-     * Determine if the application is running unit tests.
-     *
-     * @return bool
-     */
-    public function runningUnitTests();
-
-    /**
      * Determine if the application is currently down for maintenance.
      *
      * @return bool
@@ -59,10 +45,11 @@ interface Application extends Container
      * Register a service provider with the application.
      *
      * @param  \Illuminate\Support\ServiceProvider|string  $provider
+     * @param  array  $options
      * @param  bool   $force
      * @return \Illuminate\Support\ServiceProvider
      */
-    public function register($provider, $force = false);
+    public function register($provider, $options = [], $force = false);
 
     /**
      * Register a deferred provider and service.
@@ -102,11 +89,4 @@ interface Application extends Container
      * @return string
      */
     public function getCachedServicesPath();
-
-    /**
-     * Get the path to the cached packages.php file.
-     *
-     * @return string
-     */
-    public function getCachedPackagesPath();
 }

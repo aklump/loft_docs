@@ -19,9 +19,9 @@ namespace Symfony\Component\Finder\Iterator;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class CustomFilterIterator extends \FilterIterator
+class CustomFilterIterator extends FilterIterator
 {
-    private $filters = array();
+    private $filters = [];
 
     /**
      * @param \Iterator  $iterator The Iterator to filter

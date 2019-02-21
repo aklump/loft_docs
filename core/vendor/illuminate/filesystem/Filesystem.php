@@ -381,15 +381,22 @@ class Filesystem
      * Get an array of all files in a directory.
      *
      * @param  string  $directory
-     * @param  bool  $hidden
-     * @return \Symfony\Component\Finder\SplFileInfo[]
+     * @return array
      */
-    public function files($directory, $hidden = false)
+    public function files($directory)
     {
-        return iterator_to_array(
-            Finder::create()->files()->ignoreDotFiles(! $hidden)->in($directory)->depth(0)->sortByName(),
-            false
-        );
+        $glob = glob($directory.DIRECTORY_SEPARATOR.'*');
+
+        if ($glob === false) {
+            return [];
+        }
+
+        // To get the appropriate files, we'll simply glob the directory and filter
+        // out any "files" that are not truly files so we do not end up with any
+        // directories in our list, but only true files within the directory.
+        return array_filter($glob, function ($file) {
+            return filetype($file) == 'file';
+        });
     }
 
     /**
@@ -397,14 +404,11 @@ class Filesystem
      *
      * @param  string  $directory
      * @param  bool  $hidden
-     * @return \Symfony\Component\Finder\SplFileInfo[]
+     * @return array
      */
     public function allFiles($directory, $hidden = false)
     {
-        return iterator_to_array(
-            Finder::create()->files()->ignoreDotFiles(! $hidden)->in($directory)->sortByName(),
-            false
-        );
+        return iterator_to_array(Finder::create()->files()->ignoreDotFiles(! $hidden)->in($directory), false);
     }
 
     /**
@@ -417,7 +421,7 @@ class Filesystem
     {
         $directories = [];
 
-        foreach (Finder::create()->in($directory)->directories()->depth(0)->sortByName() as $dir) {
+        foreach (Finder::create()->in($directory)->directories()->depth(0) as $dir) {
             $directories[] = $dir->getPathname();
         }
 
@@ -452,8 +456,10 @@ class Filesystem
      */
     public function moveDirectory($from, $to, $overwrite = false)
     {
-        if ($overwrite && $this->isDirectory($to) && ! $this->deleteDirectory($to)) {
-            return false;
+        if ($overwrite && $this->isDirectory($to)) {
+            if (! $this->deleteDirectory($to)) {
+                return false;
+            }
         }
 
         return @rename($from, $to) === true;
@@ -549,27 +555,6 @@ class Filesystem
         }
 
         return true;
-    }
-
-    /**
-     * Remove all of the directories within a given directory.
-     *
-     * @param  string  $directory
-     * @return bool
-     */
-    public function deleteDirectories($directory)
-    {
-        $allDirectories = $this->directories($directory);
-
-        if (! empty($allDirectories)) {
-            foreach ($allDirectories as $directoryName) {
-                $this->deleteDirectory($directoryName);
-            }
-
-            return true;
-        }
-
-        return false;
     }
 
     /**
