@@ -40,10 +40,6 @@
   <td>The title as it appears in the index</td>
 </tr>
 <tr>
-  <td>sort</td>
-  <td>The order the page appears in the index and compilations</td>
-</tr>
-<tr>
   <td>chapter</td>
   <td>The id of the chapter; not the chapter title, mind you.</td>
 </tr>
@@ -76,7 +72,6 @@
 
 <pre><code>---
 title: The title of this page
-sort: -100
 tags: code php how-to
 noindex: true
 ---
@@ -84,7 +79,16 @@ noindex: true
 
 <h2>FrontMatter in json</h2>
 
-<p>You can also provide frontmatter to files using outline.merge.json.  Do this when yaml is not appropriate and using json would be easier.</p>
+<p>You can also provide frontmatter to files using <em>outline.merge.json</em>.  Do this when yaml is not appropriate and using json would be easier.  Here is an example:</p>
+
+<pre><code>{
+    "frontmatter": {
+        "demos--search-noindex2.html": {
+            "search": "noindex"
+        }
+    }
+}
+</code></pre>
 </section>
 
 <div class="search__results">
@@ -99,7 +103,7 @@ noindex: true
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Wed, 20 Feb 2019 17:09:14 -0800</p>
+    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Thu, 21 Feb 2019 12:45:16 -0800</p>
   </div>
 </footer>
 

@@ -2,17 +2,17 @@
 
 <html>
 <head>
-  <title>Demo: The Sniffed Title</title>
+  <title>Demo: Include Files</title>
   <link href="search/tipuesearch.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
 </head>
 
-<body class="page--demos--title">
+<body class="page--demos--includes">
 <header>
   <div class="pager">
-  <a href="demos--tasklist.html" class="prev demos--tasklist">&laquo;Demo: Todo List</a>
+  <a href="demos--example.html" class="prev demos--example">&laquo;Demo: An Example Page &amp; Image</a>
   <a href="index.html" class="index">Index</a>
-  <a href="demos--todos-a.html" class="next demos--todos-a">Demo: Todo List Aggregation 1 of 3&raquo;</a>
+  <a href="demos--md_extra.html" class="next demos--md_extra">Demo: Markdown Extra&raquo;</a>
 </div>
 </header>
 
@@ -22,12 +22,35 @@
   </form>
 </div>
 
-  <h1>Demo: The Sniffed Title</h1>
+  <h1>Demo: Include Files</h1>
   <div class="breadcrumb"><a href="index.html">Index</a></div>
 
 <section>
 
-<p>This page should not have a title derived from the markdown.</p>
+<p>The following headline is created during compile by <em>hooks/pre_compile.php</em>, which generates a dynamic include file <em>core/cache/source/_headline.md</em> that is inserted here:</p>
+
+<h2>Today is: Thu, 21 Feb 2019 21:45:07 +0100</h2>
+
+<p>And the following table is defined in a partial in <em>source/_table.md</em>.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Key</th>
+  <th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Size</td>
+  <td>large</td>
+</tr>
+<tr>
+  <td>Shape</td>
+  <td>square</td>
+</tr>
+</tbody>
+</table>
 </section>
 
 <div class="search__results">
@@ -36,13 +59,13 @@
 
 <footer>
   <div class="pager">
-  <a href="demos--tasklist.html" class="prev demos--tasklist">&laquo;Demo: Todo List</a>
+  <a href="demos--example.html" class="prev demos--example">&laquo;Demo: An Example Page &amp; Image</a>
   <a href="index.html" class="index">Index</a>
-  <a href="demos--todos-a.html" class="next demos--todos-a">Demo: Todo List Aggregation 1 of 3&raquo;</a>
+  <a href="demos--md_extra.html" class="next demos--md_extra">Demo: Markdown Extra&raquo;</a>
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Thu, 21 Feb 2019 12:45:14 -0800</p>
+    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Thu, 21 Feb 2019 12:45:12 -0800</p>
   </div>
 </footer>
 

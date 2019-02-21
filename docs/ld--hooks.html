@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>Using pre/post hooks</title>
+  <title>Hooks</title>
   <link href="search/tipuesearch.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
 </head>
@@ -22,18 +22,23 @@
   </form>
 </div>
 
-  <h1>Using pre/post hooks</h1>
+  <h1>Hooks</h1>
   <div class="breadcrumb"><a href="index.html">Index</a></div>
 
 <section>
 
-<p>You may specify one or more php or shell scripts to be called both before and/or after compiling using the <code>pre_hooks</code> and <code>post_hooks</code> config options.  The paths you present are relative to <code>{root}/hooks</code>.  Compilation pauses until each script is finished.</p>
+<ul>
+<li>Create your hook file in <em>hooks</em>, which is a sibling directory to <em>source</em>.</li>
+<li>Enable the hook file in <em>core.config.sh</em>, e.g., <code>pre_hooks = "pre_compile.php"</code></li>
+</ul>
+
+<p>You may specify one or more PHP or shell scripts to be called both before and/or after compiling using the <code>pre_hooks</code> and <code>post_hooks</code> config options.  The paths you present are relative to <code>{root}/hooks</code>.  Compilation pauses until each script is finished.</p>
 
 <pre><code>pre_hooks = "pre_compile.sh pre_compile.php"
 post_hooks = "post_compile.sh post_compile.php"
 </code></pre>
 
-<p><strong>Scripts must be located in <code>{root}/hooks</code>.</strong></p>
+<h2>Arguments Sent to Scripts</h2>
 
 <p>The scripts will receive the following arguments:</p>
 
@@ -49,111 +54,99 @@ post_hooks = "post_compile.sh post_compile.php"
 <tr>
   <td>$argv[1]</td>
   <td>$1</td>
-  <td>The absolute filepath to the <code>source/</code> directory</td>
+  <td>Path to the <code>source/</code> directory</td>
 </tr>
 <tr>
   <td>$argv[2]</td>
   <td>$2</td>
-  <td>The absolute filepath to the <code>core/</code> directory</td>
+  <td>Path to the <code>core/</code> directory</td>
 </tr>
 <tr>
   <td>$argv[3]</td>
   <td>$3</td>
-  <td>The absolute filepath to the version file</td>
+  <td>Path to the version file</td>
 </tr>
 <tr>
   <td>$argv[4]</td>
   <td>$4</td>
-  <td>The absolute filepath to the parent directory of <code>source</code>, a.k.a the root directory</td>
+  <td>Path to the parent directory of <code>source</code>, a.k.a the root directory</td>
 </tr>
 <tr>
   <td>$argv[5]</td>
   <td>$5</td>
-  <td>The absolute filepath to the compiled website directory</td>
+  <td>Path to the compiled website directory</td>
 </tr>
 <tr>
   <td>$argv[6]</td>
   <td>$6</td>
-  <td>The absolute filepath to the compiled html directory</td>
+  <td>Path to the compiled html directory</td>
 </tr>
 <tr>
   <td>$argv[7]</td>
   <td>$7</td>
-  <td>The absolute filepath to the compiled text directory</td>
+  <td>Path to the compiled text directory</td>
 </tr>
 <tr>
   <td>$argv[8]</td>
   <td>$8</td>
-  <td>The absolute filepath to the compiled drupal directory</td>
+  <td>Path to the compiled drupal directory</td>
 </tr>
 <tr>
   <td>$argv[9]</td>
   <td>$9</td>
-  <td>The absolute filepath to write dynamic pages before compile</td>
+  <td>Path to write dynamic pages before compile</td>
+</tr>
+<tr>
+  <td>$argv[10]</td>
+  <td>$10</td>
+  <td>Path to write dynamic twig includes to.  A file you create here is available using <code>{% include('my_dynamic_file.md') %}</code></td>
+</tr>
+<tr>
+  <td>$argv[11]</td>
+  <td>$11</td>
+  <td>Path to the outline JSON file</td>
 </tr>
 </tbody>
 </table>
 
-<h2>Generating Content</h2>
+<h2>Generating Dynamic Content</h2>
 
-<p>Hooks/plugins MUST NEVER create files in <em>/source</em> as this will affect the watcher, instead create any files in <code>$argv[9]</code>.</p>
+<p>Portions of your pages that need to be computed are generally going to be dynamic includes, which are included on your static pages named ending with <code>.twig.md</code>.</p>
 
-<h2>Output</h2>
+<h3>PHP Hooks</h3>
 
-<p>You may print or echo from your script and it will be echoed to the user.</p>
-
-<h2>Using Twig Templates for Generated Content</h2>
-
-<p>A common pre hook concern is to generate dynamic pages.  If you do this with a php file, you can have access to <a href="https://twig.symfony.com/doc/2.x">Twig</a> via the core dependencies.</p>
-
-<p>If your template file is located in source, it should use a .twig extension.  Then in your hook, spit the compiled out as .md.</p>
-
-<p>Here is an example scaffold for a pre hook that uses a twig template to create a page.</p>
-
-<h3>hooks/plugins_dir.php</h3>
+<p>You have access to an instance of <code>$compiler</code>, which has most methods you'd need.  Also any core classes are available and autoloaded so you simple need to declare them via <code>use</code> statements at the top of your hook file, e.g.,</p>
 
 <pre><code>&lt;?php
-/**
- * @file Generate the plugins directory page by scanning the plugins directory.
- */
 
-// Load the core autoload, which will give access to Twig
-require_once $argv[2] . '/vendor/autoload.php';
-
-// ...
-// Create an array $vars from some process
-// ...
-
-$loader = new Twig_Loader_Filesystem(dirname(__FILE__));
-$twig = new Twig_Environment($loader);
-
-// Template file is located in /hooks as well.
-$template = $twig-&gt;load('plugins_dir.md');
-
-// Write the file using $argv[9] to the correct compilation directory.
-file_put_contents($argv[9] . '/plugins_dir.md', $template-&gt;render($vars));
+use AKlump\LoftDocs\PhpClassMethodReader;
+...
 </code></pre>
 
-<h3>hooks/plugins_dir.md</h3>
+<p>PHP hook files should only save content using a method on the <code>$compiler</code> instance.  To save an include file, use:</p>
 
-<pre><code>---
-sort: -163
----
-# Plugin Library
-
-{% for plugin in plugins %}
-## {{ plugin.name }}
-
-&gt; {{ plugin.description }}
-
-{{ plugin.readme }}
-
-### Usage Example
-
-&lt;pre&gt;{{ plugin.example }}&lt;/pre&gt;
-
-{% endfor %}
+<pre><code>$compiler-&gt;addInclude(...
 </code></pre>
+
+<p>If you want to generate an entire dynamic page, you should use:</p>
+
+<pre><code>$compiler-&gt;addSourceFile(...
+</code></pre>
+
+<p>Be sure to check out these classes for help with dynamic content:</p>
+
+<ul>
+<li><code>\AKlump\LoftLib\Code\Markdown</code></li>
+<li><code>\AKlump\LoftDocs\PhpClassMethodReader</code></li>
+</ul>
+
+<h3>BASH Hooks</h3>
+
+<p>Dynamice files should be written to the directory defined in <code>$9</code></p>
+
+<h2>Screen Output</h2>
+
+<p>You may print or echo from your script and it will be echoed to the user.</p>
 </section>
 
 <div class="search__results">
@@ -168,7 +161,7 @@ sort: -163
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Wed, 20 Feb 2019 17:09:14 -0800</p>
+    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Thu, 21 Feb 2019 12:45:17 -0800</p>
   </div>
 </footer>
 

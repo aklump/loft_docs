@@ -2,13 +2,17 @@
     "chapters": [
         {
             "id": "ld",
-            "title": "Using Loft Docs",
-            "sort": 0
+            "title": "Using Loft Docs"
         }
     ],
     "frontmatter": {
         "demos--search-noindex2.html": {
             "search": "noindex"
+        }
+    },
+    "settings": {
+        "tasklist": {
+            "aggregate": true
         }
     }
 }

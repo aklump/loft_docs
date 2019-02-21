@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Demo: Todo List</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--demos--tasklist">
+<header>
+  <div class="pager">
+  <a href="demos--search-noindex.html" class="prev demos--search-noindex">&laquo;Demo: Do not include in search indexing</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="demos--title.html" class="next demos--title">Demo: The Sniffed Title&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Demo: Todo List</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<p>Here are the todo items for this project.  You should see at least 12 todo items.</p>
+
+
+<pre>- [ ] demos--todos-b: Echo
+- [ ] demos--todos-b: Foxtrot
+- [ ] demos--todos-a: Charlie
+- [ ] demos--todos-a: Bravo
+- [ ] demos--todos-a: Alpha
+- [ ] ld--todos: a task list item @w-10
+- [ ] ld--todos: another task
+- [ ] ld--todos: a task list item
+- [ ] ld--roadmap: Fix the delay caused by deleting files at beginning of compile.
+- [ ] demos--todos-c: Lima
+- [ ] demos--todos-c: Kilo
+- [ ] demos--todos-c: Juliette
+- [ ] demos--todos-c: India
+- [ ] demos--todos-b: Hotel
+- [ ] demos--todos-b: Golf
+- [ ] demos--todos-a: Delta
+- [ ] demos--md_extra: This task (which uses Markdown Extra todo syntax) will get aggregated automatically @w10
+- [ ] ld--todos: a task list item @w10
+- [ ] ld--todos: a task list item @w10.1
+</pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="demos--search-noindex.html" class="prev demos--search-noindex">&laquo;Demo: Do not include in search indexing</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="demos--title.html" class="next demos--title">Demo: The Sniffed Title&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Thu, 21 Feb 2019 12:45:14 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tipue_search_input').tipuesearch();
+    });
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

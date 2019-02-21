@@ -2,17 +2,17 @@
 
 <html>
 <head>
-  <title>Demo: The Sniffed Title</title>
+  <title>Twig</title>
   <link href="search/tipuesearch.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
 </head>
 
-<body class="page--demos--title">
+<body class="page--ld--twig">
 <header>
   <div class="pager">
-  <a href="demos--tasklist.html" class="prev demos--tasklist">&laquo;Demo: Todo List</a>
+  <a href="ld--tokens.html" class="prev ld--tokens">&laquo;Token Replacement</a>
   <a href="index.html" class="index">Index</a>
-  <a href="demos--todos-a.html" class="next demos--todos-a">Demo: Todo List Aggregation 1 of 3&raquo;</a>
+  <a href="structure.html" class="next structure">Structure and Chapters&raquo;</a>
 </div>
 </header>
 
@@ -22,12 +22,19 @@
   </form>
 </div>
 
-  <h1>Demo: The Sniffed Title</h1>
+  <h1>Twig</h1>
   <div class="breadcrumb"><a href="index.html">Index</a></div>
 
 <section>
 
-<p>This page should not have a title derived from the markdown.</p>
+<p>You may want to dynamically create partials that twig can load during compile.</p>
+
+<p>In a hook file create a partial and save it to:</p>
+
+<p>Any file that you name with ending in <code>.twig.md</code> will be run through the twig processor.  That means that you can use includes like the following:</p>
+
+<pre><code>{% include('my_dynamic_file.md') %}
+</code></pre>
 </section>
 
 <div class="search__results">
@@ -36,13 +43,13 @@
 
 <footer>
   <div class="pager">
-  <a href="demos--tasklist.html" class="prev demos--tasklist">&laquo;Demo: Todo List</a>
+  <a href="ld--tokens.html" class="prev ld--tokens">&laquo;Token Replacement</a>
   <a href="index.html" class="index">Index</a>
-  <a href="demos--todos-a.html" class="next demos--todos-a">Demo: Todo List Aggregation 1 of 3&raquo;</a>
+  <a href="structure.html" class="next structure">Structure and Chapters&raquo;</a>
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Thu, 21 Feb 2019 12:45:14 -0800</p>
+    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Thu, 21 Feb 2019 12:45:20 -0800</p>
   </div>
 </footer>
 
