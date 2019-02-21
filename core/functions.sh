@@ -246,17 +246,19 @@ function do_hook_file() {
 function do_pre_hooks() {
     local hook
 
+    # Flush cache files and make the dirs that might get used in the pre_hooks.
+    [[ "$docs_cache_dir" ]] && [[ -d "$docs_cache_dir" ]] && rm -r "$docs_cache_dir" || exit 1;
+    mkdir -p "$docs_cache_dir/source"
+
     # Hack to fix color, no time to figure out 2015-11-14T13:58, aklump
     #  echo "`tty -s && tput setaf 6``tty -s && tput op`"
+
     echo "Running pre-compile hooks..."
     for hook in ${docs_pre_hooks[@]}; do
         hook=$(realpath "$docs_hooks_dir/$hook")
         echo_green "Hook file: $hook"
         echo_yellow "$(do_hook_file $hook)"
     done
-
-    # Empty out the page data cache.
-    test -e "$docs_cache_dir/page_data.json" && rm "$docs_cache_dir/page_data.json"
 
     # Internal pre hooks should always come after the user-supplied
     do_todos

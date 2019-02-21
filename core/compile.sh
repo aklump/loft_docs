@@ -15,10 +15,6 @@ installing=0
 load_config
 echo_purple "Compiling your documentation..."
 
-# Flush cache files and make the dirs that might get used in the pre_hooks.
-[[ "$docs_cache_dir" ]] && [[ -d "$docs_cache_dir" ]] && rm -r "$docs_cache_dir" || exit 1;
-mkdir -p "$docs_cache_dir/source"
-
 do_pre_hooks
 
 # These dirs need to be created
@@ -244,7 +240,7 @@ if [ "$docs_README" ]; then
   done
 fi
 
-# Changelog support
+# CHANGELOG support.
 if [ "$docs_CHANGELOG" ]; then
   destinations=($docs_CHANGELOG)
   for output in "${destinations[@]}"; do
@@ -270,7 +266,7 @@ do_plugin_handler $docs_plugins_tpl post
 # Provide search support
 $docs_php "$CORE/includes/search.inc" "$docs_outline_file" "$CORE" "$docs_root_dir" "$docs_root_dir/$docs_website_dir" "$docs_root_dir/$docs_source_dir"
 
-# Cleanup dirs that are not enabled or were temp
+# Cleanup dirs that are not enabled or were temp.
 for var in "${dirs_to_delete[@]}"; do
   if [ "$var" ] && [ -d "$var" ]; then
     rm -rf $var;
@@ -279,7 +275,7 @@ done
 
 do_post_hooks
 
-# Ensure that module.help.ini exists if we are in a drupal site
+# Ensure that module.help.ini exists if we are in a drupal site.
 if [ "$docs_drupal_module" ] && [ ! -f "$docs_drupal_dir/$docs_drupal_module.help.ini"  ]; then
   $docs_php "$CORE/make_ini.php" "$docs_drupal_dir" "$docs_drupal_module" "$docs_outline_file"
 fi

@@ -32,9 +32,6 @@ $info = array();
 $user = Compiler::indexSourceFiles($source_dir);
 $generated = Compiler::indexSourceFiles($generated_dir);
 $first_level = array_merge($user, $generated);
-usort($first_level, function ($a, $b) {
-  return strcasecmp($a['filename_compiled'], $b['filename_compiled']);
-});
 
 $fm = new FrontMatter();
 $g = new Data();
