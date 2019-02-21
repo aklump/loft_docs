@@ -7,7 +7,7 @@
  * @{
  */
 
-echo "Hello Php World!";
-
-// Demonstrate that compile.sh waits for this script to finish...
-sleep(0);
+$contents = "## Today is: " . date('r');
+echo $compiler->addInclude('_headline.md', $contents)
+    ->getBasename() . ' has been created.' && exit(0);
+exit(1);

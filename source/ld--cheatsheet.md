@@ -30,14 +30,12 @@ Loft Docs makes it easy to generate cheatsheets based on a class's methods.  The
     /**
      * @file
      * An hook example of generating a PHP class method cheatsheet.
+     *
+     * Available variables:
+     * - $compiler.
      */
     
-    use AKlump\LoftDocs\PhpClassMethodReader;
     use AKlump\LoftLib\Code\Markdown;
-    use AKlump\LoftLib\Storage\FilePath;
-    
-    // You must require the LoftDocs core for the files used above.
-    require_once $argv[2] . '/vendor/autoload.php';
     
     // Then you need to include an autoloader for the classes you want to scan.
     require_once $argv[1] . '/../../vendor/autoload.php';
@@ -64,7 +62,7 @@ Loft Docs makes it easy to generate cheatsheets based on a class's methods.  The
       $contents .= Markdown::table($methods) . PHP_EOL;
     
       // Save the snippet to be used by other pages.
-      FilePath::create($argv[9] . "/_$group.md")->put($contents)->save();
+      $compiler->addInclude("_{$group}.md", $contents);
     }
 
 

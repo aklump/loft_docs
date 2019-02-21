@@ -15,6 +15,10 @@ installing=0
 load_config
 echo_purple "Compiling your documentation..."
 
+# Flush cache files and make the dirs that might get used in the pre_hooks.
+[[ "$docs_cache_dir" ]] && [[ -d "$docs_cache_dir" ]] && rm -r "$docs_cache_dir" || exit 1;
+mkdir -p "$docs_cache_dir/source"
+
 do_pre_hooks
 
 # These dirs need to be created
@@ -24,7 +28,7 @@ declare -a dirs=("$docs_html_dir" "$docs_mediawiki_dir" "$docs_website_dir" "$do
 declare -a dirs_to_empty=("$docs_html_dir" "$docs_mediawiki_dir" "$docs_website_dir" "$docs_text_dir" "$docs_drupal_dir" "$docs_kit_dir" "$docs_tmp_dir");
 
 # These dirs need to be removed at that end
-declare -a dirs_to_delete=("$docs_tmp_dir" "$docs_kit_dir")
+declare -a dirs_to_delete=("$docs_kit_dir")
 
 # Add all enabled formats to dir array
 for format in "${docs_disabled[@]}"; do
@@ -86,7 +90,7 @@ get_version
 do_plugin_handler $docs_plugins_tpl pre
 
 # Get all the files in the source directory.
-declare -a files=("$docs_source_dir"/*)
+declare -a files=("$docs_source_path"/*)
 
 # Then add in all files we created.
 declare -a generated=("$docs_cache_dir/source"/*)
@@ -101,23 +105,27 @@ for file in ${files[@]}; do
     extension=".${file##*.}"
     filename="${basename%%.*}"
 
-    # Process partial files and output as .html, converting markdown as needed.
+    # Skip over any files that begin with '_'; they are for includes only.
+    if [[ "${filename:0:1}" == "_" ]]; then
+      continue
+    fi
+
+    # Process markdown files, markdown.php will handle the twig processing if the suffix is $docs_twig_preprocess_extension.
     if [ "$extension" == "$docs_partial_extension" ]; then
         if [ "$docs_partial_extension" == "$docs_markdown_extension" ]; then
-            $docs_php "$CORE/markdown.php" "$file" "$docs_tmp_dir/$filename.html"
+            $docs_php "$CORE/markdown.php" "$file" "$docs_tmp_dir" "$docs_source_path" "$docs_twig_preprocess_extension" "$docs_cache_dir/source:$docs_tmp_dir:$docs_source_path"
         else
             $docs_php "$CORE/includes/cp_no_frontmatter.php" $file $docs_tmp_dir/$filename.html
         fi
 
-    # Css files pass through to the website and html dir
+    # CSS files pass through to the website and html dir
     elif [ "$extension" == ".css" ]; then
-#    elif echo "$file" | grep -q '.css$'; then
       cp $file $docs_html_dir/$basename
       _check_file "$docs_html_dir/$basename"
       cp $file $docs_website_dir/$basename
       _check_file "$docs_website_dir/$basename"
 
-    # Html files pass through to drupal, website and html
+    # HTML files pass through to drupal, website and html
     elif echo "$file" | grep -q '.html$'; then
       cp $file $docs_drupal_dir/$basename
       _check_file "$docs_drupal_dir/$basename"

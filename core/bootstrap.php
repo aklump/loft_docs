@@ -167,23 +167,6 @@ function get_md_source_file_extension($file)
 }
 
 /**
- * Detect if a filename points to a markdown file.
- *
- * @param  string $path
- *
- * @return bool
- */
-function path_is_section($path)
-{
-    $ext = pathinfo(strtolower($path), PATHINFO_EXTENSION);
-    $valid = get_markdown_extensions();
-    //@todo want to be able to show text files?
-    // return in_array($ext, array('txt') + get_markdown_extensions());
-
-    return in_array($ext, $valid);
-}
-
-/**
  * Loads the outline json file and fills in missing defaults.
  *
  * @param  string $outline_file

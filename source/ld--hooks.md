@@ -24,11 +24,11 @@ The scripts will receive the following arguments:
 | $argv[7] | $7      | The absolute filepath to the compiled text directory  |
 | $argv[8] | $8      | The absolute filepath to the compiled drupal directory  |
 | $argv[9] | $9      | The absolute filepath to write dynamic pages before compile |
+| $argv[10] | $10    | The absolute filepath to write dynamic twig includes to.  A file you create here is available using `{% include('my_dynamic_file.md') %}` |
 
 ## Generating Content
 
 Hooks/plugins MUST NEVER create files in _/source_ as this will affect the watcher, instead create any files in `$argv[9]`.
-
 ## Output
 
 You may print or echo from your script and it will be echoed to the user.
