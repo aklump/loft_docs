@@ -90,7 +90,7 @@ class Compiler {
       $info = pathinfo($path_to_dir . "/$basename");
       $info += [
         'path' => $info['dirname'] . '/' . $info['basename'],
-        'filename_compiled' => Core::getCompiledFilenameFromSourcePath($basename),
+        'filename_compiled' => self::getCompiledFilenameFromSourcePath($basename),
       ];
 
       return $info;
