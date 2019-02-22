@@ -158,6 +158,12 @@
             "chapter": "demos"
         },
         {
+            "id": "demos--twig-vars",
+            "title": "Demo: Twig Variable Replacement",
+            "file": "demos--twig-vars",
+            "chapter": "demos"
+        },
+        {
             "id": "demos--empty-file",
             "title": "Demos  Empty File",
             "file": "demos--empty-file",
@@ -207,6 +213,12 @@
             "id": "ld--iframes",
             "title": "Using iFrames",
             "file": "ld--iframes",
+            "chapter": "ld"
+        },
+        {
+            "id": "ld--variables",
+            "title": "Using Variables",
+            "file": "ld--variables",
             "chapter": "ld"
         }
     ],
