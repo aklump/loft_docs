@@ -73,7 +73,7 @@ class PhpClassMethodReader {
   public function addClassToScan(
     $classname,
     array $filter = [],
-    callable $group = NULL
+    $group = NULL
   ) {
     $filter = empty($filter) ? [self::EXCLUDE, []] : $filter;
     $scan_definition = [
@@ -104,7 +104,7 @@ class PhpClassMethodReader {
   public function scan() {
     $methods = [];
     foreach ($this->scanDefinitions as $scan_definition) {
-      $group = $scan_definition['group']($scan_definition);
+      $group = is_callable($scan_definition['group']) ? $scan_definition['group']($scan_definition) : $scan_definition['group'];
       $methods[$group] = isset($methods[$group]) ? $methods[$group] : [];
       $test = new \ReflectionClass($scan_definition['class']);
       $parent = $test->getParentClass();
