@@ -15,7 +15,6 @@
     "chapters": [
         {
             "id": "nodes",
-            "sort": 0,
             "title": "Nodes"
         }
     ],
@@ -31,11 +30,13 @@
             "chapter": "nodes",
             "file": "banner_ads.md",
             "id": "banner_ads",
-            "sort": 0,
             "title": "Image or Banner Ads"
         }
     ],
     "settings": {
         "search": "tipuesearch",
+        "tasklist": {
+            "aggregate": false
+        }
     }
 }

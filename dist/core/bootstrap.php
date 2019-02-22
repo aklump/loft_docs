@@ -18,26 +18,25 @@ use AKlump\Data\Data;
  *
  * @return array
  */
-function parse_todos($string, $prefix = '')
-{
-    $todos = array();
-    if (is_string($string)
-        //&& preg_match_all('/- \[ \] @todo.*$/m', $string, $matches)) {
-        && preg_match_all('/- \[ \] .*$/m', $string, $matches)
-    ) {
+function parse_todos($string, $prefix = '') {
+  $todos = array();
+  if (is_string($string)
+    //&& preg_match_all('/- \[ \] @todo.*$/m', $string, $matches)) {
+    && preg_match_all('/- \[ \] .*$/m', $string, $matches)
+  ) {
 
-        if (!empty($prefix) || !empty($remove_todo)) {
-            foreach (array_keys($matches[0]) as $key) {
+    if (!empty($prefix) || !empty($remove_todo)) {
+      foreach (array_keys($matches[0]) as $key) {
 
-                if ($prefix) {
-                    $matches[0][$key] = str_replace('- [ ] ', "- [ ] $prefix", $matches[0][$key]);
-                }
-            }
+        if ($prefix) {
+          $matches[0][$key] = str_replace('- [ ] ', "- [ ] $prefix", $matches[0][$key]);
         }
-        $todos = $matches[0];
+      }
     }
+    $todos = $matches[0];
+  }
 
-    return $todos;
+  return $todos;
 }
 
 /**
@@ -47,36 +46,39 @@ function parse_todos($string, $prefix = '')
  *
  * @return string
  */
-function flatten_todos($array)
-{
-    if (is_array($array)) {
-        return implode("\n", array_filter($array)) . "\n";
-    }
+function flatten_todos($array) {
+  if (is_array($array)) {
+    return implode("\n", array_filter($array)) . "\n";
+  }
 }
 
 /**
  * Sort an array of todo items by @w flag
  *
  * @param  array &$todos
+ *
+ * @return bool
+ *   True on success.
  */
-function sort_todos(&$todos)
-{
-    if (is_array($todos)) {
-        usort($todos, '_sort_todos');
-        $todos = array_values(array_filter(array_unique($todos)));
-    }
+function sort_todos(&$todos) {
+  $result = TRUE;
+  if (is_array($todos)) {
+    $result = usort($todos, '_sort_todos');
+    $todos = array_values(array_filter(array_unique($todos)));
+  }
+
+  return $result;
 }
 
 /**
  * Helper for usort
  */
-function _sort_todos($a, $b)
-{
-    if (get_weight($a) === get_weight($b)) {
-        return 0;
-    }
+function _sort_todos($a, $b) {
+  if (get_weight($a) === get_weight($b)) {
+    return 0;
+  }
 
-    return get_weight($a) > get_weight($b) ? 1 : -1;
+  return get_weight($a) > get_weight($b) ? 1 : -1;
 }
 
 /**
@@ -86,13 +88,12 @@ function _sort_todos($a, $b)
  *
  * @return int||float
  */
-function get_weight($string)
-{
-    if (preg_match_all('/@w([\d\.]+)/', $string, $matches)) {
-        return 1 * end($matches[1]);
-    }
+function get_weight($string) {
+  if (preg_match_all('/@w([\d\.]+)/', $string, $matches)) {
+    return 1 * end($matches[1]);
+  }
 
-    return 0;
+  return 0;
 }
 
 /**
@@ -102,12 +103,11 @@ function get_weight($string)
  *
  * @return string
  */
-function clean_id($text)
-{
-    $regex = get_markdown_extensions(true);
-    $text = preg_replace($regex, '', $text);
+function clean_id($text) {
+  $regex = get_markdown_extensions(TRUE);
+  $text = preg_replace($regex, '', $text);
 
-    return strtolower($text);
+  return strtolower($text);
 }
 
 /**
@@ -117,12 +117,11 @@ function clean_id($text)
  *
  * @return string
  */
-function clean_title($text)
-{
-    $regex = get_markdown_extensions(true);
-    $text = preg_replace($regex, '', $text);
+function clean_title($text) {
+  $regex = get_markdown_extensions(TRUE);
+  $text = preg_replace($regex, '', $text);
 
-    return ucwords(preg_replace('/[-_]/', ' ', $text));
+  return ucwords(preg_replace('/[-_]/', ' ', $text));
 }
 
 /**
@@ -132,22 +131,21 @@ function clean_title($text)
  *
  * @return array|string
  */
-function get_markdown_extensions($regex = false)
-{
-    $ext = array(
-        'md',
-        'markdown',
-        'mdown',
-        'mkdn',
-        'mkd',
-        'mdwn',
-        'mdtxt',
-        'mdtext',
-        'text',
-        'Rmd',
-    );
+function get_markdown_extensions($regex = FALSE) {
+  $ext = array(
+    'md',
+    'markdown',
+    'mdown',
+    'mkdn',
+    'mkd',
+    'mdwn',
+    'mdtxt',
+    'mdtext',
+    'text',
+    'Rmd',
+  );
 
-    return $regex ? '/\.(' . implode('|', $ext) . ')$/' : $ext;
+  return $regex ? '/\.(' . implode('|', $ext) . ')$/' : $ext;
 }
 
 /**
@@ -158,29 +156,11 @@ function get_markdown_extensions($regex = false)
  *
  * @return string
  */
-function get_md_source_file_extension($file)
-{
-    //@todo make this dynamic? by looking up the file and matching filename and reading in the extension? see getFrontMatterTagsFromHtmlFile().
-    $extensions = get_markdown_extensions();
+function get_md_source_file_extension($file) {
+  //@todo make this dynamic? by looking up the file and matching filename and reading in the extension? see getFrontMatterTagsFromHtmlFile().
+  $extensions = get_markdown_extensions();
 
-    return '.' . reset($extensions);
-}
-
-/**
- * Detect if a filename points to a markdown file.
- *
- * @param  string $path
- *
- * @return bool
- */
-function path_is_section($path)
-{
-    $ext = pathinfo(strtolower($path), PATHINFO_EXTENSION);
-    $valid = get_markdown_extensions();
-    //@todo want to be able to show text files?
-    // return in_array($ext, array('txt') + get_markdown_extensions());
-
-    return in_array($ext, $valid);
+  return '.' . reset($extensions);
 }
 
 /**
@@ -190,42 +170,39 @@ function path_is_section($path)
  *
  * @return array
  */
-function load_outline($outline_file)
-{
-    $outline = array();
+function load_outline($outline_file) {
+  $outline = array();
 
-    if (file_exists($outline_file)) {
-        $outline = json_decode(file_get_contents($outline_file), true);
-        $outline += array(
-            'appendices' => array(),
-            'authors'    => array(),
-            'chapters'   => array(),
-            'cover'      => array(),
-            'sections'   => array(),
-            'settings'   => array('search' => 'tipuesearch'),
-        );
-    }
+  if (file_exists($outline_file)) {
+    $outline = json_decode(file_get_contents($outline_file), TRUE);
+    $outline += array(
+      'appendices' => array(),
+      'authors' => array(),
+      'chapters' => array(),
+      'cover' => array(),
+      'sections' => array(),
+      'settings' => array('search' => 'tipuesearch'),
+    );
+  }
 
-    return $outline;
+  return $outline;
 
 }
 
-function _sort_weight($a, $b)
-{
-    $g = new Data;
-    $a = $g->get($a, 'weight', 0);
-    $b = $g->get($b, 'weight', 0);
+function _sort_weight($a, $b) {
+  $g = new Data;
+  $a = $g->get($a, 'weight', 0);
+  $b = $g->get($b, 'weight', 0);
 
-    return $a - $b;
+  return $a - $b;
 }
 
-function _sort_sort($a, $b)
-{
-    $g = new Data;
-    $a = $g->get($a, 'sort', 0);
-    $b = $g->get($b, 'sort', 0);
+function _sort_sort($a, $b) {
+  $g = new Data;
+  $a = $g->get($a, 'sort', 0);
+  $b = $g->get($b, 'sort', 0);
 
-    return $a - $b;
+  return $a - $b;
 }
 
 /**
@@ -235,29 +212,62 @@ function _sort_sort($a, $b)
  *
  * @return array The merged outline array.
  */
-function json_outline_merge()
-{
-    $g = new Data();
-    $args = func_get_args();
-    $base = array_shift($args);
-    foreach ($args as $merge) {
-        foreach (array_keys($merge) as $key) {
-            switch ($key) {
-                case 'chapters':
-                case 'sections':
-                case 'appendices':
-                    $base[$key] = _json_array_replace_by_id($base[$key], $merge[$key]);
-                    break;
-                default:
-                    $g->ensure($base, $key, array());
-                    $g->ensure($merge, $key, array());
-                    $base[$key] = array_replace_recursive($base[$key], $merge[$key]);
-                    break;
-            }
-        }
-    }
+function json_outline_merge() {
+  $g = new Data();
+  $args = func_get_args();
+  $base = array_shift($args);
+  foreach ($args as $merge) {
+    foreach (array_keys($merge) as $key) {
+      $g->ensure($base, $key, array());
+      $g->ensure($merge, $key, array());
+      switch ($key) {
+        case 'chapters':
+        case 'appendices':
+          $base[$key] = _json_array_replace_by_id($base[$key], $merge[$key]);
+          break;
 
-    return $base;
+        case 'sections':
+          $base[$key] = _json_array_merge_by_id($base[$key], $merge[$key]);
+          break;
+
+        default:
+          $base[$key] = array_replace_recursive($base[$key], $merge[$key]);
+          break;
+      }
+    }
+  }
+
+  return $base;
+}
+
+/**
+ * Replace $a element keys with $b element keys matching on 'id'.
+ *
+ * The resulting array is in the order of $b.
+ *
+ * @param array $a
+ * @param array $b
+ *
+ * @return array
+ */
+function _json_array_merge_by_id(array $a, array $b) {
+  $g = new Data();
+  if (empty($a)) {
+    return $b;
+  }
+  $a = array_combine(array_map(function ($a) {
+    return $a['id'];
+  }, $a), $a);
+  $b = array_combine(array_map(function ($b) {
+    return $b['id'];
+  }, $b), $b);
+
+  foreach (array_keys($b) as $key) {
+    if (isset($a[$key])) {
+      $b[$key] += $a[$key];
+    }
+  }
+  return array_values($b + $a);
 }
 
 /**
@@ -270,20 +280,19 @@ function json_outline_merge()
  *
  * @see json_outline_merge().
  */
-function _json_array_replace_by_id(array $a, array $b)
-{
-    foreach ($b as $item) {
-        $added = false;
-        foreach ($a as &$a_item) {
-            if ($a_item['id'] == $item['id']) {
-                $a_item = array_replace_recursive($a_item, $item);
-                $added = true;
-            }
-        }
-        if (!$added) {
-            $a[] = $item;
-        }
+function _json_array_replace_by_id(array $a, array $b) {
+  foreach ($b as $item) {
+    $added = FALSE;
+    foreach ($a as &$a_item) {
+      if ($a_item['id'] == $item['id']) {
+        $a_item = array_replace_recursive($a_item, $item);
+        $added = TRUE;
+      }
     }
+    if (!$added) {
+      $a[] = $item;
+    }
+  }
 
-    return $a;
+  return $a;
 }

@@ -17,9 +17,6 @@ list(, $source_dir, $output_dir, $outline, $core_dir) = $argv;
 
 // Convert paths to images to include @page
 if (isset($source_dir) && isset($output_dir)) {
-
-    $outline = load_outline($outline);
-
     $obj = new Compiler($source_dir, $output_dir);
     $obj->apply();
 

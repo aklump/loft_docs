@@ -2,6 +2,7 @@
 /**
  * Wrap a partial with the twig tpl wrappers.
  */
+
 use AKlump\Data\Data;
 use aklump\loft_parser\HTMLTagRemoveAction;
 
@@ -11,34 +12,35 @@ $g = new Data();
 //$CACHE = getenv('LOFT_DOCS_CACHE_DIR');
 
 list (, $tpl_dir, $partial, $destination, $vars) = $argv;
-$vars = json_decode($vars, true);
+$vars = json_decode($vars, TRUE);
 
 $loader = new Twig_Loader_Filesystem($tpl_dir);
 $twig = new Twig_Environment($loader, array(
-//    'cache' => $CACHE . '/twig',
-    'cache' => false,
+  //    'cache' => $CACHE . '/twig',
+  'cache' => FALSE,
 ));
 
 switch ($partial) {
-    case 'index.html':
-        $vars['is_index'] = true;
-        $vars['content'] = $twig->render('index.twig', $vars);
-        $vars['classes'][] = 'page--index';
+  case 'index.html':
+    $vars['is_index'] = TRUE;
+    $vars['content'] = $twig->render('index.twig', $vars);
+    $vars['classes'][] = 'page--index';
 
-        $next = reset($vars['index']);
-        $g->getThen($next, 'id')->set($vars, 'next_id');
-        $g->getThen($next, 'title')->set($vars, 'next_title');
-        $g->getThen($next, 'file')->set($vars, 'next');
+    $next = reset($vars['index']);
+    $g->getThen($next, 'id')->set($vars, 'next_id');
+    $g->getThen($next, 'title')->set($vars, 'next_title');
+    $g->getThen($next, 'file')->set($vars, 'next');
 
-        $prev = end($vars['index']);
-        $g->getThen($prev, 'id')->set($vars, 'prev_id');
-        $g->getThen($prev, 'title')->set($vars, 'prev_title');
-        $g->getThen($prev, 'file')->set($vars, 'prev');
-        break;
-    default:
-        $vars['is_index'] = false;
-        $vars['content'] = file_get_contents($partial);
-        break;
+    $prev = end($vars['index']);
+    $g->getThen($prev, 'id')->set($vars, 'prev_id');
+    $g->getThen($prev, 'title')->set($vars, 'prev_title');
+    $g->getThen($prev, 'file')->set($vars, 'prev');
+    break;
+
+  default:
+    $vars['is_index'] = FALSE;
+    $vars['content'] = '<section>' . file_get_contents($partial) . '</section>';
+    break;
 }
 
 $build = $twig->render('page.twig', $vars);

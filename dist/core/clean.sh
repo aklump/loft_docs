@@ -7,21 +7,12 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 CORE="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-# Remove all pattern dirs
+# Remove all pattern dirs, use the install footprint to determine the pattern directory names.
 for dir in $(find $CORE/install/patterns/*  -type d -maxdepth 1 ! -name "source" ); do
   dir="${dir##*/}"
-  test -e $dir && rm -r "$dir"
+
+#  Todo This should use confirm when moving to cloudy.
+  test -e $dir && rm -rv "$dir"
 done
 
-# echo $CORE
-# find $CORE/source -name _*
-# return
-# Remove compiled files in source; those that begin with underscore
-for path in $(find "$CORE/../source" -name _*); do
-    rm -rv "$path"
-  # if [[ -f "$path" ]]; then
-  #   rm -v "$path"
-  # elif [[ -d "$path"]]; then
-  # fi
-done
-
+echo "Cleaned"

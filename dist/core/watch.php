@@ -9,7 +9,7 @@
  */
 require_once __DIR__ . '/vendor/autoload.php';
 $g = new \AKlump\Data\Data();
-$poll_interval = $g->get($argv, 1, 20);
+$poll_interval = $g->get($argv, 1, 2);
 $CORE = dirname(__FILE__);
 $watch_dir = realpath("$CORE/../source");
 $work_from = getcwd();

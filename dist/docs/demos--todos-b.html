@@ -2,17 +2,17 @@
 
 <html>
 <head>
-  <title>Auto-compiling</title>
+  <title>Demo: Todo List Aggregation 2 of 3</title>
   <link href="search/tipuesearch.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
 </head>
 
-<body class="page--ld--autocompile">
+<body class="page--demos--todos-b">
 <header>
   <div class="pager">
-  <a href="demos--title.html" class="prev demos--title">&laquo;Demo: The Sniffed Title</a>
+  <a href="demos--todos-a.html" class="prev demos--todos-a">&laquo;Demo: Todo List Aggregation 1 of 3</a>
   <a href="index.html" class="index">Index</a>
-  <a href="ld--cheatsheet.html" class="next ld--cheatsheet">Generating Cheatsheets&raquo;</a>
+  <a href="demos--todos-c.html" class="next demos--todos-c">Demo: Todo List Aggregation 3 of 3&raquo;</a>
 </div>
 </header>
 
@@ -22,17 +22,22 @@
   </form>
 </div>
 
-  <h1>Auto-compiling</h1>
+  <h1>Demo: Todo List Aggregation 2 of 3</h1>
   <div class="breadcrumb"><a href="index.html">Index</a></div>
 
 <section>
 
-<p>You can set up an automatic build using the following</p>
+<ul>
+<li>[ ] Echo</li>
+<li>[ ] Foxtrot</li>
+</ul>
 
-<pre><code>./core/watch 10
-</code></pre>
+<h2>Some Header</h2>
 
-<p>The argument is the number of seconds to poll.  You can omit and take the default value.</p>
+<ul>
+<li>[ ] Golf</li>
+<li>[ ] Hotel</li>
+</ul>
 </section>
 
 <div class="search__results">
@@ -41,13 +46,13 @@
 
 <footer>
   <div class="pager">
-  <a href="demos--title.html" class="prev demos--title">&laquo;Demo: The Sniffed Title</a>
+  <a href="demos--todos-a.html" class="prev demos--todos-a">&laquo;Demo: Todo List Aggregation 1 of 3</a>
   <a href="index.html" class="index">Index</a>
-  <a href="ld--cheatsheet.html" class="next ld--cheatsheet">Generating Cheatsheets&raquo;</a>
+  <a href="demos--todos-c.html" class="next demos--todos-c">Demo: Todo List Aggregation 3 of 3&raquo;</a>
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Wed, 20 Feb 2019 17:09:13 -0800</p>
+    <p class="legaleeze center">Version: 0.10.0 &bull; Last Updated: Thu, 21 Feb 2019 17:10:35 -0800</p>
   </div>
 </footer>
 
@@ -56,9 +61,9 @@
   <script src="search/tipuesearch_set.js"></script>
   <script src="search/tipuesearch.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#tipue_search_input').tipuesearch();
-    });
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
   </script>
 <script src="js/core.js"></script>
 </body>

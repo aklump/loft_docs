@@ -10,9 +10,9 @@
 <body class="page--ld--cheatsheet">
 <header>
   <div class="pager">
-  <a href="ld--autocompile.html" class="prev ld--autocompile">&laquo;Auto-compiling</a>
+  <a href="qs--version.html" class="prev qs--version">&laquo;Documentation Version</a>
   <a href="index.html" class="index">Index</a>
-  <a href="ld--compiling.html" class="next ld--compiling">Compiling&raquo;</a>
+  <a href="ld--theming.html" class="next ld--theming">Custom Theming the Website Version&raquo;</a>
 </div>
 </header>
 
@@ -27,7 +27,7 @@
 
 <section>
 
-<p>Loft Docs makes it easy to generate cheatsheets based on a class's methods.  The output might look something like this:</p>
+<p>Loft Docs makes it easy to generate cheatsheet partials based on a class's methods.  The partial will receive it's name from the group in the example code below.  Include the partial as you would any other dynamic partial.  The output might look something like this:</p>
 
 <table>
 <thead>
@@ -93,11 +93,15 @@
 /**
  * @file
  * An hook example of generating a PHP class method cheatsheet.
+ *
+ * Available variables:
+ * - $compiler.
  */
 
-use AKlump\LoftDocs\PhpClassMethodReader;
 use AKlump\LoftLib\Code\Markdown;
-use AKlump\LoftLib\Storage\FilePath;
+
+// Then you need to include an autoloader for the classes you want to scan.
+require_once $argv[1] . '/../../vendor/autoload.php';
 
 // Define the classes to read.
 $reader = new PhpClassMethodReader();
@@ -121,7 +125,7 @@ foreach ($reader-&gt;scan() as $group =&gt; $methods) {
   $contents .= Markdown::table($methods) . PHP_EOL;
 
   // Save the snippet to be used by other pages.
-  FilePath::create($argv[9] . "/_$group.md")-&gt;put($contents)-&gt;save();
+  $compiler-&gt;addInclude("_{$group}.md", $contents);
 }
 </code></pre>
 </section>
@@ -132,13 +136,13 @@ foreach ($reader-&gt;scan() as $group =&gt; $methods) {
 
 <footer>
   <div class="pager">
-  <a href="ld--autocompile.html" class="prev ld--autocompile">&laquo;Auto-compiling</a>
+  <a href="qs--version.html" class="prev qs--version">&laquo;Documentation Version</a>
   <a href="index.html" class="index">Index</a>
-  <a href="ld--compiling.html" class="next ld--compiling">Compiling&raquo;</a>
+  <a href="ld--theming.html" class="next ld--theming">Custom Theming the Website Version&raquo;</a>
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Wed, 20 Feb 2019 17:09:13 -0800</p>
+    <p class="legaleeze center">Version: 0.10.0 &bull; Last Updated: Thu, 21 Feb 2019 17:10:35 -0800</p>
   </div>
 </footer>
 
@@ -147,9 +151,9 @@ foreach ($reader-&gt;scan() as $group =&gt; $methods) {
   <script src="search/tipuesearch_set.js"></script>
   <script src="search/tipuesearch.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#tipue_search_input').tipuesearch();
-    });
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
   </script>
 <script src="js/core.js"></script>
 </body>
