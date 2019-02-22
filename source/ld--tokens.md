@@ -3,7 +3,6 @@
 Using frontmatter, you can define tokens in your markdown file that will be replaced during render.  See examples below.
 
 
-
 ## Example 1: Tokens
 
 List your find/replace tokens in frontmatter under the key `tokens`:

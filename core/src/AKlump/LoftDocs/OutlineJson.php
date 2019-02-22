@@ -120,9 +120,6 @@ class OutlineJson implements IndexInterface {
           );
         }
       }
-      uasort($chapter_sections, function ($a, $b) {
-        return strcasecmp($a['title'], $b['title']);
-      });
       $data = array_merge($data, $chapter_sections);
     }
 

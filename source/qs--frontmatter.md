@@ -24,9 +24,9 @@ Here is an example:
     noindex: true
     ---
 
-## FrontMatter in json
+## Metadata as JSON
 
-You can also provide frontmatter to files using _outline.merge.json_.  Do this when yaml is not appropriate and using json would be easier.  Here is an example:
+You can also provide file metadata using _outline.merge.json_.  Do this when yaml is not appropriate and using JSON would be easier.  Here is an example:
 
     {
         "frontmatter": {

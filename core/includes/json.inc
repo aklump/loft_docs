@@ -50,8 +50,6 @@ if (!empty($json_file)) {
     file_put_contents($search_results_file, '# Search Results');
   }
 
-  $chapter_sort = 0;
-  $section_sort = 0;
   $chapter_index = array();
   foreach ($info as $file => $data) {
     if (empty($data['title'])) {

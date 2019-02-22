@@ -222,9 +222,12 @@ function json_outline_merge() {
       $g->ensure($merge, $key, array());
       switch ($key) {
         case 'chapters':
-        case 'sections':
         case 'appendices':
           $base[$key] = _json_array_replace_by_id($base[$key], $merge[$key]);
+          break;
+
+        case 'sections':
+          $base[$key] = _json_array_merge_by_id($base[$key], $merge[$key]);
           break;
 
         default:
@@ -235,6 +238,36 @@ function json_outline_merge() {
   }
 
   return $base;
+}
+
+/**
+ * Replace $a element keys with $b element keys matching on 'id'.
+ *
+ * The resulting array is in the order of $b.
+ *
+ * @param array $a
+ * @param array $b
+ *
+ * @return array
+ */
+function _json_array_merge_by_id(array $a, array $b) {
+  $g = new Data();
+  if (empty($a)) {
+    return $b;
+  }
+  $a = array_combine(array_map(function ($a) {
+    return $a['id'];
+  }, $a), $a);
+  $b = array_combine(array_map(function ($b) {
+    return $b['id'];
+  }, $b), $b);
+
+  foreach (array_keys($b) as $key) {
+    if (isset($a[$key])) {
+      $b[$key] += $a[$key];
+    }
+  }
+  return array_values($b + $a);
 }
 
 /**

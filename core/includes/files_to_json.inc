@@ -85,6 +85,13 @@ foreach ($first_level as $data) {
       'parent' => $g->get($meta, 'chapter'),
     );
   }
+
+  // Place these in alphabetical order by title.  Later in json.inc the merge
+  // file is going to allow order override when it's merged in, but by default
+  // we want them in title ASC order.
+  uasort($info, function ($a, $b) {
+    return strcasecmp($a['title'], $b['title']);
+  });
 }
 
 require_once dirname(__FILE__) . '/json.inc';
