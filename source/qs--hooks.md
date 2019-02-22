@@ -26,9 +26,8 @@ The scripts will receive the following arguments:
 | $argv[6] | $6      | Path to the compiled html directory  |
 | $argv[7] | $7      | Path to the compiled text directory  |
 | $argv[8] | $8      | Path to the compiled drupal directory  |
-| $argv[9] | $9      | Path to write dynamic pages before compile |
-| $argv[10] | $10    | Path to write dynamic twig includes to.  A file you create here is available using `{% include('my_dynamic_file.md') %}` |
-| $argv[11] | $11    | Path to the outline JSON file |
+| $argv[9] | $9      | Path to write dynamic pages and includes before compile |
+| $argv[10] | $10    | Path to the outline JSON file |
 
 ## Generating Dynamic Content
 
