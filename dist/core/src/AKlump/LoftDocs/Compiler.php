@@ -11,7 +11,7 @@ use AKlump\LoftLib\Storage\FilePath;
 class Compiler {
 
   /**
-   * The path to the cache directory.
+   * The path to the cache/source directory.
    *
    * @var \AKlump\LoftLib\Storage\FilePath
    */
@@ -177,6 +177,41 @@ class Compiler {
     $json += ['settings' => []];
 
     return $g->get($json, 'settings.' . $setting_key, $default);
+  }
+
+  /**
+   * Add variables which are used in the twig rendering.
+   *
+   * @param array $variables
+   *   An associative array of replacement vars.
+   *
+   * @return $this
+   *   Self, for chaining.
+   */
+  public function addVariables(array $variables) {
+    $files = $this->pathToDynamicSourceFiles->to('_variables.json');
+    if ($files->exists()) {
+      $variables += $files->load()->getJson();
+    }
+    $files->putJson($variables)->save();
+
+    return $this;
+  }
+
+  /**
+   * Return the variables for use with the twig rendering.
+   *
+   * @return array
+   *   The twig template data.
+   */
+  public function getVariables() {
+    $files = $this->pathToDynamicSourceFiles->to('_variables.json');
+    $variables = [];
+    if ($files->exists()) {
+      $variables += $files->load()->getJson(TRUE);
+    }
+
+    return $variables;
   }
 
 }

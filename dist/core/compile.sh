@@ -109,7 +109,7 @@ for file in ${files[@]}; do
     # Process markdown files, markdown.php will handle the twig processing if the suffix is $docs_twig_preprocess_extension.
     if [ "$extension" == "$docs_partial_extension" ]; then
         if [ "$docs_partial_extension" == "$docs_markdown_extension" ]; then
-            $docs_php "$CORE/markdown.php" "$file" "$docs_tmp_dir" "$docs_source_path" "$docs_twig_preprocess_extension" "$docs_cache_dir/source:$docs_tmp_dir:$docs_source_path"
+            $docs_php "$CORE/markdown.php" "$file" "$docs_tmp_dir" "$docs_source_path" "$docs_twig_preprocess_extension" "$docs_cache_dir/source:$docs_tmp_dir:$docs_source_path" "$CORE/cache/source" "$CORE/cache/outline.auto.json"
         else
             $docs_php "$CORE/includes/cp_no_frontmatter.php" $file $docs_tmp_dir/$filename.html
         fi
