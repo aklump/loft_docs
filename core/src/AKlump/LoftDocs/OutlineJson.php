@@ -58,9 +58,8 @@ class OutlineJson implements IndexInterface {
     foreach ($info['sections'] as $section) {
       $chapter_order[] = $g->get($section, 'chapter');
     }
-    $chapter_order = array_unique(array_filter($chapter_order));
-    // Add no chapters to the end.
     $chapter_order[] = '';
+    $chapter_order = array_unique($chapter_order);
 
     $chapter_titles = [];
     foreach ($chapter_order as $id) {
