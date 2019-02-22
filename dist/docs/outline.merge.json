@@ -1,14 +1,62 @@
 {
     "chapters": [
         {
+            "id": "qs",
+            "title": "Quick Start"
+        },
+        {
             "id": "ld",
-            "title": "Using Loft Docs",
-            "sort": 0
+            "title": "Advanced Usage"
+        },
+        {
+            "id": "demos",
+            "title": "Demo Pages"
+        }
+    ],
+    "sections": [
+        {
+            "id": "qs--intro"
+        },
+        {
+            "id": "qs--terms"
+        },
+        {
+            "id": "qs--compiling"
+        },
+        {
+            "id": "qs--toc"
+        },
+        {
+            "id": "qs--search"
+        },
+        {
+            "id": "qs--partials"
+        },
+        {
+            "id": "qs--hooks"
+        },
+        {
+            "id": "qs--frontmatter"
+        },
+        {
+            "id": "qs--version"
+        },
+        {
+            "id": "ld--cheatsheet"
+        },
+        {
+            "id": "changelog",
+            "title": "CHANGELOG"
         }
     ],
     "frontmatter": {
         "demos--search-noindex2.html": {
             "search": "noindex"
+        }
+    },
+    "settings": {
+        "tasklist": {
+            "aggregate": true
         }
     }
 }

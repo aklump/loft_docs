@@ -1,5 +1,6 @@
 <?php
-namespace AKlump\LoftDocs;
+
+namespace AKlump\LoftDocs\DynamicContent;
 
 /**
  * A class to generate class method documentation.
@@ -105,7 +106,7 @@ class PhpClassMethodReader {
     foreach ($this->scanDefinitions as $scan_definition) {
       $group = $scan_definition['group']($scan_definition);
       $methods[$group] = isset($methods[$group]) ? $methods[$group] : [];
-      $test = new ReflectionClass($scan_definition['class']);
+      $test = new \ReflectionClass($scan_definition['class']);
       $parent = $test->getParentClass();
       $methods[$group] = array_merge($methods[$group], array_map(function ($item) use ($parent) {
         return [

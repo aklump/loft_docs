@@ -23,7 +23,7 @@
   <div class="breadcrumb"><a href="index.html">Index</a></div>
 {% endif %}
 
-<section>{{ content|raw }}</section>
+{{ content|raw }}
 
 <div class="search__results">
   <div id="tipue_search_content"></div>
@@ -43,9 +43,9 @@
   <script src="search/tipuesearch_set.js"></script>
   <script src="search/tipuesearch.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#tipue_search_input').tipuesearch();
-    });
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
   </script>
 {% endif %}
 <script src="js/core.js"></script>

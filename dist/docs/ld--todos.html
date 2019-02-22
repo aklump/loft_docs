@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>The TODO list feature</title>
+  <title>Tasklist (Todo Items)</title>
   <link href="search/tipuesearch.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
 </head>
@@ -10,7 +10,7 @@
 <body class="page--ld--todos">
 <header>
   <div class="pager">
-  <a href="ld--theming.html" class="prev ld--theming">&laquo;Custom Theming the Website Version</a>
+  <a href="ld--github.html" class="prev ld--github">&laquo;Integration with GitHub</a>
   <a href="index.html" class="index">Index</a>
   <a href="ld--tokens.html" class="next ld--tokens">Token Replacement&raquo;</a>
 </div>
@@ -22,33 +22,57 @@
   </form>
 </div>
 
-  <h1>The TODO list feature</h1>
+  <h1>Tasklist (Todo Items)</h1>
   <div class="breadcrumb"><a href="index.html">Index</a></div>
 
 <section>
 
-<p>Todo item aggregation is a neat feature that works thus.  Add one or more todo items to your markdown source files using the <a href="https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments">following syntax</a> and when you compile, your todo items will be aggregated and sorted into a new markdown file called <code>_tasklist.md</code>.  <strong>Do not alter the content of <code>_tasklist.md</code> or you will loose your work.</strong></p>
+<ul>
+<li>You must enable this feature for it to active as described below.</li>
+<li>Once enabled, during compile a dynamic partial will be created of todo items called <em>&#95;tasklist.md</em>.  You may include it like other include files.</li>
+<li>Add one or more todo items to your markdown source files using the Markdown Extra todo format as shown below. <a href="https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments">Read more.</a></li>
+<li>When items are aggregated, the filenames are prepended to the todo item.  The final list will be filtered for uniqueness, and duplicates removed.  If the same todo item appears more than once in a file, it will be reduced to a single item; but the same todo item can appear in more than one file, since the filename prepend creates uniqueness.</li>
+</ul>
 
-<p>If you want this to show up in indexing, make sure to add it to <em>help.ini</em>.</p>
+<h2>How to Enable</h2>
 
-<p>If you're instead using the json index outline format, then it will automatically show up unless you remove the following from <code>outline.merge.json</code> and <code>outline.json</code> from the <code>sections</code>:</p>
+<p>The following must appear in a <em>source/outline.merge.json</em> to enable todo aggregation.</p>
 
-<pre><code>    {
-        "id": "_tasklist",
-        "file": "_tasklist.md",
-        "title": "All Todo Items",
-        "sort": 1000
+<pre><code>{
+    "settings": {
+        "tasklist": {
+            "aggregate": true
+        }
     }
+}
 </code></pre>
 
-<p>When items are aggregated, the filenames are prepended to the todo item.  The final list will be filtered for uniqueness, and duplicates removed.  If the same todo item appears more than once in a file, it will be reduced to a single item; but the same todo item can appear in more than one file, since the filename prepend creates uniqueness.</p>
+<h2>An Example File With Tasks</h2>
 
-<pre><code>- [ ] a task list item
+<pre><code># A Page With Tasks
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+- [ ] a task list item
+- [ ] another task
+
+Praesent at vulputate tellus, vehicula dignissim elit.
 </code></pre>
 
-<h2>Sorting todo items</h2>
+<h2>Including the Tasklist on Another Page</h2>
 
-<p>Use the weight flag <code>@w</code> followed by an int or float number indicating the sort weight.  Lower numbers appear first.  Sorting will happen only on the aggregated tasklist, not in the indiviual source files.</p>
+<p>You can do something like the following in a <em>.twig.md</em> file, and the aggregated tasklist will appear there.</p>
+
+<pre><code># Roadmap
+
+Here are the todo items left for this project.
+
+{% include('_tasklist.md') %}
+</code></pre>
+
+<h2>Sorting Tasks in the Final List</h2>
+
+<p>You can control the order the tasks appear <strong>in the aggregated list</strong> by using the weight flag <code>@w</code> followed by an int or float number indicating the sort weight.  Lower numbers appear first.  The source file orders are not changed by the use of <code>@w</code> flag.</p>
 
 <pre><code>- [ ] a task list item @w-10
 - [ ] a task list item @w10
@@ -62,13 +86,13 @@
 
 <footer>
   <div class="pager">
-  <a href="ld--theming.html" class="prev ld--theming">&laquo;Custom Theming the Website Version</a>
+  <a href="ld--github.html" class="prev ld--github">&laquo;Integration with GitHub</a>
   <a href="index.html" class="index">Index</a>
   <a href="ld--tokens.html" class="next ld--tokens">Token Replacement&raquo;</a>
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Wed, 20 Feb 2019 17:09:16 -0800</p>
+    <p class="legaleeze center">Version: 0.10.0 &bull; Last Updated: Thu, 21 Feb 2019 17:10:37 -0800</p>
   </div>
 </footer>
 
@@ -77,9 +101,9 @@
   <script src="search/tipuesearch_set.js"></script>
   <script src="search/tipuesearch.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#tipue_search_input').tipuesearch();
-    });
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
   </script>
 <script src="js/core.js"></script>
 </body>
