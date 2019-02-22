@@ -7,12 +7,12 @@
   <link href="style.css" rel="stylesheet">
 </head>
 
-<body class="page--ld--frontmatter">
+<body class="page--qs--frontmatter">
 <header>
   <div class="pager">
-  <a href="ld--drupal.html" class="prev ld--drupal">&laquo;Drupal Integration</a>
+  <a href="qs--hooks.html" class="prev qs--hooks">&laquo;Hooks</a>
   <a href="index.html" class="index">Index</a>
-  <a href="ld--github.html" class="next ld--github">Integration with GitHub&raquo;</a>
+  <a href="qs--version.html" class="next qs--version">Documentation Version&raquo;</a>
 </div>
 </header>
 
@@ -77,9 +77,9 @@ noindex: true
 ---
 </code></pre>
 
-<h2>FrontMatter in json</h2>
+<h2>Metadata as JSON</h2>
 
-<p>You can also provide frontmatter to files using <em>outline.merge.json</em>.  Do this when yaml is not appropriate and using json would be easier.  Here is an example:</p>
+<p>You can also provide file metadata using <em>outline.merge.json</em>.  Do this when yaml is not appropriate and using JSON would be easier.  Here is an example:</p>
 
 <pre><code>{
     "frontmatter": {
@@ -97,13 +97,13 @@ noindex: true
 
 <footer>
   <div class="pager">
-  <a href="ld--drupal.html" class="prev ld--drupal">&laquo;Drupal Integration</a>
+  <a href="qs--hooks.html" class="prev qs--hooks">&laquo;Hooks</a>
   <a href="index.html" class="index">Index</a>
-  <a href="ld--github.html" class="next ld--github">Integration with GitHub&raquo;</a>
+  <a href="qs--version.html" class="next qs--version">Documentation Version&raquo;</a>
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Thu, 21 Feb 2019 12:45:16 -0800</p>
+    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Thu, 21 Feb 2019 17:00:32 -0800</p>
   </div>
 </footer>
 
@@ -112,9 +112,9 @@ noindex: true
   <script src="search/tipuesearch_set.js"></script>
   <script src="search/tipuesearch.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#tipue_search_input').tipuesearch();
-    });
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
   </script>
 <script src="js/core.js"></script>
 </body>

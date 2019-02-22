@@ -7,12 +7,12 @@
   <link href="style.css" rel="stylesheet">
 </head>
 
-<body class="page--ld--compiling">
+<body class="page--qs--compiling">
 <header>
   <div class="pager">
-  <a href="ld--cheatsheet.html" class="prev ld--cheatsheet">&laquo;Generating Cheatsheets</a>
+  <a href="qs--terms.html" class="prev qs--terms">&laquo;Terms Used</a>
   <a href="index.html" class="index">Index</a>
-  <a href="ld--drupal.html" class="next ld--drupal">Drupal Integration&raquo;</a>
+  <a href="qs--toc.html" class="next qs--toc">Table of Contents&raquo;</a>
 </div>
 </header>
 
@@ -28,12 +28,6 @@
 <section>
 
 <p>After a round of changes to the files found in <code>/source</code>, you will need to export or <em>compile</em> your documentation.</p>
-
-<h2>Requirements</h2>
-
-<ol>
-<li>In order to use the text format you must have <a href="http://lynx.isc.org/">Lynx</a> installed.</li>
-</ol>
 
 <h2>How to compile</h2>
 
@@ -59,29 +53,18 @@ compile/
 
 <p>If you've reconfigured the folder name for the website directory, make sure to match the folder structure to the reconfigured name.</p>
 
-<h2>Defining the documentation version</h2>
-
-<p>Some of the templates utilize a version string.  How this is provided is the the next topic covered.</p>
-
-<p>If no version can be found the string will always be 1.0</p>
-
-<p><strong>By default, Loft Docs will look for <code>*.info</code>, in the directory above <code>core/</code>.</strong>  If this is not working or desired then you can specify a path in <em>core-config.sh</em> as such:</p>
-
-<pre><code>version_file = "/some/absolute/path/version.info"
-</code></pre>
-
-<p>There is a built in a version hook that can sniff a version from .info and .json files and that may suffice.  If not read on about a custom version hook...</p>
-
-<p><em>A version hook is a php or shell script that echos the version string of your documentation</em>.  These version hook script receives the same arguments as the pre/post hooks.  You define your version hook in config.  See <code>version_hook.php</code> as an implementation example.  Only one file is allowed in the declaration; either php or shell.</p>
-
-<pre><code>version_hook = "version_hook.php"
-</code></pre>
-
 <h2>Removing Compiled Files</h2>
 
 <p>You may delete all compiled files using the <em>clean</em> command.</p>
 
 <pre><code>./core/clean
+</code></pre>
+
+<h2>Auto-Compiling / File Watching</h2>
+
+<p>To watch your source directory for file changes and compile automatically as you work, you can use:</p>
+
+<pre><code>./core/watch
 </code></pre>
 </section>
 
@@ -91,13 +74,13 @@ compile/
 
 <footer>
   <div class="pager">
-  <a href="ld--cheatsheet.html" class="prev ld--cheatsheet">&laquo;Generating Cheatsheets</a>
+  <a href="qs--terms.html" class="prev qs--terms">&laquo;Terms Used</a>
   <a href="index.html" class="index">Index</a>
-  <a href="ld--drupal.html" class="next ld--drupal">Drupal Integration&raquo;</a>
+  <a href="qs--toc.html" class="next qs--toc">Table of Contents&raquo;</a>
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Thu, 21 Feb 2019 12:45:16 -0800</p>
+    <p class="legaleeze center">Version: 0.9.33 &bull; Last Updated: Thu, 21 Feb 2019 17:00:31 -0800</p>
   </div>
 </footer>
 
@@ -106,9 +89,9 @@ compile/
   <script src="search/tipuesearch_set.js"></script>
   <script src="search/tipuesearch.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#tipue_search_input').tipuesearch();
-    });
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
   </script>
 <script src="js/core.js"></script>
 </body>
