@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>API Blueprint</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--ld--apib">
+<header>
+  <div class="pager"><a href="ld--cheatsheet.html" class="prev ld--cheatsheet">&laquo;Generating Cheatsheets</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="ld--theming.html" class="next ld--theming">Custom Theming the Website Version&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+                        <a href="ld--cheatsheet.html">Advanced Usage</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>API Blueprint</h1>
+
+<section>
+
+<p>Loft Docs understands <a href="https://apiblueprint.org/">API Blueprint</a> when you follow these conventions:</p>
+
+<ol>
+<li><a href="https://github.com/danielgtaylor/aglio#installation--usage">Install Aglio</a> on your system.</li>
+<li><p>Create a hook file and register it in <em>core-config.sh</em>; here is an example named <em>hooks/apib.php</em>.  Point Loft Docs to your installation of Aglio.  Optionally, pass in some <a href="https://github.com/danielgtaylor/aglio#executable">configuration options</a>.</p>
+
+<pre><code>&lt;?php
+
+/**
+ * @file
+ * Compile the APIBlueprint Snippets.
+ *
+ * @link https://github.com/danielgtaylor/aglio
+ */
+
+$apib
+  -&gt;setAglio('/usr/local/bin/aglio', [
+    '--theme-full-width',
+  ])
+  -&gt;compile();
+</code></pre></li>
+<li><p>In the <em>source</em> directory create <em>&#95;apib.twig.md</em> with something like the following; this will be the master page for the documentation.  In it, use the token <code>{{ apib.resources }}</code> to indicate where the resource markup should appear.</p>
+
+<pre><code>FORMAT: 1A
+HOST: http://www.my-app.com/api/v1
+
+# My Cool App
+
+This API is a very helpful resource for my users.
+
+{{ apib.resources }}
+</code></pre></li>
+<li><p>Create a folder adjacent to <em>source/</em> called <em>apib/</em>.  This for your resource files.</p>
+
+<pre><code>apib
+├── companies.apib
+├── files.apib
+└── persons.apib
+source
+├── _apib.twig.md
+├── apib.html (this file is created automatically)
+└── api.md
+</code></pre></li>
+<li><p>In <em>apib/</em> create files, e.g. <em>companies.apib, files.apib, persons.apib</em>, which represent your API resources following the <a href="https://github.com/apiaryio/api-blueprint/blob/master/API%20Blueprint%20Specification.md">API Blueprint specification</a>.  Refer to <a href="https://github.com/apiaryio/api-blueprint/tree/master/examples">these examples</a> for more info.  Refer to the code example below: <em>An Example Resource</em>.</p></li>
+<li><p>Lastly create a wrapper page that uses an iframe and place it in <em>source</em>, e.g. <em>api.md</em> with at least a title and a reference iframe.  You may add other content as desired.</p>
+
+<pre><code># API Documentation
+
+&lt;a href="apib.html" target="_blank"&gt;open in a new window&lt;/a&gt;
+&lt;iframe src="apib.html" height="1200"&gt;&lt;/iframe&gt;
+</code></pre></li>
+<li><p><strong>Do not create <em>source/apib.md</em> nor <em>source/apib.html</em>, as these are reserved.</strong></p></li>
+<li>With all of that complete, when you compile, your valid API Blueprint docs will be compiled into your documentation.</li>
+</ol>
+
+<h2>An Example Resource File</h2>
+
+<pre>FORMAT: 1A
+HOST: https://alpha-api.app.net
+
+# Real World API
+This API Blueprint demonstrates a real world example documenting a portion of
+[App.net API](http://developers.app.net).
+
+NOTE: This document is a **work in progress**.
+
+# Group Posts
+This section groups App.net post resources.
+
+## Post [/stream/0/posts/{post_id}]
+A Post is the other central object utilized by the App.net Stream API. It has
+rich text and annotations which comprise all of the content a users sees in
+their feed. Posts are closely tied to the follow graph...
+
++ Parameters
+    + post_id: `1` (string) - The id of the Post.
+
++ Model (application/json)
+
+    ```js
+    {
+        "data": {
+            "id": "1", // note this is a string
+            "user": {
+                ...
+            },
+            "created_at": "2012-07-16T17:25:47Z",
+            "text": "@berg FIRST post on this new site #newsocialnetwork",
+            "html": "<span itemprop=\"mention\" data-mention-name=\"berg\" data-mention-id=\"2\">@berg</span> FIRST post on <a href=\"https://join.app.net\" rel=\"nofollow\">this new site</a> <span itemprop=\"hashtag\" data-hashtag-name=\"newsocialnetwork\">#newsocialnetwork</span>.",
+            "source": {
+                "client_id": "udxGzAVBdXwGtkHmvswR5MbMEeVnq6n4",
+                "name": "Clientastic for iOS",
+                "link": "http://app.net"
+            },
+            "machine_only": false,
+            "reply_to": null,
+            "thread_id": "1",
+            "num_replies": 3,
+            "num_reposts": 0,
+            "num_stars": 0,
+            "entities": {
+                "mentions": [{
+                    "name": "berg",
+                    "id": "2",
+                    "pos": 0,
+                    "len": 5
+                }],
+                "hashtags": [{
+                    "name": "newsocialnetwork",
+                    "pos": 34,
+                    "len": 17
+                }],
+                "links": [{
+                    "text": "this new site",
+                    "url": "https://join.app.net"
+                    "pos": 20,
+                    "len": 13
+                }]
+            },
+            "you_reposted": false,
+            "you_starred": false
+        },
+        "meta": {
+            "code": 200,
+        }
+    }
+    ```
+
+### Retrieve a Post [GET]
+Returns a specific Post.
+
++ Response 200
+
+    [Post][]
+
+### Delete a Post [DELETE]
+Delete a Post. The current user must be the same user who created the Post. It
+returns the deleted Post on success.
+
++ Response 204
+
+## Posts Collection [/stream/0/posts]
+A Collection of posts.
+
++ Model (application/json)
+
+    ```js
+    {
+        "data": [
+            {
+                "id": "1", // note this is a string
+                ...
+            },
+            {
+                "id": "2",
+                ...
+            },
+            {
+                "id": "3",
+                ...
+            },
+        ],
+        "meta": {
+            "code": 200,
+        }
+    }
+    ```
+
+### Create a Post [POST]
+Create a new Post object. Mentions and hashtags will be parsed out of the post
+text, as will bare URLs...
+
++ Request
+
+    [Post][]
+
++ Response 201
+
+    [Post][]
+
+### Retrieve all Posts [GET]
+Retrieves all posts.
+
++ Response 200
+
+    [Posts Collection][]
+
+## Stars [/stream/0/posts/{post_id}/star]
+A User’s stars are visible to others, but they are not automatically added to
+your followers’ streams.
+
++ Parameters
+    + post_id: `1` (string) - The id of the Post.
+
+### Star a Post [POST]
+Save a given Post to the current User’s stars. This is just a “save” action,
+not a sharing action.
+
+*Note: A repost cannot be starred. Please star the parent Post.*
+
++ Response 200
+
+    [Post][]
+
+### Unstar a Post [DELETE]
+Remove a Star from a Post.
+
++ Response 200
+
+    [Post][]
+</pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="ld--cheatsheet.html" class="prev ld--cheatsheet">&laquo;Generating Cheatsheets</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="ld--theming.html" class="next ld--theming">Custom Theming the Website Version&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.10.6 &bull; Last Updated: Sat, 23 Feb 2019 14:24:30 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+
