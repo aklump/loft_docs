@@ -19,6 +19,7 @@ $page_data = file_exists($data_file) ? json_decode(file_get_contents($data_file)
 $vars = array(
   'classes' => array(),
 );
+
 list(, $outline_file, $page_id, $vars['version']) = $argv;
 $g = new Data();
 

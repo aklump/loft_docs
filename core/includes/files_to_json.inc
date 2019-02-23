@@ -62,8 +62,12 @@ foreach ($first_level as $data) {
 
   //
   // 2. html heading
-  if (!$g->get($meta, 'title') && preg_match('/^#(?!#)\s*(.+)$/m', $body, $matches)) {
+  if (preg_match('/^#(?!#)\s*(.+)$/m', $body, $matches)) {
     $g->fill($meta, 'title', $matches[1]);
+    $g->fill($meta, 'content_title', $matches[1]);
+  }
+  else {
+    $g->fill($meta, 'content_title', $meta['title']);
   }
 
   //
@@ -76,12 +80,14 @@ foreach ($first_level as $data) {
   }
 
   $g->fill($meta, 'title', clean_title($file));
+  $g->fill($meta, 'content_title', clean_title($file));
 
   // In the top level there is no chapter indication.
   if (Compiler::pathIsSection($file)) {
     $info[$data['filename_compiled']] = array(
       'file' => $data['filename_compiled'],
       'title' => $g->get($meta, 'title'),
+      'content_title' => $g->get($meta, 'content_title'),
       'parent' => $g->get($meta, 'chapter'),
     );
   }

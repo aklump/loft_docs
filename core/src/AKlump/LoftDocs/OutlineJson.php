@@ -103,6 +103,7 @@ class OutlineJson implements IndexInterface {
     $index = array(
       'id' => 'index',
       'title' => $g->get($info, 'title', 'Index'),
+      'content_title' => $g->get($info, 'content_title', 'Index'),
       'file' => 'index.html',
     );
 
@@ -125,6 +126,7 @@ class OutlineJson implements IndexInterface {
             'chapter_id' => $chapter_data['id'],
             'chapter' => $chapter_data['title'],
             'title' => $this->getTitle($key, $value),
+            'content_title' => $value['content_title'],
             'file' => pathinfo($value['file'], PATHINFO_FILENAME) . '.html',
           );
         }
