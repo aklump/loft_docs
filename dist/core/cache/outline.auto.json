@@ -87,6 +87,12 @@
             "chapter": "ld"
         },
         {
+            "id": "ld--apib",
+            "title": "API Blueprint",
+            "file": "ld--apib",
+            "chapter": "ld"
+        },
+        {
             "id": "changelog",
             "title": "CHANGELOG",
             "file": "CHANGELOG"
@@ -207,12 +213,6 @@
             "id": "ld--tokens",
             "title": "Token Replacement",
             "file": "ld--tokens",
-            "chapter": "ld"
-        },
-        {
-            "id": "ld--apibp",
-            "title": "Using API Blueprint",
-            "file": "ld--apibp",
             "chapter": "ld"
         },
         {

@@ -141,6 +141,7 @@ class ComposerStaticInit57e0d1a2964202d36b8a6b260801c423
         'AKlump\\Data\\DataTest' => __DIR__ . '/..' . '/aklump/data/Tests/DataTest.php',
         'AKlump\\LoftDocs\\AdvancedHelpIni' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/AdvancedHelpIni.php',
         'AKlump\\LoftDocs\\Compiler' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/Compiler.php',
+        'AKlump\\LoftDocs\\DynamicContent\\ApiBlueprint' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/DynamicContent/ApiBlueprint.php',
         'AKlump\\LoftDocs\\DynamicContent\\PhpClassMethodReader' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/DynamicContent/PhpClassMethodReader.php',
         'AKlump\\LoftDocs\\IndexInterface' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/IndexInterface.php',
         'AKlump\\LoftDocs\\MarkdownExtra' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/MarkdownExtra.php',

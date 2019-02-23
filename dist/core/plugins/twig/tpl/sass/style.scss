@@ -89,17 +89,14 @@ body.page--index ul.index {
 
 $header_height: 2em;
 $footer_height: $header_height;
-header,
-footer {
+
+header {
   position: fixed;
   left: 0;
   right: 0;
-  padding: 0 20px;
+  padding: 0;
   background: #efefef;
   z-index: 99;
-}
-
-header {
   line-height: $header_height;
   top: 0;
   height: $header_height;
@@ -107,6 +104,12 @@ header {
 }
 
 footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  padding: 0 20px;
+  background: #efefef;
+  z-index: 99;
   bottom: 0;
   border-top: 1px solid #ddd;
 }
@@ -128,20 +131,35 @@ section {
 }
 
 .pager {
-  .prev,
-  .next {
+  a {
     line-height: $header_height;
     height: $header_height;
-    width: 40%;
     text-decoration: none;
+  }
+
+  .prev,
+  .next {
+    width: calc(50% - 60px);
+    padding: 0 20px;
   }
 
   .prev:hover,
   .next:hover {
-    width: 40%;
     text-decoration: none;
-    background: #ddd;
+    background: rgba(200, 200, 200, .35);
   }
+
+  .prev {
+    text-align: left;
+  }
+
+  .next {
+    text-align: right;
+  }
+}
+
+.pager__book-title {
+  font-weight: bold;
 }
 
 .video-wrapper {
