@@ -183,6 +183,11 @@ $contents = $file-&gt;get();
 <pre><code>$file = FilePath::create('/foo/bar.txt')-&gt;destroy();
 </code></pre>
 
+<h3>Rename a file</h3>
+
+<pre><code>$file = FilePath::create('/foo/bar.txt')-&gt;rename('new_basename.txt);
+</code></pre>
+
 <h2>Copying Files</h2>
 
 <h3>Copy a file</h3>
@@ -199,6 +204,12 @@ $destination_dir-&gt;copyFrom('/source/file.md');
 
 $another_file = FilePath::create('/source2/file2.txt');
 $destination_dir-&gt;copyFrom($another_file);
+</code></pre>
+
+<h3>Copy and rename a file from one dir to another</h3>
+
+<pre><code>$destination_dir = FilePath::create('/dir/where/file/end/up');
+$destination_dir-&gt;copyFrom('/source/file.md')-&gt;rename('renamed.md');
 </code></pre>
 
 <h3>Move a file from one directory to another</h3>
@@ -228,7 +239,7 @@ $file_to_duplicate-&gt;to('clone.md')-&gt;copy('original.md');
 </div>
   
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 1.0 &bull; Last Updated: Mon, 04 Feb 2019 09:56:48 -0800</p>
+    <p class="legaleeze center">Version: 1.0 &bull; Last Updated: Fri, 22 Feb 2019 18:15:59 -0800</p>
   </div>
 </footer>
 

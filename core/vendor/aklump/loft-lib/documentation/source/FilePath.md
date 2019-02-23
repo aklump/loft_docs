@@ -140,6 +140,10 @@ By passing a directory and an extension, a temporary filename will be created au
 
     $file = FilePath::create('/foo/bar.txt')->destroy();
 
+### Rename a file
+
+    $file = FilePath::create('/foo/bar.txt')->rename('new_basename.txt);
+
 ## Copying Files
 
 ### Copy a file
@@ -155,6 +159,11 @@ By passing a directory and an extension, a temporary filename will be created au
     
     $another_file = FilePath::create('/source2/file2.txt');
     $destination_dir->copyFrom($another_file);
+
+### Copy and rename a file from one dir to another
+    
+    $destination_dir = FilePath::create('/dir/where/file/end/up');
+    $destination_dir->copyFrom('/source/file.md')->rename('renamed.md');
 
 ### Move a file from one directory to another
 
