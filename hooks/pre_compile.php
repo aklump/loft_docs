@@ -15,6 +15,10 @@ Fusce vel sapien quis orci feugiat accumsan vel sit amet massa. Cum sociis natoq
 
 Praesent at vulputate tellus, vehicula dignissim elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. In molestie est sapien, sit amet porttitor ipsum laoreet sit amet. Praesent lacus neque, suscipit quis urna non, varius consequat justo. Curabitur tincidunt leo ac venenatis pharetra. Curabitur ultricies odio ut nibh viverra lobortis. Sed scelerisque pellentesque vehicula.']);
 
+// Pull an example from GitHub for our apibp docs.
+$contents = file_get_contents('https://raw.githubusercontent.com/apiaryio/api-blueprint/master/examples/Real%20World%20API.md');
+$compiler->addInclude('_apibp_example.md', $contents);
+
 
 // Create an include file.
 $contents = "## Today is: " . date('r');
