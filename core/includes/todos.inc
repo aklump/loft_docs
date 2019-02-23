@@ -16,7 +16,7 @@ $source = FilePath::create($argv[1], ['install' => FALSE]);
 $merged_basename = $argv[2];
 $dynamic_source_dir = FilePath::create($argv[3]);
 $outline_file = FilePath::create($argv[4], ['install' => FALSE]);
-$compiler = new Compiler($dynamic_source_dir, $outline_file);
+$compiler = new Compiler(FilePath::create(dirname($argv[1])), $dynamic_source_dir, $outline_file);
 
 if (!$compiler->getSetting('tasklist.aggregate', FALSE)) {
   exit(2);
