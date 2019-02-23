@@ -60,6 +60,7 @@ if (!empty($json_file)) {
     $section = array(
       'id' => clean_id($file),
       'title' => $data['title'],
+      'content_title' => $g->get($data, 'content_title', $data['title']),
       'file' => isset($data['file']) ? $data['file'] : $file . get_md_source_file_extension($file),
     );
 

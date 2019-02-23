@@ -29,201 +29,235 @@
         {
             "id": "qs--intro",
             "title": "Introduction to Loft Docs",
+            "content_title": "Introduction to Loft Docs",
             "file": "qs--intro",
             "chapter": "qs"
         },
         {
             "id": "qs--terms",
             "title": "Terms Used",
+            "content_title": "Terms Used",
             "file": "qs--terms",
             "chapter": "qs"
         },
         {
             "id": "qs--compiling",
             "title": "Compiling",
+            "content_title": "Compiling",
             "file": "qs--compiling",
             "chapter": "qs"
         },
         {
             "id": "qs--toc",
             "title": "Table of Contents",
+            "content_title": "Table of Contents",
             "file": "qs--toc",
             "chapter": "qs"
         },
         {
             "id": "qs--search",
             "title": "Integrating search",
+            "content_title": "Search",
             "file": "qs--search",
             "chapter": "qs"
         },
         {
             "id": "qs--partials",
             "title": "Partials (Include Files)",
+            "content_title": "Partials (Include Files)",
             "file": "qs--partials",
             "chapter": "qs"
         },
         {
             "id": "qs--hooks",
             "title": "Hooks",
+            "content_title": "Pre\/Post hooks",
             "file": "qs--hooks",
             "chapter": "qs"
         },
         {
             "id": "qs--frontmatter",
             "title": "Frontmatter and How to Use",
+            "content_title": "Frontmatter and How to Use",
             "file": "qs--frontmatter",
             "chapter": "qs"
         },
         {
             "id": "qs--version",
             "title": "Documentation Version",
+            "content_title": "Documentation Version",
             "file": "qs--version",
             "chapter": "qs"
         },
         {
             "id": "ld--cheatsheet",
             "title": "Generating Cheatsheets",
+            "content_title": "Generating Cheatsheets",
             "file": "ld--cheatsheet",
             "chapter": "ld"
         },
         {
             "id": "ld--apib",
             "title": "API Blueprint",
+            "content_title": "Using API Blueprint",
             "file": "ld--apib",
             "chapter": "ld"
         },
         {
             "id": "changelog",
             "title": "CHANGELOG",
+            "content_title": "Changelog",
             "file": "CHANGELOG"
         },
         {
             "id": "ld--theming",
             "title": "Custom Theming the Website Version",
+            "content_title": "Custom Theming the Website Version",
             "file": "ld--theming",
             "chapter": "ld"
         },
         {
             "id": "demos--example",
             "title": "Demo: An Example Page & Image",
+            "content_title": "Demo: An Example Page & Image",
             "file": "demos--example",
             "chapter": "demos"
         },
         {
             "id": "demos--search-noindex",
             "title": "Demo: Do not include in search indexing",
+            "content_title": "Demo: Do not include in search indexing",
             "file": "demos--search-noindex",
             "chapter": "demos"
         },
         {
             "id": "demos--includes",
             "title": "Demo: Include Files",
+            "content_title": "Demo: Include Files",
             "file": "demos--includes",
             "chapter": "demos"
         },
         {
             "id": "demos--md_extra",
             "title": "Demo: Markdown Extra",
+            "content_title": "Markdown Extra Demonstration Page",
             "file": "demos--md_extra",
             "chapter": "demos"
         },
         {
             "id": "demos--mediawiki",
             "title": "Demo: MediaWiki",
+            "content_title": "Level One",
             "file": "demos--mediawiki",
             "chapter": "demos"
         },
         {
             "id": "demos--title",
             "title": "Demo: The Sniffed Title",
+            "content_title": "A Title That is Not Used in the Index",
             "file": "demos--title",
             "chapter": "demos"
         },
         {
             "id": "demos--tasklist",
             "title": "Demo: Todo List",
+            "content_title": "Demo: Todo List",
             "file": "demos--tasklist",
             "chapter": "demos"
         },
         {
             "id": "demos--todos-a",
             "title": "Demo: Todo List Aggregation 1 of 3",
+            "content_title": "Demo: Todo List Aggregation 1 of 3",
             "file": "demos--todos-a",
             "chapter": "demos"
         },
         {
             "id": "demos--todos-b",
             "title": "Demo: Todo List Aggregation 2 of 3",
+            "content_title": "Demo: Todo List Aggregation 2 of 3",
             "file": "demos--todos-b",
             "chapter": "demos"
         },
         {
             "id": "demos--todos-c",
             "title": "Demo: Todo List Aggregation 3 of 3",
+            "content_title": "Demo: Todo List Aggregation 3 of 3",
             "file": "demos--todos-c",
             "chapter": "demos"
         },
         {
             "id": "demos--twig-vars",
             "title": "Demo: Twig Variable Replacement",
+            "content_title": "Demo: Twig Variable Replacement",
             "file": "demos--twig-vars",
             "chapter": "demos"
         },
         {
             "id": "demos--empty-file",
             "title": "Demos  Empty File",
+            "content_title": "Demos  Empty File",
             "file": "demos--empty-file",
             "chapter": "demos"
         },
         {
             "id": "demos--no-title",
             "title": "Demos  No Title",
+            "content_title": "Demos  No Title",
             "file": "demos--no-title",
             "chapter": "demos"
         },
         {
             "id": "ld--drupal",
             "title": "Drupal Integration",
+            "content_title": "Drupal Integration",
             "file": "ld--drupal",
             "chapter": "ld"
         },
         {
             "id": "installation",
             "title": "How to install",
+            "content_title": "How to install",
             "file": "installation"
         },
         {
             "id": "ld--github",
             "title": "Integration with GitHub",
+            "content_title": "Integration with GitHub",
             "file": "ld--github",
             "chapter": "ld"
         },
         {
             "id": "readme",
             "title": "Loft Docs",
+            "content_title": "Loft Docs",
             "file": "README"
         },
         {
             "id": "ld--todos",
             "title": "Tasklist (Todo Items)",
+            "content_title": "Tasklist (Todo Items)",
             "file": "ld--todos",
             "chapter": "ld"
         },
         {
             "id": "ld--tokens",
             "title": "Token Replacement",
+            "content_title": "Token Replacement",
             "file": "ld--tokens",
             "chapter": "ld"
         },
         {
             "id": "ld--iframes",
             "title": "Using iFrames",
+            "content_title": "Using iFrames",
             "file": "ld--iframes",
             "chapter": "ld"
         },
         {
             "id": "ld--variables",
             "title": "Using Variables",
+            "content_title": "Using Variables",
             "file": "ld--variables",
             "chapter": "ld"
         }
