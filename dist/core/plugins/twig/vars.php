@@ -55,7 +55,7 @@ $vars['chapters'] = $index->getChapterIndex();
 
 $outline_data = json_decode(file_get_contents($outline_file), TRUE);
 $vars['book'] = [
-  'title' => $outline_data['title'],
+  'title' => $g->get($outline_data, 'title'),
   'total_chapters' => count($vars['chapters']),
   'total_pages' => count($vars['index']),
 ];

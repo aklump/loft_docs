@@ -46,6 +46,10 @@
             "id": "ld--cheatsheet"
         },
         {
+            "id": "ld--apib",
+            "title": "API Blueprint"
+        },
+        {
             "id": "changelog",
             "title": "CHANGELOG"
         }

@@ -12,6 +12,7 @@ return array(
     'AKlump\\Data\\DataTest' => $vendorDir . '/aklump/data/Tests/DataTest.php',
     'AKlump\\LoftDocs\\AdvancedHelpIni' => $baseDir . '/src/AKlump/LoftDocs/AdvancedHelpIni.php',
     'AKlump\\LoftDocs\\Compiler' => $baseDir . '/src/AKlump/LoftDocs/Compiler.php',
+    'AKlump\\LoftDocs\\DynamicContent\\ApiBlueprint' => $baseDir . '/src/AKlump/LoftDocs/DynamicContent/ApiBlueprint.php',
     'AKlump\\LoftDocs\\DynamicContent\\PhpClassMethodReader' => $baseDir . '/src/AKlump/LoftDocs/DynamicContent/PhpClassMethodReader.php',
     'AKlump\\LoftDocs\\IndexInterface' => $baseDir . '/src/AKlump/LoftDocs/IndexInterface.php',
     'AKlump\\LoftDocs\\MarkdownExtra' => $baseDir . '/src/AKlump/LoftDocs/MarkdownExtra.php',
