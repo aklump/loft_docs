@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>How to install</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--installation">
+<header>
+  <div class="pager">
+  <a href="CHANGELOG.html" class="prev CHANGELOG">&laquo;CHANGELOG</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="README.html" class="next readme">Loft Docs&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>How to install</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<ol>
+<li><p>Run the compile command, the first time it is runned, installation takes place.</p>
+
+<pre><code>./core/compile
+</code></pre></li>
+<li><p>The necessary dirs will be created including these configuration file(s):</p>
+
+<pre><code>core-config.sh
+</code></pre></li>
+<li><p>Open and edit <code>core-config.sh</code>. <strong>You should not delete this file once it's been created, as it is the flag that installation has taken place!</strong> Compiling without this file may lead to some/all of your files being deleted.</p></li>
+<li>Enter the name of the drupal module this will be used for, if applicable.</li>
+<li>Enter the credentials for the drupal site if using iframes.</li>
+<li>Override the php path if needed; php must have the curl library installed.</li>
+<li>Run <code>./core/compile</code> once more to update the configuration.</li>
+<li>Test the installation by visiting <code>public_html/index.html</code> in a browser, this is the webpage output and should show you a few example pages.</li>
+<li>Installation is complete; you may now begin documenting in <code>source</code>. You most likely should first delete the example files in <code>source</code>.</li>
+</ol>
+
+
+<h2>Requirements</h2>
+
+<ol>
+<li><p>Here's a quick way to get Lynx on a mac...</p></li>
+<li><p>Download this application <a href="http://habilis.net/lynxlet/">http://habilis.net/lynxlet/</a></p></li>
+<li>In shell type <code>cd /usr/bin</code></li>
+<li>Followed by <code>sudo ln -s /Applications/Lynxlet.app/Contents/Resources/lynx/bin/lynx</code></li>
+<li>Test your installation with this command <code>lynx</code>; you should see the lynx browser show up.</li>
+</ol>
+
+<h2>or with homebrew</h2>
+
+<ol>
+<li><code>brew install lynx</code></li>
+</ol>
+
+<hr />
+
+<h2>Installation Part 2</h2>
+
+<p>How you incorporate Loft Docs is up to you, but there are two scenarios which will be described here, with suggested installation instructions.</p>
+
+<h2>Quick Start</h2>
+
+<ol>
+<li>Copy the contents of <code>/dist</code> into your project.</li>
+<li>From within <code>dist</code>, in the shell, run <code>./core/compile</code>.</li>
+<li>Open <code>dist/public_html/welcome.html</code> and follow instructions.</li>
+</ol>
+
+<h2>Stand-alone implementation</h2>
+
+<p>If your goal is simply to document something, and these files will not integrate into another larger project (think git repo), then this is a stand-alone installation.  This would also be the case where you're using Loft Docs to build a website.  Loft Docs' root is the root of your project.  Here's the minimum file structure of a stand-alone implementation:</p>
+
+<pre><code>/.gitignore
+/core
+/core-config.sh
+/core-version.info
+/public_html
+/source
+/stand_alone.info
+</code></pre>
+
+<p>In this scenario the version string of your project is contained in <code>/stand_alone.info</code> which is one level above Loft Docs' core, and so your config file would contain this line:</p>
+
+<pre><code>version_file = "../web_package.info"
+</code></pre>
+
+<p>Or, for greater flexibility (so long as you've only one <code>.info</code> file), it could be:</p>
+
+<pre><code>version_file = "../*.info"
+</code></pre>
+
+<p>If you were to host this as a website, <code>public_html</code> is your web root.</p>
+
+<h2>Integrated implementation</h2>
+
+<p>If you are installing Loft Docs <em>inside</em> the existing code of a larger project, then this constitutes an integrated installation.  Loft Docs is not the root of the larger project, but a sub-folder, maybe you call it <code>docs</code> and store it in the root of the other project.</p>
+
+<pre><code>/docs/core
+/other_project_file1
+/other_project_file2
+/other_project_file3
+/web_package.info
+</code></pre>
+
+<p>In this scenario the version string of your project is contained in <code>/web_package.info</code> which is one levels above Loft Docs, and so your config file would contain this line:</p>
+
+<pre><code>version_file = "../web_package.info"
+</code></pre>
+
+<p>Or, for greater flexibility (so long as you've only one <code>.info</code> file), it could be:</p>
+
+<pre><code>version_file = "../*.info"
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="CHANGELOG.html" class="prev CHANGELOG">&laquo;CHANGELOG</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="README.html" class="next readme">Loft Docs&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.10.5 &bull; Last Updated: Fri, 22 Feb 2019 19:46:01 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Demo: An Example Page &amp; Image</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--demos--example">
+<header>
+  <div class="pager">
+  <a href="ld--variables.html" class="prev ld--variables">&laquo;Using Variables</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="demos--search-noindex.html" class="next demos--search-noindex">Demo: Do not include in search indexing&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Demo: An Example Page &amp; Image</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<h2>Section Title</h2>
+
+<p>What do you think of my new island?</p>
+
+<p><img src="images/example.jpg" alt="island" /></p>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="ld--variables.html" class="prev ld--variables">&laquo;Using Variables</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="demos--search-noindex.html" class="next demos--search-noindex">Demo: Do not include in search indexing&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.10.5 &bull; Last Updated: Fri, 22 Feb 2019 19:45:58 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+
