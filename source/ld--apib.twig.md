@@ -1,6 +1,7 @@
 # Using API Blueprint
 
 Loft Docs understands [API Blueprint](https://apiblueprint.org/) when you follow these conventions:
+
 1. [Install Aglio](https://github.com/danielgtaylor/aglio#installation--usage) on your system.
 1. Create a hook file and register it in _core-config.sh_; here is an example named _hooks/apib.php_.  Point Loft Docs to your installation of Aglio.  Optionally, pass in some [configuration options](https://github.com/danielgtaylor/aglio#executable).  
 
