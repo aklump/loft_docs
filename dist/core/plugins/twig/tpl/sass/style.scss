@@ -10,16 +10,13 @@
   #{$property}: $value;
 }
 
-.breadcrumb {
-  font-size: 11px
+.breadcrumbs {
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 body {
-  line-height: 1.6
-}
-
-body.page--index a.index, body.page--index .breadcrumb {
-  display: none
+  line-height: 1.6;
 }
 
 body.page--index ul.index {
@@ -33,6 +30,10 @@ body.page--index ul.index {
   text-align: center;
   min-height: 1.6em;
   font-size: .9rem
+}
+
+.pager__book-title {
+  font-weight: bold;
 }
 
 .pager .prev, .pager .next {
@@ -77,7 +78,7 @@ body.page--index ul.index {
 
 .legaleeze {
   color: #aaa;
-  font-size: 13px;
+  font-size: .8125rem;
 }
 
 .center {
@@ -120,6 +121,7 @@ section {
     margin: 30px 0;
     @include vendor-prefixize(box-shadow, 0px 0px 30px 0px #aaa);
   }
+
   video {
     width: 100%;
   }
@@ -133,6 +135,7 @@ section {
     width: 40%;
     text-decoration: none;
   }
+
   .prev:hover,
   .next:hover {
     width: 40%;
@@ -165,13 +168,12 @@ a,
 .tipue_search_content_url a {
   color: #4183C4;
   text-decoration: underline;
+
   &:hover {
     color: inherit;
     text-decoration: underline;;
   }
 }
-
-
 
 #tipue_search_input,
 #tipue_search_warning,
@@ -183,12 +185,23 @@ a,
 #tipue_search_foot_boxes {
   font: inherit;
 }
+
 .tipue_search_content_title {
-  font-size: 1.5em;
+  font-size: 1.5rem;
 }
 
 a[name] {
   padding-top: 40px;
   margin-top: -40px;
   display: table-caption; /* required for webkit browsers */
+}
+
+.sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page--index .sub-header {
+  justify-content: center;
 }

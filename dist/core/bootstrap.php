@@ -221,6 +221,10 @@ function json_outline_merge() {
       $g->ensure($base, $key, array());
       $g->ensure($merge, $key, array());
       switch ($key) {
+        case 'title':
+          $base[$key] = $merge[$key];
+          break;
+
         case 'chapters':
         case 'appendices':
           $base[$key] = _json_array_replace_by_id($base[$key], $merge[$key]);
@@ -267,6 +271,7 @@ function _json_array_merge_by_id(array $a, array $b) {
       $b[$key] += $a[$key];
     }
   }
+
   return array_values($b + $a);
 }
 

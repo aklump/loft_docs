@@ -55,8 +55,16 @@ class OutlineJson implements IndexInterface {
     $chapter_order = array_map(function ($item) {
       return $item['id'];
     }, $info['chapters']);
+
+    $previous_chapter = NULL;
+    $chapter_hrefs = [];
     foreach ($info['sections'] as $section) {
-      $chapter_order[] = $g->get($section, 'chapter');
+      $chapter_id = $g->get($section, 'chapter');
+      if ($previous_chapter != $chapter_id && !isset($chapter_hrefs[$chapter_id])) {
+        $chapter_hrefs[$chapter_id] = $section['file'];
+        $previous_chapter = $chapter_id;
+      }
+      $chapter_order[] = $chapter_id;
     }
     $chapter_order[] = '';
     $chapter_order = array_unique($chapter_order);
@@ -70,6 +78,7 @@ class OutlineJson implements IndexInterface {
         'id' => '',
         'title' => '',
       ] : reset($chapter_titles[$id]);
+      $chapter_titles[$id]['href'] = $chapter_hrefs[$id] . '.html';
     }
 
     return $chapter_titles;
@@ -93,7 +102,7 @@ class OutlineJson implements IndexInterface {
     $data = array();
     $index = array(
       'id' => 'index',
-      'title' => 'Index',
+      'title' => $g->get($info, 'title', 'Index'),
       'file' => 'index.html',
     );
 
@@ -113,6 +122,7 @@ class OutlineJson implements IndexInterface {
         else {
           $chapter_sections[$key] = array(
             'id' => $value['id'],
+            'chapter_id' => $chapter_data['id'],
             'chapter' => $chapter_data['title'],
             'title' => $this->getTitle($key, $value),
             'file' => pathinfo($value['file'], PATHINFO_FILENAME) . '.html',

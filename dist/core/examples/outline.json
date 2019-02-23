@@ -1,8 +1,8 @@
 {
+    "title": "Project Docs",
     "appendices": [
         {
             "id": "a",
-            "sort": 0,
             "title": "Appendix A"
         }
     ],

@@ -9,20 +9,19 @@ use aklump\loft_parser\HTMLTagRemoveAction;
 require_once dirname(__FILE__) . '/../../vendor/autoload.php';
 
 $g = new Data();
-//$CACHE = getenv('LOFT_DOCS_CACHE_DIR');
-
 list (, $tpl_dir, $partial, $destination, $vars) = $argv;
 $vars = json_decode($vars, TRUE);
 
 $loader = new Twig_Loader_Filesystem($tpl_dir);
 $twig = new Twig_Environment($loader, array(
-  //    'cache' => $CACHE . '/twig',
   'cache' => FALSE,
 ));
 
 switch ($partial) {
   case 'index.html':
+    $vars['breadcrumbs'] = [];
     $vars['is_index'] = TRUE;
+    $vars['title'] = $g->get($vars, 'book.title', 'Index');
     $vars['content'] = $twig->render('index.twig', $vars);
     $vars['classes'][] = 'page--index';
 
@@ -38,6 +37,15 @@ switch ($partial) {
     break;
 
   default:
+    $vars['breadcrumbs'][] = ['Index', 'index.html'];
+    if (($chapter = $g->get($vars, 'chapter'))) {
+      $chapter_id = $g->get($vars, 'chapter_id');
+      $crumb = [$chapter];
+      if (!empty($vars['chapters'][$chapter_id]['href'])) {
+        $crumb[] = $vars['chapters'][$chapter_id]['href'];
+      }
+      $vars['breadcrumbs'][] = $crumb;
+    }
     $vars['is_index'] = FALSE;
     $vars['content'] = '<section>' . file_get_contents($partial) . '</section>';
     break;

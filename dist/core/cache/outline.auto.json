@@ -234,6 +234,7 @@
         },
         "search": "tipuesearch"
     },
+    "title": "Loft Docs",
     "frontmatter": {
         "demos--search-noindex2.html": {
             "search": "noindex"
