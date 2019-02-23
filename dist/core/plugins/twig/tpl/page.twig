@@ -11,17 +11,15 @@
 <header>
   {% include 'nav.twig' %}
 </header>
+<section class="sub-header">
+  {% include('breadcrumbs.twig') %}
+  {% if search %}
+    {% include 'search-form.twig' %}
+  {% endif %}
+</section>
 
-{% if search %}
-  {% include 'search-form.twig' %}
-{% endif %}
 
-{% if is_index %}
-  <h1>Index</h1>
-{% else %}
-  <h1>{{ title }}</h1>
-  <div class="breadcrumb"><a href="index.html">Index</a></div>
-{% endif %}
+<h1>{{ title }}</h1>
 
 {{ content|raw }}
 
