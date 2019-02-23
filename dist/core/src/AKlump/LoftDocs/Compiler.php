@@ -11,6 +11,13 @@ use AKlump\LoftLib\Storage\FilePath;
 class Compiler {
 
   /**
+   * The path to the original source directory.
+   *
+   * @var \AKlump\LoftLib\Storage\FilePath
+   */
+  protected $pathToStaticSourceFiles;
+
+  /**
    * The path to the cache/source directory.
    *
    * @var \AKlump\LoftLib\Storage\FilePath
@@ -24,7 +31,8 @@ class Compiler {
    */
   protected $pathToOutline;
 
-  public function __construct(FilePath $dynamic_source, Filepath $outline) {
+  public function __construct(FilePath $static_source, FilePath $dynamic_source, Filepath $outline) {
+    $this->pathToStaticSourceFiles = $static_source;
     $this->pathToDynamicSourceFiles = $dynamic_source;
     FilePath::ensureDir($this->pathToDynamicSourceFiles->getPath());
     $this->pathToOutline = $outline;
@@ -77,23 +85,46 @@ class Compiler {
    *   If $basename does not begin with an underscore.
    */
   public function addInclude($basename, $contents) {
+    return $this->validateIncludeBasename($basename)
+      ->addSourceFile($basename, $contents);
+  }
+
+  /**
+   * Check that $basename begins with an underscore.
+   *
+   * @param string $basename
+   *   The basename to load.
+   *
+   * @return $this
+   *   Self for chaining.
+   */
+  private function validateIncludeBasename($basename) {
     if (substr($basename, 0, 1) !== '_') {
       throw new \InvalidArgumentException("Include files must begin with an underscore; did you mean _\"" . $basename . '"?');
     }
 
-    return $this->addSourceFile($basename, $contents);
+    return $this;
   }
 
   /**
    * Get an instance of FilePath for an include file.
    *
-   * @param $basename
+   * We will look in dynamic files first, then static.
+   *
+   * @param string $basename
+   *   The basename.
    *
    * @return \AKlump\LoftLib\Storage\FilePath
    *   The include filepath instance.
    */
   public function getInclude($basename) {
-    return $this->pathToDynamicSourceFiles->to($basename);
+    $this->validateIncludeBasename($basename);
+    $include = $this->pathToDynamicSourceFiles->to($basename);
+    if (!$include->exists()) {
+      $include = $this->pathToStaticSourceFiles->to($basename);
+    }
+
+    return $include;
   }
 
   /**

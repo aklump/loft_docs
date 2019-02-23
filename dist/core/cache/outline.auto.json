@@ -210,6 +210,12 @@
             "chapter": "ld"
         },
         {
+            "id": "ld--apibp",
+            "title": "Using API Blueprint",
+            "file": "ld--apibp",
+            "chapter": "ld"
+        },
+        {
             "id": "ld--iframes",
             "title": "Using iFrames",
             "file": "ld--iframes",

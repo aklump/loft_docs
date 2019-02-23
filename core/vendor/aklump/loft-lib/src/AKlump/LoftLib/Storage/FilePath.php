@@ -503,7 +503,7 @@ class FilePath implements PersistentInterface {
    */
   public function copyFrom($source) {
     if (is_string($source)) {
-      $source = new FilePath($source, NULL, ['install' => FALSE]);
+      $source = new FilePath($source, ['install' => FALSE]);
     }
 
     $basename = $this->getType() === self::TYPE_FILE ? $this->getBasename() : $source->getBasename();
@@ -534,6 +534,22 @@ class FilePath implements PersistentInterface {
     return $this->_copyOrMove('move', 'rename', $source);
   }
 
+
+  /**
+   * Change this file's basename.
+   *
+   * @param string $new_basename
+   *   The new basename for the file.
+   *
+   * @return \AKlump\LoftLib\Storage\FilePath
+   *   Self for chaining.
+   */
+  public function rename($new_name) {
+    rename($this->getPath(), $this->getDirName() . "/$new_name");
+
+    return $this;
+  }
+
   /**
    * Move a file from one directory to another.
    *
@@ -547,7 +563,7 @@ class FilePath implements PersistentInterface {
    */
   public function moveFrom($source) {
     if (is_string($source)) {
-      $source = new FilePath($source, NULL, ['install' => FALSE]);
+      $source = new FilePath($source, ['install' => FALSE]);
     }
 
     return $this->to($source->getBasename())
