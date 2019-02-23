@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Terms Used</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--qs--terms">
+<header>
+  <div class="pager">
+  <a href="qs--intro.html" class="prev qs--intro">&laquo;Introduction to Loft Docs</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="qs--compiling.html" class="next qs--compiling">Compiling&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Terms Used</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<table>
+<thead>
+<tr>
+  <th>Term</th>
+  <th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Include</td>
+  <td>A snippet that is injected into another page</td>
+</tr>
+<tr>
+  <td>Partial</td>
+  <td><em>See Include</em></td>
+</tr>
+<tr>
+  <td>Dynamic Include</td>
+  <td>An include file that is generated at compile time.  Often by hooks, or internally by the compiler.</td>
+</tr>
+<tr>
+  <td>Compile settings</td>
+  <td>metadata added to a file in your source directory called <em>outline.merge.json</em>, which controls the compile process</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="qs--intro.html" class="prev qs--intro">&laquo;Introduction to Loft Docs</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="qs--compiling.html" class="next qs--compiling">Compiling&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.10.5 &bull; Last Updated: Fri, 22 Feb 2019 19:46:06 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

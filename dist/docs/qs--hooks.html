@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Hooks</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--qs--hooks">
+<header>
+  <div class="pager">
+  <a href="qs--partials.html" class="prev qs--partials">&laquo;Partials (Include Files)</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="qs--frontmatter.html" class="next qs--frontmatter">Frontmatter and How to Use&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Hooks</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section>
+
+<ul>
+<li>Create your hook file in <em>hooks</em>, which is a sibling directory to <em>source</em>.</li>
+<li>Enable the hook file in <em>core.config.sh</em>, e.g., <code>pre_hooks = "pre_compile.php"</code></li>
+</ul>
+
+<p>You may specify one or more PHP or shell scripts to be called both before and/or after compiling using the <code>pre_hooks</code> and <code>post_hooks</code> config options.  The paths you present are relative to <code>{root}/hooks</code>.  Compilation pauses until each script is finished.</p>
+
+<pre><code>pre_hooks = "pre_compile.sh pre_compile.php"
+post_hooks = "post_compile.sh post_compile.php"
+</code></pre>
+
+<h2>Arguments Sent to Scripts</h2>
+
+<p>The scripts will receive the following arguments:</p>
+
+<table>
+<thead>
+<tr>
+  <th>php arg</th>
+  <th>bash arg</th>
+  <th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>$argv[1]</td>
+  <td>$1</td>
+  <td>Path to the <code>source/</code> directory</td>
+</tr>
+<tr>
+  <td>$argv[2]</td>
+  <td>$2</td>
+  <td>Path to the <code>core/</code> directory</td>
+</tr>
+<tr>
+  <td>$argv[3]</td>
+  <td>$3</td>
+  <td>Path to the version file</td>
+</tr>
+<tr>
+  <td>$argv[4]</td>
+  <td>$4</td>
+  <td>Path to the parent directory of <code>source</code>, a.k.a the root directory</td>
+</tr>
+<tr>
+  <td>$argv[5]</td>
+  <td>$5</td>
+  <td>Path to the compiled website directory</td>
+</tr>
+<tr>
+  <td>$argv[6]</td>
+  <td>$6</td>
+  <td>Path to the compiled html directory</td>
+</tr>
+<tr>
+  <td>$argv[7]</td>
+  <td>$7</td>
+  <td>Path to the compiled text directory</td>
+</tr>
+<tr>
+  <td>$argv[8]</td>
+  <td>$8</td>
+  <td>Path to the compiled drupal directory</td>
+</tr>
+<tr>
+  <td>$argv[9]</td>
+  <td>$9</td>
+  <td>Path to write dynamic pages and includes before compile</td>
+</tr>
+<tr>
+  <td>$argv[10]</td>
+  <td>$10</td>
+  <td>Path to the outline JSON file</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Generating Dynamic Content</h2>
+
+<p>Portions of your pages that need to be computed are generally going to be dynamic includes, which are included on your static pages named ending with <code>.twig.md</code>.</p>
+
+<h3>PHP Hooks</h3>
+
+<p>You have access to an instance of <code>$compiler</code>, which has most methods you'd need.  Also any core classes are available and autoloaded so you simple need to declare them via <code>use</code> statements at the top of your hook file, e.g.,</p>
+
+<pre><code>&lt;?php
+
+use AKlump\LoftDocs\PhpClassMethodReader;
+...
+</code></pre>
+
+<p>PHP hook files should only save content using a method on the <code>$compiler</code> instance.  To save an include file, use:</p>
+
+<pre><code>$compiler-&gt;addInclude(...
+</code></pre>
+
+<p>If you want to generate an entire dynamic page, you should use:</p>
+
+<pre><code>$compiler-&gt;addSourceFile(...
+</code></pre>
+
+<p>Be sure to check out these classes for help with dynamic content:</p>
+
+<ul>
+<li><code>\AKlump\LoftLib\Code\Markdown</code></li>
+<li><code>\AKlump\LoftDocs\PhpClassMethodReader</code></li>
+</ul>
+
+<h3>BASH Hooks</h3>
+
+<p>Dynamice files should be written to the directory defined in <code>$9</code></p>
+
+<h2>Screen Output</h2>
+
+<p>You may print or echo from your script and it will be echoed to the user.</p>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="qs--partials.html" class="prev qs--partials">&laquo;Partials (Include Files)</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="qs--frontmatter.html" class="next qs--frontmatter">Frontmatter and How to Use&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.10.5 &bull; Last Updated: Fri, 22 Feb 2019 19:46:04 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

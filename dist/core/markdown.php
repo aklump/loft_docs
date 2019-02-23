@@ -25,7 +25,7 @@ if (!$is_file) {
   exit(1);
 }
 
-$compiler = new Compiler(FilePath::create($argv[6]), FilePath::create($argv[7]));
+$compiler = new Compiler(FilePath::create(dirname($argv[1])), FilePath::create($argv[6]), FilePath::create($argv[7]));
 
 $path_info = pathinfo($in_file);
 

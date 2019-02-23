@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Frontmatter and How to Use</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--qs--frontmatter">
+<header>
+  <div class="pager">
+  <a href="qs--hooks.html" class="prev qs--hooks">&laquo;Hooks</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="qs--version.html" class="next qs--version">Documentation Version&raquo;</a>
+</div>
+</header>
+
+  <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+
+  <h1>Frontmatter and How to Use</h1>
+  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<section><p>As of version 0.8 YAML front matter is supported in source files.  This is used to define items such as:</p>
+
+<table>
+<thead>
+<tr>
+  <th>key</th>
+  <th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>title</td>
+  <td>The title as it appears in the index</td>
+</tr>
+<tr>
+  <td>chapter</td>
+  <td>The id of the chapter; not the chapter title, mind you.</td>
+</tr>
+<tr>
+  <td>tags</td>
+  <td>Search tags, space separated</td>
+</tr>
+<tr>
+  <td>noindex</td>
+  <td>Set this to true to ignore or exclude a file from the index</td>
+</tr>
+<tr>
+  <td>search</td>
+  <td>Set this to "noindex" to prevent search indexing on this file</td>
+</tr>
+<tr>
+  <td>tokens</td>
+  <td>An array of find/replace tokens that will processed before compile</td>
+</tr>
+<tr>
+  <td>twig</td>
+  <td>Like <code>tokens</code> except that the find is expecting twig-syntax {{ find }}.  Saves you from having to include the curly braces in your front matter</td>
+</tr>
+</tbody>
+</table>
+
+<p>Read more about <a href="http://assemble.io/docs/YAML-front-matter.html">Front Matter</a></p>
+
+<p>Here is an example:</p>
+
+<pre><code>---
+title: The title of this page
+tags: code php how-to
+noindex: true
+---
+</code></pre>
+
+<h2>Metadata as JSON</h2>
+
+<p>You can also provide file metadata using <em>outline.merge.json</em>.  Do this when yaml is not appropriate and using JSON would be easier.  Here is an example:</p>
+
+<pre><code>{
+    "frontmatter": {
+        "demos--search-noindex2.html": {
+            "search": "noindex"
+        }
+    }
+}
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager">
+  <a href="qs--hooks.html" class="prev qs--hooks">&laquo;Hooks</a>
+  <a href="index.html" class="index">Index</a>
+  <a href="qs--version.html" class="next qs--version">Documentation Version&raquo;</a>
+</div>
+  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.10.5 &bull; Last Updated: Fri, 22 Feb 2019 19:46:04 -0800</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+
