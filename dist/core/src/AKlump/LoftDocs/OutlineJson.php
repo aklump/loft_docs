@@ -114,6 +114,9 @@ class OutlineJson implements IndexInterface {
         if ($this_chapter !== $chapter_id) {
           continue;
         }
+        if (empty($value['file'])) {
+          throw new \RuntimeException("Missing file for: " . json_encode($value));
+        }
         $key = pathinfo($value['file'], PATHINFO_FILENAME);
         if (in_array($key, array('index', 'advanced help settings'))
           && ($title = $this->getTitle($key, $value))
