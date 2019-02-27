@@ -9,10 +9,11 @@
  */
 require_once dirname(__FILE__) . '/vendor/autoload.php';
 
-use AKlump\LoftDocs\MarkdownExtra;
-use Webuni\FrontMatter\FrontMatter;
 use AKlump\LoftDocs\Compiler;
+use AKlump\LoftDocs\MarkdownExtra;
+use AKlump\LoftLib\Bash\Color;
 use AKlump\LoftLib\Storage\FilePath;
+use Webuni\FrontMatter\FrontMatter;
 
 $in_file = $argv[1];
 $out_dir = rtrim($argv[2], '/');
@@ -25,51 +26,58 @@ if (!$is_file) {
   exit(1);
 }
 
-$compiler = new Compiler(FilePath::create(dirname($argv[1])), FilePath::create($argv[6]), FilePath::create($argv[7]));
+try {
 
-$path_info = pathinfo($in_file);
+  $compiler = new Compiler(FilePath::create(dirname($argv[1])), FilePath::create($argv[6]), FilePath::create($argv[7]));
 
-// Twig Pre-Processing if ends in .twig.md
-if (substr($in_file, -1 * strlen($twig_extension)) === $twig_extension) {
-  $out_file = $out_dir . '/' . preg_replace('/\.twig$/', '', $path_info['filename']) . '.html';
-  $loader = new Twig_Loader_Filesystem($template_dirs);
-  $twig = new Twig_Environment($loader, array(
-    'cache' => FALSE,
-  ));
+  $path_info = pathinfo($in_file);
 
-  $twig_vars = $compiler->getVariables();
-  $regex = '/^' . preg_quote($source_path, '/') . '/';
-  $relative_file = trim(preg_replace($regex, '', $in_file), '/');
-  $contents = $twig->render($relative_file, $twig_vars);
-}
-else {
-  $out_file = $out_dir . '/' . $path_info['filename'] . '.html';
-  $contents = file_get_contents($in_file);
-}
+  // Twig Pre-Processing if ends in .twig.md
+  if (substr($in_file, -1 * strlen($twig_extension)) === $twig_extension) {
+    $out_file = $out_dir . '/' . preg_replace('/\.twig$/', '', $path_info['filename']) . '.html';
+    $loader = new Twig_Loader_Filesystem($template_dirs);
+    $twig = new Twig_Environment($loader, array(
+      'cache' => FALSE,
+    ));
 
-$fm = new FrontMatter();
-$document = $fm->parse($contents);
-$contents = $document->getContent();
-$data = $document->getData();
-
-if (isset($data['twig'])) {
-  foreach ($data['twig'] as $find => $replace) {
-    $data['tokens']["{{ $find }}"] = $replace;
+    $twig_vars = $compiler->getVariables();
+    $regex = '/^' . preg_quote($source_path, '/') . '/';
+    $relative_file = trim(preg_replace($regex, '', $in_file), '/');
+    $contents = $twig->render($relative_file, $twig_vars);
   }
-}
-
-// If the tokens frontmatter key is present then we need to perform a token replace.
-if (isset($data['tokens'])) {
-  uksort($data['tokens'], function ($a, $b) {
-    $a = strlen($a);
-    $b = strlen($b);
-
-    return $b - $a;
-  });
-  foreach ($data['tokens'] as $find => $replace) {
-    $contents = str_replace($find, $replace, $contents);
+  else {
+    $out_file = $out_dir . '/' . $path_info['filename'] . '.html';
+    $contents = file_get_contents($in_file);
   }
-}
 
-$my_html = MarkdownExtra::defaultTransform($contents);
-file_put_contents($out_file, $my_html);
+  $fm = new FrontMatter();
+  $document = $fm->parse($contents);
+  $contents = $document->getContent();
+  $data = $document->getData();
+
+  if (isset($data['twig'])) {
+    foreach ($data['twig'] as $find => $replace) {
+      $data['tokens']["{{ $find }}"] = $replace;
+    }
+  }
+
+  // If the tokens frontmatter key is present then we need to perform a token replace.
+  if (isset($data['tokens'])) {
+    uksort($data['tokens'], function ($a, $b) {
+      $a = strlen($a);
+      $b = strlen($b);
+
+      return $b - $a;
+    });
+    foreach ($data['tokens'] as $find => $replace) {
+      $contents = str_replace($find, $replace, $contents);
+    }
+  }
+
+  $my_html = MarkdownExtra::defaultTransform($contents);
+  file_put_contents($out_file, $my_html);
+
+}
+catch (\Exception $exception) {
+  echo Color::wrap('red', $exception->getMessage());
+}
