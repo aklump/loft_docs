@@ -1,11 +1,4 @@
 <?php
-/**
- * @file
- * Defines the OutlineJson class.
- *
- * @ingroup name
- * @{
- */
 
 namespace AKlump\LoftDocs;
 
@@ -27,7 +20,7 @@ class OutlineJson implements IndexInterface {
   protected $json;
 
   /**
-   * Constructor
+   * Constructor for the OutlineJson class.
    *
    * @param string $path_to_outline_file
    *   Outline json filepath.
@@ -49,9 +42,10 @@ class OutlineJson implements IndexInterface {
    */
   public function getChapterIndex() {
     $g = new Data();
-    $info = $this->json + array(
-        'chapters' => [],
-      );
+    $info = $this->json;
+    $info += array(
+      'chapters' => [],
+    );
     $chapter_order = array_map(function ($item) {
       return $item['id'];
     }, $info['chapters']);
@@ -59,8 +53,8 @@ class OutlineJson implements IndexInterface {
     $previous_chapter = NULL;
     $chapter_hrefs = [];
     foreach ($info['sections'] as $section) {
-      $chapter_id = $g->get($section, 'chapter');
-      if ($previous_chapter != $chapter_id && !isset($chapter_hrefs[$chapter_id])) {
+      $chapter_id = $g->get($section, 'chapter', '');
+      if ($previous_chapter !== $chapter_id && !array_key_exists($chapter_id, $chapter_hrefs)) {
         $chapter_hrefs[$chapter_id] = $section['file'];
         $previous_chapter = $chapter_id;
       }
@@ -85,7 +79,7 @@ class OutlineJson implements IndexInterface {
   }
 
   /**
-   * Return an array of index data
+   * Return an array of index data.
    *
    * @return array
    *   Each element represents a page with these keys:
@@ -96,9 +90,10 @@ class OutlineJson implements IndexInterface {
    */
   public function getData() {
     $g = new Data();
-    $info = $this->json + array(
-        'sections' => array(),
-      );
+    $info = $this->json;
+    $info += array(
+      'sections' => array(),
+    );
     $data = array();
     $index = array(
       'id' => 'index',
@@ -140,7 +135,7 @@ class OutlineJson implements IndexInterface {
     // Sort and Flatten.
     $list = array('index' => $index) + $data;
 
-    // Add in the prev and next links
+    // Add in the prev and next links.
     $prev = array();
     $last = NULL;
     foreach ($list as $key => $value) {
@@ -170,7 +165,7 @@ class OutlineJson implements IndexInterface {
       $last = $key;
     }
 
-    // Set the index prev as the last in the list
+    // Set the index prev as the last in the list.
     $last = end($list);
     $list['index']['prev_id'] = $last['id'];
     $list['index']['prev'] = $last['file'];
@@ -179,8 +174,20 @@ class OutlineJson implements IndexInterface {
     return $list;
   }
 
+  /**
+   * Return a title for a section.
+   *
+   * @param string $default
+   *   The default title.
+   * @param array $value
+   *   The data array.
+   *
+   * @return string
+   *   The title.
+   */
   public function getTitle($default, $value) {
     return isset($value['title']) ? $value['title'] :
       (isset($value['name']) ? $value['name'] : $default);
   }
+
 }

@@ -128,6 +128,27 @@ class Compiler {
   }
 
   /**
+   * Return a source file.
+   *
+   * First tries to get a processed source file, then falls back to the
+   * un-processed source files.
+   *
+   * @param string $basename
+   *   The basename.
+   *
+   * @return \AKlump\LoftLib\Storage\FilePath
+   *   The source filepath instance.
+   */
+  public function getSource($basename) {
+    $file = $this->pathToDynamicSourceFiles->to($basename);
+    if (!$file->exists()) {
+      $file = $this->pathToStaticSourceFiles->to($basename);
+    }
+
+    return $file;
+  }
+
+  /**
    * Return all source files from a directory.
    *
    * @param string $path_to_dir
