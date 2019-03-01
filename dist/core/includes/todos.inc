@@ -47,7 +47,6 @@ if ($global->exists()
 }
 
 if ($todos && sort_todos($todos) && ($contents = flatten_todos($todos))) {
-  $contents = "#Tasklist\n<pre>$contents</pre>";
   $global->put($contents)->save();
   echo '.';
 }

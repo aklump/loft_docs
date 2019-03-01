@@ -27,6 +27,8 @@
 
 <section>
 
+<h2>Advanced Help Module</h2>
+
 <p>Compiling will output files compatible with the <a href="http://drupal.org/project/advanced_help">Advanced Help Module for Drupal</a>.  By default these files will output to a folder named <code>advanced_help</code>, but with a little configuration the folder will output directory to the root of your module folder as <code>help</code>.</p>
 
 <p>This will also output <code>README.txt</code> directly to your module's root directory, so long as you create <code>/source/README.md</code> and make the settings shown below.</p>
@@ -49,11 +51,11 @@ README = '../../README.txt'
 
 <p>After you've written you markdown files, and compiled, you will see the <code>help</code> directory and the <code>README.txt</code> files in the root of your module.</p>
 
-<h2>Links</h2>
+<h3>Links</h3>
 
 <p>Do not use <code>&amp;topic:module/topic&amp;</code> as is suggested, rather follow the instructions above and the Advanced Help topic links will automatically be generated for you.</p>
 
-<h2>Images</h2>
+<h3>Images</h3>
 
 <p>Do not use the <code>&amp;path&amp;</code> convention when linking to images (as is recommended by the advanced help module), this convention will automatically be added for you during compiling.  Rather, do relative linking like this:</p>
 
@@ -66,6 +68,31 @@ README = '../../README.txt'
 
 <pre><code>&lt;img src="&amp;path&amp;images/my_diagram.png" /&gt;
 </code></pre>
+
+<h2>Project Page Support</h2>
+
+<p>If you are managing a project page at Drupal.org, you can try this strategy to keep your project page in sync with your <em>README.txt</em> file.</p>
+
+<pre><code>.
+├── README.twig.md
+├── _overview.md
+└── drupal_project_page.twig.md
+</code></pre>
+
+<ol>
+<li>In <em>&#95;overview.md</em> put the shared content; that which should appear on the project page and in the README file.</li>
+<li>Use an include <code>{% include('_overview.md') %}</code> in both files to pull in the shared info.</li>
+<li><p>Make sure <code>html</code> is not disabled in the configuration.</p>
+
+<pre><code>disabled = "text mediawiki"
+</code></pre></li>
+<li><p>Make sure README is configured, as well.</p>
+
+<pre><code>README = '../README.txt'
+</code></pre></li>
+<li><p>Compile docs.</p></li>
+<li>Copy the contents of <em>html/drupal_project_page.html</em> into the project page at drupal.org.</li>
+</ol>
 </section>
 
 <div class="search__results">
@@ -75,7 +102,7 @@ README = '../../README.txt'
 <footer>
   <div class="pager"><a href="ld--theming.html" class="prev ld--theming">&laquo;Custom Theming the Website Version</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="ld--github.html" class="next ld--github">Integration with GitHub&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.10.10 &bull; Last Updated: Wed, 27 Feb 2019 10:23:39 -0800</p>
+    <p class="legaleeze center">Version: 0.10.11 &bull; Last Updated: Fri, 01 Mar 2019 13:42:04 -0800</p>
   </div>
 </footer>
 
