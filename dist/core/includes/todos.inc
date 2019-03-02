@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Extract the todo items from a single file and append them to the global file
+ * Extract the tasks from a single file and append them to the global file.
  *
  * @ingroup loft_docs
  * @{
@@ -17,9 +17,15 @@ $merged_basename = $argv[2];
 $dynamic_source_dir = FilePath::create($argv[3]);
 $outline_file = FilePath::create($argv[4], ['install' => FALSE]);
 $compiler = new Compiler(FilePath::create(dirname($argv[1])), $dynamic_source_dir, $outline_file);
+$global = $compiler->getInclude($merged_basename);
 
 if (!$compiler->getSetting('tasklist.aggregate', FALSE)) {
   exit(2);
+}
+
+// Make sure to create an empty file so the build doesn't fail.
+if (!$global->exists()) {
+  $global->save();
 }
 
 $first_run = $argv[5] === 'true';
@@ -36,9 +42,7 @@ if (!$source->exists()
   exit(1);
 }
 
-$global = $compiler->getInclude($merged_basename);
-
-// Merge any todo items from the global list.
+// Merge any tasks from the global list.
 if ($global->exists()
   && ($contents = $global->load()->get())
   && ($global_list = parse_todos($contents))
