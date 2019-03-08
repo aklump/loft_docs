@@ -170,7 +170,7 @@ for file in ${files[@]}; do
       _check_file "$docs_website_dir/$basename"
     fi
 
-  elif [ -d "$file" ]; then
+  elif [[ -d "$file" ]]; then
     basename=${file##*/}
     echo "Copying directory $basename..."
     if ! is_disabled "drupal"; then
@@ -191,7 +191,7 @@ echo ''
 # files and send to drupal and website
 echo -n "Converting to HTML"
 for file in "$docs_tmp_dir"/*.html; do
-  if [ -f "$file" ]; then
+  if [[ -f "$file" ]]; then
     echo -n "."
     basename=${file##*/}
     basename=$(echo $basename | sed 's/\.html$//g')
@@ -294,7 +294,7 @@ echo ''
 do_plugin_handler $docs_plugins_tpl post
 
 # Provide search support
-$docs_php "$CORE/includes/search.inc" "$docs_outline_file" "$CORE" "$docs_root_dir" "$docs_root_dir/$docs_website_dir" "$docs_root_dir/$docs_source_dir"
+$docs_php "$CORE/includes/search.inc" "$docs_outline_file" "$CORE" "$docs_root_dir" "$docs_website_dir" "$docs_root_dir/$docs_source_dir"
 
 # Cleanup dirs that are not enabled or were temp.
 for var in "${dirs_to_delete[@]}"; do
