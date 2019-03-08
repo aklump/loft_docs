@@ -13,12 +13,12 @@
             "title": "Demo Pages"
         },
         {
-            "id": "qs",
-            "title": "Quick Start"
-        },
-        {
             "id": "ld",
             "title": "Advanced Usage"
+        },
+        {
+            "id": "qs",
+            "title": "Quick Start"
         },
         {
             "id": "demos",
@@ -108,6 +108,13 @@
             "title": "CHANGELOG",
             "content_title": "Changelog",
             "file": "CHANGELOG"
+        },
+        {
+            "id": "ld--cli",
+            "title": "CLI interace",
+            "content_title": "CLI interace",
+            "file": "ld--cli",
+            "chapter": "ld"
         },
         {
             "id": "ld--theming",
