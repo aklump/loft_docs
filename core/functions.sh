@@ -168,6 +168,8 @@ function load_config() {
     docs_website_dir="$(get_option "website")"
   fi
 
+  docs_website_dir=$(path_resolve "$docs_root_dir" "$docs_website_dir")
+
   # Determine which is our tpl dir
   if test -e "$PWD/tpl"; then
     docs_tpl_dir="$PWD/tpl"
@@ -235,10 +237,10 @@ function do_hook_file() {
   elif [[ "$type" ]]; then
     case $type in
     php)
-      $docs_php "$CORE/includes/do_php_hook.php" "$file" "$docs_source_path" "$CORE" "$docs_version_file" "$docs_root_dir" "$docs_root_dir/$docs_website_dir" "$docs_root_dir/$docs_html_dir" "$docs_root_dir/$docs_text_dir" "$docs_root_dir/$docs_drupal_dir" "$CORE/cache/source" "$outline_file"
+      $docs_php "$CORE/includes/do_php_hook.php" "$file" "$docs_source_path" "$CORE" "$docs_version_file" "$docs_root_dir" "$docs_website_dir" "$docs_root_dir/$docs_html_dir" "$docs_root_dir/$docs_text_dir" "$docs_root_dir/$docs_drupal_dir" "$CORE/cache/source" "$outline_file"
        ;;
     bash)
-      $docs_bash "$file" "$docs_source_path" "$CORE" "$docs_version_file" "$docs_root_dir" "$docs_root_dir/$docs_website_dir" "$docs_root_dir/$docs_html_dir" "$docs_root_dir/$docs_text_dir" "$docs_root_dir/$docs_drupal_dir" "$CORE/cache/source" "$outline_file"
+      $docs_bash "$file" "$docs_source_path" "$CORE" "$docs_version_file" "$docs_root_dir" "$docs_website_dir" "$docs_root_dir/$docs_html_dir" "$docs_root_dir/$docs_text_dir" "$docs_root_dir/$docs_drupal_dir" "$CORE/cache/source" "$outline_file"
        ;;
     esac
 
@@ -400,7 +402,7 @@ function ensure_pattern_directory() {
     if [[ "${path:0:1}" != '/' ]]; then
         path="$docs_root_dir/$path"
     fi
-    [ -e "$path" ] || rsync -a "$CORE/install/patterns/$install_dir/" "$path"
+    [[ -e "$path" ]] || rsync -a "$CORE/install/patterns/$install_dir/" "$path"
 }
 
 
@@ -421,4 +423,21 @@ function get_option() {
     fi
   done
   echo $2
+}
+
+# Resolve a path to an absolute link; if already absolute, do nothing.
+#
+# $1 - The dirname to use if $2 is not absolute
+# $2 - The path to make absolute if not starting with /
+#
+# Returns nothing
+function path_resolve() {
+    local dirname="${1%/}"
+    local path="$2"
+
+    [[ "${path:0:1}" != '/' ]] && path="$dirname/$path"
+    [ ! -e $path ] && echo $path && return
+
+    # If it exists, we will echo the real path.
+    echo "$(cd $(dirname $path) && pwd)/$(basename $path)"
 }
