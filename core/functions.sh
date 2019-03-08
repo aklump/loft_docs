@@ -164,7 +164,7 @@ function load_config() {
   #
 
   # Override vars from the CLI
-  if has_option "website"; then
+  if [[ $(get_option "website") ]]; then
     docs_website_dir="$(get_option "website")"
   fi
 
