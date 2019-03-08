@@ -163,6 +163,11 @@ function load_config() {
   # put anything that comes AFTER parsing config file below this line
   #
 
+  # Override vars from the CLI
+  if has_option "website"; then
+    docs_website_dir="$(get_option "website")"
+  fi
+
   # Determine which is our tpl dir
   if test -e "$PWD/tpl"; then
     docs_tpl_dir="$PWD/tpl"
@@ -396,4 +401,24 @@ function ensure_pattern_directory() {
         path="$docs_root_dir/$path"
     fi
     [ -e "$path" ] || rsync -a "$CORE/install/patterns/$install_dir/" "$path"
+}
+
+
+function has_option() {
+  for var in "${user_cli_options[@]}"; do
+    if [[ "$var" =~ $1 ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+function get_option() {
+  for var in "${user_cli_options[@]}"; do
+    if [[ "$var" =~ ^(.*)\=(.*) ]] && [ ${BASH_REMATCH[1]} == $1 ]; then
+      echo ${BASH_REMATCH[2]}
+      return
+    fi
+  done
+  echo $2
 }

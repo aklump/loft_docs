@@ -10,6 +10,16 @@ CORE="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 source $CORE/functions.sh
 process_start=$(date +%s)
 
+# Load in our user CLI options so we can use: has_option and get_option.
+# This is shim for Cloudy forthcoming.
+declare -a user_cli_options=();
+for arg in "$@"; do
+  if [[ "$arg" =~ ^--(.*) ]]; then
+    user_cli_options=("${user_cli_options[@]}" "${BASH_REMATCH[1]}")
+  fi
+done
+
+
 # Pull in config vars
 installing=0
 load_config
