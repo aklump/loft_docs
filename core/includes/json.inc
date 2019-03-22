@@ -99,7 +99,7 @@ try {
     // Make sure we don't send out bad json data due to missing keys.
     foreach ($json['sections'] as &$section) {
       if (empty($section['file'])) {
-        throw new \RuntimeException("Missing file for id \"{$section['id']}\".");
+        throw new \RuntimeException("Missing file for id \"{$section['id']}\". Have you included an id in outline.merge that does not point to a file?  Have you added an id to the frontmatter of a file?.");
       }
     }
 
@@ -109,6 +109,4 @@ try {
 }
 catch (\Exception $exception) {
   $json_status = $exception;
-  $class = get_class($exception);
-  throw new $class($exception->getMessage(), $exception->getCode(), $exception);
 }
