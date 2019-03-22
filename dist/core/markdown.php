@@ -55,7 +55,6 @@ try {
 
     // Save a preprocessed version to cache/source.
     $compiler->addSourceFile(str_replace($twig_extension, $markdown_extension, $relative_file), $contents);
-
   }
   else {
     $out_file = $html_output_dir . '/' . $path_info['filename'] . '.html';
@@ -87,9 +86,10 @@ try {
   }
 
   $my_html = MarkdownExtra::defaultTransform($contents);
-  file_put_contents($out_file, $my_html);
+  $my_html = $compiler->processInternalLinks($my_html);
 
+  file_put_contents($out_file, $my_html);
 }
 catch (\Exception $exception) {
-  echo Color::wrap('red', $exception->getMessage());
+  echo Color::wrap('red', 'In section: ' . $path_info['filename'] . ': ' . $exception->getMessage());
 }

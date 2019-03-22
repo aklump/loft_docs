@@ -270,7 +270,10 @@ function do_pre_hooks() {
     # Generate an outline from the file structure.
     if [[ ! "$docs_outline_file" ]]; then
         # Create $docs_outline_auto from the file contents
-        $docs_php "$CORE/includes/files_to_json.inc" "$docs_source_path" "$docs_cache_dir/source" "$docs_cache_dir/$docs_outline_auto" "$docs_source_dir/$docs_outline_merge"
+        result=$($docs_php "$CORE/includes/files_to_json.inc" "$docs_source_path" "$docs_cache_dir/source" "$docs_cache_dir/$docs_outline_auto" "$docs_source_dir/$docs_outline_merge")
+        if [[ $? -ne 0 ]]; then
+          echo_red "$result"
+        fi
 
         docs_outline_file="$docs_cache_dir/$docs_outline_auto"
     fi
