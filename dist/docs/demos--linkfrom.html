@@ -2,14 +2,14 @@
 
 <html>
 <head>
-  <title>Demo: Do not include in search indexing</title>
+  <title>Demo: Link to Other Pages</title>
   <link href="search/tipuesearch.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
 </head>
 
-<body class="page--demos--search-noindex">
+<body class="page--link_from_demo">
 <header>
-  <div class="pager"><a href="demos--example.html" class="prev demos--example">&laquo;Demo: An Example Page &amp; Image</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="demos--includes.html" class="next demos--includes">Demo: Include Files&raquo;</a></div></header>
+  <div class="pager"><a href="demos--linkto.html" class="prev demos--linkto">&laquo;Demo: Link Destination Page</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="demos--md_extra.html" class="next demos--md_extra">Demo: Markdown Extra&raquo;</a></div></header>
 <section class="sub-header">
   <div class="breadcrumbs"><a href="index.html">Index</a>
          &raquo
@@ -23,9 +23,15 @@
   </section>
 
 
-<h1>Demo: Do not include in search indexing</h1>
+<h1>Demo: Link to Other Pages</h1>
 
-<section><p>Norske tekst.</p>
+<section>
+
+<p>This demonstrates how to do internal linking to pages and sections on a page.</p>
+
+<p>This <a href="demos--linkto.html">link</a> will go to the top of the page.</p>
+
+<p>This <a href="demos--linkto.html#section">link</a> will go to a section on the page.</p>
 </section>
 
 <div class="search__results">
@@ -33,9 +39,9 @@
 </div>
 
 <footer>
-  <div class="pager"><a href="demos--example.html" class="prev demos--example">&laquo;Demo: An Example Page &amp; Image</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="demos--includes.html" class="next demos--includes">Demo: Include Files&raquo;</a></div>  
+  <div class="pager"><a href="demos--linkto.html" class="prev demos--linkto">&laquo;Demo: Link Destination Page</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="demos--md_extra.html" class="next demos--md_extra">Demo: Markdown Extra&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.10.16 &bull; Last Updated: Fri, 22 Mar 2019 11:52:40 -0700</p>
+    <p class="legaleeze center">Version: 0.10.16 &bull; Last Updated: Fri, 22 Mar 2019 10:48:25 -0700</p>
   </div>
 </footer>
 
