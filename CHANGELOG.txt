@@ -2,8 +2,9 @@
 
 0.11
 
+     * Added [1]internal linking.
      * Changed the output width from 1024px to 800px. To go back you need
-       to [1]custom theme your docs.
+       to [2]custom theme your docs.
 
 0.10
 
@@ -46,4 +47,5 @@
 
 References
 
-   1. file:///Users/aklump/Code/Packages/bash/loft_docs/core/cache/build/ld--theming.html
+   1. file:///Users/aklump/Code/Packages/bash/loft_docs/core/cache/build/qs--linking.html
+   2. file:///Users/aklump/Code/Packages/bash/loft_docs/core/cache/build/ld--theming.html

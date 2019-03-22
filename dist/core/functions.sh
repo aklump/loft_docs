@@ -146,7 +146,11 @@ function load_config() {
 
     if [[ "$docs_help_ini" ]]; then
       # Convert this to $docs_outline_auto
-      $docs_php "$CORE/includes/ini_to_json.php" "$docs_help_ini" "$docs_source_path" "$docs_source_path/$docs_outline_auto"
+      result=($docs_php "$CORE/includes/ini_to_json.php" "$docs_help_ini" "$docs_source_path" "$docs_source_path/$docs_outline_auto")
+      if [[ $? -ne 0 ]]; then
+        echo_red "$result" && exit
+      fi
+      echo $result
       docs_outline_file="$docs_cache_dir/$docs_outline_auto"
 
       echo "`tty -s && tput setaf 3`You are using the older .ini version of the configutation; consider changing to outline.json, a template has been created for you as '$docs_outline_auto'.  See README for more info.`tty -s && tput op`"
@@ -272,9 +276,9 @@ function do_pre_hooks() {
         # Create $docs_outline_auto from the file contents
         result=$($docs_php "$CORE/includes/files_to_json.inc" "$docs_source_path" "$docs_cache_dir/source" "$docs_cache_dir/$docs_outline_auto" "$docs_source_dir/$docs_outline_merge")
         if [[ $? -ne 0 ]]; then
-          echo_red "$result"
+          echo_red "$result" && exit
         fi
-
+        echo $result
         docs_outline_file="$docs_cache_dir/$docs_outline_auto"
     fi
 
