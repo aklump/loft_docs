@@ -2,6 +2,7 @@
 
 ## 0.11
 
+* Added [internal linking](@linking).
 * Changed the output width from 1024px to 800px.  To go back you need to [custom theme](@theming) your docs.
 
 ## 0.10

@@ -55,14 +55,14 @@
             "chapter": "qs"
         },
         {
-            "id": "qs--frontmatter",
+            "id": "frontmatter",
             "title": "Frontmatter and How to Use",
             "content_title": "Frontmatter and How to Use",
             "file": "qs--frontmatter",
             "chapter": "qs"
         },
         {
-            "id": "qs--linking",
+            "id": "linking",
             "title": "Linking to Other Pages",
             "content_title": "Linking to Other Pages",
             "file": "qs--linking",
@@ -83,7 +83,7 @@
             "chapter": "qs"
         },
         {
-            "id": "qs--hooks",
+            "id": "hooks",
             "title": "Hooks",
             "content_title": "Pre\/Post hooks",
             "file": "qs--hooks",
@@ -118,13 +118,13 @@
         },
         {
             "id": "ld--cli",
-            "title": "CLI interace",
-            "content_title": "CLI interace",
+            "title": "CLI Interface",
+            "content_title": "CLI Interface",
             "file": "ld--cli",
             "chapter": "ld"
         },
         {
-            "id": "ld--theming",
+            "id": "theming",
             "title": "Custom Theming the Website Version",
             "content_title": "Custom Theming the Website Version",
             "file": "ld--theming",

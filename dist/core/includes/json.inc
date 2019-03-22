@@ -96,12 +96,17 @@ try {
     // Merge json one more time to trump the auto or .ini
     $json = $merge_json ? json_outline_merge($json, $merge_json) : $json;
 
+    // Make sure we don't send out bad json data due to missing keys.
+    foreach ($json['sections'] as &$section) {
+      if (empty($section['file'])) {
+        throw new \RuntimeException("Missing file for id \"{$section['id']}\". Have you included an id in outline.merge that does not point to a file?  Have you added an id to the frontmatter of a file?.");
+      }
+    }
+
     // Write out the json file.
     file_put_contents($json_file, json_encode($json, JSON_PRETTY_PRINT));
   }
 }
 catch (\Exception $exception) {
-  echo $exception->getMessage();
-  exit(1);
+  $json_status = $exception;
 }
-exit(0);

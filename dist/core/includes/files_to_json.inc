@@ -6,6 +6,7 @@
 
 use AKlump\Data\Data;
 use AKlump\LoftDocs\Compiler;
+use AKlump\LoftLib\Bash\Color;
 use Webuni\FrontMatter\FrontMatter;
 
 $file = __FILE__;
@@ -102,5 +103,11 @@ foreach ($first_level as $data) {
   });
 }
 
+$json_status = TRUE;
 require_once dirname(__FILE__) . '/json.inc';
+if ($json_status !== TRUE) {
+  echo Color::wrap('red', $json_status->getMessage());
+  exit(1);
+}
+exit(0);
 

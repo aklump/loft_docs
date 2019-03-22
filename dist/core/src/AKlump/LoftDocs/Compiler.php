@@ -317,6 +317,7 @@ class Compiler {
     $ids = $this->getSectionsById();
     foreach (array_keys($ids) as $id) {
       $contents = preg_replace_callback('/"@(' . preg_quote($id) . ')(?:\:([^\s]+))?"/', function ($matches) use ($ids, $extension) {
+        $matches += [NULL, NULL, NULL];
         if (($section = $ids[$matches[1]])) {
           return '"' . rtrim($section['file'] . '.' . $extension . '#' . $matches[2], '#') . '"';
         }
