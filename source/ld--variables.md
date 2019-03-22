@@ -12,9 +12,9 @@ In a PHP pre hook file do something like:
 
 1. Create a file _source/_variables.json_ with something like this:
 
-    {
-        "author": "Aaron Klump"
-    }
+        {
+            "author": "Aaron Klump"
+        }
 
 ## Using Variables
 

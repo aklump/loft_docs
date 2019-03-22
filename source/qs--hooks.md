@@ -1,4 +1,5 @@
 ---
+id: hooks
 title: Hooks
 tags: extending pluggable
 ---

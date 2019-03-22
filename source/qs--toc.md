@@ -43,7 +43,7 @@ It's often nice to subdivide your documentation into chapters and this is very e
 
 ## Skipping Index of Some Files
 
-To cause the automated indexing to skip over a page, either make that page a partial, e.g. _\_fragment.md_, or set the `noindex` frontmatter on the file.  See the frontmatter section for more info.
+To cause the automated indexing to skip over a page, either make that page a partial, e.g. _\_fragment.md_, or set the `noindex` frontmatter on the file.  See [the frontmatter section](@frontmatter) for more info.
 
 ## _help.ini_
 

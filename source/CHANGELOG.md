@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11
+
+* Changed the output width from 1024px to 800px.  To go back you need to [custom theme](@theming) your docs.
+
 ## 0.10
 
 * Reduced default polling for watch.php from 20 to 2.

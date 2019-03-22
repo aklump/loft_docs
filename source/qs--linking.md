@@ -1,3 +1,6 @@
+---
+id: linking
+---
 # Linking to Other Pages
 
 Because filenames may change, as you move files around to different chapters, or simply re-organize, you do not want to write your internal links to other pages based on filename.  Instead you will use the convention descriped here to link from page A to page B, or to a subsection of page B.
@@ -55,7 +58,7 @@ page two: _ex--bravo.md_
     
 ### Using RAW Html
 
-If you are going to write plain HTML, you write your headers using an `id` attribute like vanilla HTML, but your anchor tag `href` must use the same format as per Markdown.
+If you are going to write plain HTML, you write your headers using an `id` attribute like vanilla HTML, but your link tag `href` must use the same format as per Markdown.
 
 page one: _ex--alpha.md_
 
