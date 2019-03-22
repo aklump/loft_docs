@@ -28,6 +28,12 @@
             "id": "qs--toc"
         },
         {
+            "id": "qs--frontmatter"
+        },
+        {
+            "id": "qs--linking"
+        },
+        {
             "id": "qs--search"
         },
         {
@@ -35,9 +41,6 @@
         },
         {
             "id": "qs--hooks"
-        },
-        {
-            "id": "qs--frontmatter"
         },
         {
             "id": "qs--version"

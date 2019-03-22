@@ -56,6 +56,7 @@ foreach ($first_level as $data) {
 
   //
   // 1. Frontmatter
+  $meta['id'] = $g->get($front_matter, 'id');
   $meta['chapter'] = $g->get($front_matter, 'chapter');
   $meta['section'] = $g->get($front_matter, 'section');
   $meta['title'] = $g->get($front_matter, 'title');
@@ -86,6 +87,7 @@ foreach ($first_level as $data) {
   if (Compiler::pathIsSection($file)) {
     $info[$data['filename_compiled']] = array(
       'file' => $data['filename_compiled'],
+      'id' => $g->get($meta, 'id'),
       'title' => $g->get($meta, 'title'),
       'content_title' => $g->get($meta, 'content_title'),
       'parent' => $g->get($meta, 'chapter'),

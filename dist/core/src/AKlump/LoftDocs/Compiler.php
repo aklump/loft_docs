@@ -266,4 +266,69 @@ class Compiler {
     return $variables;
   }
 
+  /**
+   * Return data for all sections.
+   *
+   * @return array
+   *   An array of section data, keyed by id.
+   */
+  public function getSectionsById() {
+    $ids = [];
+    $outline = $this->pathToOutline->load()->getJson(TRUE);
+    if (empty($outline['sections'])) {
+      return $ids;
+    }
+
+    return array_combine(array_map(function ($section) {
+      return $section['id'];
+    }, $outline['sections']), $outline['sections']);
+  }
+
+  /**
+   * Replace links to other pages on the site with actual filenames.
+   *
+   * This should run on HTML markup.
+   *
+   * Internal links--what this looks for--look like this (quotes included).
+   *
+   *    "@page2:part4"
+   *
+   * ...where "page2" is a page id and "part4" is the id of an html header.  It
+   * will get replaced with something like...
+   *
+   *    "page-two-filename.html#part4"
+   *
+   * The counterpart, or target to the above link would look like this, on a
+   * page with an id of "page2".  The following:
+   *
+   *    <h3>:part4
+   *
+   * ... gets replaced with:
+   *
+   *    <h3 id="part4">
+   *
+   * @param string $contents
+   *   The HTML file contents.
+   *
+   * @return string
+   *   The HTML file contents with actual links to filenames.
+   */
+  public function processInternalLinks($contents, $extension = 'html') {
+    $ids = $this->getSectionsById();
+    foreach (array_keys($ids) as $id) {
+      $contents = preg_replace_callback('/"@(' . preg_quote($id) . ')(?:\:([^\s]+))?"/', function ($matches) use ($ids, $extension) {
+        if (($section = $ids[$matches[1]])) {
+          return '"' . rtrim($section['file'] . '.' . $extension . '#' . $matches[2], '#') . '"';
+        }
+      }, $contents);
+
+      // Replace the section header ids.
+      $regex = '/<(h\d)(.*)>\:([^\s]+)\s*/i';
+      $replacement = '<$1$2 id="$3">';
+      $contents = preg_replace($regex, $replacement, $contents);
+    }
+
+    return $contents;
+  }
+
 }

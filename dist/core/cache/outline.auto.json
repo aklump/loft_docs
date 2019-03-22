@@ -55,6 +55,20 @@
             "chapter": "qs"
         },
         {
+            "id": "qs--frontmatter",
+            "title": "Frontmatter and How to Use",
+            "content_title": "Frontmatter and How to Use",
+            "file": "qs--frontmatter",
+            "chapter": "qs"
+        },
+        {
+            "id": "qs--linking",
+            "title": "Linking to Other Pages",
+            "content_title": "Linking to Other Pages",
+            "file": "qs--linking",
+            "chapter": "qs"
+        },
+        {
             "id": "qs--search",
             "title": "Integrating search",
             "content_title": "Search",
@@ -73,13 +87,6 @@
             "title": "Hooks",
             "content_title": "Pre\/Post hooks",
             "file": "qs--hooks",
-            "chapter": "qs"
-        },
-        {
-            "id": "qs--frontmatter",
-            "title": "Frontmatter and How to Use",
-            "content_title": "Frontmatter and How to Use",
-            "file": "qs--frontmatter",
             "chapter": "qs"
         },
         {
@@ -142,6 +149,20 @@
             "title": "Demo: Include Files",
             "content_title": "Demo: Include Files",
             "file": "demos--includes",
+            "chapter": "demos"
+        },
+        {
+            "id": "link_to_demo",
+            "title": "Demo: Link Destination Page",
+            "content_title": "Demo: Link Destination Page",
+            "file": "demos--linkto",
+            "chapter": "demos"
+        },
+        {
+            "id": "link_from_demo",
+            "title": "Demo: Link to Other Pages",
+            "content_title": "Demo: Link to Other Pages",
+            "file": "demos--linkfrom",
             "chapter": "demos"
         },
         {
