@@ -773,16 +773,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.38.3",
+            "version": "v1.38.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "5df0ef0ca2d08a6f087384c7f31530fb84889f28"
+                "reference": "7732e9e7017d751313811bd118de61302e9c8b35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/5df0ef0ca2d08a6f087384c7f31530fb84889f28",
-                "reference": "5df0ef0ca2d08a6f087384c7f31530fb84889f28",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/7732e9e7017d751313811bd118de61302e9c8b35",
+                "reference": "7732e9e7017d751313811bd118de61302e9c8b35",
                 "shasum": ""
             },
             "require": {
@@ -835,7 +835,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-03-21T14:50:13+00:00"
+            "time": "2019-03-23T14:27:19+00:00"
         },
         {
             "name": "webuni/front-matter",
