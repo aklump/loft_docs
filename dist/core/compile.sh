@@ -124,6 +124,7 @@ for file in ${files[@]}; do
             markdown_result=$($docs_php "$CORE/markdown.php" "$file" "$docs_tmp_dir" "$docs_source_path" "$docs_twig_preprocess_extension" "$docs_cache_dir/source:$docs_tmp_dir:$docs_source_path" "$CORE/cache/source" "$CORE/cache/outline.auto.json" "$docs_markdown_extension")
             if [[ $? -ne 0 ]]; then
               echo $markdown_result;
+              exit 1;
             fi
         else
             cp_result=$($docs_php "$CORE/includes/cp_no_frontmatter.php" "$file" "$docs_tmp_dir/$filename.html" "$docs_source_path" "$CORE/cache/source" "$CORE/cache/outline.auto.json")

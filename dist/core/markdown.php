@@ -89,7 +89,9 @@ try {
   $my_html = $compiler->processInternalLinks($my_html);
 
   file_put_contents($out_file, $my_html);
+  exit(0);
 }
 catch (\Exception $exception) {
   echo Color::wrap('red', 'In section: ' . $path_info['filename'] . ': ' . $exception->getMessage());
+  exit(1);
 }

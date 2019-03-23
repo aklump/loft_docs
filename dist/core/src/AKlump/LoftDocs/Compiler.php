@@ -315,11 +315,15 @@ class Compiler {
    */
   public function processInternalLinks($contents, $extension = 'html') {
     $ids = $this->getSectionsById();
+
     foreach (array_keys($ids) as $id) {
       $contents = preg_replace_callback('/"@(' . preg_quote($id) . ')(?:\:([^\s]+))?"/', function ($matches) use ($ids, $extension) {
         $matches += [NULL, NULL, NULL];
         if (($section = $ids[$matches[1]])) {
           return '"' . rtrim($section['file'] . '.' . $extension . '#' . $matches[2], '#') . '"';
+        }
+        else {
+          throw new \RuntimeException("Invalid iternal link: \"$matches[1]\".");
         }
       }, $contents);
 
@@ -327,6 +331,14 @@ class Compiler {
       $regex = '/<(h\d)(.*)>\:([^\s]+)\s*/i';
       $replacement = '<$1$2 id="$3">';
       $contents = preg_replace($regex, $replacement, $contents);
+    }
+
+    // Check for unhandled links and throw an exception.
+    preg_match_all('/"@([^\s]+)(?:\:([^\s]+))?"/', $contents, $matches, PREG_SET_ORDER);
+    if (count($matches)) {
+      throw new \RuntimeException("Invalid link id(s): " . implode(', ', array_map(function ($found) {
+          return $found[1];
+        }, $matches)));
     }
 
     return $contents;
