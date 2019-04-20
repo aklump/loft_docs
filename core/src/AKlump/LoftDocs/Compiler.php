@@ -197,7 +197,7 @@ class Compiler {
   /**
    * Detect if a filename points to a markdown file.
    *
-   * @param  string $path
+   * @param string $path
    *
    * @return bool
    */
@@ -342,6 +342,17 @@ class Compiler {
     }
 
     return $contents;
+  }
+
+  /**
+   * Return all files in a directory.
+   *
+   * @param $path_to_directory
+   *
+   * @return \AKlump\LoftLib\Component\Storage\FilePath|\AKlump\LoftLib\Component\Storage\FilePathCollection|null
+   */
+  public function getFilesInDirectory($path_to_directory, $filename_match_regex = NULL) {
+    return FilePath::create($path_to_directory)->children($filename_match_regex);
   }
 
 }
