@@ -6,7 +6,7 @@ use AKlump\Data\Data;
 use AKlump\LoftLib\Storage\FilePath;
 
 /**
- * Provide compiling functionality
+ * Provide compiling functionality.
  */
 class Compiler {
 
@@ -52,7 +52,6 @@ class Compiler {
    *   The basename of the source file.
    * @param string $contents
    *   The file contents.
-   *    *
    *
    * @return \AKlump\LoftLib\Storage\FilePath
    *   The source file
@@ -352,7 +351,84 @@ class Compiler {
    * @return \AKlump\LoftLib\Component\Storage\FilePath|\AKlump\LoftLib\Component\Storage\FilePathCollection|null
    */
   public function getFilesInDirectory($path_to_directory, $filename_match_regex = NULL) {
-    return FilePath::create($path_to_directory)->children($filename_match_regex);
+    return FilePath::create($path_to_directory)
+      ->children($filename_match_regex);
+  }
+
+
+  /**
+   * Create markdown from a PHP file.
+   *
+   * This should be used when you want to add PHP code to your documentation.
+   * Write the php code as a real PHP file and then use this method to pull
+   * that file into the documentation build.  This allows certain meta-comments
+   * that allows you to add a page title, markdown, break your code block into
+   * sections, etc.  Read on for more info.
+   *
+   * The following comments take on special meaning when parsed by this method,
+   * sprinkle these in your PHP file and the generated markdown can be spruced
+   * up and made easier to read.  Experiment with their usage to see how they
+   * work, but they should be self-explanatory.
+   * - '// @loftDocs.title(Lorem Ipsum)' - Set the page title
+   * - '// @loftDocs.markdown(## Lorem Subtitle)' - Add markdown
+   * - '// @loftDocs.break' - Split the <pre> tag at that point.
+   *
+   * Here is code that could be the contents of a hook file showing how to
+   * generate pages from test classes:
+   *
+   * @code
+   * $example_files = $compiler->getFilesInDirectory(__DIR__ .
+   *   '/../../tests/src/', '/Test\.php$/');
+   *
+   * foreach ($example_files as $example_file) {
+   *   $markup = $compiler->createMarkdownFromPhpFile($example_file);
+   *   $compiler->addSourceFile($example_file->getFilename() . '.md', $markup);
+   * }
+   * @endcode
+   *
+   * @param \AKlump\LoftLib\Storage\FilePath $php_file
+   *   The filepath to the source php file.
+   *
+   * @return string
+   *   Contents ready to be saved using ::addSourceFile() or ::addInclude().
+   */
+  public function createMarkdownFromPhpFile(FilePath $php_file) {
+    $php = $php_file->load()->get();
+
+    // Extract the title.
+    $title = $php_file->getFilename();
+    if (preg_match('#\/\/\s*@loftDocs.title\((.+)\)#', $php, $matches)) {
+      $title = $matches[1];
+    }
+    // Extract the id.
+    $id = str_replace(' ', '_', strtolower($php_file->getFilename()));
+    if (preg_match('#\/\/\s*@loftDocs.id\((.+)\)#', $php, $matches)) {
+      $id = $matches[1];
+    }
+
+    // Fix the php open tag.
+    $php = str_replace('<?php', '&lt;?php', $php);
+
+    // Split code at breaks.
+    $sections = explode('// @loftDocs.break', $php);
+    $sections = array_map(function ($item) {
+      return preg_replace('#\/\/\s*@loftDocs.markdown\((.+)\)\n#', "</pre>\\1\n<pre>", $item);
+    }, $sections);
+
+    $php = '<pre>' . implode("</pre>\n---\n<pre>", array_map('trim', $sections)) . '</pre>';
+    $php = str_replace('<pre></pre>', '', $php);
+
+    // Create the page in the index.
+    $code = [];
+    $code[] = '---';
+    $code[] = 'id: ' . $id;
+    $code[] = 'title: ' . $php_file->getFilename();
+    $code[] = '---';
+    $code[] = '# ' . $title;
+    $code[] = NULL;
+    $code[] = $php;
+
+    return implode(PHP_EOL, $code);
   }
 
 }
