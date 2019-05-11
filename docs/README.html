@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Loft Docs</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--readme">
+<header>
+  <div class="pager"><a href="installation.html" class="prev installation">&laquo;How to install</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="index.html" class="next index">Index&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Loft Docs</h1>
+
+<section>
+
+<p><img src="images/loft-docs.jpg" alt="Loft Docs" /></p>
+
+<h2>Summary</h2>
+
+<p>Write your documentation in <a href="http://daringfireball.net/projects/markdown/">markdown</a>.  Loft Docs will compile it for you in various formats.  Manage all your documentation needs using a single API.  Easily extended for advanced output scenarios.</p>
+
+<p><strong>Visit <a href="https://aklump.github.io/loft_docs">https://aklump.github.io/loft_docs</a> for full documentation.</strong></p>
+
+<h2>Features</h2>
+
+<ul>
+<li>Support for Advanced Markdown.</li>
+<li>Text search.</li>
+<li>Generate complete web sites.</li>
+<li>Generate <a href="https://www.drupal.org/project/advanced_help">Advanced Help for Drupal</a> files.</li>
+<li>Fully themable using Twig.</li>
+<li>Hook into compilation to provide dynamic content such as class method cheatsheets.</li>
+<li>Tasklist aggregation.</li>
+</ul>
+
+<h2>Quick Start</h2>
+
+<h2>Requirements</h2>
+
+<ul>
+<li>In order to use the text format you must have <a href="http://lynx.isc.org/">Lynx</a> installed.</li>
+</ul>
+
+<h2>Contributing</h2>
+
+<p>If you find this project useful... please consider <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=4E5KZHDQCEUV8&amp;item_name=Gratitude%20for%20aklump%2Floft_docs">making a donation</a>.</p>
+
+<h2>Installation</h2>
+
+<ol>
+<li>lorem</li>
+<li>ipsum</li>
+</ol>
+
+<h2>Usage</h2>
+
+<ol>
+<li>Create pages in <em>source/</em> as markdown files.</li>
+<li>Add images to <em>source/images/</em>.</li>
+<li>Compile your documention.</li>
+<li>Read your documentation at <em>docs/index.html</em>.</li>
+</ol>
+
+<h2>Updating Core</h2>
+
+<p>Loft Docs provides a core update feature as seen below.  From the root directory type:</p>
+
+<pre><code>./core/update
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="installation.html" class="prev installation">&laquo;How to install</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="index.html" class="next index">Index&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.11.1 &bull; Last Updated: Sat, 20 Apr 2019 21:23:04 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

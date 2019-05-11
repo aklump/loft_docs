@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Partials (Include Files)</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--qs--partials">
+<header>
+  <div class="pager"><a href="qs--search.html" class="prev qs--search">&laquo;Integrating search</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="qs--hooks.html" class="next hooks">Hooks&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+                        <a href="qs--intro.html">Quick Start</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Partials (Include Files)</h1>
+
+<section>
+
+<ul>
+<li>Files in <em>source</em>, which begin with an underscore are considered partials and will be ignored during render, e.g., <em>&#95;table.md</em></li>
+<li>Include such files using the twig syntax, <code>{% include('_table.md') %}</code></li>
+<li>Name these parent files ending with <code>.twig.md</code> so the Twig processor runs on them.</li>
+</ul>
+
+<h2>An Example</h2>
+
+<blockquote>
+  <p><strong>Goal:</strong> To create a file that defines a table and include that table in two different pages.</p>
+</blockquote>
+
+<p>Your <em>source</em> directory will resemble the following:</p>
+
+<pre><code>.
+├── _table.md
+├── page.twig.md
+└── page2.twig.md
+</code></pre>
+
+<p>The contents of <em>&#95;table.md</em>:</p>
+
+<pre><code>| Key | Value |
+|----------|----------|
+| Size | large  |
+| Shape | square |
+</code></pre>
+
+<p>The contents of <em>page.twig.md</em>:</p>
+
+<pre><code># Page One
+
+Here is the table:
+
+{% include('_table.md') %}
+</code></pre>
+
+<p>The contents of <em>page2.twig.md</em>:</p>
+
+<pre><code># Page Two
+
+And again a reference to the table:
+
+{% include('_table.md') %}    
+</code></pre>
+
+<h2>Creating Partials During Compile</h2>
+
+<p>Using a PHP hook file, you can generate dynamic partials during compile.  These can be referenced in your static source files just like other partials.  Here's an example of code for a hook file that generates a dynamic partial called <em>&#95;headline.md</em>.  Dynamic files are automatically cleaned up by the compiler.</p>
+
+<pre><code>&lt;?php
+$contents = "## Today is: " . date('r');
+echo $compiler-&gt;addInclude('_headline.md', $contents)
+    -&gt;getBasename() . ' has been created.' &amp;&amp; exit(0);
+exit(1);
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="qs--search.html" class="prev qs--search">&laquo;Integrating search</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="qs--hooks.html" class="next hooks">Hooks&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.11.1 &bull; Last Updated: Sat, 20 Apr 2019 21:23:14 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

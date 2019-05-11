@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Compiling</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--qs--compiling">
+<header>
+  <div class="pager"><a href="qs--terms.html" class="prev qs--terms">&laquo;Terms Used</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="qs--toc.html" class="next qs--toc">Table of Contents&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+                        <a href="qs--intro.html">Quick Start</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Compiling</h1>
+
+<section>
+
+<p>After a round of changes to the files found in <code>/source</code>, you will need to export or <em>compile</em> your documentation.</p>
+
+<h2>How to compile</h2>
+
+<p>Each time you want to update your documentation files, after modifying files in <code>source</code> you need to execute <code>compile</code> from bash, make sure you are in the root directory of this package.</p>
+
+<pre><code>./core/compile
+</code></pre>
+
+<h2>Folders and Other Includes</h2>
+
+<p>By default folders in the <code>source</code> file are copied to the compiled output directories.  In some cases you will want greater control and/or you will not want to mess up <code>source</code> with boilerplate folders.  For this reason there is a means to include files/folders in the compiled output by creating a second directory, which is merged into to your final build.  Place your boilerplate content there.</p>
+
+<p>For example to include a js directory in the website output you would create that folder as <code>compile/public_html/js</code>.</p>
+
+<pre><code>source/
+    about.md
+compile/
+    public_html/
+        js/
+            app.js
+            extra.js
+</code></pre>
+
+<p>If you've reconfigured the folder name for the website directory, make sure to match the folder structure to the reconfigured name.</p>
+
+<h2>Removing Compiled Files</h2>
+
+<p>You may delete all compiled files using the <em>clean</em> command.</p>
+
+<pre><code>./core/clean
+</code></pre>
+
+<h2>Auto-Compiling / File Watching</h2>
+
+<p>To watch your source directory for file changes and compile automatically as you work, you can use:</p>
+
+<pre><code>./core/watch
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="qs--terms.html" class="prev qs--terms">&laquo;Terms Used</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="qs--toc.html" class="next qs--toc">Table of Contents&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.11.1 &bull; Last Updated: Sat, 20 Apr 2019 21:23:12 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

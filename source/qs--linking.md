@@ -10,25 +10,25 @@ Because filenames may change, as you move files around to different chapters, or
 Study these page snippets below to see how cross-page linking is accomplished.  Notice the following points:
 
 1. The `id` of the page is declared in it's frontmatter, this is the constant that will be used in your links.  This should never change once established.  This is what allows the filenames to be fluid and not break your internal linking.
-1. In the link path you will reference your target by it's id, e.g. `@first`, `@second`, etc.  Notice the `@` symbol as id prefix.
+1. In the link path you will reference your target by it's id, e.g. `@link_from_demo`, `@link_to_demo`, etc.  Notice the `@` symbol as id prefix.
 
 page one: _ex--alpha.md_
 
     ---
-    id: first
+    id: link_from_demo
     ---
     # The First Page
     
-    Do you want to [view the next page](@second)
+    Do you want to [view the next page](@link_to_demo)
     
 page two: _ex--branvo.md_
 
     ---
-    id: second
+    id: link_to_demo
     ---
     # The Second Page
     
-    Go back to [the first page](@first)    
+    Go back to [the first page](@link_from_demo)    
 
 ## Link to Another Page Section
 
@@ -39,20 +39,20 @@ This is how you link to a section header on another page.
 page one: _ex--alpha.md_
 
     ---
-    id: first
+    id: link_from_demo
     ---
     # The First Page
     
-    Do you want to [read some extra info?](@second:extra)
+    Do you want to [read some extra info?](@link_to_demo:extra)
     
 page two: _ex--bravo.md_
 
     ---
-    id: second
+    id: link_to_demo
     ---
     # The Second Page
     
-    Go back to [the first page](@first)
+    Go back to [the first page](@link_from_demo)
     
     ##:extra Some Extra Information
     
@@ -63,19 +63,19 @@ If you are going to write plain HTML, you write your headers using an `id` attri
 page one: _ex--alpha.md_
 
     ---
-    id: first
+    id: link_from_demo
     ---
     # The First Page
     
-    Do you want to  <a href="@second:extra">read some extra info?</a>
+    Do you want to  <a href="@link_to_demo:extra">read some extra info?</a>
     
 page two: _ex--branvo.md_
 
     ---
-    id: second
+    id: link_to_demo
     ---
     # The Second Page
     
-    Go back to <a href="@first">the first page</a>
+    Go back to <a href="@link_from_demo">the first page</a>
     
     <h2 id="extra">Some Extra Information

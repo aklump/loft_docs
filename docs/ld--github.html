@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Integration with GitHub</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--ld--github">
+<header>
+  <div class="pager"><a href="ld--drupal.html" class="prev ld--drupal">&laquo;Drupal Integration</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="ld--todos.html" class="next ld--todos">Tasklist (Todo Items)&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+                        <a href="ld--cheatsheet.html">Advanced Usage</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Integration with GitHub</h1>
+
+<section>
+
+<p>GitHub allows for documentation loaded from <em>docs</em> in your repo root.  Here's a strategy for using loft_docs with a github repository.</p>
+
+<h2>File Structure</h2>
+
+<pre><code>    .
+    ├── docs
+    │   ├── how-to.html
+    │   └── index.html
+    └── documentation
+        ├── core
+        ├── core-config.sh
+        └── source
+            └── how-to.md
+</code></pre>
+
+<ol>
+<li>Install Loft Docs in your repo in <em>documentation/core</em>.</li>
+<li><p>Setup <em>core-config.sh</em> to compile <code>website</code> to <em>docs</em>.</p>
+
+<pre><code>website_dir = '../docs'
+</code></pre></li>
+<li><p>Ensure that <em>docs/index.html</em> is created on compile.</p></li>
+</ol>
+
+<h2>Setup on github.com</h2>
+
+<ol>
+<li>Load your repository page in the browser.</li>
+<li>Click the <em>Settings</em> link.</li>
+<li>Scroll down to <em>GitHub Pages</em>.</li>
+<li>Set source to <em>master branch /docs folder</em> and click <em>Save</em>.</li>
+<li>Copy the publish url, e.g. https://aklump.github.io/visual_sitemap/</li>
+<li>Return to the repo page.</li>
+<li>Click the edit button.</li>
+<li>Paste the copied URL into <em>Website</em> and click <em>Save</em>.</li>
+<li>Visit the link and ensure the docs appear as expected.</li>
+<li><p>Add something like the following to your README.md file, near the top.</p>
+
+<pre><code>**Visit &lt;https://aklump.github.io/visual_sitemap&gt; for full documentation.**
+</code></pre></li>
+</ol>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="ld--drupal.html" class="prev ld--drupal">&laquo;Drupal Integration</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="ld--todos.html" class="next ld--todos">Tasklist (Todo Items)&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.11.1 &bull; Last Updated: Sat, 20 Apr 2019 21:23:11 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>CHANGELOG</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--changelog">
+<header>
+  <div class="pager"><a href="demos--no-title.html" class="prev demos--no-title">&laquo;Demos  No Title</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="installation.html" class="next installation">How to install&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Changelog</h1>
+
+<section>
+
+<h2>0.11</h2>
+
+<ul>
+<li>Added <a href="qs--linking.html">internal linking</a>.</li>
+<li>Changed the output width from 1024px to 800px.  To go back you need to <a href="ld--theming.html">custom theme</a> your docs.</li>
+</ul>
+
+<h2>0.10</h2>
+
+<ul>
+<li>Reduced default polling for watch.php from 20 to 2.</li>
+<li>Removed the <code>sort</code> key from the json outlines.</li>
+<li>Added support for includes for files ending in <em>.twig.md</em>.</li>
+<li>Todos are only compiled if you enable them in <em>outline.merge.json</em>.</li>
+<li>Todos are now present as an include file, not as a page.  Therefore you must both enable aggregation and use an include expression in a file.  See documentation for more info.</li>
+</ul>
+
+<h2>0.9.10</h2>
+
+<ul>
+<li>POSSIBLE BREAKING CHANGE: Added <code>Deny from All</code> to the <code>.htaccess</code> for public_html pattern.  If this breaks your compile, use a post compile hook to overwrite the default <code>.htaccess</code> file; see <code>hooks/htaccess.sh</code> for an example of how to do this.  Be sure to register the hook file in <code>core-config.sh</code> in the <code>post_hooks</code> section, or it won't be called.</li>
+</ul>
+
+<h2>0.9</h2>
+
+<ul>
+<li>Removed support for kit templates. Now using Twig templates.</li>
+<li>Lost iframe support; plans to bring it back in future.</li>
+</ul>
+
+<h2>0.8.18</h2>
+
+<ul>
+<li>Removed all traces of doxygene due to no plans for implementation.</li>
+</ul>
+
+<h2>0.8.10</h2>
+
+<ul>
+<li>API CHANGE: <code>auto-generated.outline.json</code> is now called <code>outline.auto.json</code></li>
+</ul>
+
+<h2>0.8</h2>
+
+<ul>
+<li>BREAKING CHANGE: The paths in the config var <em>README</em> are now relative to the directory that contains <code>core-config.sh</code>, not the <code>source</code> folder.</li>
+</ul>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="demos--no-title.html" class="prev demos--no-title">&laquo;Demos  No Title</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="installation.html" class="next installation">How to install&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.11.1 &bull; Last Updated: Sat, 20 Apr 2019 21:23:04 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+
