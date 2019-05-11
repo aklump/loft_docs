@@ -6,7 +6,7 @@ use AKlump\Data\Data;
 use AKlump\LoftLib\Storage\FilePath;
 
 /**
- * Provide compiling functionality
+ * Provide compiling functionality.
  */
 class Compiler {
 
@@ -52,7 +52,6 @@ class Compiler {
    *   The basename of the source file.
    * @param string $contents
    *   The file contents.
-   *    *
    *
    * @return \AKlump\LoftLib\Storage\FilePath
    *   The source file
@@ -197,7 +196,7 @@ class Compiler {
   /**
    * Detect if a filename points to a markdown file.
    *
-   * @param  string $path
+   * @param string $path
    *
    * @return bool
    */
@@ -342,6 +341,100 @@ class Compiler {
     }
 
     return $contents;
+  }
+
+  /**
+   * Return all files in a directory.
+   *
+   * @param $path_to_directory
+   *
+   * @return \AKlump\LoftLib\Component\Storage\FilePath|\AKlump\LoftLib\Component\Storage\FilePathCollection|null
+   */
+  public function getFilesInDirectory($path_to_directory, $filename_match_regex = NULL) {
+    return FilePath::create($path_to_directory)
+      ->children($filename_match_regex);
+  }
+
+  /**
+   * Create markdown from source code.
+   *
+   * This should be used when you want to add source code to your
+   * documentation.  Write the code as a native file and then use this method
+   * to pull that file into the documentation build.  This allows certain
+   * meta-comments that allows you to add a page title, markdown, break your
+   * code block into sections, etc.  Read on for more info.
+   *
+   * The following comments take on special meaning when parsed by this method,
+   * sprinkle these in your source code file and the generated markdown can be
+   * spruced up and made easier to read.  Experiment with their usage to see
+   * how they work, but they should be self-explanatory.
+   * - '// @loftDocs.title(Lorem Ipsum)' - Set the page title
+   * - '// @loftDocs.markdown(## Lorem Subtitle)' - Add markdown
+   * - '// @loftDocs.break' - Split the <pre> tag at that point.
+   *
+   * Here is code that could be the contents of a hook file showing how to
+   * generate pages from test classes:
+   *
+   * @code
+   * $example_files = $compiler->getFilesInDirectory(__DIR__ .
+   *   '/../../tests/src/', '/Test\.php$/');
+   *
+   * foreach ($example_files as $example_file) {
+   *   $markup = $compiler->createMarkdownFromSourceCodeFile($example_file);
+   *   $compiler->addSourceFile($example_file->getFilename() . '.md', $markup);
+   * }
+   * @endcode
+   *
+   * @param \AKlump\LoftLib\Storage\FilePath $code_file
+   *   The filepath to the source code.
+   * @param bool $with_header
+   *   True, the frontmatter and page title will be prepended to the source
+   *   code.  Set this to false to omit this.
+   *
+   * @return string
+   *   Contents ready to be saved using ::addSourceFile() or ::addInclude().
+   */
+  public function createMarkdownFromSourceCodeFile(FilePath $code_file, $with_header = TRUE) {
+    $code = $code_file->load()->get();
+
+    // Extract the title.
+    $title = $code_file->getFilename();
+    if (preg_match('#\/\/\s*@loftDocs.title\((.+)\)\s*#', $code, $matches)) {
+      $title = trim($matches[1]);
+      $code = str_replace($matches[0], '', $code);
+    }
+    // Extract the id.
+    $id = str_replace(' ', '_', strtolower($code_file->getFilename()));
+    if (preg_match('#\/\/\s*@loftDocs.id\((.+)\)#', $code, $matches)) {
+      $id = $matches[1];
+      $code = str_replace($matches[0], '', $code);
+    }
+
+    // Fix the php open tag.
+    $code = str_replace('<?php', '&lt;?php', $code);
+
+    // Split code at breaks.
+    $sections = explode('// @loftDocs.break', $code);
+    $sections = array_map(function ($item) {
+      return preg_replace('#\n*\/\/\s*@loftDocs.markdown\((.+)\)\n+#', "</pre>\n\\1\n<pre>", $item);
+    }, $sections);
+
+    $code = '<pre>' . implode("</pre>\n---\n<pre>", array_map('trim', $sections)) . '</pre>';
+    $code = str_replace('<pre></pre>', '', $code);
+
+    // Create the page in the index.
+    $lines = [];
+    if ($with_header) {
+      $lines[] = '---';
+      $lines[] = 'id: ' . $id;
+      $lines[] = 'title: ' . $title;
+      $lines[] = '---';
+      $lines[] = '# ' . $title;
+      $lines[] = NULL;
+    }
+    $lines[] = $code;
+
+    return implode(PHP_EOL, $lines);
   }
 
 }

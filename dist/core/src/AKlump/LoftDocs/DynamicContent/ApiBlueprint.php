@@ -101,9 +101,9 @@ class ApiBlueprint {
 
     $api_resources = [];
     $files->each(function ($item) use (&$master_content, &$api_resources) {
-      preg_match('/## Group (.+)/', $item->load()->get(), $matches);
+      preg_match('/#+ Group (.+)/', $item->load()->get(), $matches);
       $api_resources[] = [
-        'group' => trim($matches[1]),
+        'group' => isset($matches[1]) ? rim($matches[1]) : '',
         'markup' => '<!-- include(_' . $item->getBasename() . ') -->',
       ];
       $this->compiler->addInclude('_' . $item->getBasename(), $item->load()

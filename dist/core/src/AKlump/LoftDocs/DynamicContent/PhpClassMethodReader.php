@@ -48,7 +48,7 @@ class PhpClassMethodReader {
    * @param array $config
    *   The configuration settings.
    */
-  public function __construct(array $config) {
+  public function __construct(array $config = []) {
     $this->config = $config;
   }
 
@@ -64,7 +64,7 @@ class PhpClassMethodReader {
    *   - 1 An array of RegExp that will be used to match a method name.  If the
    *   method name matches and the filter is \ClassMethodReader::EXCLUDE, then
    *   that method will be thrown out.  If the filter type is
-   *   \ClassMethodReader::INCLUDE, then the method must match an expression to
+   *   \ClassMethodReader::INCLUDE, then the method must match an expression tom
    *   be included in the final results.
    * @param callable|NULL $group
    *   A callable that receives the job array and returns a string representing

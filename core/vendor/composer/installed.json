@@ -626,23 +626,23 @@
     },
     {
         "name": "symfony/finder",
-        "version": "v3.4.23",
-        "version_normalized": "3.4.23.0",
+        "version": "v3.4.27",
+        "version_normalized": "3.4.27.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/finder.git",
-            "reference": "fcdde4aa38f48190ce70d782c166f23930084f9b"
+            "reference": "61af5ce0b34b942d414fe8f1b11950d0e9a90e98"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/finder/zipball/fcdde4aa38f48190ce70d782c166f23930084f9b",
-            "reference": "fcdde4aa38f48190ce70d782c166f23930084f9b",
+            "url": "https://api.github.com/repos/symfony/finder/zipball/61af5ce0b34b942d414fe8f1b11950d0e9a90e98",
+            "reference": "61af5ce0b34b942d414fe8f1b11950d0e9a90e98",
             "shasum": ""
         },
         "require": {
             "php": "^5.5.9|>=7.0.8"
         },
-        "time": "2019-02-22T14:44:53+00:00",
+        "time": "2019-04-02T19:54:57+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -737,17 +737,17 @@
     },
     {
         "name": "symfony/yaml",
-        "version": "v3.4.23",
-        "version_normalized": "3.4.23.0",
+        "version": "v3.4.27",
+        "version_normalized": "3.4.27.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/yaml.git",
-            "reference": "57f1ce82c997f5a8701b89ef970e36bb657fd09c"
+            "reference": "212a27b731e5bfb735679d1ffaac82bd6a1dc996"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/yaml/zipball/57f1ce82c997f5a8701b89ef970e36bb657fd09c",
-            "reference": "57f1ce82c997f5a8701b89ef970e36bb657fd09c",
+            "url": "https://api.github.com/repos/symfony/yaml/zipball/212a27b731e5bfb735679d1ffaac82bd6a1dc996",
+            "reference": "212a27b731e5bfb735679d1ffaac82bd6a1dc996",
             "shasum": ""
         },
         "require": {
@@ -763,7 +763,7 @@
         "suggest": {
             "symfony/console": "For validating YAML files using the lint command"
         },
-        "time": "2019-02-23T15:06:07+00:00",
+        "time": "2019-03-25T07:48:46+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -798,17 +798,17 @@
     },
     {
         "name": "twig/twig",
-        "version": "v1.38.4",
-        "version_normalized": "1.38.4.0",
+        "version": "v1.40.1",
+        "version_normalized": "1.40.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/twigphp/Twig.git",
-            "reference": "7732e9e7017d751313811bd118de61302e9c8b35"
+            "reference": "35889516bbd6bbe46a600c2c33b03515df4a076e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twigphp/Twig/zipball/7732e9e7017d751313811bd118de61302e9c8b35",
-            "reference": "7732e9e7017d751313811bd118de61302e9c8b35",
+            "url": "https://api.github.com/repos/twigphp/Twig/zipball/35889516bbd6bbe46a600c2c33b03515df4a076e",
+            "reference": "35889516bbd6bbe46a600c2c33b03515df4a076e",
             "shasum": ""
         },
         "require": {
@@ -820,11 +820,11 @@
             "symfony/debug": "^2.7",
             "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
         },
-        "time": "2019-03-23T14:27:19+00:00",
+        "time": "2019-04-29T14:12:28+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.38-dev"
+                "dev-master": "1.40-dev"
             }
         },
         "installation-source": "dist",
