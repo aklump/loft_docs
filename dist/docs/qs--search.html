@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Integrating search</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--qs--search">
+<header>
+  <div class="pager"><a href="qs--linking.html" class="prev qs--linking">&laquo;Linking to Other Pages</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="qs--partials.html" class="next qs--partials">Partials (Include Files)&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+                        <a href="qs--intro.html">Quick Start</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Search</h1>
+
+<section>
+
+<p>To enable search you need to create a file in the source directory called <em>search--results.md</em>.  This file will be used as the stub for the search results page and can either be empty or you can add content to it.</p>
+
+<h2>How to explicitly tag content</h2>
+
+<p>If you need to add search tags to pages , use the frontmatter with the key: <em>tags</em>.  Follow these guidlines:</p>
+
+<ol>
+<li><p>Tags MUST NOT contain a space.</p>
+
+<pre><code>---
+tags: code php how-to
+---
+</code></pre></li>
+</ol>
+
+<h2>How to exclude a page from the search index</h2>
+
+<p>There are two ways.  For markdown source files, frontmatter is preferred.</p>
+
+<ol>
+<li><p>Use the frontmatter like this:</p>
+
+<pre><code>---
+search: noindex
+---
+</code></pre></li>
+</ol>
+
+<p>When that can't be used, say for an <code>.html</code> file, you can use the <code>outline.merge.json</code> file with the</p>
+
+<pre><code>{
+    "frontmatter": [
+        {
+            "master.apib.html": {
+                "search": "noindex"
+            }
+        }
+    ]
+}
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="qs--linking.html" class="prev qs--linking">&laquo;Linking to Other Pages</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="qs--partials.html" class="next qs--partials">Partials (Include Files)&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.11.2 &bull; Last Updated: Sat, 11 May 2019 12:20:38 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

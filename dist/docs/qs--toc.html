@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Table of Contents</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--qs--toc">
+<header>
+  <div class="pager"><a href="qs--compiling.html" class="prev qs--compiling">&laquo;Compiling</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="qs--frontmatter.html" class="next frontmatter">Frontmatter and How to Use&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+                        <a href="qs--intro.html">Quick Start</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Table of Contents</h1>
+
+<section>
+
+<p>The table of contents is generated automatically based on the filenames of your markdown files.  The pages are listed alphabetically based on the page titles.  To overide this automation you will use a file called <em>outline.merge.json</em> which is also placed in the <em>source</em> directory; please refer to <code>examples/outline.json</code> for the complete file schema.</p>
+
+<h2>To Change the Order</h2>
+
+<p>You can control the order of pages listed in the TOC by adding to <em>outline.merge.json</em>.  The order of items added to the <code>sections</code> key takes precedence.  All that is needed to affect order is the <code>id</code>.  In the following code snippet you see that <em>installation</em> will appear first in the index, followed by <em>changelog</em>.  The remaining files will appear in the default title ascending order.  Notice that in the second element the <code>title</code> key is also used in <em>outline.merge.json</em>.  This allows you to control the <em>index title</em> for a page, independant of the how the title is displayed when the page is viewed.</p>
+
+<pre><code>{
+    "sections": [
+        {
+            "id": "installation"
+        },
+        {
+            "id": "changelog",
+            "title": "CHANGELOG"
+        }
+    ],
+    ...
+</code></pre>
+
+<h2>Using Chapters</h2>
+
+<p>It's often nice to subdivide your documentation into chapters and this is very easy to do.  It requires two additional steps:</p>
+
+<ol>
+<li>Prepend files with a chapter <code>&lt;chapter_id&gt;--</code>, e.g. <em>qs--installation.md</em> and <em>adv--files.md</em>.</li>
+<li><p>Define the chapters in <em>outline.merge.json</em>.</p>
+
+<pre><code>{
+    "chapters": [
+        {
+            "id": "qs",
+            "title": "Quick Start"
+        },
+        {
+            "id": "adv",
+            "title": "Advanced Usage"
+        }
+    ],
+....            
+</code></pre></li>
+</ol>
+
+<h2>Skipping Index of Some Files</h2>
+
+<p>To cause the automated indexing to skip over a page, either make that page a partial, e.g. <em>&#95;fragment.md</em>, or set the <code>noindex</code> frontmatter on the file.  See <a href="qs--frontmatter.html">the frontmatter section</a> for more info.</p>
+
+<h2><em>help.ini</em></h2>
+
+<p>This is the method that stems from the <a href="https://www.drupal.org/project/advanced_help">Drupal advanced help module</a> and looks something like the following.  Using <em>outline.merge.json</em> is probably the better approach, and this will most likely be deprecated in future versions.</p>
+
+<pre><code>[_tasklist]
+title = "My Tasklist"
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="qs--compiling.html" class="prev qs--compiling">&laquo;Compiling</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="qs--frontmatter.html" class="next frontmatter">Frontmatter and How to Use&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.11.2 &bull; Last Updated: Sat, 11 May 2019 12:20:38 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+
