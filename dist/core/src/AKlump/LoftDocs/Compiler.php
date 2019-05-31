@@ -256,8 +256,9 @@ class Compiler {
    *   The twig template data.
    */
   public function getVariables() {
+    $global = $this->pathToOutline->load()->getJson(TRUE);
+    $variables = $global['variables'] ?? [];
     $files = $this->pathToDynamicSourceFiles->to('_variables.json');
-    $variables = [];
     if ($files->exists()) {
       $variables += $files->load()->getJson(TRUE);
     }
