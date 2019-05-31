@@ -396,7 +396,7 @@ function is_disabled() {
   return $in
 }
 
-# Ensure that a pattern directory exists, or copy from install.
+# Ensure that a pattern directory exists, and all install/*/* files are present.
 #
 # $1 - The final path, relative or absolute.
 # $2 - The directory inside the install directory to copy from, if needed.
@@ -409,9 +409,9 @@ function ensure_pattern_directory() {
     if [[ "${path:0:1}" != '/' ]]; then
         path="$docs_root_dir/$path"
     fi
-    [[ -e "$path" ]] || rsync -a "$CORE/install/patterns/$install_dir/" "$path"
+    mkdir -p "$path" || return 1
+    rsync -a "$CORE/install/patterns/$install_dir/" "$path/" || return 1
 }
-
 
 function has_option() {
   for var in "${user_cli_options[@]}"; do
