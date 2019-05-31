@@ -27,7 +27,21 @@
 
 <section>
 
-<p>To provide variables that are used in <em>.twig.md</em> files you can either provide static variables in a file <em>source/_variables.json</em>, or you can generate them in a pre hook.</p>
+<p>To provide variables that are used in <em>.twig.md</em> files you can either provide global variables in <em>source/outline.merge.json</em> as <code>variables</code>, or you can generate them in a pre hook.</p>
+
+<h2>Global Static Variables</h2>
+
+<ol>
+<li><p>Add something like the following to  <em>source/outline.merge.json</em>:</p>
+
+<pre><code>{
+    "variables": {
+        "website_url": "https://www.my-website.com",
+        "author": "Aaron Klump"
+    }
+}
+</code></pre></li>
+</ol>
 
 <h2>Dynamic During Compile</h2>
 
@@ -36,22 +50,11 @@
 <pre><code>$compiler-&gt;addVariables(['key' =&gt; 'value']);
 </code></pre>
 
-<h2>Static File</h2>
+<h2>Printing Variable Values</h2>
 
 <ol>
-<li><p>Create a file <em>source/_variables.json</em> with something like this:</p>
-
-<pre><code>{
-    "author": "Aaron Klump"
-}
-</code></pre></li>
-</ol>
-
-<h2>Using Variables</h2>
-
-<ol>
-<li>Name the page where you want to use the variables with the suffix <em>.twig.md</em>.</li>
-<li>Use Twig replacement, e.g. <code>{{ author }}</code>.</li>
+<li>Enable Twig rendering on the page where you want to use the variables by adding the file suffix <em>.twig.md</em>.</li>
+<li>Use Twig replacement syntax, e.g. <code>{{ author }}</code>.</li>
 </ol>
 </section>
 
@@ -62,7 +65,7 @@
 <footer>
   <div class="pager"><a href="ld--iframes.html" class="prev ld--iframes">&laquo;Using iFrames</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="demos--example.html" class="next demos--example">Demo: An Example Page &amp; Image&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.11.4 &bull; Last Updated: Thu, 30 May 2019 17:33:47 -0700</p>
+    <p class="legaleeze center">Version: 0.11.5 &bull; Last Updated: Thu, 30 May 2019 17:50:55 -0700</p>
   </div>
 </footer>
 
