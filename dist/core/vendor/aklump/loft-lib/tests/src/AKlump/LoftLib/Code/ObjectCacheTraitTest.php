@@ -2,7 +2,9 @@
 
 namespace AKlump\LoftLib\Code;
 
-class ObjectCacheTraitTest extends \PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class ObjectCacheTraitTest extends TestCase {
 
   public function testDefaultValueIsReturned() {
     $this->assertSame('lie', $this->obj->setValue('false', 'news')

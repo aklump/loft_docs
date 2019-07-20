@@ -6,7 +6,9 @@
 
 namespace AKlump\LoftLib\Code;
 
-class GrammarTest extends \PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class GrammarTest extends TestCase {
 
   /**
    * Provides data for testTitleCaseWorksOnRealWorldExamples.

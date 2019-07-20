@@ -9,21 +9,19 @@
 
 <body class="page--filepath">
 <header>
-  <div class="pager">
-  <a href="index.html" class="prev index">&laquo;Index</a>
-  <a href="index.html" class="index">Index</a>
-  <a href="README.html" class="next README">In the Loft Studios Library&raquo;</a>
-</div>
-</header>
-
-  <div class="search__wrapper">
+  <div class="pager"><a href="dataset.html" class="prev dataset">&laquo;Dataset</a><a href="index.html" class="index pager__book-title"></a><a href="README.html" class="next readme">In the Loft Studios Library&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+      </div>      <div class="search__wrapper">
   <form action="search--results.html">
     <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
   </form>
 </div>
+  </section>
 
-  <h1>FilePath: A Better Way to Work With Files and Folders</h1>
-  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<h1>FilePath: A Better Way to Work With Files and Folders</h1>
 
 <section>
 
@@ -232,14 +230,9 @@ $file_to_duplicate-&gt;to('clone.md')-&gt;copy('original.md');
 </div>
 
 <footer>
-  <div class="pager">
-  <a href="index.html" class="prev index">&laquo;Index</a>
-  <a href="index.html" class="index">Index</a>
-  <a href="README.html" class="next README">In the Loft Studios Library&raquo;</a>
-</div>
-  
+  <div class="pager"><a href="dataset.html" class="prev dataset">&laquo;Dataset</a><a href="index.html" class="index pager__book-title"></a><a href="README.html" class="next readme">In the Loft Studios Library&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 1.0 &bull; Last Updated: Fri, 22 Feb 2019 18:15:59 -0800</p>
+    <p class="legaleeze center">Version: 1.0.25 &bull; Last Updated: Wed, 19 Jun 2019 11:02:06 -0700</p>
   </div>
 </footer>
 
@@ -248,9 +241,9 @@ $file_to_duplicate-&gt;to('clone.md')-&gt;copy('original.md');
   <script src="search/tipuesearch_set.js"></script>
   <script src="search/tipuesearch.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#tipue_search_input').tipuesearch();
-    });
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
   </script>
 <script src="js/core.js"></script>
 </body>

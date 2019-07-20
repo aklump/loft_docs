@@ -104,6 +104,7 @@ class DatasetBravoTest extends DatasetTestBase {
    */
   public function DataForTestInvalidFormatShowsProblemsProvider() {
     $tests = array();
+    $tests[] = [NULL, NULL];
 
     return $tests;
   }

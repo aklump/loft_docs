@@ -2,10 +2,30 @@
 
 namespace AKlump\LoftLib\Code;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Test the class Arrays.
  */
-class ArraysTest extends \PHPUnit_Framework_TestCase {
+class ArraysTest extends TestCase {
+
+  public function testListImplodeWithOr() {
+    $list = ["foo", "bar", "baz"];
+    $this->assertSame('foo, bar or baz', Arrays::listImplode(', ', ' or ', $list));
+    $list = ["foo", "bar"];
+    $this->assertSame('foo or bar', Arrays::listImplode(', ', ' or ', $list));
+    $list = ["foo"];
+    $this->assertSame('foo', Arrays::listImplode(', ', ' or ', $list));
+  }
+
+  public function testListImplodeWithAnd() {
+    $list = ["foo", "bar", "baz"];
+    $this->assertSame('foo, bar and baz', Arrays::listImplode(', ', ' and ', $list));
+    $list = ["foo", "bar"];
+    $this->assertSame('foo and bar', Arrays::listImplode(', ', ' and ', $list));
+    $list = ["foo"];
+    $this->assertSame('foo', Arrays::listImplode(', ', ' and ', $list));
+  }
 
   /**
    * @expectedException InvalidArgumentException

@@ -214,7 +214,7 @@ class Grammar {
     $base = array_shift($words);
     $return = static::prepVerbEnding($base) . $ending;
 
-    return trim(count($base) ? $return . ' ' . implode(' ', $words) : $return);
+    return trim(strlen($base) ? $return . ' ' . implode(' ', $words) : $return);
   }
 
   protected static function _singular($noun) {

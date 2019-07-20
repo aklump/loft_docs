@@ -9,42 +9,43 @@
 
 <body class="page--index">
 <header>
-  <div class="pager">
-  <a href="_tasklist.html" class="prev _tasklist">&laquo;Tasklist</a>
-  <a href="index.html" class="index">Index</a>
-  <a href="FilePath.html" class="next filepath">FilePath: A Better Way to Work With Files and Folders&raquo;</a>
-</div>
-</header>
-
-  <div class="search__wrapper">
+  <div class="pager"><a href="README.html" class="prev readme">&laquo;In the Loft Studios Library</a><span class="pager__book-title"></span><a href="CHANGELOG.html" class="next changelog">Changelog&raquo;</a></div></header>
+<section class="sub-header">
+        <div class="search__wrapper">
   <form action="search--results.html">
     <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
   </form>
 </div>
+  </section>
 
-  <h1>Index</h1>
 
-<section><ul class="index">
-      <li><a href="FilePath.html">FilePath: A Better Way to Work With Files and Folders</a></li>
-      <li><a href="README.html">In the Loft Studios Library</a></li>
-      <li><a href="dataset.html">Dataset</a></li>
-      <li><a href="_tasklist.html">Tasklist</a></li>
-  </ul>
-</section>
+<h1></h1>
+
+  
+    <section>
+    <ul class="index">
+              <li><a href="CHANGELOG.html">Changelog</a></li>
+              <li><a href="dataset.html">Dataset</a></li>
+              <li><a href="FilePath.html">FilePath: A Better Way to Work With Files and Folders</a></li>
+              <li><a href="README.html">In the Loft Studios Library</a></li>
+          </ul>
+  </section>
+
+
+
+
+
+
+
 
 <div class="search__results">
   <div id="tipue_search_content"></div>
 </div>
 
 <footer>
-  <div class="pager">
-  <a href="_tasklist.html" class="prev _tasklist">&laquo;Tasklist</a>
-  <a href="index.html" class="index">Index</a>
-  <a href="FilePath.html" class="next filepath">FilePath: A Better Way to Work With Files and Folders&raquo;</a>
-</div>
-  
+  <div class="pager"><a href="README.html" class="prev readme">&laquo;In the Loft Studios Library</a><span class="pager__book-title"></span><a href="CHANGELOG.html" class="next changelog">Changelog&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 1.0 &bull; Last Updated: Fri, 22 Feb 2019 18:16:00 -0800</p>
+    <p class="legaleeze center">Version: 1.0.25 &bull; Last Updated: Wed, 19 Jun 2019 11:02:07 -0700</p>
   </div>
 </footer>
 
@@ -53,9 +54,9 @@
   <script src="search/tipuesearch_set.js"></script>
   <script src="search/tipuesearch.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#tipue_search_input').tipuesearch();
-    });
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
   </script>
 <script src="js/core.js"></script>
 </body>

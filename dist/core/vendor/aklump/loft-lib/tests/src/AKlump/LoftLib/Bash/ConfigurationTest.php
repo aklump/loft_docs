@@ -2,7 +2,9 @@
 
 namespace AKlump\LoftLib\Bash;
 
-class ConfigurationTest extends \PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class ConfigurationTest extends TestCase {
 
   public function setUp() {
     $this->dependencies = ['config', '___'];

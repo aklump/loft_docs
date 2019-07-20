@@ -2,6 +2,8 @@
 
 namespace AKlump\LoftLib\Testing;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class PhpUnitTestCase
  *
@@ -36,7 +38,7 @@ namespace AKlump\LoftLib\Testing;
  *
  * @package AKlump\LoftLib\Testing
  */
-class PhpUnitTestCase extends \PHPUnit_Framework_TestCase {
+class PhpUnitTestCase extends TestCase {
 
   static $db;
 

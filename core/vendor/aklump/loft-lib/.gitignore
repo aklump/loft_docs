@@ -2,3 +2,5 @@
 /tests/code-coverage
 /tests/logs
 /tests/sandbox
+/documentation/core
+/documentation/README.md

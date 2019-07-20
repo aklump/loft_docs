@@ -31,6 +31,9 @@ class DatasetTestBase extends PhpUnitTestCase {
       $this->createObj();
       $this->assertArrayHasKey($key, $this->obj->validate()->getProblems());
     }
+    else {
+      $this->assertTrue(TRUE);
+    }
   }
 
   /**

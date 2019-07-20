@@ -2,7 +2,9 @@
 
 namespace AKlump\LoftLib\Bash;
 
-class ColorTest extends \PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class ColorTest extends TestCase {
 
   public function testStart() {
     $output = Color::start('white on blue');

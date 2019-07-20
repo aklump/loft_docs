@@ -9,21 +9,19 @@
 
 <body class="page--dataset">
 <header>
-  <div class="pager">
-  <a href="README.html" class="prev README">&laquo;In the Loft Studios Library</a>
-  <a href="index.html" class="index">Index</a>
-  <a href="_tasklist.html" class="next _tasklist">Tasklist&raquo;</a>
-</div>
-</header>
-
-  <div class="search__wrapper">
+  <div class="pager"><a href="CHANGELOG.html" class="prev CHANGELOG">&laquo;Changelog</a><a href="index.html" class="index pager__book-title"></a><a href="FilePath.html" class="next filepath">FilePath: A Better Way to Work With Files and Folders&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+      </div>      <div class="search__wrapper">
   <form action="search--results.html">
     <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
   </form>
 </div>
+  </section>
 
-  <h1>Dataset</h1>
-  <div class="breadcrumb"><a href="index.html">Index</a></div>
+
+<h1>Dataset</h1>
 
 <section>
 
@@ -209,14 +207,9 @@ class Alpha extends Dataset {
 </div>
 
 <footer>
-  <div class="pager">
-  <a href="README.html" class="prev README">&laquo;In the Loft Studios Library</a>
-  <a href="index.html" class="index">Index</a>
-  <a href="_tasklist.html" class="next _tasklist">Tasklist&raquo;</a>
-</div>
-  
+  <div class="pager"><a href="CHANGELOG.html" class="prev CHANGELOG">&laquo;Changelog</a><a href="index.html" class="index pager__book-title"></a><a href="FilePath.html" class="next filepath">FilePath: A Better Way to Work With Files and Folders&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 1.0 &bull; Last Updated: Fri, 22 Feb 2019 18:16:00 -0800</p>
+    <p class="legaleeze center">Version: 1.0.25 &bull; Last Updated: Wed, 19 Jun 2019 11:02:07 -0700</p>
   </div>
 </footer>
 
@@ -225,9 +218,9 @@ class Alpha extends Dataset {
   <script src="search/tipuesearch_set.js"></script>
   <script src="search/tipuesearch.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#tipue_search_input').tipuesearch();
-    });
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
   </script>
 <script src="js/core.js"></script>
 </body>
