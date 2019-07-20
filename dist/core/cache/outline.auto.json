@@ -288,6 +288,13 @@
             "content_title": "Using Variables",
             "file": "ld--variables",
             "chapter": "ld"
+        },
+        {
+            "id": "ld--changelogs",
+            "title": "Writing Changelogs",
+            "content_title": "Writing Changelogs",
+            "file": "ld--changelogs",
+            "chapter": "ld"
         }
     ],
     "settings": {

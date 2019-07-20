@@ -6,10 +6,15 @@
 
 namespace AKlump\LoftLib\Bash;
 
-class BashTest extends \PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class BashTest extends TestCase {
 
   public function testBashWithArgumentsWrapsWithDoubleQuotes() {
-    $result = Bash::exec('test() { echo $#; } && test', ['alpha', 'bravo charlie']);
+    $result = Bash::exec('test() { echo $#; } && test', [
+      'alpha',
+      'bravo charlie',
+    ]);
     $this->assertEquals(2, $result);
   }
 
@@ -49,10 +54,8 @@ class BashTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * Provides data for testGetters.
-   *
-   * @return
    */
-  function testGettersProvider() {
+  public function dataForTestGettersProvider() {
     $tests = array();
     $tests[] = array(
       array(
@@ -92,7 +95,7 @@ class BashTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
-   * @dataProvider testGettersProvider
+   * @dataProvider dataForTestGettersProvider
    */
   public function testGetters($controls, $subject) {
     $obj = new Bash($subject);

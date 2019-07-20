@@ -100,16 +100,16 @@
         },
         {
             "name": "aklump/loft-lib",
-            "version": "1.0.20",
+            "version": "1.0.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aklump/loft-lib.git",
-                "reference": "0a8fe496595e520ff19ec99b2e9a977a141a9834"
+                "reference": "e3d8e56fca6492af6ffa54eb97bcb02074eaee6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aklump/loft-lib/zipball/0a8fe496595e520ff19ec99b2e9a977a141a9834",
-                "reference": "0a8fe496595e520ff19ec99b2e9a977a141a9834",
+                "url": "https://api.github.com/repos/aklump/loft-lib/zipball/e3d8e56fca6492af6ffa54eb97bcb02074eaee6f",
+                "reference": "e3d8e56fca6492af6ffa54eb97bcb02074eaee6f",
                 "shasum": ""
             },
             "require": {
@@ -117,6 +117,9 @@
                 "illuminate/support": "5.4.36",
                 "php": ">=5.6",
                 "ralouphie/mimey": "~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6"
             },
             "type": "library",
             "autoload": {
@@ -135,7 +138,7 @@
                 }
             ],
             "description": "Core utilities provided by In the Loft Studios",
-            "time": "2019-02-23T02:16:04+00:00"
+            "time": "2019-06-19T18:02:23+00:00"
         },
         {
             "name": "aklump/loft_parser",
@@ -439,16 +442,16 @@
         },
         {
             "name": "matomo/ini",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/matomo-org/component-ini.git",
-                "reference": "ac25c899aefdbaca7e00a86367af24bd72aa1b4d"
+                "reference": "4cf2d9d73f884a1ce0d9a8c8a119d56f44771c80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matomo-org/component-ini/zipball/ac25c899aefdbaca7e00a86367af24bd72aa1b4d",
-                "reference": "ac25c899aefdbaca7e00a86367af24bd72aa1b4d",
+                "url": "https://api.github.com/repos/matomo-org/component-ini/zipball/4cf2d9d73f884a1ce0d9a8c8a119d56f44771c80",
+                "reference": "4cf2d9d73f884a1ce0d9a8c8a119d56f44771c80",
                 "shasum": ""
             },
             "require": {
@@ -468,7 +471,7 @@
             "license": [
                 "LGPL-3.0"
             ],
-            "time": "2018-02-14T18:57:44+00:00"
+            "time": "2019-07-03T07:42:01+00:00"
         },
         {
             "name": "michelf/php-markdown",
@@ -607,16 +610,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v3.4.28",
+            "version": "v3.4.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "fa5d962a71f2169dfe1cbae217fa5a2799859f6c"
+                "reference": "5f80266a729e30bbcc37f8bf0e62c3d5a38c8208"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/fa5d962a71f2169dfe1cbae217fa5a2799859f6c",
-                "reference": "fa5d962a71f2169dfe1cbae217fa5a2799859f6c",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/5f80266a729e30bbcc37f8bf0e62c3d5a38c8208",
+                "reference": "5f80266a729e30bbcc37f8bf0e62c3d5a38c8208",
                 "shasum": ""
             },
             "require": {
@@ -652,7 +655,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-24T12:25:55+00:00"
+            "time": "2019-05-30T15:47:52+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -714,7 +717,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.4.28",
+            "version": "v3.4.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -773,16 +776,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.41.0",
+            "version": "v1.42.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "575cd5028362da591facde1ef5d7b94553c375c9"
+                "reference": "21707d6ebd05476854805e4f91b836531941bcd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/575cd5028362da591facde1ef5d7b94553c375c9",
-                "reference": "575cd5028362da591facde1ef5d7b94553c375c9",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/21707d6ebd05476854805e4f91b836531941bcd4",
+                "reference": "21707d6ebd05476854805e4f91b836531941bcd4",
                 "shasum": ""
             },
             "require": {
@@ -792,12 +795,12 @@
             "require-dev": {
                 "psr/container": "^1.0",
                 "symfony/debug": "^2.7",
-                "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
+                "symfony/phpunit-bridge": "^3.4.19|^4.1.8|^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.41-dev"
+                    "dev-master": "1.42-dev"
                 }
             },
             "autoload": {
@@ -835,7 +838,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-05-14T11:59:08+00:00"
+            "time": "2019-06-18T15:35:16+00:00"
         },
         {
             "name": "webuni/front-matter",

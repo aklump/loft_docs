@@ -2,7 +2,9 @@
 
 namespace AKlump\LoftLib\Bash;
 
-class OutputTest extends \PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class OutputTest extends TestCase {
 
   public function testList() {
     $output = Output::tree(['do', 're', 'mi']);
