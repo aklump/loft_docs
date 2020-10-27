@@ -111,8 +111,6 @@ abstract class Template implements \Twig_TemplateInterface
      * This method is for internal use only and should never be called
      * directly.
      *
-     * @param array $context
-     *
      * @return \Twig_TemplateInterface|TemplateWrapper|false The parent template or false if there is no parent
      *
      * @internal
@@ -366,7 +364,7 @@ abstract class Template implements \Twig_TemplateInterface
             }
 
             if ($template === $this->getTemplateName()) {
-                $class = \get_class($this);
+                $class = static::class;
                 if (false !== $pos = strrpos($class, '___', -1)) {
                     $class = substr($class, 0, $pos);
                 }
@@ -399,7 +397,7 @@ abstract class Template implements \Twig_TemplateInterface
      *
      * @return Template
      */
-    protected function unwrap()
+    public function unwrap()
     {
         return $this;
     }
@@ -537,7 +535,7 @@ abstract class Template implements \Twig_TemplateInterface
         if (self::METHOD_CALL !== $type) {
             $arrayItem = \is_bool($item) || \is_float($item) ? (int) $item : $item;
 
-            if (((\is_array($object) || $object instanceof \ArrayObject) && (isset($object[$arrayItem]) || \array_key_exists($arrayItem, $object)))
+            if (((\is_array($object) || $object instanceof \ArrayObject) && (isset($object[$arrayItem]) || \array_key_exists($arrayItem, (array) $object)))
                 || ($object instanceof \ArrayAccess && isset($object[$arrayItem]))
             ) {
                 if ($isDefinedTest) {
@@ -604,7 +602,7 @@ abstract class Template implements \Twig_TemplateInterface
 
         // object property
         if (self::METHOD_CALL !== $type && !$object instanceof self) { // \Twig\Template does not have public properties, and we don't want to allow access to internal ones
-            if (isset($object->$item) || \array_key_exists((string) $item, $object)) {
+            if (isset($object->$item) || \array_key_exists((string) $item, (array) $object)) {
                 if ($isDefinedTest) {
                     return true;
                 }
@@ -628,7 +626,7 @@ abstract class Template implements \Twig_TemplateInterface
 
                 foreach ($ref->getMethods(\ReflectionMethod::IS_PUBLIC) as $refMethod) {
                     // Accessing the environment from templates is forbidden to prevent untrusted changes to the environment
-                    if ('getenvironment' !== strtolower($refMethod->name)) {
+                    if ('getenvironment' !== strtr($refMethod->name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')) {
                         $methods[] = $refMethod->name;
                     }
                 }
@@ -642,7 +640,7 @@ abstract class Template implements \Twig_TemplateInterface
 
             foreach ($methods as $method) {
                 $cache[$method] = $method;
-                $cache[$lcName = strtolower($method)] = $method;
+                $cache[$lcName = strtr($method, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')] = $method;
 
                 if ('g' === $lcName[0] && 0 === strpos($lcName, 'get')) {
                     $name = substr($method, 3);
@@ -670,7 +668,7 @@ abstract class Template implements \Twig_TemplateInterface
         $call = false;
         if (isset(self::$cache[$class][$item])) {
             $method = self::$cache[$class][$item];
-        } elseif (isset(self::$cache[$class][$lcItem = strtolower($item)])) {
+        } elseif (isset(self::$cache[$class][$lcItem = strtr($item, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')])) {
             $method = self::$cache[$class][$lcItem];
         } elseif (isset(self::$cache[$class]['__call'])) {
             $method = $item;

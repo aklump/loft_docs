@@ -8,7 +8,7 @@
 namespace AKlump\WebPackage;
 
 $build
-  ->setPhp('/Applications/MAMP/bin/php/php7.2.1/bin/php')
+  ->setPhp('/Applications/MAMP/bin/php/php7.2.20/bin/php')
   ->setPhpUnit('/Users/aklump/opt/phpunit/phpunit-6.phar')
   ->runTests('phpunit.xml')
   ->displayMessages();

@@ -132,8 +132,8 @@
         },
         {
             "id": "demos--example",
-            "title": "Demo: An Example Page & Image",
-            "content_title": "Demo: An Example Page & Image",
+            "title": "Demo: An Example Page with Images",
+            "content_title": "Demo: An Example Page with Images",
             "file": "demos--example",
             "chapter": "demos"
         },

@@ -49,6 +49,20 @@ class ArraysTest extends TestCase {
     $this->assertSame(['header', 'lorem', 'ipsum', 'footer'], $subject);
   }
 
+  public function testSuffleWithKeysWorksWithEmptyArrays() {
+    $original = $subject = [];
+    $subject = Arrays::shuffleWithKeys($subject);
+    $this->assertSame($original, $subject);
+  }
+
+  public function testSuffleWithKeysWorksWithSingleElementArrays() {
+    $original = $subject = [
+      'do' => 'dough',
+    ];
+    $subject = Arrays::shuffleWithKeys($subject);
+    $this->assertSame($original, $subject);
+  }
+
   public function testSuffleWithKeysWorksAsExpected() {
     $original = $subject = [
       'do' => 'dough',

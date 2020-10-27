@@ -91,6 +91,9 @@ class Arrays {
    *   The new array with shuffled order and preserved keys.
    */
   public static function shuffleWithKeys(array $array) {
+    if (count($array) < 2) {
+      return $array;
+    }
     $keys = array_keys($array);
     shuffle($keys);
     do {

@@ -34,7 +34,7 @@ class LintCommandTest extends TestCase
         $ret = $tester->execute(['filename' => $filename], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE, 'decorated' => false]);
 
         $this->assertEquals(0, $ret, 'Returns 0 in case of success');
-        $this->assertRegExp('/^\/\/ OK in /', trim($tester->getDisplay()));
+        $this->assertMatchesRegularExpression('/^\/\/ OK in /', trim($tester->getDisplay()));
     }
 
     public function testLintIncorrectFile()
@@ -48,7 +48,7 @@ bar';
         $ret = $tester->execute(['filename' => $filename], ['decorated' => false]);
 
         $this->assertEquals(1, $ret, 'Returns 1 in case of error');
-        $this->assertContains('Unable to parse at line 3 (near "bar").', trim($tester->getDisplay()));
+        $this->assertStringContainsString('Unable to parse at line 3 (near "bar").', trim($tester->getDisplay()));
     }
 
     public function testConstantAsKey()
@@ -78,16 +78,14 @@ YAML;
         $this->assertSame(1, $ret, 'lint:yaml exits with code 1 in case of error');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testLintFileNotReadable()
     {
+        $this->expectException('RuntimeException');
         $tester = $this->createCommandTester();
         $filename = $this->createFile('');
         unlink($filename);
 
-        $ret = $tester->execute(['filename' => $filename], ['decorated' => false]);
+        $tester->execute(['filename' => $filename], ['decorated' => false]);
     }
 
     /**

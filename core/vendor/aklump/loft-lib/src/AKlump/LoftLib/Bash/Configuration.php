@@ -7,19 +7,23 @@ namespace AKlump\LoftLib\Bash;
  */
 class Configuration {
 
-  const VAR_NAME_PREFIX = '';
+  protected $namespace;
 
-  const SEPARATOR = '___';
+  protected $separator;
 
-  public function __construct($var_name_prefix = NULL, $separator = NULL) {
-    $this->varNamePrefix = static::VAR_NAME_PREFIX;
-    $this->separator = $this->varNamePrefix;
-    if (!is_null($var_name_prefix)) {
-      $this->varNamePrefix = $var_name_prefix;
-    }
-    if (!is_null($separator)) {
-      $this->separator = $separator;
-    }
+  /**
+   * Configuration constructor.
+   *
+   * @param string $namespace
+   *   The plain text namespace for all variable names, it must begin with a
+   *   letter, e.g. 'cloudy_config'.
+   * @param string $separator
+   *   The char(s) to use to join the config paths elements, e.g. '.', where
+   *   the config path that is hashed will be 'foo.bar.baz'.
+   */
+  public function __construct($namespace, $separator = '.') {
+    $this->namespace = $namespace;
+    $this->separator = $separator;
   }
 
   /**
@@ -39,22 +43,22 @@ class Configuration {
 
     // Setup defaults.
     $context += ['parents' => [], 'stack' => []];
-    $var_name = $this->getVarName($context['parents'], $this->varNamePrefix);
+    list($comment, $var_name) = $this->getVarName($this->namespace, $context['parents']);
 
     // Define the reason for stopping recursion and return.
     if (!is_array($value)) {
-      $context['stack'][] = $this->getVarEvalCode($var_name, $value);
+      $context['stack'][] = $this->getVarEvalCode($var_name, $value, $comment);
 
       return $context['stack'];
     }
 
     // Generate the keys.
-    $keys_var_name = $this->getVarName($context['parents'], $this->varNamePrefix . '_keys');
+    list(, $keys_var_name) = $this->getVarName($this->namespace . '_keys', $context['parents']);
 
     if (is_numeric(key($value))) {
-      $context['stack'][] = $this->getVarEvalCode($var_name, array_values($value));
+      $context['stack'][] = $this->getVarEvalCode($var_name, array_values($value), $comment);
     }
-    $context['stack'][] = $this->getVarEvalCode($keys_var_name, array_keys($value));
+    $context['stack'][] = $this->getVarEvalCode($keys_var_name, array_keys($value), '--keys ' . $comment);
 
     // Otherwise recurse.
     foreach ($value as $k => $v) {
@@ -69,26 +73,25 @@ class Configuration {
   /**
    * Generate a BASH variable name.
    *
-   * @param array $parents
-   *   Usually this is $context['parents'].
-   * @param string ...
-   *   Additional elements to merge into the key.
+   * @param string $prefix
+   *   A plaintext string to to preceed the hash.
+   *   e.g., "cloudy_config", "cloudy_config_keys".
+   * @param array $variable_name_parts
+   *   An array of strings that indicate the parent/child configuration path of
+   *   nested arrays, ['foo', 'bar', 'baz'] where the path is 'foo.bar.baz'.
    *
    * @return string
-   *   A stack key variable name.
+   *   A hashed varible name that can be used by BASH.
    */
-  private function getVarName(array $parents, $prefix = '') {
-    $args = func_get_args();
-    $components = array_shift($args);
-    $prefix = array_shift($args);
-    if ($prefix) {
-      array_unshift($components, $prefix);
-    }
-    if (count($args)) {
-      $components = array_merge($components, $args);
+  private function getVarName($prefix, array $variable_name_parts) {
+    if (!preg_match('/^[a-z]/i', $prefix)) {
+      throw new \InvalidArgumentException("Prefix must begin with a letter.");
     }
 
-    return ltrim(implode('___', $components));
+    return [
+      ($path = implode($this->separator, $variable_name_parts)),
+      $path ? $prefix . '_' . md5($path) : $prefix,
+    ];
   }
 
   /**
@@ -127,12 +130,13 @@ class Configuration {
    *   The bash variable name to use.
    * @param mixed $value
    *   The value of the variable.
+   * @param string $comment
+   *   A comment to proceed the eval code with.
    *
    * @return string
    *   Code to be used by BASH eval.
    */
-  public function getVarEvalCode($var_name, $value) {
-    $var_name = str_replace('-', '_', $var_name);
+  public function getVarEvalCode($var_name, $value, $comment = '') {
     if (is_array($value)) {
       array_walk($value, function (&$value) {
         $value = static::typecast($value);
@@ -147,12 +151,20 @@ class Configuration {
       $open = substr($value[0], 0, 1) === '"' ? '' : '"';
       $close = substr($value[count($value) - 1], -1) === '"' ? '' : '"';
 
-      return "declare -a $var_name=($open" . implode(' ', $value) . $close . ")";
+      $return = "declare -a $var_name=($open" . implode(' ', $value) . $close . ")";
+    }
+    else {
+
+      $value = static::typecast($value);
+
+      $return = $var_name . '=' . $this->quoteValue($value);
     }
 
-    $value = static::typecast($value);
+    if ($comment) {
+      $return = '# ' . trim($comment) . PHP_EOL . $return;
+    }
 
-    return $var_name . '=' . $this->quoteValue($value);
+    return $return;
   }
 
   /**

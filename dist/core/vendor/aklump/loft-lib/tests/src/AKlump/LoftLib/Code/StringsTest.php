@@ -10,25 +10,74 @@ use PHPUnit\Framework\TestCase;
 class StringsTest extends TestCase {
 
   /**
+   * Provides data for testEndsWithSentenceWorksAsExpected.
+   */
+  public function dataForTestEndsWithSentenceWorksAsExpectedProvider() {
+    $tests = array();
+    $tests[] = array(
+      'lorem ipsum dolar sit',
+      'lorem ipsum dolar sit',
+    );
+    $tests[] = array(
+      'lorem ipsum. dolar sit',
+      'lorem ipsum.',
+    );
+    $tests[] = array(
+      'lorem ipsum." dolar sit',
+      'lorem ipsum."',
+    );
+    $tests[] = array(
+      'lorem ipsum! dolar sit',
+      'lorem ipsum!',
+    );
+    $tests[] = array(
+      'lorem ipsum!" dolar sit',
+      'lorem ipsum!"',
+    );
+    $tests[] = array(
+      'lorem ipsum? dolar sit',
+      'lorem ipsum?',
+    );
+    $tests[] = array(
+      'lorem ipsum?" dolar sit',
+      'lorem ipsum?"',
+    );
+
+    return $tests;
+  }
+
+  /**
+   * @dataProvider dataForTestEndsWithSentenceWorksAsExpectedProvider
+   */
+  public function testEndsWithSentenceWorksAsExpected($subject, $control) {
+    $this->assertSame($control, Strings::endsWithSentence($subject));
+  }
+
+  /**
    * Provides data for testAcronymWorksAsExpected.
    */
   public function dataForTestAcronymWorksAsExpectedProvider() {
     $tests = array();
 
     $tests[] = array(
-      'AK', 'AARON KLUMP'
+      'AK',
+      'AARON KLUMP',
     );
     $tests[] = array(
-      'A', 'aaron'
+      'A',
+      'aaron',
     );
     $tests[] = array(
-      'BP', 'big pipe'
+      'BP',
+      'big pipe',
     );
     $tests[] = array(
-      'BP', 'big_pipe'
+      'BP',
+      'big_pipe',
     );
     $tests[] = array(
-      'BP', 'BigPipe'
+      'BP',
+      'BigPipe',
     );
 
     return $tests;

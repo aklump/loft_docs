@@ -47,7 +47,7 @@ class Lexer implements \Twig_LexerInterface
     const STATE_INTERPOLATION = 4;
 
     const REGEX_NAME = '/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/A';
-    const REGEX_NUMBER = '/[0-9]+(?:\.[0-9]+)?/A';
+    const REGEX_NUMBER = '/[0-9]+(?:\.[0-9]+)?([Ee][\+\-][0-9]+)?/A';
     const REGEX_STRING = '/"([^#"\\\\]*(?:\\\\.[^#"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\'/As';
     const REGEX_DQ_STRING_DELIM = '/"/A';
     const REGEX_DQ_STRING_PART = '/[^#"\\\\]*(?:(?:\\\\.|#(?!\{))[^#"\\\\]*)*/As';
@@ -117,7 +117,7 @@ class Lexer implements \Twig_LexerInterface
             // #}
             'lex_comment' => '{
                 (?:'.
-                    preg_quote($this->options['whitespace_trim']).preg_quote($this->options['tag_comment'][1], '#').'\s*\n?'. // -#}\s*\n?
+                    preg_quote($this->options['whitespace_trim'].$this->options['tag_comment'][1], '#').'\s*\n?'. // -#}\s*\n?
                     '|'.
                     preg_quote($this->options['whitespace_line_trim'].$this->options['tag_comment'][1], '#').'['.$this->options['whitespace_line_chars'].']*'. // ~#}[ \t\0\x0B]*
                     '|'.
@@ -499,11 +499,15 @@ class Lexer implements \Twig_LexerInterface
         $regex = [];
         foreach ($operators as $operator => $length) {
             // an operator that ends with a character must be followed by
-            // a whitespace or a parenthesis
+            // a whitespace, a parenthesis, an opening map [ or sequence {
+            $r = preg_quote($operator, '/');
             if (ctype_alpha($operator[$length - 1])) {
-                $r = preg_quote($operator, '/').'(?=[\s()])';
-            } else {
-                $r = preg_quote($operator, '/');
+                $r .= '(?=[\s()\[{])';
+            }
+
+            // an operator that begins with a character must not have a dot or pipe before
+            if (ctype_alpha($operator[0])) {
+                $r = '(?<![\.\|])'.$r;
             }
 
             // an operator with a space can be any amount of whitespaces

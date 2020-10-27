@@ -1,7 +1,7 @@
 ``include``
 ===========
 
-The ``include`` statement includes a template and returns the rendered content
+The ``include`` statement includes a template and outputs the rendered content
 of that file:
 
 .. code-block:: twig
@@ -20,7 +20,7 @@ of that file:
       template outputs its rendered contents in the current scope; a tag should
       not display anything);
 
-    * The rendered template can be more easily stored in a variable when using
+    * It's easier to store the rendered template in a variable when using
       the ``include`` function:
 
       .. code-block:: twig

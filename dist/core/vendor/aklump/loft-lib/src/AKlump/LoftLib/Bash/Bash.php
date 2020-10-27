@@ -9,6 +9,8 @@
 
 namespace AKlump\LoftLib\Bash;
 
+use AKlump\LoftLib\Storage\FilePath;
+
 /**
  * Represents a class to help with connecting PHP to BASH scripts.
  *
@@ -103,17 +105,24 @@ class Bash {
    *
    * This handles redirecting the error and capturing it as an exception.
    *
-   * @param  string|array $command Arrays will be imploded with ' '.
+   * @param string|array $command
+   *   Arrays will be imploded with ' '.
    * @param array $args
    *   Only pass this if you have an array of arguments that you want to pass
    *   to $command.  They will be wrapped with double quotes.  If you don't
    *   want to wrap in double quotes, then just pass an array as $command.
+   * @param bool $async
+   *   Set to TRUE to run the command async.  You can review the result via the
+   *   return object AsyncResult().
    *
-   * @return string  The output from the $command.
+   * @return string
+   *   The output from the $command.
+   *
    * @throws AKlump\LoftLib\Component\Bash\FailedExecException if the command
+   * @throws \AKlump\LoftLib\Bash\FailedExecException
    *   returns a non 0 status.  The exception code holds the return status.
    */
-  public static function exec($command, $args = []) {
+  public static function exec($command, $args = [], $async = FALSE) {
 
     // Wrap all args in "".
     $args = array_map(function ($item) {
@@ -124,15 +133,25 @@ class Bash {
     }
     $command = array_merge($command, $args);
     $command = implode(' ', $command);
-    if (!strpos($command, ' 2>&1')) {
-      $command .= ' 2>&1';
-    }
-    exec($command, $result, $status);
-    if ($status !== 0) {
-      throw new FailedExecException(implode(PHP_EOL, $result), $status);
-    }
 
-    return implode(PHP_EOL, $result);
+    if ($async) {
+      $output_file = FilePath::create(sys_get_temp_dir(), ['autoname' => '.output'])
+        ->getPath();
+      exec(sprintf("%s > %s 2>&1 &", $command, $output_file));
+
+      return new AsyncResult($output_file);
+    }
+    else {
+      if (!strpos($command, ' 2>&1')) {
+        $command .= ' 2>&1';
+      }
+      exec($command, $result, $status);
+      if ($status !== 0) {
+        throw new FailedExecException(implode(PHP_EOL, $result), $status);
+      }
+
+      return implode(PHP_EOL, $result);
+    }
   }
 
   public function getArgs() {
@@ -142,9 +161,9 @@ class Bash {
   /**
    * Returns an argument by index.
    *
-   * @param  int $index Be aware that a zero index here may point to
+   * @param int $index Be aware that a zero index here may point to
    *                         $argv[1].
-   * @param  string $default The default ot return if not found.
+   * @param string $default The default ot return if not found.
    *
    * @return string|NULL
    */
@@ -173,8 +192,8 @@ class Bash {
   /**
    * Return the value of a single parameter.
    *
-   * @param  string $param The param name
-   * @param  string $default The default ot return if not found.
+   * @param string $param The param name
+   * @param string $default The default ot return if not found.
    *
    * @return mixed|NULL
    */
