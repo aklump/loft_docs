@@ -28,7 +28,7 @@ try {
   }
 
   if (!is_file($from)) {
-    exit(1);
+    throw new \RuntimeException("\"$from\" does not exist.", 2);
   }
 
   $fm = new FrontMatter();
@@ -44,10 +44,16 @@ try {
     }
     file_put_contents($to, $document->getContent());
   }
-
-  return file_exists($to) ? 0 : 1;
+  else {
+    copy($from, $to);
+  }
+  if (!file_exists($to)) {
+    throw new \RuntimeException("\"$to\" could not be created.", 1);
+  }
 }
 catch (\Exception $exception) {
   echo $exception->getMessage();
-  exit(1);
+  exit($exception->getCode());
 }
+
+exit(0);
