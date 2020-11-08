@@ -338,14 +338,16 @@ function do_post_hooks() {
 #
 function do_plugin_handler() {
     local hook_file
-    hook_file=$($docs_php $CORE/includes/plugins.php "$CORE/plugins/" "$1" "$2")
+
+    hook_file="$($docs_php "$CORE/includes/plugins.php" "$CORE/plugins/" "$1" "$2")"
     test -f "$hook_file" && source "$hook_file"
 }
 
 function get_plugin_path() {
     local hook_file
-    hook_file=$($docs_php $CORE/includes/plugins.php "$CORE/plugins/" "$1" "$2")
-    echo $hook_file
+
+    hook_file="$($docs_php "$CORE/includes/plugins.php" "$CORE/plugins/" "$1" "$2")"
+    echo "$hook_file"
 }
 
 ##

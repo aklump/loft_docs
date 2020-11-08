@@ -195,7 +195,7 @@ echo ''
 # Iterate over all html files and implement theme; then iterate over all html
 # files and send to drupal and website
 echo -n "Converting to HTML"
-for file in "$docs_tmp_dir"/*.html; do
+for file in "$docs_tmp_dir/*.html"; do
   if [[ -f "$file" ]]; then
     echo -n "."
     basename="${file##*/}"
