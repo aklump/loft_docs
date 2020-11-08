@@ -62,7 +62,7 @@ done
 CORE="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 ROOT="$CORE/.."
 
-source $CORE/functions.sh
+source "$CORE/functions.sh"
 
 # Override to use the version file of the core
 function get_version_file() {
