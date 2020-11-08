@@ -60,11 +60,11 @@ LOFT_DOCS_TMP_DIR="$docs_tmp_dir"
 export LOFT_DOCS_TMP_DIR
 
 # If no dirs, copy the patterns into place from the patterns dir.  This is important after --clean
-ensure_pattern_directory $docs_website_dir "public_html"
-ensure_pattern_directory $docs_html_dir "html"
-ensure_pattern_directory $docs_mediawiki_dir "mediawiki"
-ensure_pattern_directory $docs_text_dir "text"
-ensure_pattern_directory $docs_drupal_dir "advanced_help"
+ensure_pattern_directory "$docs_website_dir" "public_html"
+ensure_pattern_directory "$docs_html_dir" "html"
+ensure_pattern_directory "$docs_mediawiki_dir" "mediawiki"
+ensure_pattern_directory "$docs_text_dir" "text"
+ensure_pattern_directory "$docs_drupal_dir" "advanced_help"
 
 # Assert dir exists if not create it and parents
 for path in "${dirs[@]}"; do
@@ -79,7 +79,7 @@ done
 # Copy of any dirs in the (instance) compile directory to the compiled output dirs.
 if test -e "$docs_root_dir/compile"; then
     for dir in "$docs_root_dir/compile/*/"; do
-        basename=${dir##*/}
+        basename="${dir##*/}"
         if [ "$basename" != . ] && [ "$basename" != .. ] && test -e "$docs_root_dir/$basename"; then
             rsync -a "$docs_root_dir/compile/$basename/" "$docs_root_dir/$basename/"
         fi
@@ -98,8 +98,8 @@ do_plugin_handler "$docs_plugins_tpl" pre
 # Get all the files in the source directory.
 declare -a files=("$docs_source_path"/*)
 declare -a hidden_files=("$docs_source_path"/.*)
-for i in ${hidden_files[@]}; do
-   [ -f $i ] && files=("${files[@]}" "$i")
+for i in "${hidden_files[@]}"; do
+   [[ -f "$i" ]] && files=("${files[@]}" "$i")
 done
 
 # Then add in all files we created.
@@ -110,10 +110,10 @@ files=("${generated[@]}" "${files[@]}")
 # extension as it goes over; this is our baseline html that we will further
 # process for the intended audience.
 echo -n "Processing files"
-for file in ${files[@]}; do
-  if [ -f "$file" ]; then
+for file in "${files[@]}"; do
+  if [[ -f "$file" ]]; then
     echo -n "."
-    basename=${file##*/}
+    basename="${file##*/}"
     extension=".${file##*.}"
     filename="${basename%%.*}"
 
@@ -176,7 +176,7 @@ for file in ${files[@]}; do
     fi
 
   elif [[ -d "$file" ]]; then
-    basename=${file##*/}
+    basename="${file##*/}"
     echo "Copying directory $basename..."
     if ! is_disabled "drupal"; then
         rsync -ua --delete "$docs_source_dir/$basename/" "$docs_drupal_dir/$basename/"
@@ -195,11 +195,11 @@ echo ''
 # Iterate over all html files and implement theme; then iterate over all html
 # files and send to drupal and website
 echo -n "Converting to HTML"
-for file in "$docs_tmp_dir"/*.html; do
+for file in "$docs_tmp_dir/*.html"; do
   if [[ -f "$file" ]]; then
     echo -n "."
-    basename=${file##*/}
-    basename=$(echo $basename | sed 's/\.html$//g')
+    basename="${file##*/}"
+    basename="$(echo "$basename" | sed 's/\.html$//g')"
     html_file="$basename.html"
     kit_file="$basename.kit"
     tmp_file="$basename.kit.txt"
@@ -235,7 +235,7 @@ done
 
 # Get all stylesheets from the tpl dir.
 for file in "$docs_tpl_dir/*.css"; do
-  if [ -f "$file" ]; then
+  if [[ -f "$file" ]]; then
     basename="${file##*/}"
     cp "$file" "$docs_website_dir/$basename"
     _check_file "$docs_website_dir/$basename"
@@ -250,9 +250,9 @@ if [ "$docs_README" ]; then
   destinations=($docs_README)
 
   for output in "${destinations[@]}"; do
-    output=$(realpath "$docs_root_dir/$output");
-    readme_file=${output##*/}
-    readme_dir=${output%/*}
+    output="$(realpath "$docs_root_dir/$output")"
+    readme_file="${output##*/}"
+    readme_dir="${output%/*}"
     test -d "$readme_dir" || mkdir -p "$readme_dir"
     if echo "$readme_file" | grep -q '.txt$'; then
         readme_source="$docs_text_dir/$readme_file"
@@ -275,9 +275,9 @@ fi
 if [ "$docs_CHANGELOG" ]; then
   destinations=($docs_CHANGELOG)
   for output in "${destinations[@]}"; do
-    output=$(realpath "$docs_root_dir/$output");
-    changelog_file=${output##*/}
-    changelog_dir=${output%/*}
+    output="$(realpath "$docs_root_dir/$output")"
+    changelog_file="${output##*/}"
+    changelog_dir="${output%/*}"
     test -d "$changelog_dir" || mkdir -p "$changelog_dir"
     if echo "$changelog_file" | grep -q '.txt$'; then
         changelog_source="$docs_text_dir/$changelog_file"
