@@ -23,7 +23,7 @@ if (!empty($outline['settings']['search'])) {
   # This will grab the search engine files...
   $hook_file = $core_dir . "/includes/webpage." . $outline['settings']['search'] . ".sh";
   if (is_file($hook_file)) {
-    system("$hook_file $core_dir $search_dir");
+    system("\"$hook_file\" \"$core_dir\" \"$search_dir\"");
   }
 
   // Now create the search contents
