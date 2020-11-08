@@ -643,29 +643,24 @@
     },
     {
         "name": "symfony/finder",
-        "version": "v3.4.45",
-        "version_normalized": "3.4.45.0",
+        "version": "v3.4.46",
+        "version_normalized": "3.4.46.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/finder.git",
-            "reference": "52140652ed31cee3dabd0c481b5577201fa769b4"
+            "reference": "4e1da3c110c52d868f8a9153b7de3ebc381fba78"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/finder/zipball/52140652ed31cee3dabd0c481b5577201fa769b4",
-            "reference": "52140652ed31cee3dabd0c481b5577201fa769b4",
+            "url": "https://api.github.com/repos/symfony/finder/zipball/4e1da3c110c52d868f8a9153b7de3ebc381fba78",
+            "reference": "4e1da3c110c52d868f8a9153b7de3ebc381fba78",
             "shasum": ""
         },
         "require": {
             "php": "^5.5.9|>=7.0.8"
         },
-        "time": "2020-09-02T16:06:40+00:00",
+        "time": "2020-10-24T10:57:07+00:00",
         "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.4-dev"
-            }
-        },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
@@ -758,17 +753,17 @@
     },
     {
         "name": "symfony/yaml",
-        "version": "v3.4.45",
-        "version_normalized": "3.4.45.0",
+        "version": "v3.4.46",
+        "version_normalized": "3.4.46.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/yaml.git",
-            "reference": "ec3c2ac4d881a4684c1f0317d2107f1a4152bad9"
+            "reference": "88289caa3c166321883f67fe5130188ebbb47094"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/yaml/zipball/ec3c2ac4d881a4684c1f0317d2107f1a4152bad9",
-            "reference": "ec3c2ac4d881a4684c1f0317d2107f1a4152bad9",
+            "url": "https://api.github.com/repos/symfony/yaml/zipball/88289caa3c166321883f67fe5130188ebbb47094",
+            "reference": "88289caa3c166321883f67fe5130188ebbb47094",
             "shasum": ""
         },
         "require": {
@@ -784,13 +779,8 @@
         "suggest": {
             "symfony/console": "For validating YAML files using the lint command"
         },
-        "time": "2020-09-18T15:58:55+00:00",
+        "time": "2020-10-24T10:57:07+00:00",
         "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.4-dev"
-            }
-        },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
