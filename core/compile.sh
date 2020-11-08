@@ -199,7 +199,7 @@ for file in "$docs_tmp_dir/*.html"; do
   if [[ -f "$file" ]]; then
     echo -n "."
     basename="${file##*/}"
-    basename="$(echo $basename | sed 's/\.html$//g')"
+    basename="$(echo "$basename" | sed 's/\.html$//g')"
     html_file="$basename.html"
     kit_file="$basename.kit"
     tmp_file="$basename.kit.txt"
