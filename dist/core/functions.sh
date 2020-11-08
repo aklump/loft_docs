@@ -77,7 +77,7 @@ function get_version() {
 #
 function realpath() {
   local path=$($docs_php "$CORE/includes/realpath.php" "$1")
-  echo $path
+  echo "$path"
 }
 
 
@@ -137,12 +137,12 @@ function load_config() {
   fi
 
   # We're looking ultimately for outline.json
-  docs_outline_file=$(find $docs_source_path -name outline.json)
+  docs_outline_file=$(find "$docs_source_path" -name outline.json)
 
   # If it's not there we'll try to generate from a .ini file.
   if [[ ! "$docs_outline_file" ]]; then
     # Ini file
-    docs_help_ini=$(find $docs_source_path -name *.ini)
+    docs_help_ini=$(find "$docs_source_path" -name *.ini)
 
     if [[ "$docs_help_ini" ]]; then
       # Convert this to $docs_outline_auto
@@ -293,7 +293,7 @@ function do_todos() {
   if [[ "$docs_todos" ]]; then
     local global="$docs_cache_dir/source/$docs_todos"
     local first_run=true
-    for file in $(find $docs_source_dir -type f -iname "*$docs_markdown_extension"); do
+    for file in $(find "$docs_source_dir" -type f -iname "*$docs_markdown_extension"); do
       if [ "$file" != "$global" ]; then
 
         # Send a single file over for processing todos via php.  If it returns
@@ -443,8 +443,8 @@ function path_resolve() {
     local path="$2"
 
     [[ "${path:0:1}" != '/' ]] && path="$dirname/$path"
-    [ ! -e $path ] && echo $path && return
+    [ ! -e "$path" ] && echo "$path" && return
 
     # If it exists, we will echo the real path.
-    echo "$(cd $(dirname $path) && pwd)/$(basename $path)"
+    echo "$(cd "$(dirname $path)" && pwd)/$(basename "$path")"
 }

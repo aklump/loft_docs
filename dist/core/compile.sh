@@ -48,7 +48,7 @@ done
 # Empty out all files one level deep; do not touch folders as these may contain assets like images and videos and we don't want to delete them if not needed.  This would cause a longer compile times.  The folders will be rsynced later on to handle the deletes.
 for dir in "${dirs_to_empty[@]}"; do
   if [ "$dir" ] && [ -d "$dir" ]; then
-    find $dir -type f ! -name '*.git*' -maxdepth 1 -exec rm {} \;
+    find "$dir"-type f ! -name '*.git*' -maxdepth 1 -exec rm {} \;
   fi
 done
 
