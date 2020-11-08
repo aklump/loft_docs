@@ -137,12 +137,12 @@ function load_config() {
   fi
 
   # We're looking ultimately for outline.json
-  docs_outline_file=$(find "$docs_source_path" -name outline.json)
+  docs_outline_file="$(find "$docs_source_path" -name outline.json)"
 
   # If it's not there we'll try to generate from a .ini file.
   if [[ ! "$docs_outline_file" ]]; then
     # Ini file
-    docs_help_ini=$(find "$docs_source_path" -name *.ini)
+    docs_help_ini="$(find "$docs_source_path" -name *.ini)"
 
     if [[ "$docs_help_ini" ]]; then
       # Convert this to $docs_outline_auto

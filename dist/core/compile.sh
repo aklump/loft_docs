@@ -48,7 +48,7 @@ done
 # Empty out all files one level deep; do not touch folders as these may contain assets like images and videos and we don't want to delete them if not needed.  This would cause a longer compile times.  The folders will be rsynced later on to handle the deletes.
 for dir in "${dirs_to_empty[@]}"; do
   if [ "$dir" ] && [ -d "$dir" ]; then
-    find "$dir"-type f ! -name '*.git*' -maxdepth 1 -exec rm {} \;
+    find "$dir" -type f ! -name '*.git*' -maxdepth 1 -exec rm {} \;
   fi
 done
 
@@ -93,7 +93,7 @@ fi
 
 get_version
 
-do_plugin_handler $docs_plugins_tpl pre
+do_plugin_handler "$docs_plugins_tpl" pre
 
 # Get all the files in the source directory.
 declare -a files=("$docs_source_path"/*)
@@ -229,7 +229,7 @@ for file in "$docs_tmp_dir"/*.html; do
 
     # Wrap with with tpl files
     # handlers.file
-    do_plugin_handler $docs_plugins_tpl file
+    do_plugin_handler "$docs_plugins_tpl" file
   fi
 done
 
@@ -296,7 +296,7 @@ if [ "$docs_CHANGELOG" ]; then
 fi
 
 echo ''
-do_plugin_handler $docs_plugins_tpl post
+do_plugin_handler "$docs_plugins_tpl" post
 
 # Provide search support
 $docs_php "$CORE/includes/search.inc" "$docs_outline_file" "$CORE" "$docs_root_dir" "$docs_website_dir" "$docs_root_dir/$docs_source_dir"
