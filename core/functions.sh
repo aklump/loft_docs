@@ -229,14 +229,14 @@ function parse_config() {
 # @param string $file
 #
 function do_hook_file() {
-  local file=$1
+  local file="$1"
   local type=""
-  if [[ ${file##*.} == 'php' ]]; then
+  if [[ "${file##*.}" == 'php' ]]; then
     type="php"
-  elif [[ ${file##*.} == 'sh' ]]; then
+  elif [[ "${file##*.}" == 'sh' ]]; then
     type="bash"
   fi
-  if [[ ! -f $file ]]; then
+  if [[ ! -f "$file" ]]; then
     echo "`tput setaf 1`Hook file not found: $file`tput op`"
   elif [[ "$type" ]]; then
     case $type in
@@ -266,9 +266,9 @@ function do_pre_hooks() {
 
     echo "Running pre-compile hooks..."
     for hook in ${docs_pre_hooks[@]}; do
-        hook=$(realpath "$docs_hooks_dir/$hook")
+        hook="$(realpath "$docs_hooks_dir/$hook")"
         echo_green "Hook file: $hook"
-        echo_yellow "$(do_hook_file $hook)"
+        echo_yellow "$(do_hook_file "$hook")"
     done
 
     # Generate an outline from the file structure.
