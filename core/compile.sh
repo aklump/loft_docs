@@ -7,7 +7,7 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 CORE="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-source $CORE/functions.sh
+source "$CORE/functions.sh"
 process_start=$(date +%s)
 
 # Load in our user CLI options so we can use: has_option and get_option.
@@ -139,39 +139,39 @@ for file in ${files[@]}; do
 
     # CSS files pass through to the website and html dir
     elif [ "$extension" == ".css" ]; then
-      cp $file $docs_html_dir/$basename
+      cp "$file" "$docs_html_dir/$basename"
       _check_file "$docs_html_dir/$basename"
-      cp $file $docs_website_dir/$basename
+      cp "$file" "$docs_website_dir/$basename"
       _check_file "$docs_website_dir/$basename"
 
     # HTML files pass through to drupal, website and html
     elif echo "$file" | grep -q '.html$'; then
-      cp $file $docs_drupal_dir/$basename
+      cp "$file" "$docs_drupal_dir/$basename"
       _check_file "$docs_drupal_dir/$basename"
-      cp $file $docs_website_dir/$basename
+      cp "$file" "$docs_website_dir/$basename"
       _check_file "$docs_website_dir/$basename"
-      cp $file $docs_html_dir/$basename
+      cp "$file" "$docs_html_dir/$basename"
       _check_file "$docs_html_dir/$basename"
 
     # text files pass through to drupal, website and txt
     elif echo "$file" | grep -q '.txt$'; then
-      cp $file $docs_drupal_dir/$basename
+      cp "$file" "$docs_drupal_dir/$basename"
       _check_file "$docs_drupal_dir/$basename"
-      cp $file $docs_website_dir/$basename
+      cp "$file" "$docs_website_dir/$basename"
       _check_file "$docs_website_dir/$basename"
-      cp $file $docs_text_dir/$basename
+      cp "$file" "$docs_text_dir/$basename"
       _check_file "$docs_text_dir/$basename"
 
     # Rename the .ini file; we should only ever have one
     elif echo "$file" | grep -q '.ini$' && [ ! -f "$docs_drupal_dir/$docs_drupal_module.$basename" ]; then
-      cp $file "$docs_drupal_dir/$docs_drupal_module.$basename"
+      cp "$file" "$docs_drupal_dir/$docs_drupal_module.$basename"
       _check_file "$docs_drupal_dir/$docs_drupal_module.$basename"
 
     # All files types pass through to drupal and webpage
     else
-      cp $file $docs_drupal_dir/$basename
+      cp "$file" "$docs_drupal_dir/$basename"
       _check_file "$docs_drupal_dir/$basename"
-      cp $file $docs_website_dir/$basename
+      cp "$file" "$docs_website_dir/$basename"
       _check_file "$docs_website_dir/$basename"
     fi
 
@@ -211,9 +211,9 @@ for file in "$docs_tmp_dir"/*.html; do
 
     # Convert to plaintext
     if [[ "$docs_text_dir" ]] && lynx_loc="$(type -p "$docs_lynx")" && [ ! -z "$lynx_loc" ]; then
-      textname=`basename $file html`
+      textname=`basename "$file" html`
       textname=${textname}txt
-      $docs_lynx --dump $file > "$docs_text_dir/${textname}"
+      $docs_lynx --dump "$file" > "$docs_text_dir/${textname}"
       _check_file "$docs_text_dir/${textname}"
     fi
 
@@ -234,10 +234,10 @@ for file in "$docs_tmp_dir"/*.html; do
 done
 
 # Get all stylesheets from the tpl dir.
-for file in $docs_tpl_dir/*.css; do
+for file in "$docs_tpl_dir/*.css"; do
   if [ -f "$file" ]; then
-    basename=${file##*/}
-    cp $file $docs_website_dir/$basename
+    basename="${file##*/}"
+    cp "$file" "$docs_website_dir/$basename"
     _check_file "$docs_website_dir/$basename"
   fi
 done
