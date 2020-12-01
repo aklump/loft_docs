@@ -8,7 +8,7 @@ done
 CORE="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 # Remove all pattern dirs, use the install footprint to determine the pattern directory names.
-for dir in $(find "$CORE/install/patterns/*"  -type d -maxdepth 1 ! -name "source" ); do
+for dir in $(find "$CORE/install/patterns/"*  -type d -maxdepth 1 ! -name "source" ); do
   dir="${dir##*/}"
 
 #  Todo This should use confirm when moving to cloudy.
