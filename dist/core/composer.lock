@@ -38,7 +38,7 @@
                     "name": "Aaron Klump",
                     "email": "sourcecode@intheloftstudios.com",
                     "homepage": "http://www.intheloftstudios.com",
-                    "role": "Developer"
+                    "role": "developer"
                 }
             ],
             "description": "Common interface for interacting with data in objects and arrays.",
@@ -50,6 +50,10 @@
                 "objects",
                 "php"
             ],
+            "support": {
+                "issues": "https://github.com/aklump/data/issues",
+                "source": "https://github.com/aklump/data/tree/0.0.28"
+            },
             "time": "2017-05-31T01:04:19+00:00"
         },
         {
@@ -87,7 +91,7 @@
                     "name": "Aaron Klump",
                     "email": "sourcecode@intheloftstudios.com",
                     "homepage": "http://www.intheloftstudios.com",
-                    "role": "Developer"
+                    "role": "developer"
                 }
             ],
             "description": "PHP classes for compiling CodeKit's Kit Language (for HTML).",
@@ -96,6 +100,10 @@
                 "CodeKit",
                 "The Kit Language"
             ],
+            "support": {
+                "issues": "https://github.com/aklump/kit_php/issues",
+                "source": "https://github.com/aklump/kit_php/tree/0.2.4"
+            },
             "time": "2013-10-26T18:12:16+00:00"
         },
         {
@@ -138,6 +146,10 @@
                 }
             ],
             "description": "Core utilities provided by In the Loft Studios",
+            "support": {
+                "issues": "https://github.com/aklump/loft-lib/issues",
+                "source": "https://github.com/aklump/loft-lib/tree/1.1.5"
+            },
             "time": "2020-08-28T19:35:12+00:00"
         },
         {
@@ -169,7 +181,7 @@
                     "name": "Aaron Klump",
                     "email": "sourcecode@intheloftstudios.com",
                     "homepage": "http://www.intheloftstudios.com",
-                    "role": "Developer"
+                    "role": "developer"
                 }
             ],
             "description": "A collection of classes to process/parse text e.g. convert HTML to MediaWiki markup.",
@@ -179,6 +191,10 @@
                 "markup converter",
                 "mediawiki"
             ],
+            "support": {
+                "issues": "https://github.com/aklump/loft_parser/issues",
+                "source": "https://github.com/aklump/loft_parser/tree/0.1.3"
+            },
             "time": "2014-10-23T01:36:32+00:00"
         },
         {
@@ -257,6 +273,24 @@
                 "uppercase",
                 "words"
             ],
+            "support": {
+                "issues": "https://github.com/doctrine/inflector/issues",
+                "source": "https://github.com/doctrine/inflector/tree/1.4.x"
+            },
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Finflector",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-05-29T07:19:59+00:00"
         },
         {
@@ -299,6 +333,10 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
+            "support": {
+                "issues": "https://github.com/laravel/framework/issues",
+                "source": "https://github.com/laravel/framework"
+            },
             "time": "2017-08-26T23:56:53+00:00"
         },
         {
@@ -349,6 +387,10 @@
             ],
             "description": "The Illuminate Filesystem package.",
             "homepage": "https://laravel.com",
+            "support": {
+                "issues": "https://github.com/laravel/framework/issues",
+                "source": "https://github.com/laravel/framework"
+            },
             "time": "2017-08-02T21:58:00+00:00"
         },
         {
@@ -406,6 +448,10 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
+            "support": {
+                "issues": "https://github.com/laravel/framework/issues",
+                "source": "https://github.com/laravel/framework"
+            },
             "time": "2017-08-15T13:25:41+00:00"
         },
         {
@@ -449,6 +495,10 @@
                 "laravel",
                 "resource"
             ],
+            "support": {
+                "issues": "https://github.com/jasonlewis/resource-watcher/issues",
+                "source": "https://github.com/jasonlewis/resource-watcher/tree/master"
+            },
             "time": "2015-07-11T10:22:48+00:00"
         },
         {
@@ -482,6 +532,10 @@
             "license": [
                 "LGPL-3.0"
             ],
+            "support": {
+                "issues": "https://github.com/matomo-org/component-ini/issues",
+                "source": "https://github.com/matomo-org/component-ini/tree/master"
+            },
             "time": "2020-01-12T18:54:50+00:00"
         },
         {
@@ -531,6 +585,10 @@
             "keywords": [
                 "markdown"
             ],
+            "support": {
+                "issues": "https://github.com/michelf/php-markdown/issues",
+                "source": "https://github.com/michelf/php-markdown/tree/1.9.0"
+            },
             "time": "2019-12-02T02:32:27+00:00"
         },
         {
@@ -580,6 +638,11 @@
                 "pseudorandom",
                 "random"
             ],
+            "support": {
+                "email": "info@paragonie.com",
+                "issues": "https://github.com/paragonie/random_compat/issues",
+                "source": "https://github.com/paragonie/random_compat"
+            },
             "time": "2020-10-15T10:06:57+00:00"
         },
         {
@@ -620,20 +683,24 @@
                 }
             ],
             "description": "PHP package for converting file extensions to MIME types and vice versa.",
+            "support": {
+                "issues": "https://github.com/ralouphie/mimey/issues",
+                "source": "https://github.com/ralouphie/mimey/tree/develop"
+            },
             "time": "2019-03-08T08:49:03+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v3.4.46",
+            "version": "v3.4.47",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "4e1da3c110c52d868f8a9153b7de3ebc381fba78"
+                "reference": "b6b6ad3db3edb1b4b1c1896b1975fb684994de6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/4e1da3c110c52d868f8a9153b7de3ebc381fba78",
-                "reference": "4e1da3c110c52d868f8a9153b7de3ebc381fba78",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/b6b6ad3db3edb1b4b1c1896b1975fb684994de6e",
+                "reference": "b6b6ad3db3edb1b4b1c1896b1975fb684994de6e",
                 "shasum": ""
             },
             "require": {
@@ -664,7 +731,24 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2020-10-24T10:57:07+00:00"
+            "support": {
+                "source": "https://github.com/symfony/finder/tree/v3.4.47"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-11-16T17:02:08+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -726,11 +810,28 @@
                 "polyfill",
                 "portable"
             ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.20.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-10-23T14:02:19+00:00"
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.4.46",
+            "version": "v3.4.47",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -780,6 +881,23 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/yaml/tree/v3.4.47"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-10-24T10:57:07+00:00"
         },
         {
@@ -844,6 +962,20 @@
             "keywords": [
                 "templating"
             ],
+            "support": {
+                "issues": "https://github.com/twigphp/Twig/issues",
+                "source": "https://github.com/twigphp/Twig/tree/v1.44.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/twig/twig",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-10-27T19:22:48+00:00"
         },
         {
@@ -900,6 +1032,10 @@
                 "front-matter",
                 "yaml"
             ],
+            "support": {
+                "issues": "https://github.com/webuni/front-matter/issues",
+                "source": "https://github.com/webuni/front-matter/tree/master"
+            },
             "time": "2016-04-26T23:39:13+00:00"
         }
     ],
@@ -910,5 +1046,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }

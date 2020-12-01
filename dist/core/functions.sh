@@ -117,6 +117,7 @@ function load_config() {
   docs_post_hooks=''
   docs_outline_auto='outline.auto.json'
   docs_outline_merge='outline.merge.json'
+  docs_not_source_do_not_edit__md=''
 
   # Check for installation if needed.
   if [ ! -f core-config.sh ]; then

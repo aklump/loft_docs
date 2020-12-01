@@ -1,3 +1,5 @@
+<!-- Compiled from ./source/README.md: DO NOT EDIT -->
+
 # Loft Docs
 
 ![Loft Docs](images/loft-docs.jpg)
