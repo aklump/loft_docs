@@ -38,6 +38,12 @@ lynx = $(which lynx)
 #drupal_dir = '../help'
 
 ##
+# A header to be prepended to markdown README and CHANGELOG; set to blank to
+# hide header, or edit to suit.  The token "SOURCE" will be replaced with the
+# source path.
+not_source_do_not_edit__md = '<!-- Compiled from SOURCE: DO NOT EDIT -->'
+
+##
 # The file path to an extra README.txt file; when README.md is compiled and
 # this variable is set, the .txt version will be copied to this location.  Notice the second path will also copy the md version.  If this is not desired then omit the second path
 #

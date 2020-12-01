@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.11.15] - 2020-12-01
+### Added
+- New config `not_source_do_not_edit__md` which prepends a header to README.md and CHANGELOG.md if set.  See _install/core-config.sh_ for more info.
+  
 ## 0.11
 
 * Added [internal linking](@linking).

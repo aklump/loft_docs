@@ -6,10 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'AKlump\\Data\\CallTestObject' => $vendorDir . '/aklump/data/Tests/DataTest.php',
     'AKlump\\Data\\Data' => $vendorDir . '/aklump/data/Data.php',
     'AKlump\\Data\\DataInterface' => $vendorDir . '/aklump/data/DataInterface.php',
-    'AKlump\\Data\\DataTest' => $vendorDir . '/aklump/data/Tests/DataTest.php',
     'AKlump\\LoftDocs\\AdvancedHelpIni' => $baseDir . '/src/AKlump/LoftDocs/AdvancedHelpIni.php',
     'AKlump\\LoftDocs\\Compiler' => $baseDir . '/src/AKlump/LoftDocs/Compiler.php',
     'AKlump\\LoftDocs\\DynamicContent\\ApiBlueprint' => $baseDir . '/src/AKlump/LoftDocs/DynamicContent/ApiBlueprint.php',
@@ -51,6 +49,7 @@ return array(
     'AKlump\\LoftLib\\Storage\\FilePath' => $vendorDir . '/aklump/loft-lib/src/AKlump/LoftLib/Storage/FilePath.php',
     'AKlump\\LoftLib\\Storage\\FilePathCollection' => $vendorDir . '/aklump/loft-lib/src/AKlump/LoftLib/Storage/FilePathCollection.php',
     'AKlump\\LoftLib\\Storage\\PersistentInterface' => $vendorDir . '/aklump/loft-lib/src/AKlump/LoftLib/Storage/PersistentInterface.php',
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Doctrine\\Common\\Inflector\\Inflector' => $vendorDir . '/doctrine/inflector/lib/Doctrine/Common/Inflector/Inflector.php',
     'Doctrine\\Inflector\\CachedWordInflector' => $vendorDir . '/doctrine/inflector/lib/Doctrine/Inflector/CachedWordInflector.php',
     'Doctrine\\Inflector\\GenericLanguageInflectorFactory' => $vendorDir . '/doctrine/inflector/lib/Doctrine/Inflector/GenericLanguageInflectorFactory.php',

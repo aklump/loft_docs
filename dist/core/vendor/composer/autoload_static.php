@@ -140,10 +140,8 @@ class ComposerStaticInit57e0d1a2964202d36b8a6b260801c423
     );
 
     public static $classMap = array (
-        'AKlump\\Data\\CallTestObject' => __DIR__ . '/..' . '/aklump/data/Tests/DataTest.php',
         'AKlump\\Data\\Data' => __DIR__ . '/..' . '/aklump/data/Data.php',
         'AKlump\\Data\\DataInterface' => __DIR__ . '/..' . '/aklump/data/DataInterface.php',
-        'AKlump\\Data\\DataTest' => __DIR__ . '/..' . '/aklump/data/Tests/DataTest.php',
         'AKlump\\LoftDocs\\AdvancedHelpIni' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/AdvancedHelpIni.php',
         'AKlump\\LoftDocs\\Compiler' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/Compiler.php',
         'AKlump\\LoftDocs\\DynamicContent\\ApiBlueprint' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/DynamicContent/ApiBlueprint.php',
@@ -185,6 +183,7 @@ class ComposerStaticInit57e0d1a2964202d36b8a6b260801c423
         'AKlump\\LoftLib\\Storage\\FilePath' => __DIR__ . '/..' . '/aklump/loft-lib/src/AKlump/LoftLib/Storage/FilePath.php',
         'AKlump\\LoftLib\\Storage\\FilePathCollection' => __DIR__ . '/..' . '/aklump/loft-lib/src/AKlump/LoftLib/Storage/FilePathCollection.php',
         'AKlump\\LoftLib\\Storage\\PersistentInterface' => __DIR__ . '/..' . '/aklump/loft-lib/src/AKlump/LoftLib/Storage/PersistentInterface.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Doctrine\\Common\\Inflector\\Inflector' => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector/Inflector.php',
         'Doctrine\\Inflector\\CachedWordInflector' => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector/CachedWordInflector.php',
         'Doctrine\\Inflector\\GenericLanguageInflectorFactory' => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector/GenericLanguageInflectorFactory.php',
