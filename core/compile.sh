@@ -265,6 +265,10 @@ if [ "$docs_README" ]; then
         if [[ $? -ne 0 ]]; then
           echo $cp_result
         fi
+        if [[ "$docs_not_source_do_not_edit__md" ]]; then
+          header=${docs_not_source_do_not_edit__md/SOURCE/"./$docs_source_dir/$readme_file"}
+          echo -e "$header\n\n$(cat "$output")" > "$output"
+        fi
         _check_file "$output"
     fi
 
@@ -289,6 +293,10 @@ if [ "$docs_CHANGELOG" ]; then
         cp_result=$($docs_php "$CORE/includes/cp_no_frontmatter.php" "$docs_source_dir/$changelog_file" "$output" "$docs_source_path" "$CORE/cache/source" "$CORE/cache/outline.auto.json")
         if [[ $? -ne 0 ]]; then
           echo $cp_result
+        fi
+        if [[ "$docs_not_source_do_not_edit__md" ]]; then
+          header=${docs_not_source_do_not_edit__md/SOURCE/"./$docs_source_dir/$changelog_file"}
+          echo -e "$header\n\n$(cat "$output")" > "$output"
         fi
         _check_file "$output"
     fi
