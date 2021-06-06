@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Demo: Link to Other Pages</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--link_from_demo">
+<header>
+  <div class="pager"><a href="demos--linkto.html" class="prev demos--linkto">&laquo;Demo: Link Destination Page</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="demos--md_extra.html" class="next demos--md_extra">Demo: Markdown Extra&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+                        <a href="demos--example.html">Demo Pages</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Demo: Link to Other Pages</h1>
+
+<section>
+
+<p>This demonstrates how to do internal linking to pages and sections on a page.</p>
+
+<p>This <a href="demos--linkto.html">link</a> will go to the top of the page.</p>
+
+<p>This <a href="demos--linkto.html#section">link</a> will go to a section on the page.</p>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="demos--linkto.html" class="prev demos--linkto">&laquo;Demo: Link Destination Page</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="demos--md_extra.html" class="next demos--md_extra">Demo: Markdown Extra&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.12.0 &bull; Last Updated: Sat, 05 Jun 2021 18:11:17 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

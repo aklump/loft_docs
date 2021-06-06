@@ -767,8 +767,6 @@ class FilePath implements PersistentInterface {
   /**
    * Helper function
    *
-   * @see FilePath::getFilesRecursively()
-   *
    * @param string $path
    * @param array $options
    *  - 0 int Maximum levels down to recurse
@@ -778,6 +776,8 @@ class FilePath implements PersistentInterface {
    * @param int $level
    *
    * @return \AKlump\LoftLib\Component\Storage\FilePathCollection|null
+   * @see FilePath::getFilesRecursively()
+   *
    */
   private function _getFilesRecursively($path, $options, &$files = NULL, &$level = 0) {
     if (is_null($files)) {
@@ -789,19 +789,21 @@ class FilePath implements PersistentInterface {
       return new $class($path);
     };
     ++$level;
-    $dir = opendir($path . "/.");
-    list($levels) = $options;
-    while ($item = readdir($dir)) {
-      if (($item == "." || $item == "..")) {
-        continue;
-      }
+    if (is_dir($path)) {
+      $dir = opendir($path . "/.");
+      list($levels) = $options;
+      while ($item = readdir($dir)) {
+        if (($item == "." || $item == "..")) {
+          continue;
+        }
 
-      $fullPath = $path . "/" . $item;
-      $files->push($obj($fullPath));
+        $fullPath = $path . "/" . $item;
+        $files->push($obj($fullPath));
 
-      // Descend into directories if levels allows.
-      if (is_dir($fullPath) && (empty($levels) || $level < $levels)) {
-        $this->_getFilesRecursively($fullPath, $options, $files, $level);
+        // Descend into directories if levels allows.
+        if (is_dir($fullPath) && (empty($levels) || $level < $levels)) {
+          $this->_getFilesRecursively($fullPath, $options, $files, $level);
+        }
       }
     }
     --$level;

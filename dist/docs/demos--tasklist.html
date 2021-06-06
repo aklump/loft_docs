@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Demo: Todo List</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--demos--tasklist">
+<header>
+  <div class="pager"><a href="demos--title.html" class="prev demos--title">&laquo;Demo: The Sniffed Title</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="demos--todos-a.html" class="next demos--todos-a">Demo: Todo List Aggregation 1 of 3&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+                        <a href="demos--example.html">Demo Pages</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Demo: Todo List</h1>
+
+<section>
+
+<p>Here are the todo items for this project.  You should see at least 12 todo items.</p>
+
+<ul>
+<li>[ ] demos--todos-b: Echo</li>
+<li>[ ] ld--todos: a task list item</li>
+<li>[ ] demos--todos-a: Charlie</li>
+<li>[ ] demos--todos-a: Bravo</li>
+<li>[ ] demos--todos-a: Alpha</li>
+<li>[ ] ld--todos: a task list item @w-10</li>
+<li>[ ] demos--todos-b: Foxtrot</li>
+<li>[ ] ld--todos: another task</li>
+<li>[ ] demos--todos-c: Lima</li>
+<li>[ ] demos--todos-c: Kilo</li>
+<li>[ ] demos--todos-c: Juliette</li>
+<li>[ ] demos--todos-c: India</li>
+<li>[ ] demos--todos-b: Hotel</li>
+<li>[ ] demos--todos-b: Golf</li>
+<li>[ ] demos--todos-a: Delta</li>
+<li>[ ] demos--md_extra: This task (which uses Markdown Extra todo syntax) will get aggregated automatically @w10</li>
+<li>[ ] ld--todos: a task list item @w10</li>
+<li>[ ] ld--todos: a task list item @w10.1</li>
+</ul>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="demos--title.html" class="prev demos--title">&laquo;Demo: The Sniffed Title</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="demos--todos-a.html" class="next demos--todos-a">Demo: Todo List Aggregation 1 of 3&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.12.0 &bull; Last Updated: Sat, 05 Jun 2021 18:11:19 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

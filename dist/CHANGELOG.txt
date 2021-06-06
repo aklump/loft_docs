@@ -8,6 +8,12 @@
        README.md and CHANGELOG.md if set. See install/core-config.sh for
        more info.
 
+[0.12] - 2021-06-05
+
+  Changed
+
+     * Minimum PHP is now 7.1
+
 0.11
 
      * Added [1]internal linking.

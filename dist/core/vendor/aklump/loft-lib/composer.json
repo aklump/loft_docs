@@ -21,12 +21,12 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "php": ">=5.6",
+        "php": ">=7.1",
         "illuminate\/support": "5.4.36",
         "ralouphie\/mimey": "~2.0",
         "aklump\/data": "^0.0.28"
     },
-    "version": "1.1.5",
+    "version": "1.2.0",
     "require-dev": {
         "phpunit\/phpunit": "^6"
     }
