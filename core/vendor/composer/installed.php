@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '0c32975443ff5114e90af68d88c0d84f522f057d',
+    'reference' => '67659797a7bcd88e82d45aff45c519abc9982203',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '0c32975443ff5114e90af68d88c0d84f522f057d',
+      'reference' => '67659797a7bcd88e82d45aff45c519abc9982203',
     ),
     'aklump/data' => 
     array (

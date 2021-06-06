@@ -100,29 +100,29 @@
         },
         {
             "name": "aklump/loft-lib",
-            "version": "1.1.5",
-            "version_normalized": "1.1.5.0",
+            "version": "1.2.0",
+            "version_normalized": "1.2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aklump/loft-lib.git",
-                "reference": "2b82e5eb59709398773dd65a6d5dc1bb803ec8ad"
+                "reference": "13f12023a6c6f2f47594540e77fa597c68f99d22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aklump/loft-lib/zipball/2b82e5eb59709398773dd65a6d5dc1bb803ec8ad",
-                "reference": "2b82e5eb59709398773dd65a6d5dc1bb803ec8ad",
+                "url": "https://api.github.com/repos/aklump/loft-lib/zipball/13f12023a6c6f2f47594540e77fa597c68f99d22",
+                "reference": "13f12023a6c6f2f47594540e77fa597c68f99d22",
                 "shasum": ""
             },
             "require": {
                 "aklump/data": "^0.0.28",
                 "illuminate/support": "5.4.36",
-                "php": ">=5.6",
+                "php": ">=7.1",
                 "ralouphie/mimey": "~2.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^6"
             },
-            "time": "2020-08-28T19:35:12+00:00",
+            "time": "2021-06-06T00:47:52+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -141,6 +141,10 @@
                 }
             ],
             "description": "Core utilities provided by In the Loft Studios",
+            "support": {
+                "issues": "https://github.com/aklump/loft-lib/issues",
+                "source": "https://github.com/aklump/loft-lib/tree/1.2.0"
+            },
             "install-path": "../aklump/loft-lib"
         },
         {
@@ -189,30 +193,30 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "1.4.3",
-            "version_normalized": "1.4.3.0",
+            "version": "1.4.4",
+            "version_normalized": "1.4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "4650c8b30c753a76bf44fb2ed00117d6f367490c"
+                "reference": "4bd5c1cdfcd00e9e2d8c484f79150f67e5d355d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/4650c8b30c753a76bf44fb2ed00117d6f367490c",
-                "reference": "4650c8b30c753a76bf44fb2ed00117d6f367490c",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/4bd5c1cdfcd00e9e2d8c484f79150f67e5d355d9",
+                "reference": "4bd5c1cdfcd00e9e2d8c484f79150f67e5d355d9",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^7.0",
-                "phpstan/phpstan": "^0.11",
-                "phpstan/phpstan-phpunit": "^0.11",
-                "phpstan/phpstan-strict-rules": "^0.11",
+                "doctrine/coding-standard": "^8.0",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12",
+                "phpstan/phpstan-strict-rules": "^0.12",
                 "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
             },
-            "time": "2020-05-29T07:19:59+00:00",
+            "time": "2021-04-16T17:34:40+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -265,6 +269,24 @@
                 "strings",
                 "uppercase",
                 "words"
+            ],
+            "support": {
+                "issues": "https://github.com/doctrine/inflector/issues",
+                "source": "https://github.com/doctrine/inflector/tree/1.4.4"
+            },
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Finflector",
+                    "type": "tidelift"
+                }
             ],
             "install-path": "../doctrine/inflector"
         },
@@ -562,17 +584,17 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.19",
-            "version_normalized": "2.0.19.0",
+            "version": "v2.0.20",
+            "version_normalized": "2.0.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "446fc9faa5c2a9ddf65eb7121c0af7e857295241"
+                "reference": "0f1f60250fccffeaf5dda91eea1c018aed1adc2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/446fc9faa5c2a9ddf65eb7121c0af7e857295241",
-                "reference": "446fc9faa5c2a9ddf65eb7121c0af7e857295241",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/0f1f60250fccffeaf5dda91eea1c018aed1adc2a",
+                "reference": "0f1f60250fccffeaf5dda91eea1c018aed1adc2a",
                 "shasum": ""
             },
             "require": {
@@ -584,7 +606,7 @@
             "suggest": {
                 "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
             },
-            "time": "2020-10-15T10:06:57+00:00",
+            "time": "2021-04-17T09:33:01+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -610,6 +632,11 @@
                 "pseudorandom",
                 "random"
             ],
+            "support": {
+                "email": "info@paragonie.com",
+                "issues": "https://github.com/paragonie/random_compat/issues",
+                "source": "https://github.com/paragonie/random_compat"
+            },
             "install-path": "../paragonie/random_compat"
         },
         {
@@ -721,17 +748,17 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.20.0",
-            "version_normalized": "1.20.0.0",
+            "version": "v1.23.0",
+            "version_normalized": "1.23.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "f4ba089a5b6366e453971d3aad5fe8e897b37f41"
+                "reference": "46cd95797e9df938fdd2b03693b5fca5e64b01ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/f4ba089a5b6366e453971d3aad5fe8e897b37f41",
-                "reference": "f4ba089a5b6366e453971d3aad5fe8e897b37f41",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/46cd95797e9df938fdd2b03693b5fca5e64b01ce",
+                "reference": "46cd95797e9df938fdd2b03693b5fca5e64b01ce",
                 "shasum": ""
             },
             "require": {
@@ -740,11 +767,11 @@
             "suggest": {
                 "ext-ctype": "For best performance"
             },
-            "time": "2020-10-23T14:02:19+00:00",
+            "time": "2021-02-19T12:13:01+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.20-dev"
+                    "dev-main": "1.23-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -781,6 +808,23 @@
                 "ctype",
                 "polyfill",
                 "portable"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.23.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
             ],
             "install-path": "../symfony/polyfill-ctype"
         },
@@ -860,17 +904,17 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.44.1",
-            "version_normalized": "1.44.1.0",
+            "version": "v1.44.4",
+            "version_normalized": "1.44.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "04b15d4c0bb18ddbf82626320ac07f6a73f199c9"
+                "reference": "4d400421528e9fa40caaffcf7824c172526dd99d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/04b15d4c0bb18ddbf82626320ac07f6a73f199c9",
-                "reference": "04b15d4c0bb18ddbf82626320ac07f6a73f199c9",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/4d400421528e9fa40caaffcf7824c172526dd99d",
+                "reference": "4d400421528e9fa40caaffcf7824c172526dd99d",
                 "shasum": ""
             },
             "require": {
@@ -881,7 +925,7 @@
                 "psr/container": "^1.0",
                 "symfony/phpunit-bridge": "^4.4.9|^5.0.9"
             },
-            "time": "2020-10-27T19:22:48+00:00",
+            "time": "2021-05-16T12:11:20+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -922,6 +966,20 @@
             "homepage": "https://twig.symfony.com",
             "keywords": [
                 "templating"
+            ],
+            "support": {
+                "issues": "https://github.com/twigphp/Twig/issues",
+                "source": "https://github.com/twigphp/Twig/tree/v1.44.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/twig/twig",
+                    "type": "tidelift"
+                }
             ],
             "install-path": "../twig/twig"
         },
