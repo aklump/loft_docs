@@ -1,13 +1,21 @@
 # Changelog
 
 ## [0.11.15] - 2020-12-01
+
 ### Added
-- New config `not_source_do_not_edit__md` which prepends a header to README.md and CHANGELOG.md if set.  See _install/core-config.sh_ for more info.
-  
+
+- New config `not_source_do_not_edit__md` which prepends a header to README.md and CHANGELOG.md if set. See _install/core-config.sh_ for more info.
+
+## [0.12] - 2021-06-05
+
+### Changed
+
+- Minimum PHP is now 7.1
+
 ## 0.11
 
 * Added [internal linking](@linking).
-* Changed the output width from 1024px to 800px.  To go back you need to [custom theme](@theming) your docs.
+* Changed the output width from 1024px to 800px. To go back you need to [custom theme](@theming) your docs.
 
 ## 0.10
 
@@ -15,11 +23,11 @@
 * Removed the `sort` key from the json outlines.
 * Added support for includes for files ending in _.twig.md_.
 * Todos are only compiled if you enable them in _outline.merge.json_.
-* Todos are now present as an include file, not as a page.  Therefore you must both enable aggregation and use an include expression in a file.  See documentation for more info.
+* Todos are now present as an include file, not as a page. Therefore you must both enable aggregation and use an include expression in a file. See documentation for more info.
 
 ## 0.9.10
 
-* POSSIBLE BREAKING CHANGE: Added `Deny from All` to the `.htaccess` for public_html pattern.  If this breaks your compile, use a post compile hook to overwrite the default `.htaccess` file; see `hooks/htaccess.sh` for an example of how to do this.  Be sure to register the hook file in `core-config.sh` in the `post_hooks` section, or it won't be called.
+* POSSIBLE BREAKING CHANGE: Added `Deny from All` to the `.htaccess` for public_html pattern. If this breaks your compile, use a post compile hook to overwrite the default `.htaccess` file; see `hooks/htaccess.sh` for an example of how to do this. Be sure to register the hook file in `core-config.sh` in the `post_hooks` section, or it won't be called.
 
 ## 0.9
 
