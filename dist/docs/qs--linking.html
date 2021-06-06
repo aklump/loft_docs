@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Linking to Other Pages</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--linking">
+<header>
+  <div class="pager"><a href="qs--frontmatter.html" class="prev qs--frontmatter">&laquo;Frontmatter and How to Use</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="qs--search.html" class="next qs--search">Integrating search&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+                        <a href="qs--intro.html">Quick Start</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Linking to Other Pages</h1>
+
+<section>
+
+<p>Because filenames may change, as you move files around to different chapters, or simply re-organize, you do not want to write your internal links to other pages based on filename.  Instead you will use the convention descriped here to link from page A to page B, or to a subsection of page B.</p>
+
+<h2>Link to Another Page Top</h2>
+
+<p>Study these page snippets below to see how cross-page linking is accomplished.  Notice the following points:</p>
+
+<ol>
+<li>The <code>id</code> of the page is declared in it's frontmatter, this is the constant that will be used in your links.  This should never change once established.  This is what allows the filenames to be fluid and not break your internal linking.</li>
+<li>In the link path you will reference your target by it's id, e.g. <code>@link_from_demo</code>, <code>@link_to_demo</code>, etc.  Notice the <code>@</code> symbol as id prefix.</li>
+</ol>
+
+<p>page one: <em>ex--alpha.md</em></p>
+
+<pre><code>---
+id: link_from_demo
+---
+# The First Page
+
+Do you want to [view the next page](@link_to_demo)
+</code></pre>
+
+<p>page two: <em>ex--branvo.md</em></p>
+
+<pre><code>---
+id: link_to_demo
+---
+# The Second Page
+
+Go back to [the first page](@link_from_demo)    
+</code></pre>
+
+<h2>Link to Another Page Section</h2>
+
+<p>This is how you link to a section header on another page.</p>
+
+<ol>
+<li>The header id must not contain whitespace, e.g., <code>extra</code></li>
+</ol>
+
+<p>page one: <em>ex--alpha.md</em></p>
+
+<pre><code>---
+id: link_from_demo
+---
+# The First Page
+
+Do you want to [read some extra info?](@link_to_demo:extra)
+</code></pre>
+
+<p>page two: <em>ex--bravo.md</em></p>
+
+<pre><code>---
+id: link_to_demo
+---
+# The Second Page
+
+Go back to [the first page](@link_from_demo)
+
+##:extra Some Extra Information
+</code></pre>
+
+<h3>Using RAW Html</h3>
+
+<p>If you are going to write plain HTML, you write your headers using an <code>id</code> attribute like vanilla HTML, but your link tag <code>href</code> must use the same format as per Markdown.</p>
+
+<p>page one: <em>ex--alpha.md</em></p>
+
+<pre><code>---
+id: link_from_demo
+---
+# The First Page
+
+Do you want to  &lt;a href="demos--linkto.html#extra"&gt;read some extra info?&lt;/a&gt;
+</code></pre>
+
+<p>page two: <em>ex--branvo.md</em></p>
+
+<pre><code>---
+id: link_to_demo
+---
+# The Second Page
+
+Go back to &lt;a href="demos--linkfrom.html"&gt;the first page&lt;/a&gt;
+
+&lt;h2 id="extra"&gt;Some Extra Information
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="qs--frontmatter.html" class="prev qs--frontmatter">&laquo;Frontmatter and How to Use</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="qs--search.html" class="next qs--search">Integrating search&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.12.0 &bull; Last Updated: Sat, 05 Jun 2021 18:11:28 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

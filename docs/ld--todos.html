@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Tasklist (Todo Items)</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--ld--todos">
+<header>
+  <div class="pager"><a href="ld--github.html" class="prev ld--github">&laquo;Integration with GitHub</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="ld--tokens.html" class="next ld--tokens">Token Replacement&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+                        <a href="ld--cheatsheet.html">Advanced Usage</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Tasklist (Todo Items)</h1>
+
+<section>
+
+<ul>
+<li>You must enable this feature for it to active as described below.</li>
+<li>Once enabled, during compile a dynamic partial will be created of todo items called <em>&#95;tasklist.md</em>.  You may include it like other include files.</li>
+<li>Add one or more todo items to your markdown source files using the Markdown Extra todo format as shown below. <a href="https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments">Read more.</a></li>
+<li>When items are aggregated, the filenames are prepended to the todo item.  The final list will be filtered for uniqueness, and duplicates removed.  If the same todo item appears more than once in a file, it will be reduced to a single item; but the same todo item can appear in more than one file, since the filename prepend creates uniqueness.</li>
+</ul>
+
+<h2>How to Enable</h2>
+
+<p>The following must appear in a <em>source/outline.merge.json</em> to enable todo aggregation.</p>
+
+<pre><code>{
+    "settings": {
+        "tasklist": {
+            "aggregate": true
+        }
+    }
+}
+</code></pre>
+
+<h2>An Example File With Tasks</h2>
+
+<pre><code># A Page With Tasks
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+- [ ] a task list item
+- [ ] another task
+
+Praesent at vulputate tellus, vehicula dignissim elit.
+</code></pre>
+
+<h2>Including the Tasklist on Another Page</h2>
+
+<p>You can do something like the following in a <em>.twig.md</em> file, and the aggregated tasklist will appear there.</p>
+
+<pre><code># Roadmap
+
+Here are the todo items left for this project.
+
+{% include('_tasklist.md') %}
+</code></pre>
+
+<h2>Sorting Tasks in the Final List</h2>
+
+<p>You can control the order the tasks appear <strong>in the aggregated list</strong> by using the weight flag <code>@w</code> followed by an int or float number indicating the sort weight.  Lower numbers appear first.  The source file orders are not changed by the use of <code>@w</code> flag.</p>
+
+<pre><code>- [ ] a task list item @w-10
+- [ ] a task list item @w10
+- [ ] a task list item @w10.1
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="ld--github.html" class="prev ld--github">&laquo;Integration with GitHub</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="ld--tokens.html" class="next ld--tokens">Token Replacement&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.12.0 &bull; Last Updated: Sat, 05 Jun 2021 18:11:25 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

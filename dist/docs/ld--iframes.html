@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Using iFrames</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--ld--iframes">
+<header>
+  <div class="pager"><a href="ld--tokens.html" class="prev ld--tokens">&laquo;Token Replacement</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="ld--variables.html" class="next ld--variables">Using Variables&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+                        <a href="ld--cheatsheet.html">Advanced Usage</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Using iFrames</h1>
+
+<section><h3>iFrames</h3>
+
+<p>One of the cool features is that compiling will grab iframe source and render it directly into the html for offline viewing.  The way to do this is just to include an <code>iframe</code> tag in your source code like so:</p>
+
+<pre><code>&lt;iframe src="http://www.my-site.com/admin/iframe/content" width="100%" height="100%"&gt;&lt;/iframe&gt;
+</code></pre>
+
+<p>Then during compiling, the iframe source will be grabbed and then inserted as an html snippet in the place of the <code>iframe</code> tag.</p>
+
+<h4>Behind a Drupal Login</h4>
+
+<p>In some cases, your iframe content may be behind a Drupal login.  There is a contingency for this and it involves using the correct settings in <code>core-config.sh</code>.  You need to add or uncomment the following, replacing the credentials as appropriate.  That way the compiler will try to log in to your drupal site first before visiting the iframe source url.</p>
+
+<pre><code>credentials = "http://user:pass@www.my-site.com/user/login";
+</code></pre>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="ld--tokens.html" class="prev ld--tokens">&laquo;Token Replacement</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="ld--variables.html" class="next ld--variables">Using Variables&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.12.0 &bull; Last Updated: Sat, 05 Jun 2021 18:11:24 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

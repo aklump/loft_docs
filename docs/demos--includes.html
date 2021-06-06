@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Demo: Include Files</title>
+  <link href="search/tipuesearch.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="page--demos--includes">
+<header>
+  <div class="pager"><a href="demos--search-noindex.html" class="prev demos--search-noindex">&laquo;Demo: Do not include in search indexing</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="demos--linkto.html" class="next link_to_demo">Demo: Link Destination Page&raquo;</a></div></header>
+<section class="sub-header">
+  <div class="breadcrumbs"><a href="index.html">Index</a>
+         &raquo
+                        <a href="demos--example.html">Demo Pages</a>
+         &raquo
+      </div>      <div class="search__wrapper">
+  <form action="search--results.html">
+    <input type="text" class="search-input" name="q" id="tipue_search_input" autocomplete="off" required>
+  </form>
+</div>
+  </section>
+
+
+<h1>Demo: Include Files</h1>
+
+<section>
+
+<p>The following headline is created during compile by <em>hooks/pre_compile.php</em>, which generates a dynamic include file <em>core/cache/source/_headline.md</em> that is inserted here:</p>
+
+<h2>Today is: Sun, 06 Jun 2021 01:11:08 +0000</h2>
+
+<p>And the following table is defined in a partial in <em>source/_table.md</em>.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Key</th>
+  <th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Size</td>
+  <td>large</td>
+</tr>
+<tr>
+  <td>Shape</td>
+  <td>square</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<div class="search__results">
+  <div id="tipue_search_content"></div>
+</div>
+
+<footer>
+  <div class="pager"><a href="demos--search-noindex.html" class="prev demos--search-noindex">&laquo;Demo: Do not include in search indexing</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="demos--linkto.html" class="next link_to_demo">Demo: Link Destination Page&raquo;</a></div>  
+  <div id="footer-legaleeze">
+    <p class="legaleeze center">Version: 0.12.0 &bull; Last Updated: Sat, 05 Jun 2021 18:11:17 -0700</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="search/tipuesearch_content.js"></script>
+  <script src="search/tipuesearch_set.js"></script>
+  <script src="search/tipuesearch.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch()
+    })
+  </script>
+<script src="js/core.js"></script>
+</body>
+</html>
+

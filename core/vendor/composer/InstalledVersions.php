@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '67659797a7bcd88e82d45aff45c519abc9982203',
+    'reference' => '736e28759c1f13a37a58553e6bd032a5f13772db',
     'name' => '__root__',
   ),
   'versions' => 
@@ -31,7 +31,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '67659797a7bcd88e82d45aff45c519abc9982203',
+      'reference' => '736e28759c1f13a37a58553e6bd032a5f13772db',
     ),
     'aklump/data' => 
     array (
