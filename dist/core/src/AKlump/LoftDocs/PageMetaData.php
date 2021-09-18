@@ -43,11 +43,14 @@ class PageMetaData {
   public function get(): array {
     $from = $this->getPageFilepath();
     $fm = new FrontMatter();
+
+    $data = [];
     if (($contents = file_get_contents($from))) {
       $document = $fm->parse($contents);
+      $data = $this->processData($document->getData());
     }
 
-    return $this->processData($document->getData());
+    return $data;
   }
 
   protected function processData($data) {
