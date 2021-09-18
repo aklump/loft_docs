@@ -2,6 +2,9 @@
 
 > @todo This needs to be rewritten due to the [new linking feature](@linking).
 
+> See also [frontmatter](@frontmatter) for updated info.
+---
+
 Using frontmatter, you can define tokens in your markdown file that will be replaced during render.  See examples below.
 
 

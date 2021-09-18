@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "57229bda613f31ef0fdf3a4803d17846",
+    "content-hash": "485c681ae42a5cc1e9e17d9a4c6e799f",
     "packages": [
         {
             "name": "aklump/data",
@@ -196,6 +196,49 @@
                 "source": "https://github.com/aklump/loft_parser/tree/0.1.3"
             },
             "time": "2014-10-23T01:36:32+00:00"
+        },
+        {
+            "name": "ckr/arraymerger",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ckressibucher/array_merger.git",
+                "reference": "ac3d3a011088df46574d33bf1fdad2f829ef6ee9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ckressibucher/array_merger/zipball/ac3d3a011088df46574d33bf1fdad2f829ef6ee9",
+                "reference": "ac3d3a011088df46574d33bf1fdad2f829ef6ee9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "~2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ckr\\Util\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Claudio Kressibucher",
+                    "email": "ckressibucher@graphicworks.ch"
+                }
+            ],
+            "description": "Provides functionality to merge arrays recursively",
+            "support": {
+                "issues": "https://github.com/ckressibucher/array_merger/issues",
+                "source": "https://github.com/ckressibucher/array_merger/tree/master"
+            },
+            "time": "2016-03-10T09:47:33+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -1049,5 +1092,5 @@
         "php": ">=7.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

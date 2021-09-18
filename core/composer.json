@@ -17,6 +17,7 @@
         "webuni/front-matter": "^0.2.0",
         "jasonlewis/resource-watcher": "^1.2",
         "matomo/ini": "^2.0",
-        "aklump/loft-lib": "^1.2"
+        "aklump/loft-lib": "^1.2",
+        "ckr/arraymerger": "^2.0"
     }
 }

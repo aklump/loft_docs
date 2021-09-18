@@ -36,3 +36,17 @@ You can also provide file metadata using _outline.merge.json_.  Do this when yam
         }
     }
 
+## Frontmatter as Tokens
+
+Frontmatter is available **when using the Twig extension** `.twig.md` and preceding the keys with `meta`.  For example:
+
+In _source/quote.twig.md_...
+````
+---
+written: 2021-09-18
+---
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+
+Author, {{ meta.written|date("F j, Y") }}
+```
+

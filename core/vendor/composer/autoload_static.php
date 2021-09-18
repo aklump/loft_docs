@@ -45,6 +45,10 @@ class ComposerStaticInitc57fe010032568a67499f5b2880f316d
             'Doctrine\\Inflector\\' => 19,
             'Doctrine\\Common\\Inflector\\' => 26,
         ),
+        'C' => 
+        array (
+            'Ckr\\Util\\' => 9,
+        ),
         'A' => 
         array (
             'AKlump\\LoftLib\\' => 15,
@@ -104,6 +108,10 @@ class ComposerStaticInitc57fe010032568a67499f5b2880f316d
         'Doctrine\\Common\\Inflector\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
+        ),
+        'Ckr\\Util\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ckr/arraymerger/src',
         ),
         'AKlump\\LoftLib\\' => 
         array (

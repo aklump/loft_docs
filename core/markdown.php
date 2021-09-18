@@ -11,6 +11,7 @@ require_once dirname(__FILE__) . '/vendor/autoload.php';
 
 use AKlump\LoftDocs\Compiler;
 use AKlump\LoftDocs\MarkdownExtra;
+use AKlump\LoftDocs\PageMetaData;
 use AKlump\LoftLib\Bash\Color;
 use AKlump\LoftLib\Storage\FilePath;
 use Webuni\FrontMatter\FrontMatter;
@@ -49,6 +50,9 @@ try {
     ));
 
     $twig_vars = $compiler->getVariables();
+    $data_provider = new PageMetaData(FilePath::create($static_source_dir));
+    $twig_vars['meta'] = $data_provider->setPageId($path_info['filename'])->get();
+
     $regex = '/^' . preg_quote($static_source_dir, '/') . '/';
     $relative_file = trim(preg_replace($regex, '', $in_file), '/');
     $contents = $twig->render($relative_file, $twig_vars);
