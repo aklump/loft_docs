@@ -18,6 +18,13 @@ namespace AKlump\LoftLib\Code;
 final class ShortCodes {
 
   /**
+   * The regex used to locate whitespace in shortcodes.
+   *
+   * @var string
+   */
+  const WS_REGEX = '(?:\s|&nbsp;)';
+
+  /**
    * @var array
    */
   static $cache = [];
@@ -101,12 +108,12 @@ final class ShortCodes {
     });
     $names_regex = array_map('preg_quote', $element_names);
     foreach ($names_regex as $name_regex) {
-      $enclosing = '/\[\s*(' . $name_regex . ')\s*([^\]]*)\s*\](.*?)\[\/(' . $name_regex . ')\]/';
+      $enclosing = sprintf('/\[%s*(%s)%s*([^\]]*)%s*\](.*?)\[\/(%s)\]/', self::WS_REGEX, $name_regex, self::WS_REGEX, self::WS_REGEX, $name_regex);
       $base = preg_replace_callback($enclosing, function ($matches) use ($base, $element_value_map) {
         return self::getElementReplacementValue($matches[1], $matches[2], $matches[3], $element_value_map);
       }, (string) $base);
 
-      $self_closing = '/\[\s*(' . $name_regex . ')\s*(.*?)\s*\]/';
+      $self_closing = sprintf('/\[%s*(%s)%s*(.*?)%s*\]/', self::WS_REGEX, $name_regex, self::WS_REGEX, self::WS_REGEX);
       $base = preg_replace_callback($self_closing, function ($matches) use ($base, $element_value_map) {
         return self::getElementReplacementValue($matches[1], $matches[2], NULL, $element_value_map);
       }, (string) $base);
@@ -132,14 +139,14 @@ final class ShortCodes {
     if (!isset(static::$cache['elements'][$cid])) {
 
       // Generate a set of paired matchers based on opening tags.
-      $self_closing = '\[\s*([a-z0-9_]*)\s*([^\]\/]*)\s*\]';
+      $self_closing = sprintf('\[%s*([a-z0-9_]*)%s*([^\]\/]*)%s*\]', self::WS_REGEX, self::WS_REGEX, self::WS_REGEX);
       preg_match_all("/($self_closing)/", $base, $matches, PREG_SET_ORDER);
       $matchers = array_map(function ($match) {
         $tag = $match[2];
-        $self_closing = '\[\s*(%s)\s*([^\]\/]*)\s*\]';
-        $enclosing = '\[\s*(%s)\s*([^\]\/]*)\s*\](.*?)\[\/\s*%s+\]';
+        $self_closing = sprintf('\[%s*(%s)%s*([^\]\/]*)%s*\]', self::WS_REGEX, $tag, self::WS_REGEX, self::WS_REGEX);
+        $enclosing = sprintf('\[%s*(%s)%s*([^\]\/]*)%s*\](.*?)\[\/%s*%s+\]', self::WS_REGEX, $tag, self::WS_REGEX, self::WS_REGEX, self::WS_REGEX, $tag);
 
-        return sprintf("/($enclosing)|($self_closing)/", $tag, $tag, $tag);
+        return "/($enclosing)|($self_closing)/";
       }, $matches);
       $elements = [];
       while ($regex = array_shift($matchers)) {

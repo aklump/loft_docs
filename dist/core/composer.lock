@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "57229bda613f31ef0fdf3a4803d17846",
+    "content-hash": "485c681ae42a5cc1e9e17d9a4c6e799f",
     "packages": [
         {
             "name": "aklump/data",
@@ -108,16 +108,16 @@
         },
         {
             "name": "aklump/loft-lib",
-            "version": "1.2.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aklump/loft-lib.git",
-                "reference": "13f12023a6c6f2f47594540e77fa597c68f99d22"
+                "reference": "7c377c03598b90389c1bc9ff75139eee51584a10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aklump/loft-lib/zipball/13f12023a6c6f2f47594540e77fa597c68f99d22",
-                "reference": "13f12023a6c6f2f47594540e77fa597c68f99d22",
+                "url": "https://api.github.com/repos/aklump/loft-lib/zipball/7c377c03598b90389c1bc9ff75139eee51584a10",
+                "reference": "7c377c03598b90389c1bc9ff75139eee51584a10",
                 "shasum": ""
             },
             "require": {
@@ -148,9 +148,9 @@
             "description": "Core utilities provided by In the Loft Studios",
             "support": {
                 "issues": "https://github.com/aklump/loft-lib/issues",
-                "source": "https://github.com/aklump/loft-lib/tree/1.2.0"
+                "source": "https://github.com/aklump/loft-lib/tree/1.4.0"
             },
-            "time": "2021-06-06T00:47:52+00:00"
+            "time": "2021-07-18T00:37:24+00:00"
         },
         {
             "name": "aklump/loft_parser",
@@ -196,6 +196,49 @@
                 "source": "https://github.com/aklump/loft_parser/tree/0.1.3"
             },
             "time": "2014-10-23T01:36:32+00:00"
+        },
+        {
+            "name": "ckr/arraymerger",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ckressibucher/array_merger.git",
+                "reference": "ac3d3a011088df46574d33bf1fdad2f829ef6ee9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ckressibucher/array_merger/zipball/ac3d3a011088df46574d33bf1fdad2f829ef6ee9",
+                "reference": "ac3d3a011088df46574d33bf1fdad2f829ef6ee9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "~2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ckr\\Util\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Claudio Kressibucher",
+                    "email": "ckressibucher@graphicworks.ch"
+                }
+            ],
+            "description": "Provides functionality to merge arrays recursively",
+            "support": {
+                "issues": "https://github.com/ckressibucher/array_merger/issues",
+                "source": "https://github.com/ckressibucher/array_merger/tree/master"
+            },
+            "time": "2016-03-10T09:47:33+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -902,16 +945,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.44.4",
+            "version": "v1.44.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "4d400421528e9fa40caaffcf7824c172526dd99d"
+                "reference": "dd4353357c5a116322e92a00d16043a31881a81e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/4d400421528e9fa40caaffcf7824c172526dd99d",
-                "reference": "4d400421528e9fa40caaffcf7824c172526dd99d",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/dd4353357c5a116322e92a00d16043a31881a81e",
+                "reference": "dd4353357c5a116322e92a00d16043a31881a81e",
                 "shasum": ""
             },
             "require": {
@@ -964,7 +1007,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v1.44.4"
+                "source": "https://github.com/twigphp/Twig/tree/v1.44.5"
             },
             "funding": [
                 {
@@ -976,7 +1019,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-16T12:11:20+00:00"
+            "time": "2021-09-17T08:35:19+00:00"
         },
         {
             "name": "webuni/front-matter",
@@ -1049,5 +1092,5 @@
         "php": ">=7.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

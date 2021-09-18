@@ -223,4 +223,62 @@ class Bash {
 
     return FALSE;
   }
+
+  /**
+   * Prompt user to confirm one of several options.
+   *
+   * @param string $label
+   *   The label to use for the prompt.  This may include the token OPTIONS
+   *   which will be replaced with a CSV string of the $valid_input, e.g. 'Are
+   *   you sure? OPTIONS'.
+   * @param array|string[] $options
+   *   An array of valid answers, the prompt will only allow one of these
+   *   answers.
+   * @param string $invalid_message
+   *   The message to print if an invalid input is received.
+   * @param bool $ignore_case
+   *   Set this to false for case checking on the response.
+   *
+   * @return mixed|string
+   *   The accepted user response; one of $options.
+   */
+  public static function confirm(string $label, array $options = [
+    'y',
+    'n',
+  ], string $invalid_message = ' 👈 is not one of OPTIONS', bool $ignore_case = TRUE
+  ) {
+    $command = ['read'];
+    $max_chars = 0;
+    foreach ($options as $input) {
+      $max_chars = max($max_chars, strlen($input));
+    }
+    $command[] = "-n $max_chars";
+    $detoken = function ($string) use ($options) {
+      return str_replace('OPTIONS', sprintf('(%s)', implode('/', $options)), $string);
+    };
+    if ($label) {
+      $label = $detoken($label);
+      $command[] = "-p \"$label \"";
+    }
+    $command = implode(' ', $command);
+    if ($ignore_case) {
+      $options = array_map('strtolower', $options);
+    }
+    while (!in_array($user_input, $options)) {
+      if ($user_input) {
+        echo Color::wrap('red', $detoken($invalid_message));
+        echo PHP_EOL;
+      }
+      $command_response = [];
+      exec($command . ' input && echo $input', $command_response);
+      $user_input = $command_response[0];
+      if ($ignore_case) {
+        $user_input = strtolower($user_input);
+      }
+    }
+    echo PHP_EOL;
+
+    return $user_input;
+  }
+
 }

@@ -8,26 +8,32 @@
  */
 
 use AKlump\Data\Data;
+use AKlump\LoftDocs\PageMetaData;
 use AKlump\LoftDocs\OutlineJson as Index;
 use AKlump\LoftLib\Storage\FilePath;
+use Ckr\Util\ArrayMerger;
 
 $CORE = getenv('LOFT_DOCS_CORE');
 require_once $CORE . '/vendor/autoload.php';
 
+list(, $outline_file, $page_id, $version) = $argv;
+
+$data_provider = new PageMetaData(FilePath::create("$CORE/../source"));
+$page_frontmatter = $data_provider->setPageId($page_id)->get();
 $data_file = getenv('LOFT_DOCS_CACHE_DIR') . '/page_data.json';
 $page_data = file_exists($data_file) ? json_decode(file_get_contents($data_file), TRUE) : array();
+$page_data[$page_id] = ArrayMerger::doMerge($page_frontmatter, $page_data[$page_id] ?? []);
+
 $vars = array(
+  'version' => $version,
   'classes' => array(),
+  'meta' => $page_frontmatter,
+
+  // @deprecated; use meta instead.
+  'page' => $page_data[$page_id],
 );
 
-list(, $outline_file, $page_id, $vars['version']) = $argv;
 $g = new Data();
-
-// Add in page vars if found.
-if (isset($page_data[$page_id])) {
-  $vars['page'] = $page_data[$page_id];
-}
-
 $index = new Index($outline_file);
 
 $vars['index'] = array();
@@ -63,7 +69,7 @@ $vars['book'] = [
 
 // Add in additional vars:
 $now = new \DateTime('now', new \DateTimeZone('America/Los_Angeles'));
-$vars['date'] = $now->format('r');
+$vars['date'] = $vars['date'] ?? $now->format('r');
 
 // Search support.
 $outline = FilePath::create($outline_file)->load()->getJson(TRUE);

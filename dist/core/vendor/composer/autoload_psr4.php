@@ -19,6 +19,7 @@ return array(
     'Illuminate\\Contracts\\' => array($vendorDir . '/illuminate/contracts'),
     'Doctrine\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib/Doctrine/Inflector'),
     'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib/Doctrine/Common/Inflector'),
+    'Ckr\\Util\\' => array($vendorDir . '/ckr/arraymerger/src'),
     'AKlump\\LoftLib\\' => array($vendorDir . '/aklump/loft-lib/src/AKlump/LoftLib'),
     'AKlump\\Data\\' => array($vendorDir . '/aklump/data'),
 );

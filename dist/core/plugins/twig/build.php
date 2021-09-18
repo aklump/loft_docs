@@ -47,7 +47,7 @@ switch ($partial) {
       $vars['breadcrumbs'][] = $crumb;
     }
     $vars['is_index'] = FALSE;
-    $vars['content'] = '<section>' . file_get_contents($partial) . '</section>';
+    $vars['content'] = file_get_contents($partial);
     break;
 }
 

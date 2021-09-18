@@ -6,6 +6,29 @@ use AKlump\LoftLib\Testing\PhpUnitTestCase;
 
 class ShortCodesTest extends PhpUnitTestCase {
 
+  public function testShortcodesGetElementsWorkWithNBPS() {
+    $base = 'lorem [foo&nbsp;id="1"]ipsum[/foo] dolar [bar&nbsp;id="5"]';
+    $elements = ShortCodes::getElements($base);
+    $this->assertCount(2, $elements);
+    $this->assertSame('foo', $elements[0]['name']);
+    $this->assertSame(1, $elements[0]['attributes']['id']);
+    $this->assertSame('bar', $elements[1]['name']);
+    $this->assertSame(5, $elements[1]['attributes']['id']);
+  }
+
+  public function testShortcodesInflateWorkWithNBPS() {
+    $base = 'lorem [foo&nbsp;id="1"]ipsum[/foo] dolar [bar&nbsp;id="5"]';
+    $inflated = ShortCodes::inflate($base, [
+      'foo' => function ($html, $attributes) {
+        return 'foo.' . $html . '.foo.' . $attributes['id'];
+      },
+      'bar' => function ($html, $attributes) {
+        return 'bar.' . $attributes['id'];
+      },
+    ]);
+    $this->assertSame('lorem foo.ipsum.foo.1 dolar bar.5', $inflated);
+  }
+
   public function testAbleToGetSomeElementsIfAnotherFailsAttributeParsing() {
     $base = 'lorem [foo id="1"]ipsum[/foo] dolar [bar] sit [ãka wakã] amet';
     $elements = ShortCodes::getElements($base);
@@ -196,7 +219,6 @@ class ShortCodesTest extends PhpUnitTestCase {
 
     $this->assertSame($control, ShortCodes::getElements($subject));
   }
-
 
   /**
    * Provides data for testReplaceTagsWorks.
