@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit57e0d1a2964202d36b8a6b260801c423
+class ComposerStaticInitc57fe010032568a67499f5b2880f316d
 {
     public static $files = array (
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
@@ -44,6 +44,10 @@ class ComposerStaticInit57e0d1a2964202d36b8a6b260801c423
         array (
             'Doctrine\\Inflector\\' => 19,
             'Doctrine\\Common\\Inflector\\' => 26,
+        ),
+        'C' => 
+        array (
+            'Ckr\\Util\\' => 9,
         ),
         'A' => 
         array (
@@ -105,6 +109,10 @@ class ComposerStaticInit57e0d1a2964202d36b8a6b260801c423
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
         ),
+        'Ckr\\Util\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ckr/arraymerger/src',
+        ),
         'AKlump\\LoftLib\\' => 
         array (
             0 => __DIR__ . '/..' . '/aklump/loft-lib/src/AKlump/LoftLib',
@@ -150,6 +158,7 @@ class ComposerStaticInit57e0d1a2964202d36b8a6b260801c423
         'AKlump\\LoftDocs\\MarkdownExtra' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/MarkdownExtra.php',
         'AKlump\\LoftDocs\\OutlineJson' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/OutlineJson.php',
         'AKlump\\LoftDocs\\OutlineToHelpIni' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/OutlineToHelpIni.php',
+        'AKlump\\LoftDocs\\PageMetaData' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/PageMetaData.php',
         'AKlump\\LoftDocs\\SearchHtml' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/SearchHtml.php',
         'AKlump\\LoftDocs\\SearchPageData' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/SearchPageData.php',
         'AKlump\\LoftDocs\\TipueSearch' => __DIR__ . '/../..' . '/src/AKlump/LoftDocs/TipueSearch.php',
@@ -183,6 +192,7 @@ class ComposerStaticInit57e0d1a2964202d36b8a6b260801c423
         'AKlump\\LoftLib\\Storage\\FilePath' => __DIR__ . '/..' . '/aklump/loft-lib/src/AKlump/LoftLib/Storage/FilePath.php',
         'AKlump\\LoftLib\\Storage\\FilePathCollection' => __DIR__ . '/..' . '/aklump/loft-lib/src/AKlump/LoftLib/Storage/FilePathCollection.php',
         'AKlump\\LoftLib\\Storage\\PersistentInterface' => __DIR__ . '/..' . '/aklump/loft-lib/src/AKlump/LoftLib/Storage/PersistentInterface.php',
+        'Ckr\\Util\\ArrayMerger' => __DIR__ . '/..' . '/ckr/arraymerger/src/ArrayMerger.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Doctrine\\Common\\Inflector\\Inflector' => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector/Inflector.php',
         'Doctrine\\Inflector\\CachedWordInflector' => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector/CachedWordInflector.php',
@@ -831,10 +841,10 @@ class ComposerStaticInit57e0d1a2964202d36b8a6b260801c423
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit57e0d1a2964202d36b8a6b260801c423::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit57e0d1a2964202d36b8a6b260801c423::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit57e0d1a2964202d36b8a6b260801c423::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit57e0d1a2964202d36b8a6b260801c423::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc57fe010032568a67499f5b2880f316d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc57fe010032568a67499f5b2880f316d::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc57fe010032568a67499f5b2880f316d::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitc57fe010032568a67499f5b2880f316d::$classMap;
 
         }, null, ClassLoader::class);
     }
