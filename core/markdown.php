@@ -41,6 +41,9 @@ try {
 
   $path_info = pathinfo($in_file);
 
+  $page_metadata = new PageMetaData(FilePath::create($static_source_dir));
+  $page_metadata->setPageId($path_info['filename']);
+
   // Twig Pre-Processing if ends in .twig.md.
   if (substr($in_file, -1 * strlen($twig_extension)) === $twig_extension) {
     $out_file = $html_output_dir . '/' . preg_replace('/\.twig$/', '', $path_info['filename']) . '.html';
@@ -50,8 +53,7 @@ try {
     ));
 
     $twig_vars = $compiler->getVariables();
-    $data_provider = new PageMetaData(FilePath::create($static_source_dir));
-    $twig_vars['meta'] = $data_provider->setPageId($path_info['filename'])->get();
+    $twig_vars['meta'] = $page_metadata->get();
 
     $regex = '/^' . preg_quote($static_source_dir, '/') . '/';
     $relative_file = trim(preg_replace($regex, '', $in_file), '/');
@@ -65,10 +67,8 @@ try {
     $contents = file_get_contents($in_file);
   }
 
-  $fm = new FrontMatter();
-  $document = $fm->parse($contents);
-  $contents = $document->getContent();
-  $data = $document->getData();
+  $data = $page_metadata->get();
+  $contents = $page_metadata->getPage();
 
   if (isset($data['twig'])) {
     foreach ($data['twig'] as $find => $replace) {

@@ -10,6 +10,8 @@ use Webuni\FrontMatter\FrontMatter;
  */
 class PageMetaData {
 
+  protected $page;
+
   protected $pageId;
 
   protected $source;
@@ -27,6 +29,7 @@ class PageMetaData {
    * @return $this
    */
   public function setPageId($page_id) {
+    $this->page = NULL;
     $this->pageId = $page_id;
 
     return $this;
@@ -46,23 +49,42 @@ class PageMetaData {
     $fm = new FrontMatter();
 
     $data = [];
-    if (($contents = file_get_contents($from))) {
+    if (($this->page = file_get_contents($from))) {
 
       // Detect if we're using frontmatter or HTML comment.
-      if ('<!--' === substr(ltrim($contents), 0, 4)) {
+      if ('<!--' === substr(ltrim($this->page), 0, 4)) {
         $data = [];
-        preg_replace_callback("/<!\-\-(.+?)\-\->/s", function ($matches) use (&$data) {
+        $this->page = preg_replace_callback("/<!\-\-(.+?)\-\->/s", function ($matches) use (&$data) {
           $data = trim($matches[1], "\n");
           $data = Yaml::parse($data);
-        }, $contents);
+        }, $this->page);
       }
       else {
-        $data = $fm->parse($contents)->getData();
+        $handler = $fm->parse($this->page);
+        $this->page = $handler->getContent();
+        $data = $handler->getData();
       }
       $data = $this->processData($data);
     }
 
     return $data;
+  }
+
+  /**
+   * Return $string with metadata removed.
+   *
+   * @param $string
+   *   The contents of a page with metadata header to be remove.
+   *
+   * @return string
+   *   $string without metadata.
+   */
+  public function getPage(): string {
+    if (is_null($this->page)) {
+      $this->get();
+    }
+
+    return $this->page;
   }
 
   protected function processData($data) {

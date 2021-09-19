@@ -18,11 +18,25 @@ Read more about [frontmatter](http://assemble.io/docs/YAML-front-matter.html) on
 
 Here is an example:
 
-    ---
-    title: The title of this page
-    tags: code php how-to
-    noindex: true
-    ---
+```
+---
+title: The title of this page
+tags: code php how-to
+noindex: true
+---
+```
+
+## Frontmatter as an HTML Comment
+
+You may use an HTML comment syntax instead at the top of your markdown file, if preferred.  Inside the comment the format is still YAML.
+
+```html
+<!--
+title: The title of this page
+tags: code php how-to
+noindex: true
+-->
+```
 
 ## Metadata as JSON
 
