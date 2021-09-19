@@ -2,6 +2,7 @@
 
 namespace AKlump\LoftDocs;
 
+use Symfony\Component\Yaml\Yaml;
 use Webuni\FrontMatter\FrontMatter;
 
 /**
@@ -46,8 +47,19 @@ class PageMetaData {
 
     $data = [];
     if (($contents = file_get_contents($from))) {
-      $document = $fm->parse($contents);
-      $data = $this->processData($document->getData());
+
+      // Detect if we're using frontmatter or HTML comment.
+      if ('<!--' === substr(ltrim($contents), 0, 4)) {
+        $data = [];
+        preg_replace_callback("/<!\-\-(.+?)\-\->/s", function ($matches) use (&$data) {
+          $data = trim($matches[1], "\n");
+          $data = Yaml::parse($data);
+        }, $contents);
+      }
+      else {
+        $data = $fm->parse($contents)->getData();
+      }
+      $data = $this->processData($data);
     }
 
     return $data;
