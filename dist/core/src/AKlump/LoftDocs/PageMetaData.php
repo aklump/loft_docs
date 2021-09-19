@@ -2,12 +2,15 @@
 
 namespace AKlump\LoftDocs;
 
+use Symfony\Component\Yaml\Yaml;
 use Webuni\FrontMatter\FrontMatter;
 
 /**
  * A class to extract metadata from a source page.
  */
 class PageMetaData {
+
+  protected $page;
 
   protected $pageId;
 
@@ -26,6 +29,7 @@ class PageMetaData {
    * @return $this
    */
   public function setPageId($page_id) {
+    $this->page = NULL;
     $this->pageId = $page_id;
 
     return $this;
@@ -45,12 +49,42 @@ class PageMetaData {
     $fm = new FrontMatter();
 
     $data = [];
-    if (($contents = file_get_contents($from))) {
-      $document = $fm->parse($contents);
-      $data = $this->processData($document->getData());
+    if (($this->page = file_get_contents($from))) {
+
+      // Detect if we're using frontmatter or HTML comment.
+      if ('<!--' === substr(ltrim($this->page), 0, 4)) {
+        $data = [];
+        $this->page = preg_replace_callback("/<!\-\-(.+?)\-\->/s", function ($matches) use (&$data) {
+          $data = trim($matches[1], "\n");
+          $data = Yaml::parse($data);
+        }, $this->page);
+      }
+      else {
+        $handler = $fm->parse($this->page);
+        $this->page = $handler->getContent();
+        $data = $handler->getData();
+      }
+      $data = $this->processData($data);
     }
 
     return $data;
+  }
+
+  /**
+   * Return $string with metadata removed.
+   *
+   * @param $string
+   *   The contents of a page with metadata header to be remove.
+   *
+   * @return string
+   *   $string without metadata.
+   */
+  public function getPage(): string {
+    if (is_null($this->page)) {
+      $this->get();
+    }
+
+    return $this->page;
   }
 
   protected function processData($data) {
