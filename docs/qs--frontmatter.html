@@ -77,6 +77,17 @@ noindex: true
 ---
 </code></pre>
 
+<h2>Frontmatter as an HTML Comment</h2>
+
+<p>You may use an HTML comment syntax instead at the top of your markdown file, if preferred.  Inside the comment the format is still YAML.</p>
+
+<pre><code class="html">&lt;!--
+title: The title of this page
+tags: code php how-to
+noindex: true
+--&gt;
+</code></pre>
+
 <h2>Metadata as JSON</h2>
 
 <p>You can also provide file metadata using <em>outline.merge.json</em>.  Do this when yaml is not appropriate and using JSON would be easier.  Here is an example:</p>
@@ -114,7 +125,7 @@ noindex: true
 <footer>
   <div class="pager"><a href="qs--toc.html" class="prev qs--toc">&laquo;Table of Contents</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="qs--linking.html" class="next linking">Linking to Other Pages&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.12.2 &bull; Last Updated: Sat, 18 Sep 2021 15:39:13 -0700</p>
+    <p class="legaleeze center">Version: 0.12.3 &bull; Last Updated: Sat, 18 Sep 2021 19:14:39 -0700</p>
   </div>
 </footer>
 
