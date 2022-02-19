@@ -23,6 +23,7 @@ $compiler->addInclude('_apib_example.md', $contents);
 
 // Create an include file for testing addInclude().
 $contents = "## Today is: " . date('r');
-echo $compiler->addInclude('_headline.md', $contents)
-    ->getBasename() . ' has been created.' && exit(0);
-exit(1);
+$compiler->addInclude('_headline.md', $contents);
+
+$compiler->addSourceFile('demos--dynamic-source-file.md', "# Dynamic Source File\n\nThis file was created in " . __FILE__);
+
