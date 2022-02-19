@@ -6,8 +6,9 @@
 
 use AKlump\Data\Data;
 use AKlump\LoftDocs\Compiler;
+use AKlump\LoftDocs\PageMetaData;
 use AKlump\LoftLib\Bash\Color;
-use Webuni\FrontMatter\FrontMatter;
+use AKlump\LoftLib\Storage\FilePath;
 
 $file = __FILE__;
 require_once dirname($file) . '/../vendor/autoload.php';
@@ -34,18 +35,18 @@ $user = Compiler::indexSourceFiles($source_dir);
 $generated = Compiler::indexSourceFiles($generated_dir);
 $first_level = array_merge($user, $generated);
 
-$fm = new FrontMatter();
 $g = new Data();
 foreach ($first_level as $data) {
   $path = $data['path'];
   $file = $data['basename'];
-
-  $front_matter = array();
-  $contents = $body = '';
+  $front_matter = [];
+  $contents = '';
+  $body = '';
   if (is_file($path) && ($contents = file_get_contents($path))) {
-    $document = $fm->parse($contents);
-    $front_matter = $document->getData();
-    $body = $document->getContent();
+    $page_metadata = new PageMetaData(FilePath::create($data['dirname']));
+    $page_metadata->setPageId($data['filename']);
+    $front_matter = $page_metadata->get();
+    $body = $page_metadata->getPage();
   }
 
   // Allow this file to be skipped for indexing.

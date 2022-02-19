@@ -138,13 +138,6 @@
             "chapter": "demos"
         },
         {
-            "id": "demos--search-noindex",
-            "title": "Demo: Do not include in search indexing",
-            "content_title": "Demo: Do not include in search indexing",
-            "file": "demos--search-noindex",
-            "chapter": "demos"
-        },
-        {
             "id": "demos--includes",
             "title": "Demo: Include Files",
             "content_title": "Demo: Include Files",
@@ -233,6 +226,13 @@
             "title": "Demos  No Title",
             "content_title": "Demos  No Title",
             "file": "demos--no-title",
+            "chapter": "demos"
+        },
+        {
+            "id": "demos--search-noindex",
+            "title": "Demos  Search Noindex",
+            "content_title": "Demos  Search Noindex",
+            "file": "demos--search-noindex",
             "chapter": "demos"
         },
         {

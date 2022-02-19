@@ -2,6 +2,7 @@
 
 namespace AKlump\LoftDocs;
 
+use AKlump\LoftLib\Storage\FilePath;
 use Symfony\Component\Yaml\Yaml;
 use Webuni\FrontMatter\FrontMatter;
 
@@ -16,7 +17,7 @@ class PageMetaData {
 
   protected $source;
 
-  public function __construct(\AKlump\LoftLib\Storage\FilePath $source_dir) {
+  public function __construct(FilePath $source_dir) {
     $this->source = $source_dir;
   }
 
