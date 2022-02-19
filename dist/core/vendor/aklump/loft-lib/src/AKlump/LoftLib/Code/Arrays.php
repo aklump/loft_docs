@@ -393,4 +393,31 @@ class Arrays {
     return implode($glue, $pieces);
   }
 
+  /**
+   * Return the value in $array that is closest to $value
+   *
+   * @param int|float $value
+   *   The numeric value to look for it's closest match.  $values that are
+   *   exactly in the middle will be matched to the lesser value in $array.
+   * @param array $array
+   *   An array of numeric values.
+   *
+   * @return float|int
+   *   The closest value in $array to $value.
+   */
+  public static function getClosestValueTo($value, $array) {
+    $distance = NULL;
+    foreach ($array as $v) {
+      $d = abs($v - $value);
+      if (is_null($distance) || $d < $distance) {
+        $distance = $d;
+        $closest = $v;
+      }
+    }
+    $closest = $closest ?? $v;
+
+    return $closest;
+  }
 }
+
+

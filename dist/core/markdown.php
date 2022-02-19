@@ -63,13 +63,11 @@ try {
     $compiler->addSourceFile(str_replace($twig_extension, $markdown_extension, $relative_file), $contents);
   }
   else {
+    $contents = $page_metadata->getPage();
     $out_file = $html_output_dir . '/' . $path_info['filename'] . '.html';
-    $contents = file_get_contents($in_file);
   }
 
   $data = $page_metadata->get();
-  $contents = $page_metadata->getPage();
-
   if (isset($data['twig'])) {
     foreach ($data['twig'] as $find => $replace) {
       $data['tokens']["{{ $find }}"] = $replace;

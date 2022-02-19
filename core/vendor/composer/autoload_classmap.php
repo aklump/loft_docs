@@ -40,6 +40,7 @@ return array(
     'AKlump\\LoftLib\\Code\\ObjectCacheTrait' => $vendorDir . '/aklump/loft-lib/src/AKlump/LoftLib/Code/ObjectCacheTrait.php',
     'AKlump\\LoftLib\\Code\\PersistentSequence' => $vendorDir . '/aklump/loft-lib/src/AKlump/LoftLib/Code/PersistentSequence.php',
     'AKlump\\LoftLib\\Code\\ShortCodes' => $vendorDir . '/aklump/loft-lib/src/AKlump/LoftLib/Code/ShortCodes.php',
+    'AKlump\\LoftLib\\Code\\ShortCodesInterface' => $vendorDir . '/aklump/loft-lib/src/AKlump/LoftLib/Code/ShortCodesInterface.php',
     'AKlump\\LoftLib\\Code\\StandardPhpErrorException' => $vendorDir . '/aklump/loft-lib/src/AKlump/LoftLib/Code/StandardPhpErrorException.php',
     'AKlump\\LoftLib\\Code\\Strings' => $vendorDir . '/aklump/loft-lib/src/AKlump/LoftLib/Code/Strings.php',
     'AKlump\\LoftLib\\Code\\ThrowableErrorsTrait' => $vendorDir . '/aklump/loft-lib/src/AKlump/LoftLib/Code/ThrowableErrorsTrait.php',

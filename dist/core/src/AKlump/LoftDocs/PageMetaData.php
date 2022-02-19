@@ -49,7 +49,7 @@ class PageMetaData {
     $fm = new FrontMatter();
 
     $data = [];
-    if (($this->page = file_get_contents($from))) {
+    if (is_file($from) && ($this->page = file_get_contents($from))) {
 
       // Detect if we're using frontmatter or HTML comment.
       if ('<!--' === substr(ltrim($this->page), 0, 4)) {

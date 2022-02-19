@@ -287,8 +287,10 @@ function _json_array_merge_by_id(array $a, array $b) {
  */
 function _json_array_replace_by_id(array $a, array $b) {
   foreach ($b as $item) {
+    $item += ['id' => ''];
     $added = FALSE;
     foreach ($a as &$a_item) {
+      $a_item += ['id' => ''];
       if ($a_item['id'] == $item['id']) {
         $a_item = array_replace_recursive($a_item, $item);
         $added = TRUE;

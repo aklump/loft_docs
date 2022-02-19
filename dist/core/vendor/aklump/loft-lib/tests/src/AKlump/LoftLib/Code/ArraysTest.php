@@ -9,6 +9,15 @@ use PHPUnit\Framework\TestCase;
  */
 class ArraysTest extends TestCase {
 
+  public function testGetClosestValueTo() {
+    $array = [8, 16, 24, 36];
+    $this->assertSame(8, Arrays::getClosestValueTo(4, $array));
+    $this->assertSame(36, Arrays::getClosestValueTo(37, $array));
+    $this->assertSame(8, Arrays::getClosestValueTo(12, $array));
+    $this->assertSame(16, Arrays::getClosestValueTo(12.01, $array));
+    $this->assertSame(24, Arrays::getClosestValueTo(24, $array));
+  }
+
   public function testListImplodeWithOr() {
     $list = ["foo", "bar", "baz"];
     $this->assertSame('foo, bar or baz', Arrays::listImplode(', ', ' or ', $list));
