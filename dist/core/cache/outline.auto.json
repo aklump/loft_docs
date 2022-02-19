@@ -138,6 +138,13 @@
             "chapter": "demos"
         },
         {
+            "id": "demos--search-noindex",
+            "title": "Demo: Do not include in search indexing",
+            "content_title": "Demo: Do not include in search indexing",
+            "file": "demos--search-noindex",
+            "chapter": "demos"
+        },
+        {
             "id": "demos--includes",
             "title": "Demo: Include Files",
             "content_title": "Demo: Include Files",
@@ -229,18 +236,18 @@
             "chapter": "demos"
         },
         {
-            "id": "demos--search-noindex",
-            "title": "Demos  Search Noindex",
-            "content_title": "Demos  Search Noindex",
-            "file": "demos--search-noindex",
-            "chapter": "demos"
-        },
-        {
             "id": "ld--drupal",
             "title": "Drupal Integration",
             "content_title": "Drupal Integration",
             "file": "ld--drupal",
             "chapter": "ld"
+        },
+        {
+            "id": "demos--dynamic-source-file",
+            "title": "Dynamic Source File",
+            "content_title": "Dynamic Source File",
+            "file": "demos--dynamic-source-file",
+            "chapter": "demos"
         },
         {
             "id": "installation",
