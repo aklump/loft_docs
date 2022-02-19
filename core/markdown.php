@@ -41,7 +41,7 @@ try {
 
   $path_info = pathinfo($in_file);
 
-  $page_metadata = new PageMetaData(FilePath::create($static_source_dir));
+  $page_metadata = new PageMetaData(FilePath::create($path_info['dirname']));
   $page_metadata->setPageId($path_info['filename']);
 
   // Twig Pre-Processing if ends in .twig.md.
