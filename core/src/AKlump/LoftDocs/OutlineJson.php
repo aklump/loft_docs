@@ -47,7 +47,7 @@ class OutlineJson implements IndexInterface {
       'chapters' => [],
     );
     $chapter_order = array_map(function ($item) {
-      return $item['id'];
+      return isset($item['id']) ? $item['id'] : '';
     }, $info['chapters']);
 
     $previous_chapter = NULL;
@@ -66,7 +66,7 @@ class OutlineJson implements IndexInterface {
     $chapter_titles = [];
     foreach ($chapter_order as $id) {
       $chapter_titles[$id] = array_filter($info['chapters'], function ($item) use ($id) {
-        return $item['id'] == $id;
+        return empty($item['id']) ? FALSE : $item['id'] == $id;
       });
       $chapter_titles[$id] = empty($chapter_titles[$id]) ? [
         'id' => '',
@@ -103,6 +103,7 @@ class OutlineJson implements IndexInterface {
     );
 
     foreach ($this->getChapterIndex() as $chapter_id => $chapter_data) {
+      $chapter_data += ['title' => ''];
       $chapter_sections = [];
       foreach ($info['sections'] as $value) {
         $this_chapter = $g->get($value, 'chapter', '');
