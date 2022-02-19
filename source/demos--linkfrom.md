@@ -1,6 +1,7 @@
----
+<!--
 id: link_from_demo
----
+-->
+
 # Demo: Link to Other Pages
 
 This demonstrates how to do internal linking to pages and sections on a page.
