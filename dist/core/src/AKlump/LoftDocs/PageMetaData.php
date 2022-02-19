@@ -15,10 +15,18 @@ class PageMetaData {
 
   protected $pageId;
 
-  protected $source;
+  protected $sourceDirs;
 
-  public function __construct(FilePath $source_dir) {
-    $this->source = $source_dir;
+  /**
+   * Construct an instance.
+   *
+   * @param array $source_directories
+   *   One or more directories where to search for files having filename (no
+   *   extension) matching the page ID.  This is usually the user source
+   *   directory, and sometimes includes the generated source directory as well.
+   */
+  public function __construct(array $source_directories) {
+    $this->sourceDirs = $source_directories;
   }
 
   /**
@@ -99,13 +107,27 @@ class PageMetaData {
     return explode(' ', $tags);
   }
 
+  /**
+   * Get the full path, this scans for the filename, without knowing extension.
+   *
+   * @return string
+   *   The full path with extension.
+   */
   private function getPageFilepath(): string {
     if (empty($this->pageId)) {
       throw new \RuntimeException('You must first call setPageId().');
     }
-    $filepath = exec(sprintf('cd "%s" && ls "%s"*', $this->source->getPath(), $this->pageId));
 
-    return $this->source->getPath() . '/' . $filepath;
+    foreach ($this->sourceDirs as $source_dir) {
+      $files = array_filter(scandir($source_dir), function ($item) {
+        return pathinfo($item, PATHINFO_FILENAME) === $this->pageId;
+      });
+      if ($files) {
+        return $source_dir . '/' . reset($files);
+      }
+    }
+
+    return '';
   }
 
 }

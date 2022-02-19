@@ -18,8 +18,12 @@ require_once $CORE . '/vendor/autoload.php';
 
 list(, $outline_file, $page_id, $version) = $argv;
 
-$data_provider = new PageMetaData(FilePath::create("$CORE/../source"));
+$data_provider = new PageMetaData([
+  "$CORE/../source",
+  getenv('LOFT_DOCS_CACHE_DIR') . '/source',
+]);
 $page_frontmatter = $data_provider->setPageId($page_id)->get();
+
 $data_file = getenv('LOFT_DOCS_CACHE_DIR') . '/page_data.json';
 $page_data = file_exists($data_file) ? json_decode(file_get_contents($data_file), TRUE) : array();
 $page_data[$page_id] = ArrayMerger::doMerge($page_frontmatter, $page_data[$page_id] ?? []);

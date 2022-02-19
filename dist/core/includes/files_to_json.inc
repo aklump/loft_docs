@@ -43,7 +43,7 @@ foreach ($first_level as $data) {
   $contents = '';
   $body = '';
   if (is_file($path) && ($contents = file_get_contents($path))) {
-    $page_metadata = new PageMetaData(FilePath::create($data['dirname']));
+    $page_metadata = new PageMetaData([$data['dirname']]);
     $page_metadata->setPageId($data['filename']);
     $front_matter = $page_metadata->get();
     $body = $page_metadata->getPage();
