@@ -93,7 +93,7 @@ class PageMetaData {
       $this->get();
     }
 
-    return $this->page;
+    return $this->page ?? '';
   }
 
   protected function processData($data) {
