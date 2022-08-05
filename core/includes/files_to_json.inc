@@ -37,6 +37,9 @@ $first_level = array_merge($user, $generated);
 
 $g = new Data();
 foreach ($first_level as $data) {
+  if (empty($data['filename'])) {
+    continue;
+  }
   $path = $data['path'];
   $file = $data['basename'];
   $front_matter = [];
