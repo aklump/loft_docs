@@ -2,7 +2,6 @@
 
 namespace AKlump\LoftDocs;
 
-use AKlump\LoftLib\Storage\FilePath;
 use Symfony\Component\Yaml\Yaml;
 use Webuni\FrontMatter\FrontMatter;
 

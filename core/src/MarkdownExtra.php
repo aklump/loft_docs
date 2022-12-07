@@ -16,7 +16,7 @@ namespace AKlump\LoftDocs;
  */
 class MarkdownExtra extends \Michelf\MarkdownExtra {
 
-  public static function defaultTransform($text) {
+  public static function defaultTransform(string $text): string {
     //
     //
     // Replace video tags

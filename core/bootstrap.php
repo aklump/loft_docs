@@ -17,11 +17,12 @@ use AKlump\Data\Data;
  *                        name in the todo item.
  *
  * @return array
+ *
+ * @// TODO Replace with Lexer class.
  */
 function parse_todos($string, $prefix = '') {
   $todos = array();
   if (is_string($string)
-    //&& preg_match_all('/- \[ \] @todo.*$/m', $string, $matches)) {
     && preg_match_all('/- \[ \] .*$/m', $string, $matches)
   ) {
 

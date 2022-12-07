@@ -323,7 +323,7 @@ class Compiler {
           return '"' . rtrim($section['file'] . '.' . $extension . '#' . $matches[2], '#') . '"';
         }
         else {
-          throw new \RuntimeException("Invalid iternal link: \"$matches[1]\".");
+          throw new \RuntimeException("Invalid internal link: \"$matches[1]\".");
         }
       }, $contents);
 
