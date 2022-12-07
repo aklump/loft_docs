@@ -19,10 +19,15 @@ for arg in "$@"; do
   fi
 done
 
-
 # Pull in config vars
 installing=0
-load_config
+
+if [[ "$1" ]] && [[ $(basename "$1") != "core-config.sh" ]]; then
+  echo "The basename of argument one must be core-config.sh; you gave me: $(basename "$1")"
+  exit 1
+fi
+load_config "$1"
+
 echo_purple "Compiling your documentation..."
 
 do_pre_hooks

@@ -81,22 +81,31 @@ function realpath() {
 }
 
 
-##
- # Load the configuration file
- #
- # Lines that begin with [ or # will be ignored
- # Format: Name = "Value"
- # Value does not need wrapping quotes if no spaces
- # File MUST HAVE an EOL char!
- #
+#
+# Load the configuration file
+#
+# Lines that begin with [ or # will be ignored
+# Format: Name = "Value"
+# Value does not need wrapping quotes if no spaces
+# File MUST HAVE an EOL char!
+#
+# $1 - string Optional. Path to the config file to use, defaults to looking one
+# level above $CORE for core-config.sh
+#
+# Returns nothing.
 function load_config() {
+  local path_to_config="$1"
+
+  if [[ ! "$path_to_config" ]]; then
+    path_to_config="$CORE/../core-config.sh"
+  fi
 
   # defaults
   docs_php=$(which php)
   docs_bash=$(which bash)
   docs_lynx=$(which lynx)
   docs_source_dir='source'
-  docs_root_dir=$(realpath "$CORE/..")
+  docs_root_dir=$(dirname $path_to_config)
   docs_source_path=$(realpath "$docs_root_dir/$docs_source_dir")
   docs_plugins_tpl='twig'
   docs_plugins_theme='twig'
@@ -120,7 +129,7 @@ function load_config() {
   docs_not_source_do_not_edit__md=''
 
   # Check for installation if needed.
-  if [ ! -f core-config.sh ]; then
+  if [[ ! -f "$path_to_config" ]]; then
     echo_yellow "Installing..."
     cp "$CORE/install/core-config.sh" "$docs_root_dir/"
     installing=1
