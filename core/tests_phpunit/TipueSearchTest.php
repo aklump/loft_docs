@@ -1,14 +1,15 @@
 <?php
+namespace AKlump\LoftDocs\Tests;
+
+use PHPUnit\Framework\TestCase;
+use AKlump\LoftDocs\TipueSearch;
+use AKlump\LoftDocs\SearchPageData;
+
 /**
- * @file
- * PHPUnit tests for the TipueSearch class
+ * @covers \AKlump\LoftDocs\TipueSearch
  */
+class TipueSearchTest extends TestCase {
 
-namespace AKlump\LoftDocs;
-require_once dirname(__FILE__) . '/../../vendor/autoload.php';
-
-class TipueSearchTest extends \PHPUnit_Framework_TestCase {
-  
   public function testAddTwoSortsCorrectly() {
     $obj = new TipueSearch;
     $obj
@@ -41,5 +42,5 @@ var tipuesearch = {"pages":[{"title":"title","text":"contents","tags":"do re mi"
 EOD;
     $this->assertSame($control, $obj->buildFileContents());
   }
-      
+
 }

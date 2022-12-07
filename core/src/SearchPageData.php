@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Defins the SearchPageData class
+ * Defines the SearchPageData class
  */
 
 namespace AKlump\LoftDocs;

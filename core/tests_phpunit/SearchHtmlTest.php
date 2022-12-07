@@ -1,13 +1,14 @@
 <?php
+
+namespace AKlump\LoftDocs\Tests;
+
+use PHPUnit\Framework\TestCase;
+use AKlump\LoftDocs\SearchHtml;
+
 /**
- * @file
- * PHPUnit tests for the SearchHtml class
+ * @covers \AKlump\LoftDocs\SearchHtml
  */
-
-namespace AKlump\LoftDocs;
-require_once dirname(__FILE__) . '/../../vendor/autoload.php';
-
-class SearchHtmlTest extends \PHPUnit_Framework_TestCase {
+class SearchHtmlTest extends TestCase {
 
   public function testNoTags() {
     $subject = "<h1>My nice title</h1><p>lorem ipsum</p>";
@@ -27,7 +28,7 @@ class SearchHtmlTest extends \PHPUnit_Framework_TestCase {
 
   public function testReturnsObject() {
     $obj = new SearchHtml();
-    $this->assertInstanceOf('\AKlump\LoftDocs\SearchPageData', $obj->getData());  
+    $this->assertInstanceOf('\AKlump\LoftDocs\SearchPageData', $obj->getData());
   }
-      
+
 }

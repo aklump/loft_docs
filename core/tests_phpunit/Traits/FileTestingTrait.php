@@ -1,12 +1,8 @@
 <?php
-/**
- * @file
- * Base class for PHPUnit tests requiring files
- *
- * @defgroup loft_phpunit Loft PHPUnit
- * @{
- */
-abstract class LoftPHPUnit_Framework_TestCase extends PHPUnit_Framework_TestCase {
+
+namespace AKlump\LoftDocs\Tests\Traits;
+
+trait FileTestingTrait {
 
   protected $paths;
 
@@ -75,22 +71,19 @@ abstract class LoftPHPUnit_Framework_TestCase extends PHPUnit_Framework_TestCase
   /**
    * Remove all files created during the test
    */
-  function tearDown() {
+  function tearDown(): void {
     // Delete all of our temporary files
     if (is_dir($this->getTempDir())) {
-      $files = new RecursiveIteratorIterator(
-          new RecursiveDirectoryIterator($this->getTempDir(), RecursiveDirectoryIterator::SKIP_DOTS),
-          RecursiveIteratorIterator::CHILD_FIRST
+      $files = new \RecursiveIteratorIterator(
+        new \RecursiveDirectoryIterator($this->getTempDir(), \RecursiveDirectoryIterator::SKIP_DOTS), \RecursiveIteratorIterator::CHILD_FIRST
       );
 
-      foreach ($files as $fileinfo) {
-        $todo = ($fileinfo->isDir() ? 'rmdir' : 'unlink');
-        $todo($fileinfo->getRealPath());
+      foreach ($files as $file_info) {
+        $todo = ($file_info->isDir() ? 'rmdir' : 'unlink');
+        $todo($file_info->getRealPath());
       }
 
       rmdir($this->getTempDir());
     }
   }
 }
-
-/** @} */ //end of group: loft_phpunit

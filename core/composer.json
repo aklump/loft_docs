@@ -3,8 +3,9 @@
         "files": [
             "bootstrap.php"
         ],
-        "psr-0": {
-            "AKlump\\LoftDocs\\": "src/"
+        "psr-4": {
+            "AKlump\\LoftDocs\\": "src/",
+            "AKlump\\LoftDocs\\Tests\\": "tests_phpunit/"
         }
     },
     "require": {
@@ -19,5 +20,8 @@
         "matomo/ini": "^2.0",
         "aklump/loft-lib": "^1.2",
         "ckr/arraymerger": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
     }
 }
