@@ -273,13 +273,14 @@ function do_pre_hooks() {
 
     # Hack to fix color, no time to figure out 2015-11-14T13:58, aklump
     #  echo "`tty -s && tput setaf 6``tty -s && tput op`"
-
-    echo "Running pre-compile hooks..."
-    for hook in ${docs_pre_hooks[@]}; do
-        hook="$(realpath "$docs_hooks_dir/$hook")"
-        echo_green "Hook file: $hook"
-        echo_yellow "$(do_hook_file "$hook")"
-    done
+    if [[ "${docs_pre_hooks[0]}" ]]; then
+      echo "Running pre-compile hooks..."
+      for hook in ${docs_pre_hooks[@]}; do
+          hook="$(realpath "$docs_hooks_dir/$hook")"
+          echo_green "Hook file: $hook"
+          echo_yellow "$(do_hook_file "$hook")"
+      done
+    fi
 
     # Generate an outline from the file structure.
     if [[ ! "$docs_outline_file" ]]; then
@@ -328,13 +329,16 @@ function do_todos() {
 # Do the post-compile hook
 #
 function do_post_hooks() {
+
   local hook
-  echo "Running post-compile hooks..."
-  for hook in ${docs_post_hooks[@]}; do
-    hook=$(realpath "$docs_hooks_dir/$hook")
-    echo_green "`tty -s && tput setaf 2`Hook file: $hook`tty -s && tput op`"
-    echo_yellow "$(do_hook_file $hook)"
-  done
+  if [[ "${docs_post_hooks[0]}" ]]; then
+    echo "Running post-compile hooks..."
+    for hook in ${docs_post_hooks[@]}; do
+      hook=$(realpath "$docs_hooks_dir/$hook")
+      echo_green "`tty -s && tput setaf 2`Hook file: $hook`tty -s && tput op`"
+      echo_yellow "$(do_hook_file $hook)"
+    done
+  fi
 
   # Internal post hooks should always come after the user-supplied
   # Remove the _tasklist.md file
