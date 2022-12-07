@@ -6,7 +6,15 @@ After a round of changes to the files found in `/source`, you will need to expor
 
 Each time you want to update your documentation files, after modifying files in `source` you need to execute `compile` from bash, make sure you are in the root directory of this package.
 
-    ./core/compile
+```shell
+./core/compile
+```
+
+You may indicate an alternative config file by passing it as the first argument, e.g. 
+
+```shell
+./core/compile "/Users/aklump/Code/Projects/InTheLoftStudios/D8Shorts/site/dist/documentation/core-config.sh"
+```
 
 ## Folders and Other Includes
 
