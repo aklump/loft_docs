@@ -8,15 +8,16 @@ use AKlump\Data\Data;
 use AKlump\LoftDocs\Compiler;
 use AKlump\LoftDocs\PageMetaData;
 use AKlump\LoftLib\Bash\Color;
-use AKlump\LoftLib\Storage\FilePath;
 
 $file = __FILE__;
 require_once dirname($file) . '/../vendor/autoload.php';
 
-if (count($argv) < 3
-  || ((list(, $source_dir, $generated_dir, $json_file, $merge_file) = $argv)
-    && (empty($source_dir) || empty($json_file)))
-) {
+$source_dir = $argv[1];
+$generated_dir = $argv[2];
+$json_file = $argv[3];
+$merge_file = $argv[4];
+
+if (count($argv) < 3  || empty($source_dir) || empty($json_file)) {
   echo "Missing parameters to $file" . PHP_EOL;
 
   return;

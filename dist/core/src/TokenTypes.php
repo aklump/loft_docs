@@ -20,6 +20,8 @@ class TokenTypes {
 
   const SOURCE_CODE_START = 'source code start';
 
+  const SOURCE_CODE = 'source code';
+
   const SOURCE_CODE_END = 'source code end';
 
 }

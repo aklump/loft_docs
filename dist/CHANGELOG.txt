@@ -1,5 +1,11 @@
                                    Changelog
 
+[0.14] - 2022-12-06
+
+  Changed
+
+     * Minimum PHP is now 7.4
+
 [0.13.0] - 2021-09-18
 
   Added
