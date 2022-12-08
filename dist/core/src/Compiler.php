@@ -333,12 +333,26 @@ class Compiler {
       $contents = preg_replace($regex, $replacement, $contents);
     }
 
+    $lexer = new Lexer($contents);
+    $parser = new Parser($lexer->getTokens());
+    $unhandled_links = $parser->getTokensByType(TokenTypes::INTERNAL_LINK);
+
     // Check for unhandled links and throw an exception.
-    preg_match_all('/"@([^\s]+)(?:\:([^\s]+))?"/', $contents, $matches, PREG_SET_ORDER);
-    if (count($matches)) {
-      throw new \RuntimeException("Invalid link id(s): " . implode(', ', array_map(function ($found) {
-          return $found[1];
-        }, $matches)));
+    if (count($unhandled_links)) {
+      throw new \RuntimeException("Invalid link id(s): " . implode(', ', array_map(function ($token) {
+          $parser = new Parser($token);
+          $page_id = $parser->getTokensByType(TokenTypes::PAGE_ID)[0]['value'] ?? '';
+          if ($page_id) {
+            $page_id = "@$page_id";
+          }
+
+          $html_id = $parser->getTokensByType(TokenTypes::HTML_ID)[0]['value'] ?? '';
+          if ($html_id) {
+            $html_id = ":$html_id";
+          }
+
+          return "$page_id$html_id";
+        }, $unhandled_links)));
     }
 
     return $contents;

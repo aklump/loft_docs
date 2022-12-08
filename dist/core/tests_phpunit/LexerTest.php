@@ -12,6 +12,38 @@ use PHPUnit\Framework\TestCase;
  */
 class LexerTest extends TestCase {
 
+  public function testAtTodoIsNotDetectedAsAnInternalLink() {
+    $source = "<p>To truly output 'Foo' when there is no entity... how is that achieved? @todo.</p>";
+    $lexer = new Lexer($source);
+    $tokens = $lexer->getTokens();
+    $parser = new Parser($tokens);
+    $tokens = $parser->getTokensByType(TokenTypes::INTERNAL_LINK);
+    $this->assertCount(0, $tokens);
+  }
+
+  public function testInternalLinksIgnoredWhenInsideHtmlCodeBlock() {
+    $source = <<<EOD
+    sure you are running at least version 0.18 of <a href="https://github.com/aklump/loft_deploy">Loft Deploy</a>.</strong></p>
+      
+    <pre><code class="yaml">local:
+      database:
+        lando: "@drupal"
+      drupal:
+        root: web
+    </code></pre>
+    
+    <h2>Configuration</h2>
+    
+    <ol>
+    <li>In <em>.lando</em> you need to add more database services for each branch you wish  
+    EOD;
+    $lexer = new Lexer($source);
+    $tokens = $lexer->getTokens();
+    $parser = new Parser($tokens);
+    $tokens = $parser->getTokensByType(TokenTypes::INTERNAL_LINK);
+    $this->assertCount(0, $tokens);
+  }
+
   public function testInternalLinksIgnoredWhenInsideCodeBlock() {
     $source = <<<EOD
     Lorem
@@ -29,8 +61,8 @@ class LexerTest extends TestCase {
     $this->assertCount(0, $tokens);
   }
 
-  public function testLocatesInternalLinks() {
-    $source = "Lorem ipsum\n@page2:part4\n\n@page3 and then some more things.";
+  public function testLocatesInternalLinksInMarkup() {
+    $source = "Lorem ipsum\n[click](@page2:part4)\n\n<@page3> and then some more things.";
     $lexer = new Lexer($source);
     $tokens = $lexer->getTokens();
     $parser = new Parser($tokens);

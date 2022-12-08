@@ -66,7 +66,7 @@ class Lexer {
   }
 
   private function handleCodeBlocks($lexeme) {
-    if (!preg_match('/[\s`]/', $lexeme)) {
+    if (!preg_match('/[\s`\<\>]/', $lexeme)) {
       return $this;
     }
 
@@ -84,15 +84,19 @@ class Lexer {
     }
 
     $is = $is || preg_match('/(.*)`{3}(.*)\n/s', $this->node . $lexeme, $matches);
+    $is = $is || preg_match('/(.*)(?:<code class="(.+)">|<code>|<\/code>)/s', $this->node . $lexeme, $matches);
     if ($is) {
       $this->insideCodeBlock = !$this->insideCodeBlock;
-      if (!empty($matches[1])) {
-        $this->tokens[] = $this->getToken(TokenTypes::COPY, $matches[1] ?? NULL);
-      }
       if ($this->insideCodeBlock) {
+        if (!empty($matches[1])) {
+          $this->tokens[] = $this->getToken(TokenTypes::SOURCE_CODE, $matches[1] ?? NULL);
+        }
         $this->tokens[] = $this->getToken(TokenTypes::SOURCE_CODE_START, $matches[2] ?? NULL);
       }
       else {
+        if (!empty($matches[1])) {
+          $this->tokens[] = $this->getToken(TokenTypes::COPY, $matches[1] ?? NULL);
+        }
         $this->tokens[] = $this->getToken(TokenTypes::SOURCE_CODE_END, NULL);
       }
       $this->node = '';
@@ -124,10 +128,30 @@ class Lexer {
     return boolval($is);
   }
 
+  /**
+   * @param string $string
+   * @param $tokens
+   *
+   * @return bool
+   *
+   * @code
+   *
+   * These are the URL portion of markdown links.
+   * (@PAGE_ID:HTML_ID)
+   * (@PAGE_ID)
+   *
+   * These are markdown URLs.
+   * <@PAGE_ID:HTML_ID>
+   * <@PAGE_ID>
+   * @endcode
+   */
   private function isInternalLink(string $string, &$tokens = []): bool {
-    $is = preg_match('/^(.*)\@([^ :]+)(?:\:([^\s]+))?/s', $string, $matches);
+    $is = preg_match('/(.*)\(\@([^\n:]+):?([^\n]+)?\)/', $string, $matches);
+    $is = $is || preg_match('/(.*)<\@([^\n:]+):?([^\n]+)?>/s', $string, $matches);
     if ($is) {
-      $tokens[] = $this->getToken(TokenTypes::COPY, $matches[1]);
+      if (!empty($matches[1])) {
+        $tokens[] = $this->getToken(TokenTypes::COPY, $matches[1]);
+      }
       $tokens[] = $this->getToken(TokenTypes::INTERNAL_LINK, [
         $this->getToken(TokenTypes::PAGE_ID, $matches[2]),
         $this->getToken(TokenTypes::HTML_ID, $matches[3] ?? NULL),
@@ -151,10 +175,14 @@ class Lexer {
   }
 
   private function handleInternalLinks($lexeme) {
+
+    // Look to see if our lexeme is closing out an internal link
+    if ($this->insideCodeBlock || !in_array($lexeme, [')', '>'])) {
+      return;
+    }
+
     $tokens = [];
-    if (!$this->insideCodeBlock
-      && preg_match('/\s/', $lexeme)
-      && $this->isInternalLink($this->node, $tokens)) {
+    if ($this->isInternalLink($this->node . $lexeme, $tokens)) {
       $this->tokens = array_merge($this->tokens, $tokens);
       $this->node = '';
       $this->skipLexeme;
@@ -163,7 +191,7 @@ class Lexer {
     return $this;
   }
 
-  protected function getToken(string $type, $value) {
+  public static function getToken(string $type, $value) {
     return [
       'type' => $type,
       'value' => $value,
