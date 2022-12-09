@@ -22,11 +22,7 @@ done
 # Pull in config vars
 installing=0
 
-if [[ "$1" ]] && [[ $(basename "$1") != "core-config.sh" ]]; then
-  echo "The basename of argument one must be core-config.sh; you gave me: $(basename "$1")"
-  exit 1
-fi
-load_config "$1"
+load_config
 
 echo_purple "Compiling your documentation..."
 
