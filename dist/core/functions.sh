@@ -94,8 +94,8 @@ function realpath() {
 #
 # Returns nothing.
 function load_config() {
-  local path_to_config="$1"
 
+  path_to_config="$(get_option "config")"
   if [[ ! "$path_to_config" ]]; then
     path_to_config="$CORE/../core-config.sh"
   fi
