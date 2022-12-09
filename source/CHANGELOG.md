@@ -2,6 +2,10 @@
 
 ## [0.14] - 2022-12-06
 
+### Added
+
+- `--config=` to the CLI for alt configuration file loading.
+
 ### Changed
 
 - Minimum PHP is now 7.4
