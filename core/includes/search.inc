@@ -2,61 +2,67 @@
 /**
  * @file
  * Adds search to the output
- *
  */
 
 namespace AKlump\LoftDocs;
 
-use AKlump\Data\Data;
+use AKlump\LoftDocs\SearchEngine\PageFromHtmlFactory;
 use Webuni\FrontMatter\FrontMatter;
+use AKlump\LoftDocs\SearchEngine\TipueSearch;
 
 require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
-list(, $outline, $core_dir, $build_dir, $webpage_dir) = $argv;
-
+$webpage_dir = $argv[4] ?? NULL;
+$outline = $argv[1] ?? NULL;
 $outline = load_outline($outline);
 
-// Search support
 if (!empty($outline['settings']['search'])) {
-  $search_dir = "$webpage_dir/search";
-
-  # This will grab the search engine files...
-  $hook_file = $core_dir . "/includes/webpage." . $outline['settings']['search'] . ".sh";
-  if (is_file($hook_file)) {
-    system("\"$hook_file\" \"$core_dir\" \"$search_dir\"");
+  if ('tipuesearch' !== $outline['settings']['search']) {
+    throw new \RuntimeException(sprintf('Invalid search engine: %s', $outline['settings']['search']));
   }
 
-  // Now create the search contents
-  $searchBuilder = new TipueSearch;
+  $page_factory = new PageFromHtmlFactory();
+  $search_engine_dir = "$webpage_dir/search";
+  $search_engine_builder = new TipueSearch();
 
-  $source_files = array_filter(scandir($build_dir . '/html/'), function ($value) {
-    return preg_match('/\.html$/', $value);
+  $html_files_to_index = array_filter(scandir($webpage_dir), function ($value) {
+
+    return preg_match('/\.html$/', $value)
+      && pathinfo($value, PATHINFO_FILENAME) != 'index';
   });
 
   try {
-
-    $g = new Data();
-    foreach ($source_files as $html_file) {
+    foreach ($html_files_to_index as $html_file) {
       $record = getOutlineRecordByHtmlFile($html_file);
-
-      // Does json or front matter tell us to ignore this file?
-      if ($g->get($record, 'search') === 'noindex'
-        || (($front_matter = getFrontMatterFromHtmlFile($html_file)) && $g->get($front_matter, 'search') === 'noindex')
-      ) {
+      if (isset($record['search']) && 'noindex' === $record['search']) {
         continue;
       }
 
-      $searchHtml = new SearchHtml($build_dir . '/html/' . $html_file, TRUE);
-      $data = $searchHtml->getData();
-
-      // Get the tags from our front matter
-      if ($tags = getTags($front_matter)) {
-        $data->addTags($tags);
+      $front_matter = getFrontMatterFromHtmlFile($html_file);
+      if (isset($front_matter['search']) && 'noindex' === $front_matter['search']) {
+        continue;
       }
 
-      $searchBuilder->addPage($data);
+      $html = file_get_contents($webpage_dir . '/' . $html_file);
+      $page = $page_factory($html);
+      $page->setUrl($html_file);
+      $search_engine_builder->addPage($page);
     }
-    $searchBuilder->createFile($search_dir, TRUE);
+    if (!is_dir($search_engine_dir)
+      && !mkdir($search_engine_dir, 0755, TRUE)) {
+      throw new \RuntimeException(sprintf('Cannot create search directory: %s', $search_engine_dir));
+    }
+    if (!is_writeable($search_engine_dir)) {
+      throw new \RuntimeException(sprintf('Search directory is not writeable: %s', $search_engine_dir));
+    }
+    foreach ($search_engine_builder->getFiles() as $file) {
+      $path = $search_engine_dir . '/' . $file->getFilename();
+      $fh = fopen($path, 'w');
+      if (fwrite($fh, $file->getContents()) === FALSE) {
+        throw new \RuntimeException("Unable to write file: $path");
+      }
+      fclose($fh);
+    }
   }
   catch (\Exception $e) {
     print $e;
@@ -73,22 +79,6 @@ function getOutlineRecordByHtmlFile($html_file) {
 
   return [];
 }
-
-/**
- * Pulls out the tags from a front matter array.
- *
- * @param array $front_matter
- *
- * @return mixed
- */
-function getTags(array $front_matter) {
-  $g = new Data();
-
-  return $g->get($front_matter, 'tags', '', function ($value) {
-    return array_unique(array_filter(explode(' ', $value)));
-  });
-}
-
 
 /**
  * Uses the filename of the html file and tries to find a markdown source file,

@@ -103,7 +103,7 @@ class PageMetaData {
   }
 
   protected function processTags($tags) {
-    return explode(' ', $tags);
+    return array_filter(explode(' ', $tags));
   }
 
   /**

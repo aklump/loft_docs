@@ -8,8 +8,9 @@
  */
 
 use AKlump\Data\Data;
-use AKlump\LoftDocs\PageMetaData;
 use AKlump\LoftDocs\OutlineJson as Index;
+use AKlump\LoftDocs\PageMetaData;
+use AKlump\LoftDocs\SearchEngine\PageInterface;
 use AKlump\LoftLib\Storage\FilePath;
 use Ckr\Util\ArrayMerger;
 
@@ -77,7 +78,11 @@ $vars['date'] = $vars['date'] ?? $now->format('r');
 
 // Search support.
 $outline = FilePath::create($outline_file)->load()->getJson(TRUE);
-$g->onlyIf($outline, 'settings.search')->set($vars, 'search', TRUE);
+if (!empty($outline['settings']['search'])) {
+  $vars['search'] = TRUE;
+  $vars['search_begin'] = PageInterface::DELIMITER_BEGIN;
+  $vars['search_end'] = PageInterface::DELIMITER_END;
+}
 
 $json = json_encode($vars);
 print $json;

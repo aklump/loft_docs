@@ -5,6 +5,10 @@
     ],
     "psr-4": {
       "AKlump\\LoftDocs\\": "src/",
+      "AKlump\\LoftDocs\\SearchEngine\\": [
+        "src/SearchEngine",
+        "plugins/tipuesearch"
+      ],
       "AKlump\\LoftDocs\\Tests\\": "tests_phpunit/"
     }
   },
@@ -20,7 +24,9 @@
     "matomo/ini": "^2.0",
     "aklump/loft-lib": "^1.2",
     "ckr/arraymerger": "^2.0",
-    "ext-mbstring": "*"
+    "ext-mbstring": "*",
+    "ext-json": "*",
+    "ext-simplexml": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5"
