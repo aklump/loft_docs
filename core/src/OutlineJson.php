@@ -72,7 +72,7 @@ class OutlineJson implements IndexInterface {
         'id' => '',
         'title' => '',
       ] : reset($chapter_titles[$id]);
-      $chapter_titles[$id]['href'] = $chapter_hrefs[$id] . '.html';
+      $chapter_titles[$id]['href'] = !empty($chapter_hrefs[$id]) ? $chapter_hrefs[$id] : NULL;
     }
 
     return $chapter_titles;
