@@ -4,7 +4,7 @@
 
 ### Added
 
-- `--config=` to the CLI for alt configuration file loading.
+- `--config=` to the CLI for alt configuration file loading.  Usage: `--config=/path/to/core-config.sh`
 
 ### Changed
 
