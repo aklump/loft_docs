@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "312dc0f4c7a6edb86c51a45ef28d15d2",
+    "content-hash": "f130300453948eb5ea16ed11d2665ab3",
     "packages": [
         {
             "name": "aklump/data",
@@ -2828,7 +2828,8 @@
     "platform": {
         "php": ">=7.4",
         "ext-mbstring": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-simplexml": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.1.0"

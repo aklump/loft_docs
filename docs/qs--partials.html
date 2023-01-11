@@ -5,6 +5,7 @@
   <title>Partials (Include Files)</title>
   <link href="search/tipuesearch.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
+  <meta name="keywords" content="" />
 </head>
 
 <body class="page--qs--partials">
@@ -13,7 +14,7 @@
 <section class="sub-header">
   <div class="breadcrumbs"><a href="index.html">Index</a>
          &raquo
-                        <a href="qs--intro.html">Quick Start</a>
+                        <a href="qs--intro">Quick Start</a>
          &raquo
       </div>      <div class="search__wrapper">
   <form action="search--results.html">
@@ -24,7 +25,7 @@
 
 <section>
   <h1>Partials (Include Files)</h1>
-  
+  <!--searchable_content-->
 
 <ul>
 <li>Files in <em>source</em>, which begin with an underscore are considered partials and will be ignored during render, e.g., <em>&#95;table.md</em></li>
@@ -82,7 +83,7 @@ echo $compiler-&gt;addInclude('_headline.md', $contents)
     -&gt;getBasename() . ' has been created.' &amp;&amp; exit(0);
 exit(1);
 </code></pre>
-
+<!--end_searchable_content-->
 </section>
 
 <div class="search__results">
@@ -92,7 +93,7 @@ exit(1);
 <footer>
   <div class="pager"><a href="qs--search.html" class="prev qs--search">&laquo;Integrating search</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="qs--hooks.html" class="next hooks">Hooks&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.13.7 &bull; Last Updated: Thu, 08 Dec 2022 16:12:04 -0800</p>
+    <p class="legaleeze center">Version: 0.13.8 &bull; Last Updated: Tue, 10 Jan 2023 19:35:37 -0800</p>
   </div>
 </footer>
 
