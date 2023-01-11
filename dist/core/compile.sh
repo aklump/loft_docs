@@ -178,15 +178,17 @@ for file in "${files[@]}"; do
 
   elif [[ -d "$file" ]]; then
     basename="${file##*/}"
-    echo "Copying directory $basename..."
-    if ! is_disabled "drupal"; then
-        rsync -ua --delete "$docs_source_dir/$basename/" "$docs_drupal_dir/$basename/"
-    fi
-    if ! is_disabled "website"; then
-        rsync -ua --delete "$docs_source_dir/$basename/" "$docs_website_dir/$basename/"
-    fi
-    if ! is_disabled "html"; then
-        rsync -ua --delete "$docs_source_dir/$basename/" "$docs_html_dir/$basename/"
+    if [[ -d "$docs_source_dir/$basename/" ]]; then
+      echo "Copying directory $basename..."
+      if ! is_disabled "drupal"; then
+          rsync -ua --delete "$docs_source_dir/$basename/" "$docs_drupal_dir/$basename/"
+      fi
+      if ! is_disabled "website"; then
+          rsync -ua --delete "$docs_source_dir/$basename/" "$docs_website_dir/$basename/"
+      fi
+      if ! is_disabled "html"; then
+          rsync -ua --delete "$docs_source_dir/$basename/" "$docs_html_dir/$basename/"
+      fi
     fi
   fi
 done
