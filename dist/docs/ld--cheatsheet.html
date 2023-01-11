@@ -5,6 +5,7 @@
   <title>Generating Cheatsheets</title>
   <link href="search/tipuesearch.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
+  <meta name="keywords" content="" />
 </head>
 
 <body class="page--ld--cheatsheet">
@@ -13,7 +14,7 @@
 <section class="sub-header">
   <div class="breadcrumbs"><a href="index.html">Index</a>
          &raquo
-                        <a href="ld--cheatsheet.html">Advanced Usage</a>
+                        <a href="ld--cheatsheet">Advanced Usage</a>
          &raquo
       </div>      <div class="search__wrapper">
   <form action="search--results.html">
@@ -24,7 +25,7 @@
 
 <section>
   <h1>Generating Cheatsheets</h1>
-  
+  <!--searchable_content-->
 
 <p>Loft Docs makes it easy to generate cheatsheet partials based on a class's methods.  The partial will receive it's name from the group in the example code below.  Include the partial as you would any other dynamic partial.  The output might look something like this:</p>
 
@@ -127,7 +128,7 @@ foreach ($reader-&gt;scan() as $group =&gt; $methods) {
   $compiler-&gt;addInclude("_{$group}.md", $contents);
 }
 </code></pre>
-
+<!--end_searchable_content-->
 </section>
 
 <div class="search__results">
@@ -137,7 +138,7 @@ foreach ($reader-&gt;scan() as $group =&gt; $methods) {
 <footer>
   <div class="pager"><a href="qs--version.html" class="prev qs--version">&laquo;Documentation Version</a><a href="index.html" class="index pager__book-title">Loft Docs</a><a href="ld--apib.html" class="next ld--apib">API Blueprint&raquo;</a></div>  
   <div id="footer-legaleeze">
-    <p class="legaleeze center">Version: 0.13.7 &bull; Last Updated: Thu, 08 Dec 2022 16:11:58 -0800</p>
+    <p class="legaleeze center">Version: 0.13.7 &bull; Last Updated: Tue, 10 Jan 2023 19:25:32 -0800</p>
   </div>
 </footer>
 

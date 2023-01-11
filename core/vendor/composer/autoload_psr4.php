@@ -25,6 +25,7 @@ return array(
     'Ckr\\Util\\' => array($vendorDir . '/ckr/arraymerger/src'),
     'AKlump\\LoftLib\\' => array($vendorDir . '/aklump/loft-lib/src/AKlump/LoftLib'),
     'AKlump\\LoftDocs\\Tests\\' => array($baseDir . '/tests_phpunit'),
+    'AKlump\\LoftDocs\\SearchEngine\\' => array($baseDir . '/src/SearchEngine', $baseDir . '/plugins/tipuesearch'),
     'AKlump\\LoftDocs\\' => array($baseDir . '/src'),
     'AKlump\\Data\\' => array($vendorDir . '/aklump/data'),
 );
